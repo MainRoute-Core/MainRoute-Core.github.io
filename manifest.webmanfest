@@ -1,0 +1,80 @@
+{
+  "name": "MainRoute Core | Future Engineered",
+  "short_name": "MRC",
+  "description": "A specialized technology powerhouse led by M Ramzan Ch. We engineer high-performance PWAs, enterprise software, MegaMind Solution, and robust open-source infrastructure.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#f44234",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories":["technology", "business", "development"],
+  "icons":[
+    {
+      "src": "https://avatars.githubusercontent.com/u/249983472?s=192&v=4",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://avatars.githubusercontent.com/u/249983472?s=192&v=4",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "https://avatars.githubusercontent.com/u/249983472?s=512&v=4",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://avatars.githubusercontent.com/u/249983472?s=512&v=4",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts":[
+    {
+      "name": "Connect With Us",
+      "short_name": "Mail",
+      "description": "Contact To Connect With Us",
+      "url": "/connect",
+      "icons":[
+        {
+          "src": "https://avatars.githubusercontent.com/u/249983472?s=192&v=4",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "M Ramzan Ch",
+      "short_name": "MR Ch",
+      "description": "Explore M Ramzan Ch's Profile",
+      "url": "/mrc",
+      "icons":[
+        {
+          "src": "/mrc/mrc.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Pro Bandey",
+      "short_name": "PB",
+      "description": "Explore Pro Bandey's Profile",
+      "url": "/mrc",
+      "icons":[
+        {
+          "src": "/pb/pb.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}
