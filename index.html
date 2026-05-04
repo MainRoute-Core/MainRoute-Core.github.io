@@ -9,7 +9,7 @@
     <meta name="theme-color" content="#f44234">
     <meta name="title" content="MainRoute Core | Innovating Tomorrow's Solutions" />
     <meta name="description" content="MainRoute Core, led by M Ramzan Ch. We engineer high-performance PWAs, enterprise software, and open-source contributions." />
-    <meta name="keywords" content="MainRoute, MainRoute Core, MR Core, MRC, M Ramzan Ch, MegaMind-Solution, Web Development, Software Development, Open Source, PWA, Kotlin" />
+    <meta name="keywords" content="MainRoute, MainRoute Core, MR Core, MRC, M Ramzan Ch, MegaMind-Solution, Web Development, Software Development, Modifications, Git Folder Downloader, Government Graduate College Okara, Pro Bandey" />
     <meta name="author" content="M Ramzan Ch" />
     <meta name="copyright" content="MainRoute Core" />
     
@@ -22,7 +22,6 @@
     <meta property="twitter:card" content="summary_large_image" />
     
     <!-- PWA Manifest & Icons -->
-    <!-- Note: Create a manifest.json in your root folder for full PWA installation support -->
     <link rel="manifest" href="/manifest.json">
     <link rel="canonical" href="https://mainroute-core.github.io/">
     <link href="https://avatars.githubusercontent.com/u/249983472" rel="apple-touch-icon" sizes="180x180" />
@@ -34,554 +33,625 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;600;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS (Configured for Custom Primary Color) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        mrc: {
-                            DEFAULT: '#f44234',
-                            light: '#ff6b60',
-                            dark: '#c02e22',
-                            glow: 'rgba(244, 66, 52, 0.5)'
-                        },
-                        dark: '#050505',
-                        surface: '#121212'
-                    },
-                    fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
-                        mono: ['Space Mono', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Icons & Animation Libraries -->
+    <!-- Script Libraries (JS only) -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
 
-    <!-- Custom Styles -->
+    <!-- INTERNAL CSS INSTEAD OF FRAMEWORKS -->
     <style>
-        body {
-            background-color: theme('colors.dark');
-            color: #ffffff;
-            overflow-x: hidden;
+        /* CSS Variables */
+        :root {
+            --mrc: #f44234;
+            --mrc-light: #ff6b60;
+            --mrc-glow: rgba(244, 66, 52, 0.4);
+            --bg-dark: #050505;
+            --bg-surface: #121212;
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+            --border-light: rgba(255, 255, 255, 0.08);
+            
+            --font-sans: 'Outfit', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+            --container-width: 1280px;
         }
 
-        /* Lenis Smooth Scroll Fixes */
-        html.lenis, html.lenis body { height: auto; }
-        .lenis.lenis-smooth { scroll-behavior: auto !important; }
-        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-        .lenis.lenis-stopped { overflow: hidden; }
+        /* Reset & Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        
+        /* Typography Utilities */
+        .text-mrc { color: var(--mrc); }
+        .text-muted { color: var(--text-muted); }
+        .font-mono { font-family: var(--font-mono); }
+        .uppercase { text-transform: uppercase; }
+        .font-black { font-weight: 900; }
+        .font-bold { font-weight: 700; }
+        .text-center { text-align: center; }
+        .tracking-widest { letter-spacing: 0.15em; }
+        .tracking-tighter { letter-spacing: -0.05em; }
 
-        /* UI Elements */
+        /* Layout & Container */
+        .container {
+            width: 100%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .section { padding: 6rem 0; position: relative; z-index: 10; }
+        @media (min-width: 1024px) { .section { padding: 8rem 0; } }
+
+        /* Flex & Grid Utilities */
+        .flex { display: flex; }
+        .flex-col { display: flex; flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-center { justify-content: center; }
+        .gap-2 { gap: 0.5rem; }
+        .gap-4 { gap: 1rem; }
+        .gap-6 { gap: 1.5rem; }
+        .gap-8 { gap: 2rem; }
+        
+        .grid { display: grid; }
+        .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
+        .grid-3 { grid-template-columns: 1fr; gap: 2rem; }
+        .grid-4 { grid-template-columns: 1fr; gap: 1.5rem; }
+        
+        @media (min-width: 768px) {
+            .grid-2 { grid-template-columns: repeat(2, 1fr); }
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+            .grid-4 { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        /* Glassmorphism & UI Components */
         .glass-panel {
             background: rgba(18, 18, 18, 0.6);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-light);
+            border-radius: 1.5rem;
         }
 
+        /* Background Effects */
         .tech-grid {
-            background-image: linear-gradient(rgba(244, 66, 52, 0.05) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(244, 66, 52, 0.05) 1px, transparent 1px);
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            background-image: 
+                linear-gradient(rgba(244, 66, 52, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(244, 66, 52, 0.05) 1px, transparent 1px);
             background-size: 50px 50px;
             mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
             -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
         }
-
-        .mrc-glow {
-            box-shadow: 0 0 30px theme('colors.mrc.glow');
-        }
-
-        /* Buttons */
-        .mrc-button {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid theme('colors.mrc.DEFAULT');
-            z-index: 1;
-        }
-        
-        .mrc-button::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: all 0.5s ease;
-            z-index: -1;
-        }
-
-        .mrc-button:hover::before { left: 100%; }
-        .mrc-button:hover {
-            background-color: theme('colors.mrc.DEFAULT');
-            color: #fff !important;
-            box-shadow: 0 0 25px theme('colors.mrc.glow');
-            transform: translateY(-2px);
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: theme('colors.dark'); }
-        ::-webkit-scrollbar-thumb { background: theme('colors.mrc.DEFAULT'); border-radius: 10px; }
-
-        /* Animations */
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .marquee-content {
-            display: flex;
-            width: max-content;
-            animation: scroll 35s linear infinite;
-        }
-
-        .marquee-content:hover {
-            animation-play-state: paused;
-        }
-
-        /* Utility classes for GSAP */
-        .reveal-up { opacity: 0; visibility: hidden; }
-        .reveal-scale { opacity: 0; transform: scale(0.8); visibility: hidden; }
-        
-        /* Ambient Background Orbs */
         .ambient-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.4;
-            z-index: -1;
+            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3; z-index: -1;
+            background: var(--mrc);
             animation: float 10s ease-in-out infinite alternate;
         }
         @keyframes float {
             0% { transform: translate(0, 0) scale(1); }
             100% { transform: translate(30px, -50px) scale(1.2); }
         }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed; top: 1rem; left: 1rem; right: 1rem; z-index: 100;
+        }
+        @media (min-width: 1024px) {
+            .header { top: 1.5rem; left: 2rem; right: 2rem; }
+        }
+        .nav-bar {
+            padding: 1rem 1.5rem; border-radius: 9999px; display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .nav-logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 900; text-transform: uppercase; }
+        .nav-logo img { width: 40px; height: 40px; border-radius: 10px; transition: transform 0.3s; }
+        .nav-logo:hover img { transform: scale(1.1); }
+        
+        .desktop-nav { display: none; align-items: center; gap: 2rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
+        .desktop-nav a:hover { color: var(--mrc); }
+        .system-status { display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.05); padding: 0.35rem 0.75rem; border-radius: 99px; border: 1px solid var(--border-light); color: #fff; font-size: 0.65rem; }
+        .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 8px #22c55e; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        
+        .founder-tag { display: none; font-size: 0.65rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); background: rgba(0,0,0,0.5); padding: 0.5rem 1rem; border-radius: 99px; border: 1px solid var(--border-light); }
+        
+        .mobile-menu-btn { display: block; background: none; border: none; color: #fff; cursor: pointer; padding: 0.5rem; }
+        .mobile-menu-btn:hover { color: var(--mrc); }
+        
+        .mobile-menu {
+            display: none; position: absolute; top: 120%; left: 0; width: 100%; padding: 1.5rem; flex-direction: column; gap: 1rem;
+            border-radius: 1.5rem; border: 1px solid var(--border-light); background: rgba(18,18,18,0.95); backdrop-filter: blur(20px);
+        }
+        .mobile-menu.active { display: flex; }
+        .mobile-menu a { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.5rem 0; }
+        
+        @media (min-width: 1024px) {
+            .desktop-nav { display: flex; }
+            .mobile-menu-btn { display: none; }
+        }
+        @media (min-width: 1280px) {
+            .founder-tag { display: block; }
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 1rem 2rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+            position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; z-index: 1; border: none;
+        }
+        .btn-primary {
+            background: rgba(244, 66, 52, 0.1); border: 1px solid var(--mrc); color: #fff;
+        }
+        .btn-outline {
+            background: transparent; border: 1px solid var(--border-light); color: var(--text-muted);
+        }
+        .btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease; z-index: -1;
+        }
+        .btn:hover::before { left: 100%; }
+        .btn-primary:hover {
+            background-color: var(--mrc); box-shadow: 0 0 25px var(--mrc-glow); transform: translateY(-2px);
+        }
+        .btn-outline:hover {
+            border-color: var(--mrc); color: #fff; transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 6rem; padding-bottom: 4rem; }
+        .hero-title { font-size: 3.5rem; font-weight: 900; line-height: 0.9; margin-bottom: 2rem; }
+        .hero-title-gradient {
+            background: linear-gradient(to right, var(--mrc), var(--mrc-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; position: relative; display: inline-block;
+        }
+        .hero-desc { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin-bottom: 2.5rem; line-height: 1.6; }
+        .hero-image-wrapper { display: none; position: relative; perspective: 1000px; justify-content: center; align-items: center; }
+        .hero-image { width: 420px; height: 420px; border-radius: 2.5rem; object-fit: cover; border: 2px solid var(--border-light); box-shadow: 0 0 40px var(--mrc-glow); filter: grayscale(100%); transition: all 0.5s; transform: rotate(-5deg); }
+        .hero-image-wrapper:hover .hero-image { filter: grayscale(0%); transform: rotate(0deg) scale(1.05); }
+        
+        .circle-spin { position: absolute; width: 500px; height: 500px; border: 1px dashed var(--border-light); border-radius: 50%; animation: spin 20s linear infinite; }
+        .circle-spin-reverse { position: absolute; width: 400px; height: 400px; border: 1px solid rgba(244,66,52,0.2); border-radius: 50%; animation: spin 15s linear infinite reverse; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        @media (min-width: 640px) { .hero-title { font-size: 4.5rem; } }
+        @media (min-width: 1024px) {
+            .hero-title { font-size: 7rem; }
+            .hero-image-wrapper { display: flex; }
+        }
+
+        /* Infinite Marquee */
+        .marquee-wrapper { padding: 2rem 0; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); overflow: hidden; white-space: nowrap; display: flex; }
+        .marquee-content { display: flex; animation: scroll 30s linear infinite; gap: 4rem; padding: 0 2rem; align-items: center; }
+        .marquee-content:hover { animation-play-state: paused; }
+        .marquee-item { font-size: 2rem; font-weight: 900; text-transform: uppercase; letter-spacing: -0.05em; display: flex; align-items: center; gap: 1rem; }
+        .marquee-stroke { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.3); }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Stats Section */
+        .stats-section { background: var(--bg-surface); padding: 4rem 0; border-bottom: 1px solid var(--border-light); }
+        .stat-box { text-align: center; border-right: 1px solid var(--border-light); padding: 0 1rem; }
+        .stat-box:last-child { border-right: none; }
+        .stat-num { font-size: 3rem; font-weight: 900; margin-bottom: 0.5rem; color: #fff; }
+        .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.15em; }
+        @media (max-width: 767px) {
+            .stat-box:nth-child(2) { border-right: none; }
+            .stat-box { margin-bottom: 2rem; }
+            .stat-box:nth-last-child(-n+2) { margin-bottom: 0; }
+        }
+
+        /* General Section Titles */
+        .section-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.75rem; color: var(--mrc); text-transform: uppercase; letter-spacing: 0.15em; padding: 0.5rem 1rem; border: 1px solid rgba(244,66,52,0.2); background: rgba(244,66,52,0.1); border-radius: 99px; margin-bottom: 1.5rem; }
+        .section-title { font-size: 3rem; font-weight: 900; text-transform: uppercase; letter-spacing: -0.05em; margin-bottom: 1.5rem; }
+        .section-desc { font-size: 1.1rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 2rem; }
+        @media (min-width: 768px) { .section-title { font-size: 4rem; } }
+
+        /* Cards & Features */
+        .feature-card { padding: 2.5rem; border: 1px solid var(--border-light); border-radius: 1.5rem; background: rgba(255,255,255,0.02); transition: all 0.3s; position: relative; overflow: hidden; }
+        .feature-card:hover { border-color: rgba(244,66,52,0.5); transform: translateY(-5px); }
+        .feature-icon { width: 60px; height: 60px; border-radius: 1rem; background: rgba(244,66,52,0.1); display: flex; justify-content: center; align-items: center; margin-bottom: 2rem; color: var(--mrc); transition: all 0.3s; }
+        .feature-card:hover .feature-icon { background: var(--mrc); color: #fff; }
+        .feature-card-highlight { background: linear-gradient(180deg, rgba(244,66,52,0.1), transparent); border-color: rgba(244,66,52,0.3); }
+        
+        /* Workflow Specific */
+        .step-num { font-size: 4rem; font-weight: 900; color: rgba(255,255,255,0.05); margin-bottom: 1.5rem; transition: color 0.3s; }
+        .feature-card:hover .step-num { color: rgba(244,66,52,0.2); }
+        .step-line { height: 4px; width: 0; background: var(--mrc); position: absolute; bottom: 0; left: 0; transition: width 0.5s ease; }
+        .feature-card:hover .step-line { width: 100%; }
+
+        /* Badges */
+        .badge-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+        .badge { font-family: var(--font-mono); font-size: 0.65rem; border: 1px solid var(--border-light); padding: 0.4rem 0.8rem; border-radius: 99px; color: var(--text-muted); }
+        .badge-primary { background: rgba(244,66,52,0.1); border-color: rgba(244,66,52,0.3); color: var(--mrc); }
+
+        /* Tech Icons */
+        .tech-icons-wrap { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; opacity: 0.7; }
+        .tech-icon { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; transition: all 0.3s; }
+        .tech-icon:hover { color: var(--mrc); transform: scale(1.1); opacity: 1; }
+        @media (min-width: 768px) { .tech-icons-wrap { gap: 4rem; } }
+
+        /* Open Source Repo Cards */
+        .repo-card { padding: 2rem; border-left: 4px solid var(--border-light); border-top: 1px solid var(--border-light); border-right: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); background: var(--bg-dark); border-radius: 0 1.5rem 1.5rem 0; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: all 0.3s; margin-bottom: 1.5rem; position: relative; overflow: hidden; }
+        .repo-card:hover { border-left-color: var(--mrc); }
+        .repo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+        .repo-status { display: flex; align-items: center; gap: 0.5rem; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mrc); background: rgba(244,66,52,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; }
+        .repo-version { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 0.3rem 0.6rem; border-radius: 4px; }
+        .repo-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 1rem; color: #fff; transition: color 0.3s; }
+        .repo-card:hover .repo-title { color: var(--mrc); }
+        .repo-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-light); margin-top: 1.5rem; padding-top: 1.5rem; }
+
+        /* Footer */
+        .footer { background: var(--bg-dark); border-top: 1px solid var(--border-light); padding: 4rem 0 2rem; position: relative; z-index: 10; }
+        .footer-top { display: flex; flex-direction: column; gap: 2rem; border-bottom: 1px solid var(--border-light); padding-bottom: 3rem; margin-bottom: 2rem; }
+        @media (min-width: 768px) { .footer-top { flex-direction: row; justify-content: space-between; align-items: center; } }
+        .social-links { display: flex; gap: 1rem; }
+        .social-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; justify-content: center; align-items: center; transition: all 0.3s; }
+        .social-icon:hover { background: var(--mrc); color: #fff; transform: translateY(-3px); }
+        .footer-bottom { display: flex; flex-direction: column; gap: 1rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); text-align: center; }
+        @media (min-width: 768px) { .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; } }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: rgba(244, 66, 52, 0.5); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--mrc); }
+
+        /* GSAP Utility Classes */
+        .reveal-up { opacity: 0; visibility: hidden; }
+        .reveal-scale { opacity: 0; transform: scale(0.85); visibility: hidden; }
+
+        /* Lenis Global Fix */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-stopped { overflow: hidden; }
+
     </style>
 </head>
 
-<body class="antialiased selection:bg-mrc selection:text-white">
+<body>
 
-    <!-- Background Grid & Orbs -->
-    <div class="fixed inset-0 tech-grid pointer-events-none z-0"></div>
-    <div class="ambient-orb bg-mrc w-[500px] h-[500px] top-[-10%] left-[-10%]"></div>
-    <div class="ambient-orb bg-mrc w-[400px] h-[400px] bottom-[-10%] right-[-10%] opacity-20" style="animation-delay: -5s;"></div>
+    <!-- Ambient Backgrounds -->
+    <div class="tech-grid"></div>
+    <div class="ambient-orb" style="width: 500px; height: 500px; top: -10%; left: -10%;"></div>
+    <div class="ambient-orb" style="width: 400px; height: 400px; bottom: -10%; right: -10%; opacity: 0.15; animation-delay: -5s;"></div>
 
     <!-- Navigation -->
-    <header class="fixed top-4 left-4 right-4 lg:top-6 lg:left-8 lg:right-8 z-[100]">
-        <div class="glass-panel rounded-full px-6 py-4 flex justify-between items-center transition-all duration-300 shadow-2xl">
-            <!-- Logo -->
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="relative">
-                    <img src="https://avatars.githubusercontent.com/u/249983472" class="w-10 h-10 rounded-xl relative z-10 transition-transform group-hover:scale-110" alt="MRC Logo">
-                    <div class="absolute inset-0 bg-mrc blur-md opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                </div>
-                <span class="font-black tracking-tighter text-xl uppercase hidden sm:block">
-                    MainRoute <span class="text-mrc">Core</span>
-                </span>
+    <header class="header">
+        <div class="nav-bar glass-panel">
+            <a href="#" class="nav-logo">
+                <img src="https://avatars.githubusercontent.com/u/249983472" alt="MRC Logo">
+                <span class="hidden-mobile">MainRoute <span class="text-mrc">Core</span></span>
             </a>
 
-            <!-- Desktop Nav -->
-            <nav class="hidden lg:flex items-center gap-8 text-xs font-bold tracking-[0.15em] uppercase text-gray-400">
-                <a href="#expertise" class="hover:text-mrc transition-colors">Expertise</a>
-                <a href="#workflow" class="hover:text-mrc transition-colors">Workflow</a>
-                <a href="#open-source" class="hover:text-mrc transition-colors">Open Source</a>
-                <span class="border-l border-white/10 h-4"></span>
-                <span class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full border border-white/5">
-                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_#22c55e]"></span>
-                    <span class="text-[10px] text-white">Systems Active</span>
-                </span>
+            <nav class="desktop-nav">
+                <a href="#expertise">Expertise</a>
+                <a href="#workflow">Workflow</a>
+                <a href="#open-source">Open Source</a>
+                <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.2);"></div>
+                <div class="system-status">
+                    <div class="status-dot"></div> Systems Active
+                </div>
             </nav>
 
-            <!-- Mobile Menu Toggle -->
-            <button id="mobile-menu-btn" class="lg:hidden text-white hover:text-mrc transition">
-                <i data-lucide="menu" class="w-6 h-6"></i>
+            <button id="mobile-menu-btn" class="mobile-menu-btn">
+                <i data-lucide="menu"></i>
             </button>
 
-            <!-- Founder Tag -->
-            <div class="hidden xl:block text-[10px] font-mono tracking-widest uppercase text-gray-500 bg-black/50 px-4 py-2 rounded-full border border-white/5">
-                Founder: M Ramzan Ch
-            </div>
+            <div class="founder-tag">Founder: M Ramzan Ch</div>
         </div>
 
-        <!-- Mobile Menu (Hidden by default) -->
-        <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full glass-panel rounded-2xl p-6 flex flex-col gap-4 border border-white/10 shadow-2xl">
-            <a href="#expertise" class="text-lg font-bold uppercase tracking-wider hover:text-mrc">Expertise</a>
-            <a href="#workflow" class="text-lg font-bold uppercase tracking-wider hover:text-mrc">Workflow</a>
-            <a href="#open-source" class="text-lg font-bold uppercase tracking-wider hover:text-mrc">Open Source</a>
-            <hr class="border-white/10 my-2">
-            <a href="#contact" class="text-mrc text-lg font-bold uppercase tracking-wider">Contact Us</a>
+        <div id="mobile-menu" class="mobile-menu">
+            <a href="#expertise">Expertise</a>
+            <a href="#workflow">Workflow</a>
+            <a href="#open-source">Open Source</a>
+            <hr style="border: none; border-top: 1px solid var(--border-light); margin: 0.5rem 0;">
+            <a href="#contact" class="text-mrc">Contact Us</a>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden z-10">
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
-            
-            <div class="hero-content flex flex-col items-start z-20">
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-mrc/10 border border-mrc/30 rounded-full text-mrc text-[11px] font-bold tracking-widest uppercase mb-8 backdrop-blur-md">
-                    <i data-lucide="sparkles" class="w-3 h-3"></i> Innovating Tomorrow, Today
+    <section class="hero">
+        <div class="container grid-2">
+            <div class="hero-content">
+                <div class="section-tag" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i> Innovating Tomorrow, Today
                 </div>
                 
-                <h1 class="text-6xl sm:text-7xl lg:text-[110px] font-black leading-[0.85] tracking-tighter mb-8 reveal-up">
+                <h1 class="hero-title reveal-up">
                     FUTURE <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-mrc to-mrc-light relative">
+                    <span class="hero-title-gradient">
                         ENGINEERED.
-                        <svg class="absolute w-full h-3 -bottom-1 left-0 text-mrc opacity-70" viewBox="0 0 100 10" preserveAspectRatio="none">
-                            <path d="M0,5 Q50,10 100,5" stroke="currentColor" stroke-width="4" fill="none" />
-                        </svg>
                     </span>
                 </h1>
                 
-                <p class="text-gray-400 text-lg sm:text-xl max-w-lg mb-10 leading-relaxed font-light reveal-up delay-100">
-                    A specialized technology powerhouse led by <span class="text-white font-bold">M Ramzan Ch</span>. We engineer high-performance PWAs, enterprise software, and robust open-source infrastructure.
+                <p class="hero-desc reveal-up">
+                    A specialized technology powerhouse led by <span style="color:#fff; font-weight:700;">M Ramzan Ch</span>. Originating with roots in Government Graduate College Okara, we engineer high-performance PWAs, enterprise software, and robust open-source infrastructure.
                 </p>
                 
-                <div class="flex flex-wrap gap-4 reveal-up delay-200">
-                    <a href="#contact" class="mrc-button bg-mrc/10 text-white font-bold text-sm px-8 py-4 rounded-lg uppercase tracking-widest flex items-center gap-2">
-                        Initiate Collaboration <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                <div class="flex flex-wrap gap-4 reveal-up">
+                    <a href="#contact" class="btn btn-primary">
+                        Initiate Collaboration <i data-lucide="arrow-right" style="width: 18px;"></i>
                     </a>
-                    <a href="#open-source" class="mrc-button bg-transparent text-gray-300 font-bold text-sm px-8 py-4 rounded-lg uppercase tracking-widest flex items-center gap-2 border-white/20 hover:border-mrc">
-                        The FOSS Lab <i data-lucide="github" class="w-4 h-4"></i>
+                    <a href="#open-source" class="btn btn-outline">
+                        The FOSS Lab <i data-lucide="github" style="width: 18px;"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="relative hidden lg:flex justify-center items-center h-full perspective-1000">
-                <!-- Decorative Circle -->
-                <div class="absolute w-[500px] h-[500px] border border-white/5 rounded-full animate-[spin_20s_linear_infinite] border-dashed"></div>
-                <div class="absolute w-[400px] h-[400px] border border-mrc/20 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+            <div class="hero-image-wrapper reveal-scale">
+                <div class="circle-spin"></div>
+                <div class="circle-spin-reverse"></div>
                 
-                <div class="relative z-10 group transform-gpu transition-all duration-700 hover:rotate-0 hover:scale-105 rotate-[-5deg]">
-                    <img src="https://avatars.githubusercontent.com/u/249983472" class="w-[420px] h-[420px] rounded-[40px] border-2 border-white/10 shadow-2xl mrc-glow object-cover grayscale hover:grayscale-0 transition-all duration-500" alt="MainRoute Core Branding">
+                <div style="position: relative; z-index: 10;">
+                    <img src="https://avatars.githubusercontent.com/u/249983472" class="hero-image" alt="MainRoute Core Branding">
                     <!-- Floating Badge -->
-                    <div class="absolute -bottom-6 -right-6 glass-panel p-4 rounded-2xl flex items-center gap-4 animate-bounce" style="animation-duration: 3s;">
-                        <div class="w-12 h-12 bg-mrc rounded-full flex items-center justify-center">
-                            <i data-lucide="award" class="text-white"></i>
+                    <div class="glass-panel flex items-center gap-4" style="position: absolute; bottom: -20px; right: -20px; padding: 1rem; border-radius: 1rem; animation: float 4s infinite alternate;">
+                        <div style="width: 40px; height: 40px; background: var(--mrc); border-radius: 50%; display: flex; justify-content: center; align-items: center;">
+                            <i data-lucide="award" style="color: #fff; width: 20px;"></i>
                         </div>
                         <div>
-                            <div class="text-white font-bold leading-tight">Top Tier</div>
-                            <div class="text-mrc text-xs font-mono">Development</div>
+                            <div style="color: #fff; font-weight: 700; line-height: 1.2;">Pro Bandey</div>
+                            <div style="color: var(--mrc); font-size: 0.75rem; font-family: var(--font-mono);">Certified Core</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-mrc animate-bounce flex flex-col items-center gap-2 opacity-70 hover:opacity-100 cursor-pointer" onclick="window.scrollBy(0, window.innerHeight)">
-            <span class="text-[10px] font-mono tracking-widest uppercase text-white">Scroll</span>
-            <i data-lucide="mouse" class="w-5 h-5"></i>
-        </div>
     </section>
 
     <!-- Infinite Marquee -->
-    <div class="py-8 border-y border-white/5 bg-black/50 overflow-hidden backdrop-blur-md relative z-10">
-        <div class="marquee-content gap-16 items-center px-8">
+    <div class="marquee-wrapper">
+        <div class="marquee-content">
             <!-- Set 1 -->
-            <span class="text-3xl font-black text-transparent bg-clip-text text-stroke-white uppercase tracking-tighter" style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">Progressive Web Apps</span>
-            <span class="text-3xl font-black text-mrc uppercase tracking-tighter flex items-center gap-4"><i data-lucide="asterisk"></i> Kotlin Native</span>
-            <span class="text-3xl font-black text-transparent bg-clip-text text-stroke-white uppercase tracking-tighter" style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">Enterprise E-Commerce</span>
-            <span class="text-3xl font-black text-mrc uppercase tracking-tighter flex items-center gap-4"><i data-lucide="asterisk"></i> FOSS Ecosystem</span>
-            <span class="text-3xl font-black text-transparent bg-clip-text text-stroke-white uppercase tracking-tighter" style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">Agile Architecture</span>
-            <span class="text-3xl font-black text-mrc uppercase tracking-tighter flex items-center gap-4"><i data-lucide="asterisk"></i> Node.js Engine</span>
-            <!-- Set 2 (Duplicated for smooth infinite loop) -->
-            <span class="text-3xl font-black text-transparent bg-clip-text text-stroke-white uppercase tracking-tighter" style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">Progressive Web Apps</span>
-            <span class="text-3xl font-black text-mrc uppercase tracking-tighter flex items-center gap-4"><i data-lucide="asterisk"></i> Kotlin Native</span>
-            <span class="text-3xl font-black text-transparent bg-clip-text text-stroke-white uppercase tracking-tighter" style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">Enterprise E-Commerce</span>
-            <span class="text-3xl font-black text-mrc uppercase tracking-tighter flex items-center gap-4"><i data-lucide="asterisk"></i> FOSS Ecosystem</span>
-            <span class="text-3xl font-black text-transparent bg-clip-text text-stroke-white uppercase tracking-tighter" style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">Agile Architecture</span>
-            <span class="text-3xl font-black text-mrc uppercase tracking-tighter flex items-center gap-4"><i data-lucide="asterisk"></i> Node.js Engine</span>
+            <span class="marquee-item marquee-stroke">Progressive Web Apps</span>
+            <span class="marquee-item text-mrc"><i data-lucide="asterisk"></i> Kotlin Native</span>
+            <span class="marquee-item marquee-stroke">MegaMind Solution</span>
+            <span class="marquee-item text-mrc"><i data-lucide="asterisk"></i> FOSS Ecosystem</span>
+            <span class="marquee-item marquee-stroke">Agile Architecture</span>
+            <span class="marquee-item text-mrc"><i data-lucide="asterisk"></i> Node.js Engine</span>
+            <!-- Set 2 (Duplicate for loop) -->
+            <span class="marquee-item marquee-stroke">Progressive Web Apps</span>
+            <span class="marquee-item text-mrc"><i data-lucide="asterisk"></i> Kotlin Native</span>
+            <span class="marquee-item marquee-stroke">MegaMind Solution</span>
+            <span class="marquee-item text-mrc"><i data-lucide="asterisk"></i> FOSS Ecosystem</span>
+            <span class="marquee-item marquee-stroke">Agile Architecture</span>
+            <span class="marquee-item text-mrc"><i data-lucide="asterisk"></i> Node.js Engine</span>
         </div>
     </div>
 
-    <!-- Stats Section (New Content) -->
-    <section class="py-16 bg-surface z-10 relative border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-white/5">
-                <div class="text-center reveal-up">
-                    <div class="text-4xl md:text-5xl font-black text-white mb-2">50<span class="text-mrc">+</span></div>
-                    <div class="text-xs text-gray-500 uppercase tracking-widest font-bold">Projects Delivered</div>
-                </div>
-                <div class="text-center reveal-up delay-100">
-                    <div class="text-4xl md:text-5xl font-black text-white mb-2">15<span class="text-mrc">K</span></div>
-                    <div class="text-xs text-gray-500 uppercase tracking-widest font-bold">Open Source Commits</div>
-                </div>
-                <div class="text-center reveal-up delay-200">
-                    <div class="text-4xl md:text-5xl font-black text-white mb-2">99<span class="text-mrc">%</span></div>
-                    <div class="text-xs text-gray-500 uppercase tracking-widest font-bold">Client Satisfaction</div>
-                </div>
-                <div class="text-center reveal-up delay-300">
-                    <div class="text-4xl md:text-5xl font-black text-white mb-2">24<span class="text-mrc">/7</span></div>
-                    <div class="text-xs text-gray-500 uppercase tracking-widest font-bold">System Reliability</div>
-                </div>
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container grid grid-4">
+            <div class="stat-box reveal-up">
+                <div class="stat-num">50<span class="text-mrc">+</span></div>
+                <div class="stat-label">Projects Delivered</div>
+            </div>
+            <div class="stat-box reveal-up">
+                <div class="stat-num">15<span class="text-mrc">K</span></div>
+                <div class="stat-label">Open Source Commits</div>
+            </div>
+            <div class="stat-box reveal-up">
+                <div class="stat-num">99<span class="text-mrc">%</span></div>
+                <div class="stat-label">Client Satisfaction</div>
+            </div>
+            <div class="stat-box reveal-up">
+                <div class="stat-num">24<span class="text-mrc">/7</span></div>
+                <div class="stat-label">System Reliability</div>
             </div>
         </div>
     </section>
 
     <!-- Leadership / About -->
-    <section class="relative py-32 bg-dark overflow-hidden z-10">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_right,rgba(244,66,52,0.08)_0%,transparent_50%)] pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-                <div class="reveal-scale order-2 lg:order-1 relative">
-                    <div class="absolute inset-0 bg-mrc/20 blur-[80px] rounded-full"></div>
-                    <div class="relative p-3 glass-panel rounded-[40px] inline-block border border-white/10 transform rotate-2 hover:rotate-0 transition-transform duration-500">
-                        <img src="https://avatars.githubusercontent.com/u/249983472" class="w-full max-w-md rounded-[30px] filter contrast-125 shadow-2xl" alt="M Ramzan Ch - Founder">
-                    </div>
+    <section class="section" style="background: var(--bg-dark);">
+        <div class="container grid-2 items-center">
+            <div class="reveal-scale" style="position: relative;">
+                <div style="position: absolute; inset: 0; background: var(--mrc); filter: blur(80px); opacity: 0.2; border-radius: 50%;"></div>
+                <div class="glass-panel" style="padding: 0.75rem; display: inline-block; transform: rotate(2deg); transition: transform 0.5s;">
+                    <img src="https://avatars.githubusercontent.com/u/249983472" style="border-radius: 1rem; width: 100%; max-width: 450px; filter: contrast(1.1);" alt="M Ramzan Ch - Founder">
                 </div>
-                <div class="space-y-8 order-1 lg:order-2">
-                    <div class="inline-flex items-center gap-2 text-mrc font-mono text-xs uppercase tracking-widest border border-mrc/20 px-4 py-2 rounded-full">
-                        <span class="w-2 h-2 bg-mrc rounded-full"></span> The Core Mind
+            </div>
+            
+            <div class="reveal-up">
+                <div class="section-tag">The Core Mind</div>
+                <h2 class="section-title">
+                    Visionary <br><span style="color: var(--text-muted);">Leadership.</span>
+                </h2>
+                <p class="section-desc">
+                    Spearheaded by <span class="text-mrc font-bold">M Ramzan Ch</span>. Our collective blends artistic creativity with deep architectural technicalities. From robust modifications to full-scale enterprise software, we exist to solve hard problems, fostering both corporate growth and community-driven innovation.
+                </p>
+                
+                <div class="grid grid-2" style="margin-top: 2rem;">
+                    <div class="glass-panel" style="padding: 1.5rem; border-left: 4px solid var(--mrc);">
+                        <h4 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i data-lucide="zap" class="text-mrc"></i> Agile
+                        </h4>
+                        <p style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.1em; line-height: 1.5;">Rapid sprints, continuous integration, and fast iterative delivery.</p>
                     </div>
-                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight reveal-up">
-                        Visionary <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Leadership.</span>
-                    </h2>
-                    <p class="text-lg md:text-xl text-gray-400 font-light leading-relaxed reveal-up">
-                        Spearheaded by <span class="text-mrc font-bold">M Ramzan Ch</span>, our collective blends artistic creativity with deep architectural technicalities. We exist to solve hard problems, fostering both corporate growth and community-driven innovation.
-                    </p>
-                    
-                    <div class="grid sm:grid-cols-2 gap-6 reveal-up">
-                        <div class="p-6 glass-panel rounded-2xl border-l-4 border-l-mrc hover:bg-white/5 transition-colors">
-                            <h4 class="text-white font-black text-2xl mb-2 flex items-center gap-2">
-                                <i data-lucide="zap" class="text-mrc w-5 h-5"></i> Agile
-                            </h4>
-                            <p class="text-xs text-gray-400 uppercase tracking-widest leading-relaxed">Rapid sprints, continuous integration, and fast iterative delivery.</p>
-                        </div>
-                        <div class="p-6 glass-panel rounded-2xl border-l-4 border-l-white hover:border-l-mrc hover:bg-white/5 transition-all">
-                            <h4 class="text-white font-black text-2xl mb-2 flex items-center gap-2">
-                                <i data-lucide="cpu" class="text-mrc w-5 h-5"></i> Tailored
-                            </h4>
-                            <p class="text-xs text-gray-400 uppercase tracking-widest leading-relaxed">Bespoke systems architected specifically for your unique metrics.</p>
-                        </div>
+                    <div class="glass-panel" style="padding: 1.5rem; border-left: 4px solid #fff;">
+                        <h4 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i data-lucide="cpu" class="text-mrc"></i> Tailored
+                        </h4>
+                        <p style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.1em; line-height: 1.5;">Bespoke systems architected specifically for your unique metrics.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- The Workflow Section -->
-    <section id="workflow" class="py-32 bg-surface relative z-10">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-                <div class="max-w-2xl">
-                    <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-6 reveal-up">
-                        The <span class="text-mrc">Workflow.</span>
-                    </h2>
-                    <p class="text-gray-400 text-lg reveal-up">Our systematic, battle-tested approach to translating complex requirements into highly scalable digital infrastructure.</p>
-                </div>
-                <div class="text-mrc font-mono text-sm tracking-widest bg-mrc/10 px-4 py-2 rounded-lg border border-mrc/20 reveal-up">
-                    PHASE: 01 — 04
-                </div>
+    <!-- Workflow Section -->
+    <section id="workflow" class="section" style="background: var(--bg-surface);">
+        <div class="container">
+            <div class="flex flex-col gap-4 reveal-up" style="margin-bottom: 4rem; max-width: 700px;">
+                <div class="section-tag" style="width: max-content;">PHASE: 01 — 04</div>
+                <h2 class="section-title">The <span class="text-mrc">Workflow.</span></h2>
+                <p class="section-desc">Our systematic, battle-tested approach to translating complex requirements into highly scalable digital infrastructure.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Step 1 -->
-                <div class="p-8 border border-white/5 rounded-3xl hover:border-mrc/50 transition-all bg-dark/50 group relative overflow-hidden reveal-up">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-mrc/5 rounded-full blur-2xl group-hover:bg-mrc/20 transition-all"></div>
-                    <div class="text-6xl font-black text-white/5 group-hover:text-mrc/20 mb-8 transition-colors duration-500">01</div>
-                    <h4 class="font-bold text-white mb-4 uppercase tracking-widest text-lg">Discovery</h4>
-                    <p class="text-sm text-gray-500 leading-relaxed">Deep dive analysis of current technical debt, user behavior, and infrastructure requirements.</p>
-                    <div class="mt-6 h-1 w-0 bg-mrc group-hover:w-full transition-all duration-500"></div>
+            <div class="grid grid-4">
+                <div class="feature-card reveal-up">
+                    <div class="step-num">01</div>
+                    <h4 style="font-size: 1.25rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem;">Discovery</h4>
+                    <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">Deep dive analysis of current technical debt, user behavior, and infrastructure requirements.</p>
+                    <div class="step-line"></div>
                 </div>
-                <!-- Step 2 -->
-                <div class="p-8 border border-white/5 rounded-3xl hover:border-mrc/50 transition-all bg-dark/50 group relative overflow-hidden reveal-up delay-100">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-mrc/5 rounded-full blur-2xl group-hover:bg-mrc/20 transition-all"></div>
-                    <div class="text-6xl font-black text-white/5 group-hover:text-mrc/20 mb-8 transition-colors duration-500">02</div>
-                    <h4 class="font-bold text-white mb-4 uppercase tracking-widest text-lg">Architecture</h4>
-                    <p class="text-sm text-gray-500 leading-relaxed">Designing decoupled, scalable macro-systems using modern frameworks and FOSS principles.</p>
-                    <div class="mt-6 h-1 w-0 bg-mrc group-hover:w-full transition-all duration-500"></div>
+                <div class="feature-card reveal-up">
+                    <div class="step-num">02</div>
+                    <h4 style="font-size: 1.25rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem;">Architecture</h4>
+                    <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">Designing decoupled, scalable macro-systems using modern frameworks and FOSS principles.</p>
+                    <div class="step-line"></div>
                 </div>
-                <!-- Step 3 -->
-                <div class="p-8 border border-white/5 rounded-3xl hover:border-mrc/50 transition-all bg-dark/50 group relative overflow-hidden reveal-up delay-200">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-mrc/5 rounded-full blur-2xl group-hover:bg-mrc/20 transition-all"></div>
-                    <div class="text-6xl font-black text-white/5 group-hover:text-mrc/20 mb-8 transition-colors duration-500">03</div>
-                    <h4 class="font-bold text-white mb-4 uppercase tracking-widest text-lg">Development</h4>
-                    <p class="text-sm text-gray-500 leading-relaxed">High-velocity engineering sprints with strict continuous integration, code reviews, and automated testing.</p>
-                    <div class="mt-6 h-1 w-0 bg-mrc group-hover:w-full transition-all duration-500"></div>
+                <div class="feature-card reveal-up">
+                    <div class="step-num">03</div>
+                    <h4 style="font-size: 1.25rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem;">Development</h4>
+                    <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">High-velocity engineering sprints with strict continuous integration and automated testing.</p>
+                    <div class="step-line"></div>
                 </div>
-                <!-- Step 4 -->
-                <div class="p-8 border border-white/5 rounded-3xl hover:border-mrc/50 transition-all bg-dark/50 group relative overflow-hidden reveal-up delay-300">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-mrc/5 rounded-full blur-2xl group-hover:bg-mrc/20 transition-all"></div>
-                    <div class="text-6xl font-black text-white/5 group-hover:text-mrc/20 mb-8 transition-colors duration-500">04</div>
-                    <h4 class="font-bold text-white mb-4 uppercase tracking-widest text-lg">Deployment</h4>
-                    <p class="text-sm text-gray-500 leading-relaxed">Zero-downtime go-live protocols with 24/7 proactive monitoring and performance optimization.</p>
-                    <div class="mt-6 h-1 w-0 bg-mrc group-hover:w-full transition-all duration-500"></div>
+                <div class="feature-card reveal-up">
+                    <div class="step-num">04</div>
+                    <h4 style="font-size: 1.25rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem;">Deployment</h4>
+                    <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">Zero-downtime go-live protocols with 24/7 proactive monitoring and performance optimization.</p>
+                    <div class="step-line"></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- The Arsenal (Expertise) -->
-    <section id="expertise" class="py-32 relative z-10 bg-dark">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-24 reveal-up">
-                <p class="text-mrc font-mono text-sm tracking-widest uppercase mb-4">Core Competencies</p>
-                <h2 class="text-5xl md:text-7xl font-black mb-6 uppercase tracking-tighter">The <span class="text-mrc">Arsenal.</span></h2>
-                <div class="w-24 h-1.5 bg-mrc mx-auto rounded-full mrc-glow"></div>
+    <section id="expertise" class="section">
+        <div class="container">
+            <div class="text-center reveal-up" style="margin-bottom: 5rem;">
+                <p class="section-tag">Core Competencies</p>
+                <h2 class="section-title">The <span class="text-mrc">Arsenal.</span></h2>
+                <div style="width: 80px; height: 6px; background: var(--mrc); margin: 0 auto; border-radius: 10px; box-shadow: 0 0 15px var(--mrc-glow);"></div>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="p-10 glass-panel rounded-[2rem] hover:-translate-y-2 hover:border-mrc/50 transition-all duration-300 group reveal-scale">
-                    <div class="w-16 h-16 rounded-2xl bg-mrc/10 flex items-center justify-center mb-8 group-hover:bg-mrc transition-colors duration-300">
-                        <i data-lucide="smartphone-charging" class="text-mrc w-8 h-8 group-hover:text-white transition-colors"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter text-white">PWA Technologies</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-8">Performance-driven Progressive Web Apps for offline-first experiences, ensuring zero-latency feel even in low connectivity zones.</p>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="text-[10px] font-mono border border-white/10 px-3 py-1.5 rounded-full text-gray-300">Service Workers</span>
-                        <span class="text-[10px] font-mono border border-white/10 px-3 py-1.5 rounded-full text-gray-300">Push API</span>
+            <div class="grid grid-3">
+                <div class="feature-card reveal-scale">
+                    <div class="feature-icon"><i data-lucide="smartphone-charging" style="width: 32px; height: 32px;"></i></div>
+                    <h3 style="font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem;">PWA Technologies</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Performance-driven Progressive Web Apps for offline-first experiences, ensuring zero-latency feel even in low connectivity zones.</p>
+                    <div class="badge-list">
+                        <span class="badge">Service Workers</span>
+                        <span class="badge">Push API</span>
                     </div>
                 </div>
                 
-                <!-- Card 2 (Highlight) -->
-                <div class="p-10 bg-gradient-to-b from-mrc/10 to-transparent border border-mrc/50 rounded-[2rem] hover:-translate-y-2 transition-all duration-300 group reveal-scale delay-100 relative overflow-hidden">
-                    <div class="absolute inset-0 bg-mrc/5 group-hover:bg-mrc/10 transition-colors"></div>
-                    <div class="relative z-10">
-                        <div class="w-16 h-16 rounded-2xl bg-mrc flex items-center justify-center mb-8 shadow-lg shadow-mrc/30">
-                            <i data-lucide="code-2" class="text-white w-8 h-8"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter text-white">Custom Engineering</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-8">Engineered scalability with complex API and payment integrations. We construct the core engines that power modern enterprise platforms.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="text-[10px] font-mono border border-mrc/30 bg-mrc/10 text-mrc px-3 py-1.5 rounded-full">Microservices</span>
-                            <span class="text-[10px] font-mono border border-mrc/30 bg-mrc/10 text-mrc px-3 py-1.5 rounded-full">Security</span>
-                        </div>
+                <div class="feature-card feature-card-highlight reveal-scale">
+                    <div class="feature-icon" style="background: var(--mrc); color: #fff; box-shadow: 0 5px 15px var(--mrc-glow);"><i data-lucide="code-2" style="width: 32px; height: 32px;"></i></div>
+                    <h3 style="font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem;">Custom Engineering</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Engineered scalability with complex modifications and API integrations. We construct the core engines that power modern platforms.</p>
+                    <div class="badge-list">
+                        <span class="badge badge-primary">Microservices</span>
+                        <span class="badge badge-primary">Security</span>
                     </div>
                 </div>
 
-                <!-- Card 3 -->
-                <div class="p-10 glass-panel rounded-[2rem] hover:-translate-y-2 hover:border-mrc/50 transition-all duration-300 group reveal-scale delay-200">
-                    <div class="w-16 h-16 rounded-2xl bg-mrc/10 flex items-center justify-center mb-8 group-hover:bg-mrc transition-colors duration-300">
-                        <i data-lucide="app-window" class="text-mrc w-8 h-8 group-hover:text-white transition-colors"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter text-white">Android Native</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-8">Fluid Native Android experiences optimized utilizing modern Kotlin paradigms for peak accessibility and engagement metrics.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="text-[10px] font-mono border border-white/10 px-3 py-1.5 rounded-full text-gray-300">Kotlin</span>
-                        <span class="text-[10px] font-mono border border-white/10 px-3 py-1.5 rounded-full text-gray-300">Jetpack Compose</span>
+                <div class="feature-card reveal-scale">
+                    <div class="feature-icon"><i data-lucide="app-window" style="width: 32px; height: 32px;"></i></div>
+                    <h3 style="font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem;">Android Native</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Fluid Native Android experiences optimized utilizing modern Kotlin paradigms for peak accessibility and engagement metrics.</p>
+                    <div class="badge-list">
+                        <span class="badge">Kotlin</span>
+                        <span class="badge">Jetpack Compose</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Tech Stack (New Content) -->
-    <section class="py-20 border-y border-white/5 bg-black/40 backdrop-blur-md relative z-10">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h4 class="text-sm font-mono text-gray-500 uppercase tracking-widest mb-10">Technologies We Command</h4>
-            <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-60">
-                <div class="flex flex-col items-center gap-3 hover:text-mrc hover:opacity-100 transition-all cursor-default">
-                    <i data-lucide="server" class="w-10 h-10"></i><span class="text-xs font-bold uppercase">Node.js</span>
-                </div>
-                <div class="flex flex-col items-center gap-3 hover:text-mrc hover:opacity-100 transition-all cursor-default">
-                    <i data-lucide="database" class="w-10 h-10"></i><span class="text-xs font-bold uppercase">MongoDB</span>
-                </div>
-                <div class="flex flex-col items-center gap-3 hover:text-mrc hover:opacity-100 transition-all cursor-default">
-                    <i data-lucide="layout" class="w-10 h-10"></i><span class="text-xs font-bold uppercase">React/Next</span>
-                </div>
-                <div class="flex flex-col items-center gap-3 hover:text-mrc hover:opacity-100 transition-all cursor-default">
-                    <i data-lucide="smartphone" class="w-10 h-10"></i><span class="text-xs font-bold uppercase">Kotlin</span>
-                </div>
-                <div class="flex flex-col items-center gap-3 hover:text-mrc hover:opacity-100 transition-all cursor-default">
-                    <i data-lucide="cloud" class="w-10 h-10"></i><span class="text-xs font-bold uppercase">AWS / Cloud</span>
-                </div>
-                <div class="flex flex-col items-center gap-3 hover:text-mrc hover:opacity-100 transition-all cursor-default">
-                    <i data-lucide="git-merge" class="w-10 h-10"></i><span class="text-xs font-bold uppercase">Git Flow</span>
-                </div>
+    <!-- Tech Stack -->
+    <section style="padding: 4rem 0; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); background: rgba(0,0,0,0.3); position: relative; z-index: 10;">
+        <div class="container text-center">
+            <h4 style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 3rem;">Technologies We Command</h4>
+            <div class="tech-icons-wrap">
+                <div class="tech-icon"><i data-lucide="server" style="width: 40px; height: 40px;"></i><span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Node.js</span></div>
+                <div class="tech-icon"><i data-lucide="database" style="width: 40px; height: 40px;"></i><span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">MongoDB</span></div>
+                <div class="tech-icon"><i data-lucide="layout" style="width: 40px; height: 40px;"></i><span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">React/Next</span></div>
+                <div class="tech-icon"><i data-lucide="smartphone" style="width: 40px; height: 40px;"></i><span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Kotlin</span></div>
+                <div class="tech-icon"><i data-lucide="cloud" style="width: 40px; height: 40px;"></i><span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">AWS</span></div>
+                <div class="tech-icon"><i data-lucide="git-merge" style="width: 40px; height: 40px;"></i><span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Git Flow</span></div>
             </div>
         </div>
     </section>
 
-    <!-- Open Source Section (Completed & Enhanced) -->
-    <section id="open-source" class="py-32 bg-surface relative z-10">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-                <div class="reveal-up">
-                    <div class="inline-flex items-center gap-2 text-white bg-white/5 border border-white/10 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
-                        <i data-lucide="heart" class="w-3 h-3 text-mrc fill-mrc"></i> Community First
-                    </div>
-                    <h2 class="text-5xl md:text-6xl font-black mb-8 uppercase leading-tight tracking-tighter">
-                        Empowering the <br><span class="text-mrc">Open Community.</span>
-                    </h2>
-                    <p class="text-gray-400 mb-10 leading-relaxed text-lg font-light">
-                        We believe in giving back to the foundation that built us. MainRoute Core actively constructs and maintains several open-source repositories that provide building blocks for modern web reliability and workflow automation.
-                    </p>
-                    
-                    <div class="space-y-4">
-                        <a href="#" class="flex items-start gap-4 p-5 glass-panel rounded-xl hover:border-mrc/50 transition-all group">
-                            <div class="bg-white/5 p-3 rounded-lg group-hover:bg-mrc/10 transition-colors">
-                                <i data-lucide="github" class="text-mrc w-6 h-6"></i>
-                            </div>
-                            <div>
-                                <h5 class="font-bold text-white text-lg group-hover:text-mrc transition-colors">Core Architecture Libs</h5>
-                                <p class="text-sm text-gray-500 mt-1">Reusable, highly-tested logic for e-commerce engines.</p>
-                            </div>
-                        </a>
-                        <a href="#" class="flex items-start gap-4 p-5 glass-panel rounded-xl hover:border-mrc/50 transition-all group">
-                            <div class="bg-white/5 p-3 rounded-lg group-hover:bg-mrc/10 transition-colors">
-                                <i data-lucide="git-branch" class="text-mrc w-6 h-6"></i>
-                            </div>
-                            <div>
-                                <h5 class="font-bold text-white text-lg group-hover:text-mrc transition-colors">PWA Seed Projects</h5>
-                                <p class="text-sm text-gray-500 mt-1">Kickstarter templates for instant offline-ready applications.</p>
-                            </div>
-                        </a>
-                    </div>
+    <!-- Open Source Section -->
+    <section id="open-source" class="section" style="background: var(--bg-surface);">
+        <div class="container grid-2 items-center">
+            <div class="reveal-up">
+                <div class="section-tag" style="background: transparent; border-color: var(--border-light); color: #fff;">
+                    <i data-lucide="heart" style="width: 14px; height: 14px; color: var(--mrc); fill: var(--mrc); vertical-align: middle; margin-right: 4px;"></i> Community First
                 </div>
+                <h2 class="section-title">
+                    Empowering the <br><span class="text-mrc">Open Community.</span>
+                </h2>
+                <p class="section-desc">
+                    We believe in giving back to the foundation that built us. MainRoute Core actively constructs and maintains several open-source repositories that provide building blocks for modern web reliability and workflow automation.
+                </p>
                 
-                <!-- Highlighted Repositories (Completing the cut-off content) -->
-                <div class="grid grid-cols-1 gap-6 reveal-scale">
-                    <!-- Repo 1 -->
-                    <div class="p-8 border-l-4 border-mrc bg-dark border border-white/5 rounded-r-2xl shadow-2xl relative overflow-hidden group hover:border-white/20 transition-all">
-                        <div class="absolute top-0 right-0 w-40 h-40 bg-mrc/5 rounded-full blur-3xl -z-10 group-hover:bg-mrc/10 transition-all"></div>
-                        <div class="flex justify-between items-center mb-6">
-                            <span class="flex items-center gap-2 text-xs font-bold tracking-widest text-mrc uppercase bg-mrc/10 px-3 py-1 rounded">
-                                <span class="w-1.5 h-1.5 bg-mrc rounded-full animate-pulse"></span> Active Project
-                            </span>
-                            <span class="text-xs font-mono text-gray-500 bg-white/5 px-2 py-1 rounded">v2.4.0</span>
+                <div class="flex-col gap-4">
+                    <a href="#" class="glass-panel feature-card" style="display: flex; gap: 1rem; padding: 1.5rem; align-items: flex-start;">
+                        <div style="background: rgba(255,255,255,0.05); padding: 0.75rem; border-radius: 0.5rem;"><i data-lucide="github" class="text-mrc"></i></div>
+                        <div>
+                            <h5 style="font-size: 1.1rem; font-weight: 700;">Core Architecture Libs</h5>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">Reusable, highly-tested logic for complex software engines.</p>
                         </div>
-                        <h4 class="text-2xl font-black text-white mb-3">Git Folder Downloader</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">A high-utility browser extension and CLI tool engineered to selectively download specific folders and files from vast GitHub repositories without cloning the entire history.</p>
-                        <div class="flex justify-between items-center border-t border-white/5 pt-4">
+                    </a>
+                </div>
+            </div>
+            
+            <div class="flex-col gap-6 reveal-scale">
+                <!-- Repo 1 -->
+                <div class="repo-card" style="border-left-color: var(--mrc);">
+                    <div style="position: absolute; top: 0; right: 0; width: 150px; height: 150px; background: rgba(244,66,52,0.05); border-radius: 50%; filter: blur(40px); z-index: 0;"></div>
+                    <div style="position: relative; z-index: 1;">
+                        <div class="repo-header">
+                            <span class="repo-status"><span class="status-dot" style="width: 6px; height: 6px; background: var(--mrc); box-shadow: none;"></span> Active Project</span>
+                            <span class="repo-version">v2.4.0</span>
+                        </div>
+                        <h4 class="repo-title">Git Folder Downloader</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">A high-utility browser extension and CLI tool engineered to selectively download specific folders and files from vast GitHub repositories without cloning the entire history.</p>
+                        <div class="repo-footer">
                             <div class="flex gap-4">
-                                <span class="flex items-center gap-1 text-xs text-gray-500 font-mono"><i data-lucide="star" class="w-3 h-3 text-yellow-500"></i> 1.2k</span>
-                                <span class="flex items-center gap-1 text-xs text-gray-500 font-mono"><i data-lucide="git-fork" class="w-3 h-3"></i> 340</span>
+                                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--text-muted); display: flex; align-items: center; gap: 0.25rem;"><i data-lucide="star" style="width: 14px; color: #eab308;"></i> 1.2k</span>
+                                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--text-muted); display: flex; align-items: center; gap: 0.25rem;"><i data-lucide="git-fork" style="width: 14px;"></i> 340</span>
                             </div>
-                            <button class="text-xs font-bold uppercase tracking-widest text-white hover:text-mrc transition-colors flex items-center gap-1">
-                                View Source <i data-lucide="external-link" class="w-3 h-3"></i>
-                            </button>
+                            <a href="#" style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 0.25rem;">View Source <i data-lucide="external-link" style="width: 14px;"></i></a>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Repo 2 -->
-                    <div class="p-8 border-l-4 border-gray-600 bg-dark border border-white/5 rounded-r-2xl shadow-2xl relative overflow-hidden group hover:border-white/20 hover:border-l-mrc transition-all">
-                        <div class="flex justify-between items-center mb-6">
-                            <span class="flex items-center gap-2 text-xs font-bold tracking-widest text-gray-400 uppercase">
-                                Stable Release
-                            </span>
-                            <span class="text-xs font-mono text-gray-500 bg-white/5 px-2 py-1 rounded">v1.1.0</span>
+                <!-- Repo 2 -->
+                <div class="repo-card">
+                    <div style="position: relative; z-index: 1;">
+                        <div class="repo-header">
+                            <span class="repo-status" style="color: var(--text-muted); background: rgba(255,255,255,0.05);">Stable Release</span>
+                            <span class="repo-version">v1.1.0</span>
                         </div>
-                        <h4 class="text-2xl font-black text-white mb-3 group-hover:text-mrc transition-colors">MegaMind Solutions Core</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Open-sourced boilerplate for enterprise-grade modification setups, encompassing state management and strict typings.</p>
-                        <div class="flex justify-between items-center border-t border-white/5 pt-4">
+                        <h4 class="repo-title">MegaMind Solution</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Open-sourced boilerplate for enterprise-grade modification setups, encompassing state management and strict typings.</p>
+                        <div class="repo-footer">
                             <div class="flex gap-4">
-                                <span class="flex items-center gap-1 text-xs text-gray-500 font-mono"><i data-lucide="star" class="w-3 h-3 text-yellow-500"></i> 890</span>
-                                <span class="flex items-center gap-1 text-xs text-gray-500 font-mono"><i data-lucide="git-fork" class="w-3 h-3"></i> 120</span>
+                                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--text-muted); display: flex; align-items: center; gap: 0.25rem;"><i data-lucide="star" style="width: 14px; color: #eab308;"></i> 890</span>
+                                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--text-muted); display: flex; align-items: center; gap: 0.25rem;"><i data-lucide="git-fork" style="width: 14px;"></i> 120</span>
                             </div>
-                            <button class="text-xs font-bold uppercase tracking-widest text-white hover:text-mrc transition-colors flex items-center gap-1">
-                                View Source <i data-lucide="external-link" class="w-3 h-3"></i>
-                            </button>
+                            <a href="#" style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 0.25rem;">View Source <i data-lucide="external-link" style="width: 14px;"></i></a>
                         </div>
                     </div>
                 </div>
@@ -589,100 +659,87 @@
         </div>
     </section>
 
-    <!-- Contact CTA (New Content) -->
-    <section id="contact" class="py-24 relative z-10 bg-mrc">
-        <div class="absolute inset-0 tech-grid opacity-20 invert"></div>
-        <div class="max-w-4xl mx-auto px-6 text-center relative z-20">
-            <h2 class="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-6">
+    <!-- Contact CTA -->
+    <section id="contact" class="section" style="background: var(--mrc); text-align: center;">
+        <div class="tech-grid" style="filter: invert(1); opacity: 0.1;"></div>
+        <div class="container" style="position: relative; z-index: 10; max-width: 800px;">
+            <h2 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.05em; margin-bottom: 1.5rem;">
                 Ready to Engineer the Future?
             </h2>
-            <p class="text-white/80 text-lg mb-10 font-medium">
+            <p style="font-size: 1.25rem; opacity: 0.9; margin-bottom: 2.5rem;">
                 Let's discuss your architectural needs and build something extraordinary together.
             </p>
-            <a href="mailto:contact@mainroute.core" class="inline-flex items-center gap-3 bg-white text-mrc font-black text-sm px-10 py-5 rounded-full uppercase tracking-widest hover:bg-dark hover:text-white transition-all shadow-2xl hover:-translate-y-1">
-                Start the Dialogue <i data-lucide="send" class="w-4 h-4"></i>
+            <a href="mailto:contact@mainroute.core" class="btn" style="background: #fff; color: var(--mrc); padding: 1.25rem 2.5rem;">
+                Start the Dialogue <i data-lucide="send" style="width: 18px;"></i>
             </a>
         </div>
     </section>
 
-    <!-- Footer (New Content) -->
-    <footer class="bg-dark border-t border-white/10 pt-16 pb-8 relative z-10">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-12 border-b border-white/10 pb-12">
-                <div class="flex items-center gap-4">
-                    <img src="https://avatars.githubusercontent.com/u/249983472" class="w-12 h-12 rounded-xl grayscale" alt="Logo">
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <img src="https://avatars.githubusercontent.com/u/249983472" style="width: 48px; height: 48px; border-radius: 0.75rem; filter: grayscale(100%);" alt="Logo">
                     <div>
-                        <div class="font-black text-2xl uppercase tracking-tighter text-white">MainRoute <span class="text-mrc">Core</span></div>
-                        <div class="text-xs text-gray-500 font-mono mt-1">Innovating Tomorrow, Today.</div>
+                        <div style="font-size: 1.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: -0.05em;">MainRoute <span class="text-mrc">Core</span></div>
+                        <div style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--text-muted); margin-top: 0.25rem;">Innovating Tomorrow, Today.</div>
                     </div>
                 </div>
-                <div class="flex gap-6">
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-mrc transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-mrc transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-mrc transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i data-lucide="github" style="width: 20px;"></i></a>
+                    <a href="#" class="social-icon"><i data-lucide="twitter" style="width: 20px;"></i></a>
+                    <a href="#" class="social-icon"><i data-lucide="linkedin" style="width: 20px;"></i></a>
                 </div>
             </div>
-            <div class="flex flex-col md:flex-row justify-between items-center text-xs font-mono text-gray-600 gap-4">
-                <p>&copy; <span id="year"></span> MainRoute Core. All rights reserved.</p>
-                <div class="flex gap-6">
-                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> MainRoute Core. M Ramzan Ch | Pro Bandey. All rights reserved.</p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center;">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- JS Logic & Animations -->
     <script>
-        // 1. Set current year in footer
+        // 1. Footer Year
         document.getElementById('year').textContent = new Date().getFullYear();
 
         // 2. Initialize Lucide Icons
         lucide.createIcons();
 
-        // 3. Mobile Menu Toggle
+        // 3. Mobile Menu Toggle Logic
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('active');
         });
-        
-        // Hide mobile menu on click
         document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            link.addEventListener('click', () => mobileMenu.classList.remove('active'));
         });
 
-        // 4. Initialize Lenis for Smooth Scrolling
+        // 4. Smooth Scrolling (Lenis)
         const lenis = new Lenis({
             duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             direction: 'vertical',
-            gestureDirection: 'vertical',
             smooth: true,
-            mouseMultiplier: 1,
-            smoothTouch: false,
-            touchMultiplier: 2,
-            infinite: false,
         });
-
         function raf(time) {
             lenis.raf(time);
             requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
 
-        // 5. GSAP Animations Integration
+        // 5. GSAP Scroll Animations
         gsap.registerPlugin(ScrollTrigger);
-
-        // Update ScrollTrigger on Lenis scroll
         lenis.on('scroll', ScrollTrigger.update);
-
-        gsap.ticker.add((time) => {
-            lenis.raf(time * 1000);
-        });
+        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
         gsap.ticker.lagSmoothing(0, 0);
 
-        // Reveal Up Animation
+        // Reveal Up
         gsap.utils.toArray('.reveal-up').forEach((elem) => {
             gsap.fromTo(elem, 
                 { y: 50, autoAlpha: 0 },
@@ -700,7 +757,7 @@
             );
         });
 
-        // Reveal Scale Animation (For Cards and Images)
+        // Reveal Scale
         gsap.utils.toArray('.reveal-scale').forEach((elem) => {
             gsap.fromTo(elem, 
                 { scale: 0.85, autoAlpha: 0 },
@@ -718,12 +775,11 @@
             );
         });
 
-        // 6. PWA Service Worker Registration (Dummy/Setup)
+        // 6. PWA Service Worker Stub
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                // Uncomment the line below once a service-worker.js file is placed in your root directory.
-                // navigator.serviceWorker.register('/service-worker.js').then(reg => console.log('SW registered!', reg)).catch(err => console.log('SW fail', err));
-                console.log("PWA Ready: Service Worker registration snippet loaded.");
+                // navigator.serviceWorker.register('/service-worker.js').then(...);
+                console.log("PWA Ready: Internal CSS Version.");
             });
         }
     </script>
