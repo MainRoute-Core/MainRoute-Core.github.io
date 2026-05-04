@@ -1,407 +1,731 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="title" content="MainRoute Core" />
-    <meta name="description" content="MainRoute Core, Innovating Tomorrow's Solutions, Today
-technical expertise to foster growth and community innovation." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- PWA & SEO Meta Tags -->
+    <meta name="theme-color" content="#f44234">
+    <meta name="title" content="MainRoute Core | Innovating Tomorrow's Solutions" />
+    <meta name="description" content="MainRoute Core, led by M Ramzan Ch. We engineer high-performance PWAs, enterprise software, and open-source contributions." />
+    <meta name="keywords" content="MainRoute, MainRoute Core, MR Core, MRC, M Ramzan Ch, MegaMind-Solution, Web Development, Software Development, Open Source, PWA, Kotlin" />
+    <meta name="author" content="M Ramzan Ch" />
     <meta name="copyright" content="MainRoute Core" />
-    <meta name="keywords"
-        content="MainRoute,MainRoute Core,MR Core,MainRoute Core,MRC, M Ramzan Ch, mrc, Pro Bandey, MegaMind-Solution,Web Development,Software Development ,Modifications,Git Folder Downloader,Government Graduate College Okara" />
+    
+    <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mainroute-core.github.io/" />
-    <meta property="og:title" content="MainRoute Core" />
-    <meta property="og:description" content="MainRoute Core, Innovating Tomorrow's Solutions, Today
-technical expertise to foster growth and community innovation." />
+    <meta property="og:title" content="MainRoute Core | Innovating Tomorrow" />
+    <meta property="og:description" content="A specialized technology powerhouse delivering PWA, open-source, and custom software solutions." />
     <meta property="og:image" content="https://avatars.githubusercontent.com/u/249983472" />
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://mainroute-core.github.io/" />
-    <meta property="twitter:title" content="MainRoute Core" />
-    <meta property="twitter:description" content="MainRoute Core, Innovating Tomorrow's Solutions, Today
-technical expertise to foster growth and community innovation." />
-    <meta property="twitter:image" content="https://avatars.githubusercontent.com/u/249983472" />
-
-
-
+    
+    <!-- PWA Manifest & Icons -->
+    <!-- Note: Create a manifest.json in your root folder for full PWA installation support -->
+    <link rel="manifest" href="/manifest.json">
     <link rel="canonical" href="https://mainroute-core.github.io/">
-    <link href="https://avatars.githubusercontent.com/u/249983472" rel="data" />
     <link href="https://avatars.githubusercontent.com/u/249983472" rel="apple-touch-icon" sizes="180x180" />
-    <link href="https://avatars.githubusercontent.com/u/249983472" rel="android-chrome-192x192" sizes="192x192" />
-    <link href="https://avatars.githubusercontent.com/u/249983472" rel="android-chrome-512x512" sizes="512x512" />
-    <link href="https://avatars.githubusercontent.com/u/249983472" rel="icon" sizes="32x32" />
-    <link href="https://avatars.githubusercontent.com/u/249983472" rel="icon" sizes="16x16" />
-    <link href="https://avatars.githubusercontent.com/u/249983472" rel="icon" />
-    <title>MainRoute Core | Innovating Tomorrow</title>
+    <link href="https://avatars.githubusercontent.com/u/249983472" rel="icon" sizes="32x32" type="image/png" />
+    <link href="https://avatars.githubusercontent.com/u/249983472" rel="icon" sizes="16x16" type="image/png" />
+
+    <title>MainRoute Core | Future Engineered</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;600;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS (Configured for Custom Primary Color) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mrc: {
+                            DEFAULT: '#f44234',
+                            light: '#ff6b60',
+                            dark: '#c02e22',
+                            glow: 'rgba(244, 66, 52, 0.5)'
+                        },
+                        dark: '#050505',
+                        surface: '#121212'
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Icons & Animation Libraries -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+
+    <!-- Custom Styles -->
     <style>
-        :root {
-            --mrc-red: #f44336;
-            --mrc-dark: #0a0a0a
-        }
-
         body {
-            font-family: 'Outfit', sans-serif;
-            background-color: var(--mrc-dark);
-            color: white;
-            overflow-x: hidden
+            background-color: theme('colors.dark');
+            color: #ffffff;
+            overflow-x: hidden;
         }
 
-        .text-mrc {
-            color: var(--mrc-red)
-        }
+        /* Lenis Smooth Scroll Fixes */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
 
-        .bg-mrc {
-            background-color: var(--mrc-red)
-        }
-
-        .border-mrc {
-            border-color: var(--mrc-red)
-        }
-
-        html.lenis {
-            height: auto
-        }
-
-        .lenis-smooth {
-            scroll-behavior: auto !important
-        }
-
+        /* UI Elements */
         .glass-panel {
-            background: rgba(20, 20, 20, 0.7);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05)
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
 
         .tech-grid {
-            background-image: radial-gradient(rgba(244, 67, 54, 0.1) 1px, transparent 1px);
-            background-size: 40px 40px
+            background-image: linear-gradient(rgba(244, 66, 52, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(244, 66, 52, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
         }
 
+        .mrc-glow {
+            box-shadow: 0 0 30px theme('colors.mrc.glow');
+        }
+
+        /* Buttons */
         .mrc-button {
             position: relative;
             overflow: hidden;
-            transition: all 0.4s ease;
-            border: 1px solid var(--mrc-red);
-            padding: 12px 30px;
-            border-radius: 4px
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid theme('colors.mrc.DEFAULT');
+            z-index: 1;
+        }
+        
+        .mrc-button::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease;
+            z-index: -1;
         }
 
+        .mrc-button:hover::before { left: 100%; }
         .mrc-button:hover {
-            background: var(--mrc-red);
-            box-shadow: 0 0 25px rgba(244, 67, 54, 0.4)
+            background-color: theme('colors.mrc.DEFAULT');
+            color: #fff !important;
+            box-shadow: 0 0 25px theme('colors.mrc.glow');
+            transform: translateY(-2px);
         }
 
-        ::-webkit-scrollbar {
-            width: 4px
-        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: theme('colors.dark'); }
+        ::-webkit-scrollbar-thumb { background: theme('colors.mrc.DEFAULT'); border-radius: 10px; }
 
-        ::-webkit-scrollbar-thumb {
-            background: var(--mrc-red)
-        }
-
-        .reveal-text {
-            opacity: 0;
-            transform: translateY(30px)
-        }
-
-        .reveal-scale {
-            opacity: 0;
-            transform: scale(0.9)
-        }
-
+        /* Animations */
         @keyframes scroll {
-            0% {
-                transform: translateX(0)
-            }
-
-            100% {
-                transform: translateX(-50%)
-            }
-        }
-
-        .marquee-container {
-            overflow: hidden;
-            white-space: nowrap;
-            display: flex
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         .marquee-content {
             display: flex;
-            animation: scroll 30s linear infinite
+            width: max-content;
+            animation: scroll 35s linear infinite;
+        }
+
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+
+        /* Utility classes for GSAP */
+        .reveal-up { opacity: 0; visibility: hidden; }
+        .reveal-scale { opacity: 0; transform: scale(0.8); visibility: hidden; }
+        
+        /* Ambient Background Orbs */
+        .ambient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+            z-index: -1;
+            animation: float 10s ease-in-out infinite alternate;
+        }
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -50px) scale(1.2); }
         }
     </style>
 </head>
 
-<body>
-    <div class="fixed inset-0 tech-grid pointer-events-none z-0"></div>
-    <div
-        class="fixed top-6 left-6 right-6 z-[100] flex justify-between items-center px-6 py-4 glass-panel rounded-full">
-        <div class="flex items-center gap-3"><img src="https://avatars.githubusercontent.com/u/249983472"
-                class="w-8 h-8 rounded-lg shadow-lg shadow-red-500/20" alt="Logo"><span
-                class="font-black tracking-tighter text-lg uppercase">MainRoute <span
-                    class="text-mrc">Core</span></span></div>
-        <nav class="hidden lg:flex items-center gap-8 text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400">
-            <a href="#expertise" class="nav-link hover:text-mrc transition">Expertise</a><a href="#workflow"
-                class="nav-link hover:text-mrc transition">Workflow</a><a href="#open-source"
-                class="nav-link hover:text-mrc transition">Open Source</a><span
-                class="border-l border-white/10 h-4"></span><span class="flex items-center gap-2"><span
-                    class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>Systems Active</span></nav>
-        <div class="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 md:block hidden">Founder: M Ramzan
-            Ch </div>
-    </div>
-    <section class="relative min-h-screen flex items-center justify-center pt-24">
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center z-10">
-            <div class="hero-content">
-                <div
-                    class="inline-block px-3 py-1 bg-mrc/10 border border-mrc/20 rounded-md text-mrc text-[10px] font-bold tracking-widest uppercase mb-6">
-                    Innovating Tomorrow's Solutions, Today </div>
-                <h1 class="text-7xl lg:text-[100px] font-black leading-[0.9] tracking-tighter mb-8">FUTURE <br><span
-                        class="text-mrc underline decoration-1 underline-offset-8">ENGINEERED.</span></h1>
-                <p class="text-slate-400 text-lg max-w-lg mb-12 leading-relaxed">A specialized technology powerhouse led
-                    by <span class="text-white font-bold">M Ramzan Ch</span>. We engineer high-performance PWAs,
-                    enterprise software, and open-source contributions for the next generation of digital commerce. </p>
-                <div class="flex gap-4"><button
-                        class="mrc-button font-bold text-xs uppercase tracking-widest bg-mrc">Initiate
-                        Collaboration</button><button
-                        class="mrc-button font-bold text-xs uppercase tracking-widest hover:text-white">The FOSS
-                        Lab</button></div>
-            </div>
-            <div class="relative hidden lg:block">
-                <div class="absolute inset-0 bg-mrc/20 blur-[120px] rounded-full"></div><img
-                    src="https://avatars.githubusercontent.com/u/249983472"
-                    class="w-[450px] h-[450px] rounded-[60px] relative z-10 border border-white/10 transform rotate-3 shadow-2xl floating-img"
-                    alt="Branding">
-            </div>
-        </div>
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-mrc animate-bounce"><i
-                data-lucide="chevrons-down"></i></div>
-    </section>
-    <div class="py-10 border-y border-white/5 bg-zinc-950 overflow-hidden">
-        <div class="marquee-container">
-            <div class="marquee-content gap-20 items-center px-10"><span
-                    class="text-2xl font-black text-slate-700 uppercase tracking-tighter">Progressive Web
-                    Apps</span><span class="text-2xl font-black text-mrc uppercase tracking-tighter">Kotlin
-                    Native</span><span class="text-2xl font-black text-slate-700 uppercase tracking-tighter">Enterprise
-                    E-Commerce</span><span class="text-2xl font-black text-mrc uppercase tracking-tighter">FOSS
-                    Ecosystem</span><span class="text-2xl font-black text-slate-700 uppercase tracking-tighter">Agile
-                    Architecture</span><span class="text-2xl font-black text-mrc uppercase tracking-tighter">Node.js
-                    Engine</span><span class="text-2xl font-black text-slate-700 uppercase tracking-tighter">Progressive
-                    Web Apps</span><span class="text-2xl font-black text-mrc uppercase tracking-tighter">Kotlin
-                    Native</span><span class="text-2xl font-black text-slate-700 uppercase tracking-tighter">Enterprise
-                    E-Commerce</span><span class="text-2xl font-black text-mrc uppercase tracking-tighter">FOSS
-                    Ecosystem</span></div>
-        </div>
-    </div>
-    <section class="relative min-h-screen flex items-center bg-zinc-950/50">
-        <div class="max-w-7xl mx-auto px-6 py-24">
-            <div class="grid lg:grid-cols-2 gap-20 items-center">
-                <div class="reveal-scale">
-                    <div class="relative p-2 glass-panel rounded-[40px] inline-block"><img
-                            src="https://avatars.githubusercontent.com/u/249983472"
-                            class="w-80 h-80 rounded-[35px] grayscale hover:grayscale-0 transition-all duration-700"
-                            alt="Founder"></div>
-                </div>
-                <div class="space-y-8">
-                    <h2 class="text-4xl lg:text-6xl font-bold reveal-text">Visionary Leadership</h2>
-                    <p class="text-xl text-slate-300 reveal-text">Led by <span class="text-mrc font-bold">M Ramzan
-                            Ch</span>, our team combines creativity with technical expertise to foster growth and
-                        community innovation.</p>
-                    <div class="grid grid-cols-2 gap-6 reveal-text">
-                        <div class="p-6 glass-panel rounded-xl">
-                            <h4 class="text-mrc font-bold text-3xl mb-1">Agile</h4>
-                            <p class="text-[10px] text-slate-500 uppercase tracking-widest">Approach for fast delivery &
-                                iterations</p>
-                        </div>
-                        <div class="p-6 glass-panel rounded-xl">
-                            <h4 class="text-mrc font-bold text-3xl mb-1">Tailored</h4>
-                            <p class="text-[10px] text-slate-500 uppercase tracking-widest">Solutions unique to your
-                                business needs</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="workflow" class="py-32 bg-black">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
-                <div class="max-w-2xl">
-                    <h2 class="text-5xl font-black uppercase tracking-tighter mb-4">The <span
-                            class="text-mrc">Workflow.</span></h2>
-                    <p class="text-slate-400">Our systematic approach to turning complex problems into scalable digital
-                        infrastructure.</p>
-                </div>
-                <div class="text-mrc font-mono text-sm tracking-widest">PHASE: 01 — 04</div>
-            </div>
-            <div class="grid md:grid-cols-4 gap-4">
-                <div class="p-8 border border-white/5 hover:border-mrc/50 transition-all bg-zinc-900/30 group">
-                    <div class="text-4xl font-black text-white/10 group-hover:text-mrc/20 mb-6 transition-colors">01
-                    </div>
-                    <h4 class="font-bold mb-3 uppercase tracking-widest text-sm">Discovery & Audit</h4>
-                    <p class="text-xs text-slate-500 leading-relaxed">Deep analysis of current technical debt and
-                        infrastructure requirements.</p>
-                </div>
-                <div class="p-8 border border-white/5 hover:border-mrc/50 transition-all bg-zinc-900/30 group">
-                    <div class="text-4xl font-black text-white/10 group-hover:text-mrc/20 mb-6 transition-colors">02
-                    </div>
-                    <h4 class="font-bold mb-3 uppercase tracking-widest text-sm">Architecture</h4>
-                    <p class="text-xs text-slate-500 leading-relaxed">Designing decoupled, scalable systems using modern
-                        FOSS principles.</p>
-                </div>
-                <div class="p-8 border border-white/5 hover:border-mrc/50 transition-all bg-zinc-900/30 group">
-                    <div class="text-4xl font-black text-white/10 group-hover:text-mrc/20 mb-6 transition-colors">03
-                    </div>
-                    <h4 class="font-bold mb-3 uppercase tracking-widest text-sm">Development</h4>
-                    <p class="text-xs text-slate-500 leading-relaxed">High-velocity engineering with continuous
-                        integration and testing.</p>
-                </div>
-                <div class="p-8 border border-white/5 hover:border-mrc/50 transition-all bg-zinc-900/30 group">
-                    <div class="text-4xl font-black text-white/10 group-hover:text-mrc/20 mb-6 transition-colors">04
-                    </div>
-                    <h4 class="font-bold mb-3 uppercase tracking-widest text-sm">Deployment</h4>
-                    <p class="text-xs text-slate-500 leading-relaxed">Seamless go-live with 24/7 monitoring and
-                        performance optimization.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="expertise" class="py-32 relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-24">
-                <h2 class="text-5xl lg:text-7xl font-black mb-6 reveal-text uppercase">The <span
-                        class="text-mrc">Arsenal.</span></h2>
-                <div class="w-20 h-1 bg-mrc mx-auto"></div>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="p-10 glass-panel rounded-[2rem] hover:border-mrc/50 transition-all group reveal-scale"><i
-                        data-lucide="zap" class="text-mrc w-12 h-12 mb-8 group-hover:scale-110 transition"></i>
-                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">PWA FOSS</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Performance-driven Progressive Web Apps for
-                        offline-first experiences, ensuring your business stays active even in zero connectivity.</p>
-                    <div class="flex gap-2"><span class="text-[9px] border border-white/10 px-2 py-1 rounded">Service
-                            Workers</span><span class="text-[9px] border border-white/10 px-2 py-1 rounded">Push
-                            API</span></div>
-                </div>
-                <div class="p-10 bg-mrc/5 border-mrc rounded-[2rem] border transition-all group reveal-scale"><i
-                        data-lucide="code" class="text-mrc w-12 h-12 mb-8 group-hover:scale-110 transition"></i>
-                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">Custom Software</h3>
-                    <p class="text-slate-300 text-sm leading-relaxed mb-6">Engineered scalability with secure payment
-                        integrations. We build the engines that power modern e-commerce platforms.</p>
-                    <div class="flex gap-2"><span
-                            class="text-[9px] border border-mrc/20 px-2 py-1 rounded bg-mrc/10">Architecture</span><span
-                            class="text-[9px] border border-mrc/20 px-2 py-1 rounded bg-mrc/10">Security</span></div>
-                </div>
-                <div class="p-10 glass-panel rounded-[2rem] hover:border-mrc/50 transition-all group reveal-scale"><i
-                        data-lucide="smartphone" class="text-mrc w-12 h-12 mb-8 group-hover:scale-110 transition"></i>
-                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">Android Apps</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Native Android experiences optimized for
-                        business performance, accessibility, and high user engagement metrics.</p>
-                    <div class="flex gap-2"><span
-                            class="text-[9px] border border-white/10 px-2 py-1 rounded">Kotlin</span><span
-                            class="text-[9px] border border-white/10 px-2 py-1 rounded">UX Focused</span></div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="open-source" class="py-32 bg-zinc-950">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-20 items-center">
-                <div>
-                    <h2 class="text-5xl font-black mb-8 uppercase leading-tight">Empowering the <br><span
-                            class="text-mrc">Open Community.</span></h2>
-                    <p class="text-slate-400 mb-8 leading-relaxed">We believe in giving back. MainRoute Core
-                        actively maintains several open-source repositories that provide the foundation for modern web
-                        reliability.</p>
-                    <div class="space-y-4">
-                        <div class="flex items-start gap-4 p-4 glass-panel rounded-lg"><i data-lucide="github"
-                                class="text-mrc mt-1"></i>
-                            <div>
-                                <h5 class="font-bold text-sm">Core Architecture Libs</h5>
-                                <p class="text-[10px] text-slate-500">Reusable logic for high-performance commerce
-                                    engines.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4 p-4 glass-panel rounded-lg"><i data-lucide="git-branch"
-                                class="text-mrc mt-1"></i>
-                            <div>
-                                <h5 class="font-bold text-sm">PWA Seed Projects</h5>
-                                <p class="text-[10px] text-slate-500">Kickstarter templates for offline-ready
-                                    applications.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 gap-4">
-                    <div class="p-6 border-l-4 border-mrc bg-white/5 rounded-r-xl">
-                        <div class="flex justify-between items-center mb-4"><span
-                                class="text-[10px] font-bold tracking-widest text-mrc uppercase">Active
-                                Project</span><span class="text-[10px] text-slate-500">v2.4.0</span></div>
-                        <h4 class="text-xl font-bold mb-2">Micro-PWA Core</h4>
-                        <p class="text-xs text-slate-400">Next-gen service worker wrapper for heavy asset caching in
-                            retail environments.</p>
-                    </div>
-                    <div class="p-6 border-l-4 border-slate-700 bg-white/5 rounded-r-xl opacity-60">
-                        <div class="flex justify-between items-center mb-4"><span
-                                class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Beta
-                                Testing</span><span class="text-[10px] text-slate-500">v0.8.0</span></div>
-                        <h4 class="text-xl font-bold mb-2">Kotlin-JS-Connect</h4>
-                        <p class="text-xs text-slate-400">Bridge library for seamless Android and Web data
-                            synchronization.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="py-32 bg-white/5">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-4 gap-12 text-center">
-                <div class="reveal-text">
-                    <div class="text-6xl font-black text-mrc mb-2">3X</div>
-                    <div class="text-[10px] tracking-[0.3em] font-bold text-slate-500 uppercase">Growth Potential</div>
-                </div>
-                <div class="reveal-text">
-                    <div class="text-6xl font-black text-white mb-2 underline decoration-mrc">FOSS</div>
-                    <div class="text-[10px] tracking-[0.3em] font-bold text-slate-500 uppercase">Open-Source Soul</div>
-                </div>
-                <div class="reveal-text">
-                    <div class="text-6xl font-black text-mrc mb-2">99.9%</div>
-                    <div class="text-[10px] tracking-[0.3em] font-bold text-slate-500 uppercase">Runtime Security</div>
-                </div>
-                <div class="reveal-text">
-                    <div class="text-6xl font-black text-white mb-2 underline decoration-mrc">24/7</div>
-                    <div class="text-[10px] tracking-[0.3em] font-bold text-slate-500 uppercase">Agile Support</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="min-h-screen flex items-center justify-center relative">
-        <div class="max-w-4xl mx-auto px-6 text-center z-10">
-            <h2 class="text-5xl lg:text-8xl font-black mb-12 reveal-text">LET'S <br><span
-                    class="text-mrc">INNOVATE.</span></h2>
-            <p class="text-slate-400 mb-12 text-xl reveal-text">Ready to transform your digital journey? Join the
-                MainRoute ecosystem today.</p>
-            <div class="flex flex-col md:flex-row justify-center gap-8 reveal-scale"><a href="mailto:tellus@mrc.io"
-                    class="mrc-button bg-mrc text-white font-bold flex items-center justify-center gap-3"><i
-                        data-lucide="mail" class="w-4 h-4"></i>CONNECT@MAINROUTE </a><a
-                    href="https://github.com/MainRoute-Core"
-                    class="mrc-button text-white font-bold flex items-center justify-center gap-3"><i
-                        data-lucide="github" class="w-4 h-4 text-mrc"></i>EXPLORE REPOSITORIES </a></div>
-            <div
-                class="mt-32 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] text-slate-600 tracking-widest font-bold">
-                <p>© 2024-Peseent MainRoute Core / M RAMZAN CH</p>
-                <div class="flex gap-10 mt-6 md:mt-0"><a href="./" class="hover:text-mrc transition">SYSTEM STATUS:
-                        LIVE</a><a href="./Privacy/" class="hover:text-mrc transition">PRIVACY_PROTOCOL</a></div>
-            </div>
-        </div>
-    </section>
-    <script>const lenis = new Lenis(); function raf(time) { lenis.raf(time); requestAnimationFrame(raf) } requestAnimationFrame(raf); lucide.createIcons(); gsap.registerPlugin(ScrollTrigger); document.querySelectorAll('.reveal-text').forEach((el) => { gsap.to(el, { scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none reverse" }, opacity: 1, y: 0, duration: 1.2, ease: "expo.out" }) }); document.querySelectorAll('.reveal-scale').forEach((el) => { gsap.to(el, { scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none reverse" }, opacity: 1, scale: 1, duration: 1.5, ease: "power4.out" }) }); gsap.to(".floating-img", { y: 30, x: 10, duration: 3, repeat: -1, yoyo: true, ease: "sine.inOut" }); gsap.to(".tech-grid", { y: -200, scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: true } }); document.addEventListener("DOMContentLoaded", () => { document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener("click", function (e) { e.preventDefault(); const targetId = this.getAttribute("href").slice(1); const targetElement = document.getElementById(targetId); if (targetElement) { lenis.scrollTo(targetElement, { offset: -100, duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) }) } }) }) }); </script>
-</body>
+<body class="antialiased selection:bg-mrc selection:text-white">
 
+    <!-- Background Grid & Orbs -->
+    <div class="fixed inset-0 tech-grid pointer-events-none z-0"></div>
+    <div class="ambient-orb bg-mrc w-[500px] h-[500px] top-[-10%] left-[-10%]"></div>
+    <div class="ambient-orb bg-mrc w-[400px] h-[400px] bottom-[-10%] right-[-10%] opacity-20" style="animation-delay: -5s;"></div>
+
+    <!-- Navigation -->
+    <header class="fixed top-4 left-4 right-4 lg:top-6 lg:left-8 lg:right-8 z-[100]">
+        <div class="glass-panel rounded-full px-6 py-4 flex justify-between items-center transition-all duration-300 shadow-2xl">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="relative">
+                    <img src="https://avatars.githubusercontent.com/u/249983472" class="w-10 h-10 rounded-xl relative z-10 transition-transform group-hover:scale-110" alt="MRC Logo">
+                    <div class="absolute inset-0 bg-mrc blur-md opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+                <span class="font-black tracking-tighter text-xl uppercase hidden sm:block">
+                    MainRoute <span class="text-mrc">Core</span>
+                </span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden lg:flex items-center gap-8 text-xs font-bold tracking-[0.15em] uppercase text-gray-400">
+                <a href="#expertise" class="hover:text-mrc transition-colors">Expertise</a>
+                <a href="#workflow" class="hover:text-mrc transition-colors">Workflow</a>
+                <a href="#open-source" class="hover:text-mrc transition-colors">Open Source</a>
+                <span class="border-l border-white/10 h-4"></span>
+                <span class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full border border-white/5">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_#22c55e]"></span>
+                    <span class="text-[10px] text-white">Systems Active</span>
+                </span>
+            </nav>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="lg:hidden text-white hover:text-mrc transition">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+
+            <!-- Founder Tag -->
+            <div class="hidden xl:block text-[10px] font-mono tracking-widest uppercase text-gray-500 bg-black/50 px-4 py-2 rounded-full border border-white/5">
+                Founder: M Ramzan Ch
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full glass-panel rounded-2xl p-6 flex flex-col gap-4 border border-white/10 shadow-2xl">
+            <a href="#expertise" class="text-lg font-bold uppercase tracking-wider hover:text-mrc">Expertise</a>
+            <a href="#workflow" class="text-lg font-bold uppercase tracking-wider hover:text-mrc">Workflow</a>
+            <a href="#open-source" class="text-lg font-bold uppercase tracking-wider hover:text-mrc">Open Source</a>
+            <hr class="border-white/10 my-2">
+            <a href="#contact" class="text-mrc text-lg font-bold uppercase tracking-wider">Contact Us</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden z-10">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
+            
+            <div class="hero-content flex flex-col items-start z-20">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-mrc/10 border border-mrc/30 rounded-full text-mrc text-[11px] font-bold tracking-widest uppercase mb-8 backdrop-blur-md">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i> Innovating Tomorrow, Today
+                </div>
+                
+                <h1 class="text-6xl sm:text-7xl lg:text-[110px] font-black leading-[0.85] tracking-tighter mb-8 reveal-up">
+                    FUTURE <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-mrc to-mrc-light relative">
+                        ENGINEERED.
+                        <svg class="absolute w-full h-3 -bottom-1 left-0 text-mrc opacity-70" viewBox="0 0 100 10" preserveAspectRatio="none">
+                            <path d="M0,5 Q50,10 100,5" stroke="currentColor" stroke-width="4" fill="none" />
+                        </svg>
+                    </span>
+                </h1>
+                
+                <p class="text-gray-400 text-lg sm:text-xl max-w-lg mb-10 leading-relaxed font-light reveal-up delay-100">
+                    A specialized technology powerhouse led by <span class="text-white font-bold">M Ramzan Ch</span>. We engineer high-performance PWAs, enterprise software, and robust open-source infrastructure.
+                </p>
+                
+                <div class="flex flex-wrap gap-4 reveal-up delay-200">
+                    <a href="#contact" class="mrc-button bg-mrc/10 text-white font-bold text-sm px-8 py-4 rounded-lg uppercase tracking-widest flex items-center gap-2">
+                        Initiate Collaboration <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#open-source" class="mrc-button bg-transparent text-gray-300 font-bold text-sm px-8 py-4 rounded-lg uppercase tracking-widest flex items-center gap-2 border-white/20 hover:border-mrc">
+                        The FOSS Lab <i data-lucide="github" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="relative hidden lg:flex justify-center items-center h-full perspective-1000">
+                <!-- Decorative Circle -->
+                <div class="absolute w-[500px] h-[500px] border border-white/5 rounded-full animate-[spin_20s_linear_infinite] border-dashed"></div>
+                <div class="absolute w-[400px] h-[400px] border border-mrc/20 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+                
+                <div class="relative z-10 group transform-gpu transition-all duration-700 hover:rotate-0 hover:scale-105 rotate-[-5deg]">
+                    <img src="https://avatars.githubusercontent.com/u/249983472" class="w-[420px] h-[420px] rounded-[40px] border-2 border-white/10 shadow-2xl mrc-glow object-cover grayscale hover:grayscale-0 transition-all duration-500" alt="MainRoute Core Branding">
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-6 -right-6 glass-panel p-4 rounded-2xl flex items-center gap-4 animate-bounce" style="animation-duration: 3s;">
+                        <div class="w-12 h-12 bg-mrc rounded-full flex items-center justify-center">
+                            <i data-lucide="award" class="text-white"></i>
+                        </div>
+                        <div>
+                            <div class="text-white font-bold leading-tight">Top Tier</div>
+                            <div class="text-mrc text-xs font-mono">Development</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-mrc animate-bounce flex flex-col items-center gap-2 opacity-70 hover:opacity-100 cursor-pointer" onclick="window.scrollBy(0, window.innerHeight)">
+            <span class="text-[10px] font-mono tracking-widest uppercase text-white">Scroll</span>
+            <i data-lucide="mouse" class="w-5 h-5"></i>
+        </div>
+    </section>
+
+    <!-- Infinite Marquee -->
+    <div class="py-8 border-y border-white/5 bg-black/50 overflow-hidden backdrop-blur-md relative z-10">
+        <div class="marquee-content gap-16 items-center px-8">
+            <!-- Set 1 -->
+            <span class="text-3xl font-black text-transparent bg-clip-text text-stroke-white uppercase tracking-tighter" style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">Progressive Web Apps</span>
+            <span class="text-3xl font-black text-mrc uppercase tracking-tighter flex items-center gap-4"><i data-lucide="asterisk"></i> Kotlin Native</span>
+            <span class="text-3xl font-black text-transparent bg-clip-text text-stroke-white uppercase tracking-tighter" style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">Enterprise E-Commerce</span>
+            <span class="text-3xl font-black text-mrc uppercase tracking-tighter flex items-center gap-4"><i data-lucide="asterisk"></i> FOSS Ecosystem</span>
+            <span class="text-3xl font-black text-transparent bg-clip-text text-stroke-white uppercase tracking-tighter" style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">Agile Architecture</span>
+            <span class="text-3xl font-black text-mrc uppercase tracking-tighter flex items-center gap-4"><i data-lucide="asterisk"></i> Node.js Engine</span>
+            <!-- Set 2 (Duplicated for smooth infinite loop) -->
+            <span class="text-3xl font-black text-transparent bg-clip-text text-stroke-white uppercase tracking-tighter" style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">Progressive Web Apps</span>
+            <span class="text-3xl font-black text-mrc uppercase tracking-tighter flex items-center gap-4"><i data-lucide="asterisk"></i> Kotlin Native</span>
+            <span class="text-3xl font-black text-transparent bg-clip-text text-stroke-white uppercase tracking-tighter" style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">Enterprise E-Commerce</span>
+            <span class="text-3xl font-black text-mrc uppercase tracking-tighter flex items-center gap-4"><i data-lucide="asterisk"></i> FOSS Ecosystem</span>
+            <span class="text-3xl font-black text-transparent bg-clip-text text-stroke-white uppercase tracking-tighter" style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">Agile Architecture</span>
+            <span class="text-3xl font-black text-mrc uppercase tracking-tighter flex items-center gap-4"><i data-lucide="asterisk"></i> Node.js Engine</span>
+        </div>
+    </div>
+
+    <!-- Stats Section (New Content) -->
+    <section class="py-16 bg-surface z-10 relative border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-white/5">
+                <div class="text-center reveal-up">
+                    <div class="text-4xl md:text-5xl font-black text-white mb-2">50<span class="text-mrc">+</span></div>
+                    <div class="text-xs text-gray-500 uppercase tracking-widest font-bold">Projects Delivered</div>
+                </div>
+                <div class="text-center reveal-up delay-100">
+                    <div class="text-4xl md:text-5xl font-black text-white mb-2">15<span class="text-mrc">K</span></div>
+                    <div class="text-xs text-gray-500 uppercase tracking-widest font-bold">Open Source Commits</div>
+                </div>
+                <div class="text-center reveal-up delay-200">
+                    <div class="text-4xl md:text-5xl font-black text-white mb-2">99<span class="text-mrc">%</span></div>
+                    <div class="text-xs text-gray-500 uppercase tracking-widest font-bold">Client Satisfaction</div>
+                </div>
+                <div class="text-center reveal-up delay-300">
+                    <div class="text-4xl md:text-5xl font-black text-white mb-2">24<span class="text-mrc">/7</span></div>
+                    <div class="text-xs text-gray-500 uppercase tracking-widest font-bold">System Reliability</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership / About -->
+    <section class="relative py-32 bg-dark overflow-hidden z-10">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_right,rgba(244,66,52,0.08)_0%,transparent_50%)] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                <div class="reveal-scale order-2 lg:order-1 relative">
+                    <div class="absolute inset-0 bg-mrc/20 blur-[80px] rounded-full"></div>
+                    <div class="relative p-3 glass-panel rounded-[40px] inline-block border border-white/10 transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <img src="https://avatars.githubusercontent.com/u/249983472" class="w-full max-w-md rounded-[30px] filter contrast-125 shadow-2xl" alt="M Ramzan Ch - Founder">
+                    </div>
+                </div>
+                <div class="space-y-8 order-1 lg:order-2">
+                    <div class="inline-flex items-center gap-2 text-mrc font-mono text-xs uppercase tracking-widest border border-mrc/20 px-4 py-2 rounded-full">
+                        <span class="w-2 h-2 bg-mrc rounded-full"></span> The Core Mind
+                    </div>
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight reveal-up">
+                        Visionary <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Leadership.</span>
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-400 font-light leading-relaxed reveal-up">
+                        Spearheaded by <span class="text-mrc font-bold">M Ramzan Ch</span>, our collective blends artistic creativity with deep architectural technicalities. We exist to solve hard problems, fostering both corporate growth and community-driven innovation.
+                    </p>
+                    
+                    <div class="grid sm:grid-cols-2 gap-6 reveal-up">
+                        <div class="p-6 glass-panel rounded-2xl border-l-4 border-l-mrc hover:bg-white/5 transition-colors">
+                            <h4 class="text-white font-black text-2xl mb-2 flex items-center gap-2">
+                                <i data-lucide="zap" class="text-mrc w-5 h-5"></i> Agile
+                            </h4>
+                            <p class="text-xs text-gray-400 uppercase tracking-widest leading-relaxed">Rapid sprints, continuous integration, and fast iterative delivery.</p>
+                        </div>
+                        <div class="p-6 glass-panel rounded-2xl border-l-4 border-l-white hover:border-l-mrc hover:bg-white/5 transition-all">
+                            <h4 class="text-white font-black text-2xl mb-2 flex items-center gap-2">
+                                <i data-lucide="cpu" class="text-mrc w-5 h-5"></i> Tailored
+                            </h4>
+                            <p class="text-xs text-gray-400 uppercase tracking-widest leading-relaxed">Bespoke systems architected specifically for your unique metrics.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Workflow Section -->
+    <section id="workflow" class="py-32 bg-surface relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                <div class="max-w-2xl">
+                    <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-6 reveal-up">
+                        The <span class="text-mrc">Workflow.</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg reveal-up">Our systematic, battle-tested approach to translating complex requirements into highly scalable digital infrastructure.</p>
+                </div>
+                <div class="text-mrc font-mono text-sm tracking-widest bg-mrc/10 px-4 py-2 rounded-lg border border-mrc/20 reveal-up">
+                    PHASE: 01 — 04
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Step 1 -->
+                <div class="p-8 border border-white/5 rounded-3xl hover:border-mrc/50 transition-all bg-dark/50 group relative overflow-hidden reveal-up">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-mrc/5 rounded-full blur-2xl group-hover:bg-mrc/20 transition-all"></div>
+                    <div class="text-6xl font-black text-white/5 group-hover:text-mrc/20 mb-8 transition-colors duration-500">01</div>
+                    <h4 class="font-bold text-white mb-4 uppercase tracking-widest text-lg">Discovery</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">Deep dive analysis of current technical debt, user behavior, and infrastructure requirements.</p>
+                    <div class="mt-6 h-1 w-0 bg-mrc group-hover:w-full transition-all duration-500"></div>
+                </div>
+                <!-- Step 2 -->
+                <div class="p-8 border border-white/5 rounded-3xl hover:border-mrc/50 transition-all bg-dark/50 group relative overflow-hidden reveal-up delay-100">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-mrc/5 rounded-full blur-2xl group-hover:bg-mrc/20 transition-all"></div>
+                    <div class="text-6xl font-black text-white/5 group-hover:text-mrc/20 mb-8 transition-colors duration-500">02</div>
+                    <h4 class="font-bold text-white mb-4 uppercase tracking-widest text-lg">Architecture</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">Designing decoupled, scalable macro-systems using modern frameworks and FOSS principles.</p>
+                    <div class="mt-6 h-1 w-0 bg-mrc group-hover:w-full transition-all duration-500"></div>
+                </div>
+                <!-- Step 3 -->
+                <div class="p-8 border border-white/5 rounded-3xl hover:border-mrc/50 transition-all bg-dark/50 group relative overflow-hidden reveal-up delay-200">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-mrc/5 rounded-full blur-2xl group-hover:bg-mrc/20 transition-all"></div>
+                    <div class="text-6xl font-black text-white/5 group-hover:text-mrc/20 mb-8 transition-colors duration-500">03</div>
+                    <h4 class="font-bold text-white mb-4 uppercase tracking-widest text-lg">Development</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">High-velocity engineering sprints with strict continuous integration, code reviews, and automated testing.</p>
+                    <div class="mt-6 h-1 w-0 bg-mrc group-hover:w-full transition-all duration-500"></div>
+                </div>
+                <!-- Step 4 -->
+                <div class="p-8 border border-white/5 rounded-3xl hover:border-mrc/50 transition-all bg-dark/50 group relative overflow-hidden reveal-up delay-300">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-mrc/5 rounded-full blur-2xl group-hover:bg-mrc/20 transition-all"></div>
+                    <div class="text-6xl font-black text-white/5 group-hover:text-mrc/20 mb-8 transition-colors duration-500">04</div>
+                    <h4 class="font-bold text-white mb-4 uppercase tracking-widest text-lg">Deployment</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">Zero-downtime go-live protocols with 24/7 proactive monitoring and performance optimization.</p>
+                    <div class="mt-6 h-1 w-0 bg-mrc group-hover:w-full transition-all duration-500"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Arsenal (Expertise) -->
+    <section id="expertise" class="py-32 relative z-10 bg-dark">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-24 reveal-up">
+                <p class="text-mrc font-mono text-sm tracking-widest uppercase mb-4">Core Competencies</p>
+                <h2 class="text-5xl md:text-7xl font-black mb-6 uppercase tracking-tighter">The <span class="text-mrc">Arsenal.</span></h2>
+                <div class="w-24 h-1.5 bg-mrc mx-auto rounded-full mrc-glow"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="p-10 glass-panel rounded-[2rem] hover:-translate-y-2 hover:border-mrc/50 transition-all duration-300 group reveal-scale">
+                    <div class="w-16 h-16 rounded-2xl bg-mrc/10 flex items-center justify-center mb-8 group-hover:bg-mrc transition-colors duration-300">
+                        <i data-lucide="smartphone-charging" class="text-mrc w-8 h-8 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter text-white">PWA Technologies</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-8">Performance-driven Progressive Web Apps for offline-first experiences, ensuring zero-latency feel even in low connectivity zones.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="text-[10px] font-mono border border-white/10 px-3 py-1.5 rounded-full text-gray-300">Service Workers</span>
+                        <span class="text-[10px] font-mono border border-white/10 px-3 py-1.5 rounded-full text-gray-300">Push API</span>
+                    </div>
+                </div>
+                
+                <!-- Card 2 (Highlight) -->
+                <div class="p-10 bg-gradient-to-b from-mrc/10 to-transparent border border-mrc/50 rounded-[2rem] hover:-translate-y-2 transition-all duration-300 group reveal-scale delay-100 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-mrc/5 group-hover:bg-mrc/10 transition-colors"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 rounded-2xl bg-mrc flex items-center justify-center mb-8 shadow-lg shadow-mrc/30">
+                            <i data-lucide="code-2" class="text-white w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter text-white">Custom Engineering</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-8">Engineered scalability with complex API and payment integrations. We construct the core engines that power modern enterprise platforms.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-[10px] font-mono border border-mrc/30 bg-mrc/10 text-mrc px-3 py-1.5 rounded-full">Microservices</span>
+                            <span class="text-[10px] font-mono border border-mrc/30 bg-mrc/10 text-mrc px-3 py-1.5 rounded-full">Security</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="p-10 glass-panel rounded-[2rem] hover:-translate-y-2 hover:border-mrc/50 transition-all duration-300 group reveal-scale delay-200">
+                    <div class="w-16 h-16 rounded-2xl bg-mrc/10 flex items-center justify-center mb-8 group-hover:bg-mrc transition-colors duration-300">
+                        <i data-lucide="app-window" class="text-mrc w-8 h-8 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter text-white">Android Native</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-8">Fluid Native Android experiences optimized utilizing modern Kotlin paradigms for peak accessibility and engagement metrics.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[10px] font-mono border border-white/10 px-3 py-1.5 rounded-full text-gray-300">Kotlin</span>
+                        <span class="text-[10px] font-mono border border-white/10 px-3 py-1.5 rounded-full text-gray-300">Jetpack Compose</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack (New Content) -->
+    <section class="py-20 border-y border-white/5 bg-black/40 backdrop-blur-md relative z-10">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h4 class="text-sm font-mono text-gray-500 uppercase tracking-widest mb-10">Technologies We Command</h4>
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-60">
+                <div class="flex flex-col items-center gap-3 hover:text-mrc hover:opacity-100 transition-all cursor-default">
+                    <i data-lucide="server" class="w-10 h-10"></i><span class="text-xs font-bold uppercase">Node.js</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 hover:text-mrc hover:opacity-100 transition-all cursor-default">
+                    <i data-lucide="database" class="w-10 h-10"></i><span class="text-xs font-bold uppercase">MongoDB</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 hover:text-mrc hover:opacity-100 transition-all cursor-default">
+                    <i data-lucide="layout" class="w-10 h-10"></i><span class="text-xs font-bold uppercase">React/Next</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 hover:text-mrc hover:opacity-100 transition-all cursor-default">
+                    <i data-lucide="smartphone" class="w-10 h-10"></i><span class="text-xs font-bold uppercase">Kotlin</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 hover:text-mrc hover:opacity-100 transition-all cursor-default">
+                    <i data-lucide="cloud" class="w-10 h-10"></i><span class="text-xs font-bold uppercase">AWS / Cloud</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 hover:text-mrc hover:opacity-100 transition-all cursor-default">
+                    <i data-lucide="git-merge" class="w-10 h-10"></i><span class="text-xs font-bold uppercase">Git Flow</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Source Section (Completed & Enhanced) -->
+    <section id="open-source" class="py-32 bg-surface relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                <div class="reveal-up">
+                    <div class="inline-flex items-center gap-2 text-white bg-white/5 border border-white/10 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
+                        <i data-lucide="heart" class="w-3 h-3 text-mrc fill-mrc"></i> Community First
+                    </div>
+                    <h2 class="text-5xl md:text-6xl font-black mb-8 uppercase leading-tight tracking-tighter">
+                        Empowering the <br><span class="text-mrc">Open Community.</span>
+                    </h2>
+                    <p class="text-gray-400 mb-10 leading-relaxed text-lg font-light">
+                        We believe in giving back to the foundation that built us. MainRoute Core actively constructs and maintains several open-source repositories that provide building blocks for modern web reliability and workflow automation.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <a href="#" class="flex items-start gap-4 p-5 glass-panel rounded-xl hover:border-mrc/50 transition-all group">
+                            <div class="bg-white/5 p-3 rounded-lg group-hover:bg-mrc/10 transition-colors">
+                                <i data-lucide="github" class="text-mrc w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-white text-lg group-hover:text-mrc transition-colors">Core Architecture Libs</h5>
+                                <p class="text-sm text-gray-500 mt-1">Reusable, highly-tested logic for e-commerce engines.</p>
+                            </div>
+                        </a>
+                        <a href="#" class="flex items-start gap-4 p-5 glass-panel rounded-xl hover:border-mrc/50 transition-all group">
+                            <div class="bg-white/5 p-3 rounded-lg group-hover:bg-mrc/10 transition-colors">
+                                <i data-lucide="git-branch" class="text-mrc w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-white text-lg group-hover:text-mrc transition-colors">PWA Seed Projects</h5>
+                                <p class="text-sm text-gray-500 mt-1">Kickstarter templates for instant offline-ready applications.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Highlighted Repositories (Completing the cut-off content) -->
+                <div class="grid grid-cols-1 gap-6 reveal-scale">
+                    <!-- Repo 1 -->
+                    <div class="p-8 border-l-4 border-mrc bg-dark border border-white/5 rounded-r-2xl shadow-2xl relative overflow-hidden group hover:border-white/20 transition-all">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-mrc/5 rounded-full blur-3xl -z-10 group-hover:bg-mrc/10 transition-all"></div>
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="flex items-center gap-2 text-xs font-bold tracking-widest text-mrc uppercase bg-mrc/10 px-3 py-1 rounded">
+                                <span class="w-1.5 h-1.5 bg-mrc rounded-full animate-pulse"></span> Active Project
+                            </span>
+                            <span class="text-xs font-mono text-gray-500 bg-white/5 px-2 py-1 rounded">v2.4.0</span>
+                        </div>
+                        <h4 class="text-2xl font-black text-white mb-3">Git Folder Downloader</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">A high-utility browser extension and CLI tool engineered to selectively download specific folders and files from vast GitHub repositories without cloning the entire history.</p>
+                        <div class="flex justify-between items-center border-t border-white/5 pt-4">
+                            <div class="flex gap-4">
+                                <span class="flex items-center gap-1 text-xs text-gray-500 font-mono"><i data-lucide="star" class="w-3 h-3 text-yellow-500"></i> 1.2k</span>
+                                <span class="flex items-center gap-1 text-xs text-gray-500 font-mono"><i data-lucide="git-fork" class="w-3 h-3"></i> 340</span>
+                            </div>
+                            <button class="text-xs font-bold uppercase tracking-widest text-white hover:text-mrc transition-colors flex items-center gap-1">
+                                View Source <i data-lucide="external-link" class="w-3 h-3"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Repo 2 -->
+                    <div class="p-8 border-l-4 border-gray-600 bg-dark border border-white/5 rounded-r-2xl shadow-2xl relative overflow-hidden group hover:border-white/20 hover:border-l-mrc transition-all">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="flex items-center gap-2 text-xs font-bold tracking-widest text-gray-400 uppercase">
+                                Stable Release
+                            </span>
+                            <span class="text-xs font-mono text-gray-500 bg-white/5 px-2 py-1 rounded">v1.1.0</span>
+                        </div>
+                        <h4 class="text-2xl font-black text-white mb-3 group-hover:text-mrc transition-colors">MegaMind Solutions Core</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Open-sourced boilerplate for enterprise-grade modification setups, encompassing state management and strict typings.</p>
+                        <div class="flex justify-between items-center border-t border-white/5 pt-4">
+                            <div class="flex gap-4">
+                                <span class="flex items-center gap-1 text-xs text-gray-500 font-mono"><i data-lucide="star" class="w-3 h-3 text-yellow-500"></i> 890</span>
+                                <span class="flex items-center gap-1 text-xs text-gray-500 font-mono"><i data-lucide="git-fork" class="w-3 h-3"></i> 120</span>
+                            </div>
+                            <button class="text-xs font-bold uppercase tracking-widest text-white hover:text-mrc transition-colors flex items-center gap-1">
+                                View Source <i data-lucide="external-link" class="w-3 h-3"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA (New Content) -->
+    <section id="contact" class="py-24 relative z-10 bg-mrc">
+        <div class="absolute inset-0 tech-grid opacity-20 invert"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-20">
+            <h2 class="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-6">
+                Ready to Engineer the Future?
+            </h2>
+            <p class="text-white/80 text-lg mb-10 font-medium">
+                Let's discuss your architectural needs and build something extraordinary together.
+            </p>
+            <a href="mailto:contact@mainroute.core" class="inline-flex items-center gap-3 bg-white text-mrc font-black text-sm px-10 py-5 rounded-full uppercase tracking-widest hover:bg-dark hover:text-white transition-all shadow-2xl hover:-translate-y-1">
+                Start the Dialogue <i data-lucide="send" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer (New Content) -->
+    <footer class="bg-dark border-t border-white/10 pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-12 border-b border-white/10 pb-12">
+                <div class="flex items-center gap-4">
+                    <img src="https://avatars.githubusercontent.com/u/249983472" class="w-12 h-12 rounded-xl grayscale" alt="Logo">
+                    <div>
+                        <div class="font-black text-2xl uppercase tracking-tighter text-white">MainRoute <span class="text-mrc">Core</span></div>
+                        <div class="text-xs text-gray-500 font-mono mt-1">Innovating Tomorrow, Today.</div>
+                    </div>
+                </div>
+                <div class="flex gap-6">
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-mrc transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-mrc transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-mrc transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between items-center text-xs font-mono text-gray-600 gap-4">
+                <p>&copy; <span id="year"></span> MainRoute Core. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // 2. Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 3. Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Hide mobile menu on click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // 4. Initialize Lenis for Smooth Scrolling
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // 5. GSAP Animations Integration
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Update ScrollTrigger on Lenis scroll
+        lenis.on('scroll', ScrollTrigger.update);
+
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0, 0);
+
+        // Reveal Up Animation
+        gsap.utils.toArray('.reveal-up').forEach((elem) => {
+            gsap.fromTo(elem, 
+                { y: 50, autoAlpha: 0 },
+                {
+                    y: 0,
+                    autoAlpha: 1,
+                    duration: 1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // Reveal Scale Animation (For Cards and Images)
+        gsap.utils.toArray('.reveal-scale').forEach((elem) => {
+            gsap.fromTo(elem, 
+                { scale: 0.85, autoAlpha: 0 },
+                {
+                    scale: 1,
+                    autoAlpha: 1,
+                    duration: 1.2,
+                    ease: "back.out(1.2)",
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // 6. PWA Service Worker Registration (Dummy/Setup)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // Uncomment the line below once a service-worker.js file is placed in your root directory.
+                // navigator.serviceWorker.register('/service-worker.js').then(reg => console.log('SW registered!', reg)).catch(err => console.log('SW fail', err));
+                console.log("PWA Ready: Service Worker registration snippet loaded.");
+            });
+        }
+    </script>
+</body>
 </html>
