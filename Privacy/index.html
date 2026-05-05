@@ -26,6 +26,23 @@
         ul { list-style-type: none; padding-left: 0; }
         li { margin-bottom: 0.5rem; display: flex; align-items: flex-start; gap: 10px; }
         li::before { content: "•"; color: #f44336; font-weight: bold; }
+         /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(244, 66, 52, 0.5);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--mrc);
+        }
     </style>
 </head>
 <body>
