@@ -9,251 +9,31 @@
     <meta name="theme-color" content="#f44234">
     <meta name="title" content="Terms of Service | MainRoute Core" />
     <meta name="description" content="Terms of Service and usage guidelines for MainRoute Core." />
+    <meta name="keywords" content="MainRoute, MainRoute Core, MR Core, MRC, M Ramzan Ch, MegaMind-Solution, Web Development, Software Development, Modifications, Git Folder Downloader, Government Graduate College Okara, Pro Bandey" />
+    <meta name="author" content="M Ramzan Ch" />
+    <meta name="copyright" content="MainRoute Core" />
     
     <!-- Icons & Manifest -->
     <link rel="manifest" href="/manifest.webmanifest">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://avatars.githubusercontent.com/u/249983472?s=192&v=4">
-    <link href="https://avatars.githubusercontent.com/u/249983472?s=180&v=4" rel="apple-touch-icon" sizes="180x180" />
-
+    <link rel="canonical" href="https://mainroute-core.github.io/">
+    <link rel="shortcut icon" type="image/x-icon" sizes="any" href="/src/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/144.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/512.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/src/apple-touch-icon.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="167x167" href="/src/apple-touch-167.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="/src/apple-touch-152.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="/src/apple-touch-120.png">
     <title>Terms of Service | MainRoute Core</title>
 
     <!-- Custom Font -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link href="https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf" rel="stylesheet">
+    <link href="/src/CoreSans-Regular_en.otf" rel="stylesheet">
 
     <!-- 100% INTERNAL CSS (No Frameworks) -->
     <style>
-        @font-face {
-            font-family: 'Core Sans';
-            src: url(https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf);
-            font-display: swap;
-        }
-
-        :root {
-            /* Core Colors */
-            --mrc: #f44234;
-            --mrc-light: #ff7063;
-            --mrc-glow: rgba(244, 66, 52, 0.4);
-            
-            /* Material Dark Theme */
-            --bg-dark: #09090b;
-            --bg-surface: #18181b;
-            --bg-surface-elevated: #27272a;
-            
-            /* Text */
-            --text-main: #f8fafc;
-            --text-muted: #a1a1aa;
-            
-            /* Glassmorphism */
-            --glass-bg: rgba(24, 24, 27, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-
-            /* Typography */
-            --font-sans: 'Core Sans', system-ui, -apple-system, sans-serif;
-            --font-mono: 'Space Mono', ui-monospace, monospace;
-            
-            /* Layout */
-            --container-width: 1280px;
-            --nav-height: 80px;
-        }
-
-        /* Base Resets */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; font-size: 16px; }
-        body {
-            font-family: var(--font-sans);
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            line-height: 1.5;
-        }
-        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
-        img, svg { max-width: 100%; display: block; }
-        button { cursor: pointer; border: none; background: none; font-family: inherit; }
-
-        /* Icon Styles */
-        .icon { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-        /* Typography */
-        .text-mrc { color: var(--mrc); }
-        .text-muted { color: var(--text-muted); }
-        .font-mono { font-family: var(--font-mono); }
-        .uppercase { text-transform: uppercase; letter-spacing: 0.05em; }
-        .font-black { font-weight: 900; }
-        .font-bold { font-weight: 700; }
-
-        /* Loading Screen */
-        #loader {
-            position: fixed; inset: 0; z-index: 99999;
-            background: var(--bg-dark);
-            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;
-            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
-        }
-        .loader-ring {
-            width: 60px; height: 60px;
-            border: 4px solid var(--glass-border);
-            border-top-color: var(--mrc);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-
-        /* Scroll Progress Bar */
-        #scroll-progress-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 4px;
-            background: transparent; z-index: 10000;
-        }
-        #scroll-progress {
-            height: 100%; width: 0%; background: var(--mrc);
-            box-shadow: 0 0 10px var(--mrc-glow);
-            transition: width 0.1s ease-out;
-        }
-
-        /* Layout & Utilities */
-        .container { width: 100%; max-width: var(--container-width); margin: 0 auto; padding: 0 1.5rem; }
-        .section { padding: clamp(3rem, 6vw, 6rem) 0; position: relative; z-index: 10; }
-        .flex { display: flex; }
-        .flex-col { display: flex; flex-direction: column; }
-        .items-center { align-items: center; }
-        .justify-between { justify-content: space-between; }
-        .justify-center { justify-content: center; }
-        .gap-4 { gap: 1rem; } 
-        .gap-8 { gap: 2rem; }
-
-        /* Glassmorphism Panels */
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--glass-border);
-            border-radius: 1.5rem;
-            box-shadow: var(--glass-shadow);
-        }
-
-        /* Background Effects */
-        .tech-grid {
-            position: fixed; inset: 0; z-index: 0; pointer-events: none;
-            background-image: linear-gradient(var(--glass-border) 1px, transparent 1px), linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
-            background-size: 40px 40px;
-            mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
-            -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
-        }
-        .ambient-orb {
-            position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15; z-index: -1;
-            background: var(--mrc);
-            animation: float 12s ease-in-out infinite alternate;
-        }
-
-        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, -50px) scale(1.1); } }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        /* Navigation */
-        .header { position: fixed; top: 1rem; left: 1rem; right: 1rem; z-index: 100; transition: transform 0.3s ease; }
-        @media (min-width: 1024px) { .header { top: 1.5rem; left: 2rem; right: 2rem; } }
-        
-        .nav-bar { padding: 0.75rem 1.5rem; border-radius: 9999px; display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 900; letter-spacing: -0.05em; }
-        .nav-logo img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--mrc); }
-        
-        .desktop-nav { display: none; align-items: center; gap: 2rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; }
-        .desktop-nav a { position: relative; color: var(--text-muted); padding: 0.5rem 0; }
-        .desktop-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: var(--mrc); transition: width 0.3s; }
-        .desktop-nav a:hover { color: #fff; }
-        .desktop-nav a:hover::after { width: 100%; }
-
-        .system-status { display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.05); padding: 0.4rem 1rem; border-radius: 99px; font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em; }
-        .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
-
-        .mobile-menu-btn { display: block; color: #fff; padding: 0.5rem; }
-        .mobile-menu {
-            position: absolute; top: 120%; left: 0; width: 100%; padding: 1.5rem;
-            display: flex; flex-direction: column; gap: 1rem;
-            opacity: 0; visibility: hidden; transform: translateY(-10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .mobile-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
-        .mobile-menu a { font-size: 1.2rem; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem; }
-        .mobile-menu a:hover { background: rgba(255,255,255,0.05); color: var(--mrc); }
-
-        @media (min-width: 1024px) {
-            .desktop-nav { display: flex; }
-            .mobile-menu-btn, .mobile-menu { display: none !important; }
-        }
-
-        /* Page specific styling for Terms of Service */
-        .page-header {
-            padding-top: calc(var(--nav-height) + 6rem);
-            padding-bottom: 2rem;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .page-title {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 900;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-        }
-        .page-subtitle {
-            font-family: var(--font-mono);
-            color: var(--mrc);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            background: rgba(244, 66, 52, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 99px;
-            display: inline-block;
-            border: 1px solid rgba(244, 66, 52, 0.2);
-        }
-
-        /* Long-form Content Area */
-        .prose-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: clamp(2rem, 5vw, 4rem);
-            margin-bottom: 4rem;
-        }
-        .prose {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.8;
-        }
-        .prose h2 {
-            color: #fff;
-            font-size: 1.75rem;
-            font-weight: 800;
-            margin-top: 3rem;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-        }
-        .prose h2:first-child { margin-top: 0; }
-        .prose p { margin-bottom: 1.5rem; }
-        .prose ul { margin-bottom: 1.5rem; padding-left: 1.5rem; list-style-type: disc; }
-        .prose li { margin-bottom: 0.5rem; }
-        .prose a { color: var(--mrc); text-decoration: underline; text-decoration-color: rgba(244, 66, 52, 0.3); text-underline-offset: 4px; }
-        .prose a:hover { text-decoration-color: var(--mrc); }
-
-        /* Footer */
-        .footer { background: var(--bg-surface); padding: 4rem 0 2rem; border-top: 1px solid var(--glass-border); }
-        .social-btn { width: 44px; height: 44px; border-radius: 50%; background: var(--bg-surface-elevated); display: flex; justify-content: center; align-items: center; transition: all 0.3s; border: 1px solid var(--glass-border); }
-        .social-btn:hover { background: var(--mrc); color: #fff; transform: translateY(-3px); border-color: var(--mrc); }
-
-        /* Animations Classes */
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .delay-100 { transition-delay: 100ms; }
-        .delay-200 { transition-delay: 200ms; }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { background: rgba(244, 66, 52, 0.5); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--mrc); }
+        @font-face{ font-family: 'Core Sans'; src: url(/src/CoreSans-Regular_en.otf); font-display: swap;} :root{ --mrc: #f44234; --mrc-light: #ff7063; --mrc-glow: rgba(244, 66, 52, 0.4); --bg-dark: #09090b; --bg-surface: #18181b; --bg-surface-elevated: #27272a; --text-main: #f8fafc; --text-muted: #a1a1aa; --glass-bg: rgba(24, 24, 27, 0.65); --glass-border: rgba(255, 255, 255, 0.08); --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); --font-sans: 'Core Sans', system-ui, -apple-system, sans-serif; --font-mono: 'Space Mono', ui-monospace, monospace; --container-width: 1280px; --nav-height: 80px;} *{ margin: 0; padding: 0; box-sizing: border-box;} html{ scroll-behavior: smooth; font-size: 16px;} body{ font-family: var(--font-sans); background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; -webkit-font-smoothing: antialiased; line-height: 1.5;} a{ text-decoration: none; color: inherit; transition: all 0.3s ease;} img, svg{ max-width: 100%; display: block;} button{ cursor: pointer; border: none; background: none; font-family: inherit;} .icon{ width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;} .text-mrc{ color: var(--mrc);} .text-muted{ color: var(--text-muted);} .font-mono{ font-family: var(--font-mono);} .uppercase{ text-transform: uppercase; letter-spacing: 0.05em;} .font-black{ font-weight: 900;} .font-bold{ font-weight: 700;} #loader{ position: fixed; inset: 0; z-index: 99999; background: var(--bg-dark); display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem; transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;} .loader-ring{ width: 60px; height: 60px; border: 4px solid var(--glass-border); border-top-color: var(--mrc); border-radius: 50%; animation: spin 1s linear infinite;} #loader.hidden{ opacity: 0; visibility: hidden; pointer-events: none;} #scroll-progress-container{ position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: transparent; z-index: 10000;} #scroll-progress{ height: 100%; width: 0%; background: var(--mrc); box-shadow: 0 0 10px var(--mrc-glow); transition: width 0.1s ease-out;} .container{ width: 100%; max-width: var(--container-width); margin: 0 auto; padding: 0 1.5rem;} .section{ padding: clamp(3rem, 6vw, 6rem) 0; position: relative; z-index: 10;} .flex{ display: flex;} .flex-col{ display: flex; flex-direction: column;} .items-center{ align-items: center;} .justify-between{ justify-content: space-between;} .justify-center{ justify-content: center;} .gap-2{ gap:.5rem;} .gap-4{ gap: 1rem;} .gap-8{ gap: 2rem;} .glass-panel{ background: var(--glass-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid var(--glass-border); border-radius: 1.5rem; box-shadow: var(--glass-shadow);} .tech-grid{ position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(var(--glass-border) 1px, rgb(244 66 52 / 40%) 1px), linear-gradient(90deg, rgb(255 255 255 / 40%) 1px, rgb(0 0 0 / 20%) 1px); background-size: 40px 40px; mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%); -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);} .ambient-orb{ position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15; z-index: -1; background: var(--mrc); animation: float 12s ease-in-out infinite alternate;} @keyframes float{ 0%{ transform: translate(0, 0) scale(1);} 100%{ transform: translate(50px, -50px) scale(1.1);}} @keyframes spin{ 100%{ transform: rotate(360deg);}} .header{ position: fixed; top: 1rem; left: 1rem; right: 1rem; z-index: 100; transition: transform 0.3s ease;} @media (min-width: 1024px){ .header{ top: 1.5rem; left: 2rem; right: 2rem;}} .nav-bar{ padding: 0.75rem 1.5rem; border-radius: 9999px; display: flex; justify-content: space-between; align-items: center;} .nav-logo{ display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 900; letter-spacing: -0.05em;} .nav-logo img{ width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--mrc);} .desktop-nav{ display: none; align-items: center; gap: 2rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase;} .desktop-nav a{ position: relative; color: var(--text-muted); padding: 0.5rem 0;} .desktop-nav a::after{ content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: var(--mrc); transition: width 0.3s;} .desktop-nav a:hover{ color: #fff;} .desktop-nav a:hover::after{ width: 100%;} .system-status{ display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.05); padding: 0.4rem 1rem; border-radius: 99px; font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em;} .status-dot{ width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; animation: pulse 2s infinite;} @keyframes pulse{ 0%, 100%{ opacity: 1; transform: scale(1);} 50%{ opacity: 0.5; transform: scale(0.8);}} .mobile-menu-btn{ display: block; color: #fff; padding: 0.5rem;} .mobile-menu{ position: absolute; top: 120%; left: 0; width: 100%; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);} .mobile-menu.active{ opacity: 1; visibility: visible; transform: translateY(0);} .mobile-menu a{ font-size: 1.2rem; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem;} .mobile-menu a:hover{ background: rgba(255,255,255,0.05); color: var(--mrc);} @media (min-width: 1024px){ .desktop-nav{ display: flex;} .mobile-menu-btn, .mobile-menu{ display: none !important;}} .page-header{ padding-top: calc(var(--nav-height) + 6rem); padding-bottom: 2rem; text-align: center; max-width: 800px; margin: 0 auto;} .page-title{ font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem;} .page-subtitle{ font-family: var(--font-mono); color: var(--mrc); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(244, 66, 52, 0.1); padding: 0.5rem 1rem; border-radius: 99px; display: inline-block; border: 1px solid rgba(244, 66, 52, 0.2);} .prose-container{ max-width: 900px; margin: 0 auto; padding: clamp(2rem, 5vw, 4rem); margin-bottom: 4rem;} .prose{ color: var(--text-muted); font-size: 1.05rem; line-height: 1.8;} .prose h2{ color: #fff; font-size: 1.75rem; font-weight: 800; margin-top: 3rem; margin-bottom: 1rem; letter-spacing: -0.02em;} .prose h2:first-child{ margin-top: 0;} .prose p{ margin-bottom: 1.5rem;} .prose ul{ margin-bottom: 1.5rem; padding-left: 1.5rem; list-style-type: disc;} .prose li{ margin-bottom: 0.5rem;} .prose a{ color: var(--mrc); text-decoration: underline; text-decoration-color: rgba(244, 66, 52, 0.3); text-underline-offset: 4px;} .prose a:hover{ text-decoration-color: var(--mrc);} .footer{ background: var(--bg-surface); padding: 4rem 0 2rem; border-top: 1px solid var(--glass-border);} .social-btn{ width: 44px; height: 44px; border-radius: 50%; background: var(--bg-surface-elevated); display: flex; justify-content: center; align-items: center; transition: all 0.3s; border: 1px solid var(--glass-border);} .social-btn:hover{ background: var(--mrc); color: #fff; transform: translateY(-3px); border-color: var(--mrc);} .reveal{ opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out;} .reveal.active{ opacity: 1; transform: translateY(0);} .delay-100{ transition-delay: 100ms;} .delay-200{ transition-delay: 200ms;} ::-webkit-scrollbar{ width: 6px;} ::-webkit-scrollbar-track{ background: var(--bg-dark);} ::-webkit-scrollbar-thumb{ background: rgba(244, 66, 52, 0.5); border-radius: 10px;} ::-webkit-scrollbar-thumb:hover{ background: var(--mrc);}
     </style>
 </head>
 
@@ -279,22 +59,21 @@
 
     <!-- Ambient Backgrounds -->
     <div class="tech-grid"></div>
-    <div class="ambient-orb" style="width: 40vw; height: 40vw; top: -10%; left: -10%;"></div>
-    <div class="ambient-orb" style="width: 30vw; height: 30vw; bottom: 10%; right: -5%; opacity: 0.1; animation-delay: -5s;"></div>
+    <div class="ambient-orb" style="width: 40vw; height: 40vw;"></div>
+    <div class="ambient-orb" style="width: 30vw; height: 30vw; opacity: 0.1; animation-delay: -5s;"></div>
 
     <!-- Navigation -->
     <header class="header" id="navbar">
         <div class="nav-bar glass-panel">
             <a href="/" class="nav-logo">
-                <img src="https://avatars.githubusercontent.com/u/249983472" alt="MRC Logo">
+                <img src="/src/mrc-nuca.svg" alt="MRC Logo">
                 <span style="color:var(--text-main);">MainRoute <span class="text-mrc">Core</span></span>
             </a>
 
             <nav class="desktop-nav">
                 <a href="/">Home</a>
-                <a href="/#expertise">Expertise</a>
-                <a href="/#workflow">Workflow</a>
-                <a href="/#open-source">Open Source</a>
+                <a href="/Privacy/">Privacy Policy</a>
+                <a href="/CopyRight/">Brand CopyRight</a>
                 <div style="width: 1px; height: 16px; background: var(--glass-border);"></div>
                 <div class="system-status">
                     <div class="status-dot"></div> Active
@@ -308,9 +87,8 @@
 
         <div id="mobile-menu" class="mobile-menu glass-panel">
             <a href="/">Home</a>
-            <a href="/#expertise">Expertise</a>
-            <a href="/#workflow">Workflow</a>
-            <a href="/#open-source">Open Source</a>
+            <a href="/Privacy/">Privacy Policy</a>
+            <a href="/CopyRight/">Brand CopyRight</a>
         </div>
     </header>
 
@@ -374,22 +152,22 @@
         <div class="container">
             <div class="flex flex-col md:flex-row justify-between items-center gap-8" style="border-bottom: 1px solid var(--glass-border); padding-bottom: 3rem; margin-bottom: 2rem;">
                 <div class="flex items-center gap-4">
-                    <img src="https://avatars.githubusercontent.com/u/249983472" style="width: 48px; height: 48px; border-radius: 50%; filter: grayscale(1);" alt="Logo">
+                    <img src="/src/mrc-nuca.svg" style="width: 48px; height: 48px; border-radius: 50%; filter: grayscale(1);" alt="Logo">
                     <div>
                         <div class="font-black uppercase" style="font-size: 1.5rem; letter-spacing: -0.05em;">MainRoute <span class="text-mrc">Core</span></div>
-                        <div class="font-mono text-muted" style="font-size: 0.75rem;">Innovating Tomorrow, Today.</div>
+                        <div class="font-mono text-muted" style="font-size: 0.75rem;">Be Passionate For Future.</div>
                     </div>
                 </div>
                 <div class="flex gap-4">
                     <a href="https://github.com/MainRoute-Core/" class="social-btn"><svg class="icon"><use href="#icon-github"></use></svg></a>
-                    <a href="https://www.google.com/search?q=MainRoute+Core&utm=50" class="social-btn"><svg class="icon"><use href="#icon-google"></use></svg></a>
+                    <a href="https://www.google.com/search?q=MainRoute+Core&udm=50&aep=48" class="social-btn"><svg class="icon"><use href="#icon-google"></use></svg></a>
                     </div>
             </div>
             <div class="flex flex-col md:flex-row justify-between items-center text-center gap-4 text-muted font-mono" style="font-size: 0.8rem;">
                 <p>&copy; <span id="year"></span> MainRoute Core. M Ramzan Ch | Pro Bandey. All rights reserved.</p>
-                <div class="flex gap-6 justify-center">
-                    <a href="/Privacy/">Privacy Policy</a>
-                    <a href="/Terms/">Terms of Service</a>
+                <div class="flex gap-2 justify-center">
+                    <a href="/Privacy/">Privacy Policy</a> •
+                    <a href="/CopyRight/">Brand CopyRight</a>
                 </div>
             </div>
         </div>

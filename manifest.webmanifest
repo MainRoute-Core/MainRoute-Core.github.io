@@ -1,7 +1,7 @@
 {
-  "name": "MainRoute Core | Future Engineered",
+  "name": "MainRoute Core",
   "short_name": "MRC",
-  "description": "A specialized technology powerhouse led by M Ramzan Ch. We engineer high-performance PWAs, enterprise software, MegaMind Solution, and robust open-source infrastructure.",
+  "description": "A specialized technology powerhouse delivering PWA, open-source, and custom software solutions.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#050505",
@@ -9,42 +9,74 @@
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "en",
+
   "categories": ["technology", "business", "development"],
+
+  "prefer_related_applications": false,
+
   "icons": [
     {
-      "src": "https://avatars.githubusercontent.com/u/249983472?s=192&v=4",
+      "src": "./src/favicon.ico",
+      "sizes": "16x16 32x32 48x48 64x64",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "./src/16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "./src/32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "./src/144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./src/maskable-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./src/192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://avatars.githubusercontent.com/u/249983472?s=192&v=4",
+      "src": "./src/maskable-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "https://avatars.githubusercontent.com/u/249983472?s=512&v=4",
+      "src": "./src/512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://avatars.githubusercontent.com/u/249983472?s=512&v=4",
+      "src": "./src/maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     }
   ],
+
   "shortcuts": [
     {
       "name": "Privacy",
       "short_name": "Privacy",
-      "description": "See Terms of Services",
+      "description": "See Privacy Policy",
       "url": "/Privacy",
       "icons": [
         {
-          "src": "https://avatars.githubusercontent.com/u/249983472?s=192&v=4",
+          "src": "./src/192.png",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -57,7 +89,20 @@
       "url": "/Terms",
       "icons": [
         {
-          "src": "https://avatars.githubusercontent.com/u/249983472?s=192&v=4",
+          "src": "./src/192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "CopyRight",
+      "short_name": "CopyRight",
+      "description": "See Copy Right",
+      "url": "/CopyRight",
+      "icons": [
+        {
+          "src": "./src/192.png",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -67,10 +112,10 @@
       "name": "M Ramzan Ch",
       "short_name": "MR Ch",
       "description": "Explore M Ramzan Ch's Profile",
-      "url": "/mrc",
+      "url": "/MRamzanCh",
       "icons": [
         {
-          "src": "/mrc/mrc.png",
+          "src": "/MRamzanCh/mrc.png",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -80,14 +125,23 @@
       "name": "Pro Bandey",
       "short_name": "PB",
       "description": "Explore Pro Bandey's Profile",
-      "url": "/mrc",
+      "url": "/ProBandey",
       "icons": [
         {
-          "src": "/pb/pb.png",
+          "src": "/ProBandey/pb.png",
           "sizes": "192x192",
           "type": "image/png"
         }
       ]
+    }
+  ],
+  
+  "screenshots": [
+    {
+      "src": "./src/social.png",
+      "sizes": "2560x1440",
+      "type": "image/png",
+      "description": "ScreenShot Of Site's Upper Part."
     }
   ]
 }
