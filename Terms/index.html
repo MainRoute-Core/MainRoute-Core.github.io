@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+    <!-- SEO Meta Tags -->
+    <meta name="theme-color" content="#f44234">
+    <meta name="title" content="Terms of Service | MainRoute Core" />
+    <meta name="description" content="Terms of Service and usage guidelines for MainRoute Core." />
+    
+    <!-- Icons & Manifest -->
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://avatars.githubusercontent.com/u/249983472?s=192&v=4">
+    <link href="https://avatars.githubusercontent.com/u/249983472?s=180&v=4" rel="apple-touch-icon" sizes="180x180" />
+
+    <title>Terms of Service | MainRoute Core</title>
+
+    <!-- Custom Font -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf" rel="stylesheet">
+
+    <!-- 100% INTERNAL CSS (No Frameworks) -->
+    <style>
+        @font-face {
+            font-family: 'Core Sans';
+            src: url(https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf);
+            font-display: swap;
+        }
+
+        :root {
+            /* Core Colors */
+            --mrc: #f44234;
+            --mrc-light: #ff7063;
+            --mrc-glow: rgba(244, 66, 52, 0.4);
+            
+            /* Material Dark Theme */
+            --bg-dark: #09090b;
+            --bg-surface: #18181b;
+            --bg-surface-elevated: #27272a;
+            
+            /* Text */
+            --text-main: #f8fafc;
+            --text-muted: #a1a1aa;
+            
+            /* Glassmorphism */
+            --glass-bg: rgba(24, 24, 27, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+            /* Typography */
+            --font-sans: 'Core Sans', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Space Mono', ui-monospace, monospace;
+            
+            /* Layout */
+            --container-width: 1280px;
+            --nav-height: 80px;
+        }
+
+        /* Base Resets */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.5;
+        }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        img, svg { max-width: 100%; display: block; }
+        button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+        /* Icon Styles */
+        .icon { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* Typography */
+        .text-mrc { color: var(--mrc); }
+        .text-muted { color: var(--text-muted); }
+        .font-mono { font-family: var(--font-mono); }
+        .uppercase { text-transform: uppercase; letter-spacing: 0.05em; }
+        .font-black { font-weight: 900; }
+        .font-bold { font-weight: 700; }
+
+        /* Loading Screen */
+        #loader {
+            position: fixed; inset: 0; z-index: 99999;
+            background: var(--bg-dark);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+        }
+        .loader-ring {
+            width: 60px; height: 60px;
+            border: 4px solid var(--glass-border);
+            border-top-color: var(--mrc);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        /* Scroll Progress Bar */
+        #scroll-progress-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 4px;
+            background: transparent; z-index: 10000;
+        }
+        #scroll-progress {
+            height: 100%; width: 0%; background: var(--mrc);
+            box-shadow: 0 0 10px var(--mrc-glow);
+            transition: width 0.1s ease-out;
+        }
+
+        /* Layout & Utilities */
+        .container { width: 100%; max-width: var(--container-width); margin: 0 auto; padding: 0 1.5rem; }
+        .section { padding: clamp(3rem, 6vw, 6rem) 0; position: relative; z-index: 10; }
+        .flex { display: flex; }
+        .flex-col { display: flex; flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-center { justify-content: center; }
+        .gap-4 { gap: 1rem; } 
+        .gap-8 { gap: 2rem; }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            box-shadow: var(--glass-shadow);
+        }
+
+        /* Background Effects */
+        .tech-grid {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            background-image: linear-gradient(var(--glass-border) 1px, transparent 1px), linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+        }
+        .ambient-orb {
+            position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15; z-index: -1;
+            background: var(--mrc);
+            animation: float 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, -50px) scale(1.1); } }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Navigation */
+        .header { position: fixed; top: 1rem; left: 1rem; right: 1rem; z-index: 100; transition: transform 0.3s ease; }
+        @media (min-width: 1024px) { .header { top: 1.5rem; left: 2rem; right: 2rem; } }
+        
+        .nav-bar { padding: 0.75rem 1.5rem; border-radius: 9999px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 900; letter-spacing: -0.05em; }
+        .nav-logo img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--mrc); }
+        
+        .desktop-nav { display: none; align-items: center; gap: 2rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; }
+        .desktop-nav a { position: relative; color: var(--text-muted); padding: 0.5rem 0; }
+        .desktop-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: var(--mrc); transition: width 0.3s; }
+        .desktop-nav a:hover { color: #fff; }
+        .desktop-nav a:hover::after { width: 100%; }
+
+        .system-status { display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.05); padding: 0.4rem 1rem; border-radius: 99px; font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em; }
+        .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+        .mobile-menu-btn { display: block; color: #fff; padding: 0.5rem; }
+        .mobile-menu {
+            position: absolute; top: 120%; left: 0; width: 100%; padding: 1.5rem;
+            display: flex; flex-direction: column; gap: 1rem;
+            opacity: 0; visibility: hidden; transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mobile-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .mobile-menu a { font-size: 1.2rem; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem; }
+        .mobile-menu a:hover { background: rgba(255,255,255,0.05); color: var(--mrc); }
+
+        @media (min-width: 1024px) {
+            .desktop-nav { display: flex; }
+            .mobile-menu-btn, .mobile-menu { display: none !important; }
+        }
+
+        /* Page specific styling for Terms of Service */
+        .page-header {
+            padding-top: calc(var(--nav-height) + 6rem);
+            padding-bottom: 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .page-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        .page-subtitle {
+            font-family: var(--font-mono);
+            color: var(--mrc);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: rgba(244, 66, 52, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 99px;
+            display: inline-block;
+            border: 1px solid rgba(244, 66, 52, 0.2);
+        }
+
+        /* Long-form Content Area */
+        .prose-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 4rem;
+        }
+        .prose {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        .prose h2 {
+            color: #fff;
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        .prose h2:first-child { margin-top: 0; }
+        .prose p { margin-bottom: 1.5rem; }
+        .prose ul { margin-bottom: 1.5rem; padding-left: 1.5rem; list-style-type: disc; }
+        .prose li { margin-bottom: 0.5rem; }
+        .prose a { color: var(--mrc); text-decoration: underline; text-decoration-color: rgba(244, 66, 52, 0.3); text-underline-offset: 4px; }
+        .prose a:hover { text-decoration-color: var(--mrc); }
+
+        /* Footer */
+        .footer { background: var(--bg-surface); padding: 4rem 0 2rem; border-top: 1px solid var(--glass-border); }
+        .social-btn { width: 44px; height: 44px; border-radius: 50%; background: var(--bg-surface-elevated); display: flex; justify-content: center; align-items: center; transition: all 0.3s; border: 1px solid var(--glass-border); }
+        .social-btn:hover { background: var(--mrc); color: #fff; transform: translateY(-3px); border-color: var(--mrc); }
+
+        /* Animations Classes */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: rgba(244, 66, 52, 0.5); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--mrc); }
+    </style>
+</head>
+
+<body>
+
+    <!-- Inline SVG Sprite for Icons -->
+    <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="icon-menu" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></symbol>
+        <symbol id="icon-github" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></symbol>
+        <symbol id="icon-google" viewBox="0 0 24 24"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></symbol>
+    </svg>
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="loader-ring"></div>
+        <div class="font-mono text-mrc font-bold tracking-widest uppercase" style="font-size: 0.8rem;">Initializing Legal...</div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress-container">
+        <div id="scroll-progress"></div>
+    </div>
+
+    <!-- Ambient Backgrounds -->
+    <div class="tech-grid"></div>
+    <div class="ambient-orb" style="width: 40vw; height: 40vw; top: -10%; left: -10%;"></div>
+    <div class="ambient-orb" style="width: 30vw; height: 30vw; bottom: 10%; right: -5%; opacity: 0.1; animation-delay: -5s;"></div>
+
+    <!-- Navigation -->
+    <header class="header" id="navbar">
+        <div class="nav-bar glass-panel">
+            <a href="/" class="nav-logo">
+                <img src="https://avatars.githubusercontent.com/u/249983472" alt="MRC Logo">
+                <span style="color:var(--text-main);">MainRoute <span class="text-mrc">Core</span></span>
+            </a>
+
+            <nav class="desktop-nav">
+                <a href="/">Home</a>
+                <a href="/#expertise">Expertise</a>
+                <a href="/#workflow">Workflow</a>
+                <a href="/#open-source">Open Source</a>
+                <div style="width: 1px; height: 16px; background: var(--glass-border);"></div>
+                <div class="system-status">
+                    <div class="status-dot"></div> Active
+                </div>
+            </nav>
+
+            <button id="mobile-menu-btn" class="mobile-menu-btn">
+                <svg class="icon"><use href="#icon-menu"></use></svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="mobile-menu glass-panel">
+            <a href="/">Home</a>
+            <a href="/#expertise">Expertise</a>
+            <a href="/#workflow">Workflow</a>
+            <a href="/#open-source">Open Source</a>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <main style="position: relative; z-index: 10;">
+        
+        <div class="page-header reveal">
+            <div class="page-subtitle mb-4">Legal Framework</div>
+            <h1 class="page-title">Terms of Service</h1>
+            <p class="text-muted" style="font-size: 1.1rem;">Last updated: May 7, 2026</p>
+        </div>
+
+        <div class="container">
+            <div class="glass-panel prose-container reveal delay-100">
+                <div class="prose">
+                    <h2>1. Agreement to Terms</h2>
+                    <p>By accessing or using the website and services provided by MainRoute Core ("we", "us", or "our"), you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you may not access the service.</p>
+
+                    <h2>2. Use License</h2>
+                    <p>Permission is granted to temporarily download one copy of the materials (information or software) on MainRoute Core's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+                    <ul>
+                        <li>Modify or copy the materials;</li>
+                        <li>Use the materials for any commercial purpose, or for any public display (commercial or non-commercial);</li>
+                        <li>Attempt to decompile or reverse engineer any software contained on MainRoute Core's website;</li>
+                        <li>Remove any copyright or other proprietary notations from the materials; or</li>
+                        <li>Transfer the materials to another person or "mirror" the materials on any other server.</li>
+                    </ul>
+                    <p>This license shall automatically terminate if you violate any of these restrictions and may be terminated by MainRoute Core at any time.</p>
+
+                    <h2>3. Disclaimer</h2>
+                    <p>The materials on MainRoute Core's website are provided on an 'as is' basis. MainRoute Core makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+                    <p>Further, MainRoute Core does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its website or otherwise relating to such materials or on any sites linked to this site.</p>
+
+                    <h2>4. Open Source Contributions</h2>
+                    <p>Any code, snippets, or software labeled as Open Source
+                    (such as Git Folder Downloader) provided by MainRoute
+                    Core are governed by their respective repository licenses
+                    (e.g., MIT, GPL). These Terms of Service do not supersede
+                    the specific open-source licenses attached to those
+                    individual projects.</p>
+
+                    <h2>5. Limitations of Liability</h2>
+                    <p>In no event shall MainRoute Core, M Ramzan Ch, or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on MainRoute Core's website, even if MainRoute Core or an authorized representative has been notified orally or in writing of the possibility of such damage.</p>
+
+                    <h2>6. Revisions and Errata</h2>
+                    <p>The materials appearing on MainRoute Core's website could include technical, typographical, or photographic errors. MainRoute Core does not warrant that any of the materials on its website are accurate, complete, or current. We may make changes to the materials contained on its website at any time without notice.</p>
+
+                    <h2>7. Governing Law</h2>
+                    <p>These terms and conditions are governed by and construed in accordance with the laws, and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.</p>
+
+                    <h2>8. Contact Information</h2>
+                    <p>If you have any questions about these Terms, please contact us at <a href="mailto:tellus@mrc.com">tellus@mrc.com</a>.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8" style="border-bottom: 1px solid var(--glass-border); padding-bottom: 3rem; margin-bottom: 2rem;">
+                <div class="flex items-center gap-4">
+                    <img src="https://avatars.githubusercontent.com/u/249983472" style="width: 48px; height: 48px; border-radius: 50%; filter: grayscale(1);" alt="Logo">
+                    <div>
+                        <div class="font-black uppercase" style="font-size: 1.5rem; letter-spacing: -0.05em;">MainRoute <span class="text-mrc">Core</span></div>
+                        <div class="font-mono text-muted" style="font-size: 0.75rem;">Innovating Tomorrow, Today.</div>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <a href="https://github.com/MainRoute-Core/" class="social-btn"><svg class="icon"><use href="#icon-github"></use></svg></a>
+                    <a href="https://www.google.com/search?q=MainRoute+Core&utm=50" class="social-btn"><svg class="icon"><use href="#icon-google"></use></svg></a>
+                    </div>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between items-center text-center gap-4 text-muted font-mono" style="font-size: 0.8rem;">
+                <p>&copy; <span id="year"></span> MainRoute Core. M Ramzan Ch | Pro Bandey. All rights reserved.</p>
+                <div class="flex gap-6 justify-center">
+                    <a href="/Privacy/">Privacy Policy</a>
+                    <a href="/Terms/">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 100% VANILLA JS LOGIC -->
+    <script>
+        // Loader Removal
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => { loader.classList.add('hidden'); }, 300); 
+        });
+
+        // Set Footer Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Scroll Progress Bar & Header Shrink
+        const progressBar = document.getElementById('scroll-progress');
+        const header = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + '%';
+
+            if (winScroll > 50) {
+                header.style.transform = "translateY(-0.5rem)";
+            } else {
+                header.style.transform = "translateY(0)";
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Intersection Observer for Animations
+        const observerOptions = {
+            root: null, rootMargin: '0px', threshold: 0.1
+        };
+
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            scrollObserver.observe(el);
+        });
+    </script>
+</body>
+</html>
