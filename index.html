@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -8,10 +8,8 @@
     <!-- PWA & SEO Meta Tags -->
     <meta name="theme-color" content="#f44234">
     <meta name="title" content="MainRoute Core | Innovating Tomorrow's Solution Today" />
-    <meta name="description"
-        content="MainRoute Core, led by M Ramzan Ch. We engineer high-performance PWAs, enterprise software, and open-source contributions." />
-    <meta name="keywords"
-        content="MainRoute, MainRoute Core, MR Core, MRC, M Ramzan Ch, MegaMind-Solution, Web Development, Software Development, Modifications, Git Folder Downloader, Government Graduate College Okara, Pro Bandey" />
+    <meta name="description" content="MainRoute Core, led by M Ramzan Ch. We engineer high-performance PWAs, enterprise software, and open-source contributions." />
+    <meta name="keywords" content="MainRoute, MainRoute Core, MR Core, MRC, M Ramzan Ch, MegaMind-Solution, Web Development, Software Development, Modifications, Git Folder Downloader, Government Graduate College Okara, Pro Bandey" />
     <meta name="author" content="M Ramzan Ch" />
     <meta name="copyright" content="MainRoute Core" />
 
@@ -19,1049 +17,345 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mainroute-core.github.io/" />
     <meta property="og:title" content="MainRoute Core | Innovating Tomorrow's Solution Today" />
-    <meta property="og:description"
-        content="A specialized technology powerhouse delivering PWA, open-source, and custom software solutions." />
+    <meta property="og:description" content="A specialized technology powerhouse delivering PWA, open-source, and custom software solutions." />
     <meta property="og:image" content="https://avatars.githubusercontent.com/u/249983472" />
-    <meta property="twitter:card" content="summary_large_image" />
-
-    <!-- PWA Manifest & Icons -->
+    
+    <!-- Icons & Manifest -->
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="canonical" href="https://mainroute-core.github.io/">
-    <link rel="shortcut icon" href="src/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="512x512" href="https://avatars.githubusercontent.com/u/249983472?s=512&v=4">
     <link rel="icon" type="image/png" sizes="192x192" href="https://avatars.githubusercontent.com/u/249983472?s=192&v=4">
-    <link rel="icon" type="image/png" sizes="144x144" href="https://avatars.githubusercontent.com/u/249983472?s=144&v=4">
     <link href="https://avatars.githubusercontent.com/u/249983472?s=180&v=4" rel="apple-touch-icon" sizes="180x180" />
-    <link href="https://avatars.githubusercontent.com/u/249983472?s=32&v=4" rel="icon" sizes="32x32" type="image/png" />
-    <link href="https://avatars.githubusercontent.com/u/249983472?s=16&v=4" rel="icon" sizes="16x16" type="image/png" />
 
     <title>MainRoute Core | Future Engineered</title>
 
-    <!-- Google Fonts -->
+    <!-- Custom Font -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link href="https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf" rel="stylesheet">
 
-    <!-- Script Libraries (JS only) -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
-
+    <!-- 100% INTERNAL CSS (No Frameworks) -->
     <style>
         @font-face {
-            font-family: Core Sans;
+            font-family: 'Core Sans';
             src: url(https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf);
+            font-display: swap;
         }
 
-        /* CSS Variables */
         :root {
+            /* Core Colors */
             --mrc: #f44234;
-            --mrc-dark: #ff6b60;
-            --mrc-light: #ff6b60;
+            --mrc-light: #ff7063;
             --mrc-glow: rgba(244, 66, 52, 0.4);
-            --bg-dark: #050505;
-            --bg-surface: #121212;
-            --text-main: #ffffff;
-            --text-muted: #9ca3af;
-            --border-light: rgba(255, 255, 255, 0.08);
+            
+            /* Material Dark Theme */
+            --bg-dark: #09090b;
+            --bg-surface: #18181b;
+            --bg-surface-elevated: #27272a;
+            
+            /* Text */
+            --text-main: #f8fafc;
+            --text-muted: #a1a1aa;
+            
+            /* Glassmorphism */
+            --glass-bg: rgba(24, 24, 27, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 
-            --font-sans: 'Core Sans', sans-serif;
-            --font-mono: 'Space Mono', monospace;
+            /* Typography */
+            --font-sans: 'Core Sans', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Space Mono', ui-monospace, monospace;
+            
+            /* Layout */
             --container-width: 1280px;
+            --nav-height: 80px;
         }
 
-        /* Reset & Base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        /* Base Resets */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
         body {
             font-family: var(--font-sans);
             background-color: var(--bg-dark);
             color: var(--text-main);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            line-height: 1.5;
+        }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        img, svg { max-width: 100%; display: block; }
+        button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+        /* Icon Styles (Replaces Lucide) */
+        .icon { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* Typography */
+        .text-mrc { color: var(--mrc); }
+        .text-muted { color: var(--text-muted); }
+        .font-mono { font-family: var(--font-mono); }
+        .uppercase { text-transform: uppercase; letter-spacing: 0.05em; }
+        .font-black { font-weight: 900; }
+        .font-bold { font-weight: 700; }
+        .text-center { text-align: center; }
+
+        /* Loading Screen */
+        #loader {
+            position: fixed; inset: 0; z-index: 99999;
+            background: var(--bg-dark);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+        }
+        .loader-ring {
+            width: 60px; height: 60px;
+            border: 4px solid var(--glass-border);
+            border-top-color: var(--mrc);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        /* Scroll Progress Bar */
+        #scroll-progress-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 4px;
+            background: transparent; z-index: 10000;
+        }
+        #scroll-progress {
+            height: 100%; width: 0%; background: var(--mrc);
+            box-shadow: 0 0 10px var(--mrc-glow);
+            transition: width 0.1s ease-out;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: color 0.3s ease;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Typography Utilities */
-        .text-mrc {
-            color: var(--mrc-glow);
-        }
-
-        .text-muted {
-            color: var(--text-muted);
-        }
-
-        .font-mono {
-            font-family: var(--font-mono);
-        }
-
-        .uppercase {
-            text-transform: uppercase;
-        }
-
-        .font-black {
-            font-weight: 900;
-        }
-
-        .font-bold {
-            font-weight: 700;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .tracking-widest {
-            letter-spacing: 0.15em;
-        }
-
-        .tracking-tighter {
-            letter-spacing: -0.05em;
-        }
-
-        /* Layout & Container */
-        .container {
-            width: 100%;
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        .section {
-            padding: 6rem 0;
-            position: relative;
-            z-index: 10;
-        }
-
-        @media (min-width: 1024px) {
-            .section {
-                padding: 8rem 0;
-            }
-        }
-
-        /* Flex & Grid Utilities */
-        .flex {
-            display: flex;
-        }
-
-        .flex-col {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .items-center {
-            align-items: center;
-        }
-
-        .justify-between {
-            justify-content: space-between;
-        }
-
-        .justify-center {
-            justify-content: center;
-        }
-
-        .gap-2 {
-            gap: 0.5rem;
-        }
-
-        .gap-4 {
-            gap: 1rem;
-        }
-
-        .gap-6 {
-            gap: 1.5rem;
-        }
-
-        .gap-8 {
-            gap: 2rem;
-        }
-
-        .grid {
-            display: grid;
-        }
-
-        .grid-2 {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        .grid-3 {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        .grid-4 {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
+        /* Layout & Utilities */
+        .container { width: 100%; max-width: var(--container-width); margin: 0 auto; padding: 0 1.5rem; }
+        .section { padding: clamp(4rem, 10vw, 8rem) 0; position: relative; z-index: 10; }
+        .flex { display: flex; }
+        .flex-col { display: flex; flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-center { justify-content: center; }
+        .gap-2 { gap: 0.5rem; } .gap-4 { gap: 1rem; } .gap-6 { gap: 1.5rem; } .gap-8 { gap: 2rem; }
+        
+        .grid { display: grid; gap: 2rem; }
         @media (min-width: 768px) {
-            .grid-2 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .grid-3 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .grid-4 {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .grid-2 { grid-template-columns: repeat(2, 1fr); }
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
         }
-
         @media (min-width: 1024px) {
-            .grid-3 {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .grid-4 {
-                grid-template-columns: repeat(4, 1fr);
-            }
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+            .grid-4 { grid-template-columns: repeat(4, 1fr); }
         }
 
-        /* Glassmorphism & UI Components */
+        /* Minimal Glassmorphism Panels */
         .glass-panel {
-            background: rgba(18, 18, 18, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--border-light);
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
             border-radius: 1.5rem;
+            box-shadow: var(--glass-shadow);
         }
 
         /* Background Effects */
         .tech-grid {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            background-image:
-                linear-gradient(rgba(244, 66, 52, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(244, 66, 52, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-            -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            background-image: linear-gradient(var(--glass-border) 1px, transparent 1px), linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
         }
-
         .ambient-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.3;
-            z-index: -1;
+            position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15; z-index: -1;
             background: var(--mrc);
-            animation: float 10s ease-in-out infinite alternate;
+            animation: float 12s ease-in-out infinite alternate;
         }
 
-        @keyframes float {
-            0% {
-                transform: translate(0, 0) scale(1);
-            }
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, -50px) scale(1.1); } }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
-            100% {
-                transform: translate(30px, -50px) scale(1.2);
-            }
-        }
+        /* Navigation */
+        .header { position: fixed; top: 1rem; left: 1rem; right: 1rem; z-index: 100; transition: transform 0.3s ease; }
+        @media (min-width: 1024px) { .header { top: 1.5rem; left: 2rem; right: 2rem; } }
+        
+        .nav-bar { padding: 0.75rem 1.5rem; border-radius: 9999px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 900; letter-spacing: -0.05em; }
+        .nav-logo img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--mrc); }
+        
+        .desktop-nav { display: none; align-items: center; gap: 2rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; }
+        .desktop-nav a { position: relative; color: var(--text-muted); padding: 0.5rem 0; }
+        .desktop-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: var(--mrc); transition: width 0.3s; }
+        .desktop-nav a:hover { color: #fff; }
+        .desktop-nav a:hover::after { width: 100%; }
 
-        /* Header & Navigation */
-        .header {
-            position: fixed;
-            top: 1rem;
-            left: 1rem;
-            right: 1rem;
-            z-index: 100;
-        }
+        .system-status { display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.05); padding: 0.4rem 1rem; border-radius: 99px; font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em; }
+        .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
 
-        @media (min-width: 1024px) {
-            .header {
-                top: 1.5rem;
-                left: 2rem;
-                right: 2rem;
-            }
-        }
-
-        .nav-bar {
-            padding: 1rem 1.5rem;
-            border-radius: 9999px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .nav-logo {
-            color: var(--mrc);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1.25rem;
-            font-weight: 900;
-            text-transform: uppercase;
-        }
-
-        .nav-logo img {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-
-        .nav-logo:hover img {
-            transform: scale(1.1);
-        }
-
-        .desktop-nav {
-            display: none;
-            align-items: center;
-            gap: 2rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-        }
-
-        .desktop-nav a:hover {
-            color: var(--mrc);
-        }
-
-        .system-status {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 0.35rem 0.75rem;
-            border-radius: 99px;
-            border: 1px solid var(--border-light);
-            color: #fff;
-            font-size: 0.65rem;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #22c55e;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #22c55e;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.5;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .founder-tag {
-            display: none;
-            font-size: 0.65rem;
-            font-family: var(--font-mono);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-            background: rgba(0, 0, 0, 0.5);
-            padding: 0.5rem 1rem;
-            border-radius: 99px;
-            border: 1px solid var(--border-light);
-        }
-
-        .mobile-menu-btn {
-            display: block;
-            background: none;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .mobile-menu-btn:hover {
-            color: var(--mrc);
-        }
-
+        .mobile-menu-btn { display: block; color: #fff; padding: 0.5rem; }
         .mobile-menu {
-            display: none;
-            position: absolute;
-            top: 120%;
-            left: 0;
-            width: 100%;
-            padding: 1.5rem;
-            flex-direction: column;
-            gap: 1rem;
-            border-radius: 1.5rem;
-            border: 1px solid var(--border-light);
-            background: rgba(18, 18, 18, 0.95);
-            backdrop-filter: blur(20px);
+            position: absolute; top: 120%; left: 0; width: 100%; padding: 1.5rem;
+            display: flex; flex-direction: column; gap: 1rem;
+            opacity: 0; visibility: hidden; transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .mobile-menu.active {
-            display: flex;
-        }
-
-        .mobile-menu a {
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: 0.5rem 0;
-        }
+        .mobile-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .mobile-menu a { font-size: 1.2rem; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem; }
+        .mobile-menu a:hover { background: rgba(255,255,255,0.05); color: var(--mrc); }
 
         @media (min-width: 1024px) {
-            .desktop-nav {
-                display: flex;
-            }
-
-            .mobile-menu-btn {
-                display: none;
-            }
+            .desktop-nav { display: flex; }
+            .mobile-menu-btn, .mobile-menu { display: none !important; }
         }
 
-        @media (min-width: 1280px) {
-            .founder-tag {
-                display: block;
-            }
-        }
-
-        /* Buttons */
+        /* Material Buttons */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            border-radius: 0.5rem;
-            font-size: 0.875rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            z-index: 1;
-            border: none;
-            margin: auto;
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem;
+            padding: 1rem 2rem; border-radius: 0.75rem; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;
         }
-
-        .btn-primary {
-            background: rgba(244, 66, 52, 0.1);
-            border: 1px solid var(--mrc);
-            color: #fff;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--border-light);
-            color: var(--text-muted);
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: all 0.5s ease;
-            z-index: -1;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--mrc);
-            box-shadow: 0 0 25px var(--mrc-glow);
-            transform: translateY(-2px);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--mrc);
-            color: #fff;
-            transform: translateY(-2px);
-        }
+        .btn-primary { background: var(--mrc); color: #fff; box-shadow: 0 4px 15px var(--mrc-glow); }
+        .btn-primary:hover { background: var(--mrc-light); transform: translateY(-2px); box-shadow: 0 6px 20px var(--mrc-glow); }
+        .btn-primary:active { transform: translateY(0); }
+        
+        .btn-outline { background: transparent; border: 1px solid var(--glass-border); color: var(--text-main); backdrop-filter: blur(10px); }
+        .btn-outline:hover { border-color: var(--mrc); background: rgba(244, 66, 52, 0.05); transform: translateY(-2px); }
 
         /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 6rem;
-            padding-bottom: 4rem;
-        }
+        .hero { min-height: 100vh; display: flex; align-items: center; padding-top: calc(var(--nav-height) + 2rem); }
+        .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--mrc); background: rgba(244, 66, 52, 0.1); border: 1px solid rgba(244, 66, 52, 0.2); padding: 0.5rem 1rem; border-radius: 99px; margin-bottom: 2rem; }
+        .hero-title { font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .text-gradient { background: linear-gradient(135deg, #fff 0%, var(--mrc) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-desc { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--text-muted); max-width: 600px; margin-bottom: 2.5rem; line-height: 1.7; }
+        
+        .hero-graphics { position: relative; display: none; justify-content: center; align-items: center; perspective: 1000px; }
+        @media (min-width: 1024px) { .hero-graphics { display: flex; } }
 
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 900;
-            line-height: 0.9;
-            margin-bottom: 2rem;
-        }
+        /* Marquee */
+        .marquee { padding: 2rem 0; background: var(--bg-surface-elevated); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); overflow: hidden; white-space: nowrap; display: flex; }
+        .marquee-content { display: flex; animation: scroll-left 30s linear infinite; gap: 4rem; padding-right: 4rem; align-items: center; }
+        .marquee-item { font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 900; text-transform: uppercase; display: flex; align-items: center; gap: 1rem; color: #fff; }
+        .marquee-stroke { color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4); }
+        @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        .hero-title-gradient {
-            background: linear-gradient(to right, var(--mrc), var(--mrc-light));
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: relative;
-            display: inline-block;
-        }
+        /* General Section Styling */
+        .section-header { margin-bottom: 4rem; max-width: 800px; }
+        .section-title { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -0.02em; }
+        .section-desc { font-size: 1.1rem; color: var(--text-muted); line-height: 1.6; }
 
-        .hero-desc {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
-        }
-
-        .hero-image-wrapper {
-            display: none;
-            position: relative;
-            perspective: 1000px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .circle-spin {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            border: 1px dashed var(--border-light);
-            border-radius: 50%;
-            animation: spin 20s linear infinite;
-        }
-
-        .circle-spin-reverse {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            border: 1px solid rgba(244, 66, 52, 0.2);
-            border-radius: 50%;
-            animation: spin 15s linear infinite reverse;
-        }
-
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        @media (min-width: 640px) {
-            .hero-title {
-                font-size: 4.5rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .hero-title {
-                font-size: 7rem;
-            }
-
-            .hero-image-wrapper {
-                display: flex;
-            }
-        }
-
-        /* Infinite Marquee */
-        .marquee-wrapper {
-            padding: 2rem 0;
-            border-top: 1px solid var(--border-light);
-            border-bottom: 1px solid var(--border-light);
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            overflow: hidden;
-            white-space: nowrap;
-            display: flex;
-        }
-
-        .marquee-content {
-            display: flex;
-            animation: scroll 30s linear infinite;
-            gap: 4rem;
-            padding: 0 2rem;
-            align-items: center;
-        }
-
-        .marquee-content:hover {
-            animation-play-state: paused;
-        }
-
-        .marquee-item {
-            font-size: 2rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -0.05em;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .marquee-stroke {
-            color: transparent;
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-        }
-
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        /* Stats Section */
-        .stats-section {
-            background: var(--bg-surface);
-            padding: 4rem 0;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .stat-box {
-            text-align: center;
-            border-right: 1px solid var(--border-light);
-            padding: 0 1rem;
-        }
-
-        .stat-box:last-child {
-            border-right: none;
-        }
-
-        .stat-num {
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 0.5rem;
-            color: #fff;
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-        }
-
-        @media (max-width: 767px) {
-            .stat-box:nth-child(2) {
-                border-right: none;
-            }
-
-            .stat-box {
-                margin-bottom: 2rem;
-            }
-
-            .stat-box:nth-last-child(-n+2) {
-                margin-bottom: 0;
-            }
-        }
-
-        /* General Section Titles */
-        .section-tag {
-            display: inline-block;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--mrc);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            padding: 0.5rem 1rem;
-            border: 1px solid rgba(244, 66, 52, 0.2);
-            background: rgba(244, 66, 52, 0.1);
-            border-radius: 99px;
-            margin: 1rem 0 1.5rem;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -0.05em;
-            margin-bottom: 1.5rem;
-        }
-
-        .section-desc {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-
-        @media (min-width: 768px) {
-            .section-title {
-                font-size: 4rem;
-            }
-        }
-
-        /* Cards & Features */
-        .feature-card {
-            padding: 2.5rem;
-            border: 1px solid var(--border-light);
-            border-radius: 1.5rem;
-            background: rgba(255, 255, 255, 0.02);
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card:hover {
-            border-color: rgba(244, 66, 52, 0.5);
-            transform: translateY(-5px);
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 1rem;
-            background: rgba(244, 66, 52, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 2rem;
-            color: var(--mrc);
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover .feature-icon {
-            background: var(--mrc);
-            color: #fff;
-        }
-
-        .feature-card-highlight {
-            background: linear-gradient(180deg, rgba(244, 66, 52, 0.1), transparent);
-            border-color: rgba(244, 66, 52, 0.3);
-        }
-
-        /* Workflow Specific */
-        .step-num {
-            font-size: 4rem;
-            font-weight: 900;
-            color: rgba(255, 255, 255, 0.05);
-            margin-bottom: 1.5rem;
-            transition: color 0.3s;
-        }
-
-        .feature-card:hover .step-num {
-            color: rgba(244, 66, 52, 0.2);
-        }
-
-        .step-line {
-            height: 4px;
-            width: 0;
-            background: var(--mrc);
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            transition: width 0.5s ease;
-        }
-
-        .feature-card:hover .step-line {
-            width: 100%;
-        }
-
+        /* Feature Cards (Material + Glass) */
+        .card { padding: 2.5rem; border-radius: 1.5rem; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s; position: relative; overflow: hidden; }
+        .card:hover { transform: translateY(-8px); border-color: var(--mrc-glow); }
+        .card-icon { width: 56px; height: 56px; border-radius: 1rem; background: rgba(244, 66, 52, 0.1); color: var(--mrc); display: flex; justify-content: center; align-items: center; margin-bottom: 1.5rem; transition: all 0.3s; }
+        .card:hover .card-icon { background: var(--mrc); color: #fff; }
+        .card-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; }
+        .card-text { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; }
+        
         /* Badges */
-        .badge-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-        }
+        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tag { font-family: var(--font-mono); font-size: 0.7rem; padding: 0.4rem 0.8rem; border-radius: 99px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: var(--text-muted); }
+        .tag.primary { background: rgba(244, 66, 52, 0.1); color: var(--mrc); border-color: rgba(244, 66, 52, 0.2); }
 
-        .badge {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            border: 1px solid var(--border-light);
-            padding: 0.4rem 0.8rem;
-            border-radius: 99px;
-            color: var(--text-muted);
-        }
+        /* Stats */
+        .stats-grid { border-bottom: 1px solid var(--glass-border); padding-bottom: 4rem; }
+        .stat-item { text-align: center; padding: 2rem; }
+        .stat-num { font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 900; line-height: 1; margin-bottom: 0.5rem; }
+        .stat-label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em; }
 
-        .badge-primary {
-            background: rgba(244, 66, 52, 0.1);
-            border-color: rgba(244, 66, 52, 0.3);
-            color: var(--mrc);
-        }
-
-        /* Tech Icons */
-        .tech-icons-wrap {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            opacity: 0.7;
-        }
-
-        .tech-icon {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            transition: all 0.3s;
-        }
-
-        .tech-icon:hover {
-            color: var(--mrc);
-            transform: scale(1.1);
-            opacity: 1;
-        }
-
-        @media (min-width: 768px) {
-            .tech-icons-wrap {
-                gap: 4rem;
-            }
-        }
-
-        /* Open Source Repo Cards */
-        .repo-card {
-            padding: 2rem;
-            border-left: 4px solid var(--border-light);
-            border-top: 1px solid var(--border-light);
-            border-right: 1px solid var(--border-light);
-            border-bottom: 1px solid var(--border-light);
-            background: var(--bg-dark);
-            border-radius: 0 1.5rem 1.5rem 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s;
-            margin-bottom: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .repo-card:hover {
-            border-left-color: var(--mrc);
-        }
-
-        .repo-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .repo-status {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--mrc);
-            background: rgba(244, 66, 52, 0.1);
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-        }
-
-        .repo-version {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.05);
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-        }
-
-        .repo-title {
-            font-size: 1.5rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            color: #fff;
-            transition: color 0.3s;
-        }
-
-        .repo-card:hover .repo-title {
-            color: var(--mrc);
-        }
-
-        .repo-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid var(--border-light);
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-        }
+        /* Tech Grid */
+        .tech-icons { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(2rem, 5vw, 4rem); opacity: 0.6; }
+        .tech-item { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; transition: all 0.3s; cursor: default; }
+        .tech-item:hover { color: var(--mrc); transform: scale(1.1); opacity: 1; }
+        .tech-item span { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; }
 
         /* Footer */
-        .footer {
-            background: var(--bg-dark);
-            border-top: 1px solid var(--border-light);
-            padding: 4rem 0 2rem;
-            position: relative;
-            z-index: 10;
-        }
+        .footer { background: var(--bg-surface); padding: 4rem 0 2rem; border-top: 1px solid var(--glass-border); }
+        .social-btn { width: 44px; height: 44px; border-radius: 50%; background: var(--bg-surface-elevated); display: flex; justify-content: center; align-items: center; transition: all 0.3s; border: 1px solid var(--glass-border); }
+        .social-btn:hover { background: var(--mrc); color: #fff; transform: translateY(-3px); border-color: var(--mrc); }
 
-        .footer-top {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            border-bottom: 1px solid var(--border-light);
-            padding-bottom: 3rem;
-            margin-bottom: 2rem;
-        }
+        /* Vanilla JS Animations Classes */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        .scale-in { opacity: 0; transform: scale(0.9); transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .scale-in.active { opacity: 1; transform: scale(1); }
 
-        @media (min-width: 768px) {
-            .footer-top {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
 
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.3s;
-        }
-
-        .social-icon:hover {
-            background: var(--mrc);
-            color: #fff;
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-align: center;
-        }
-
-        @media (min-width: 768px) {
-            .footer-bottom {
-                flex-direction: row;
-                justify-content: space-between;
-                text-align: left;
-            }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(244, 66, 52, 0.5);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--mrc);
-        }
-
-        /* GSAP Utility Classes */
-        .reveal-up {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .reveal-scale {
-            opacity: 0;
-            transform: scale(0.85);
-            visibility: hidden;
-        }
-
-        /* Lenis Global Fix */
-        html.lenis,
-        html.lenis body {
-            height: auto;
-        }
-
-        .lenis.lenis-smooth {
-            scroll-behavior: auto !important;
-        }
-
-        .lenis.lenis-stopped {
-            overflow: hidden;
-        }
+        /* Scrollbar styling */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: rgba(244, 66, 52, 0.5); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--mrc); }
     </style>
 </head>
 
 <body>
 
+    <!-- Inline SVG Sprite for Icons (Zero External Dependencies) -->
+    <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="icon-menu" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></symbol>
+        <symbol id="icon-sparkles" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+        <symbol id="icon-arrow-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></symbol>
+        <symbol id="icon-github" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></symbol>
+        <symbol id="icon-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></symbol>
+        <symbol id="icon-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></symbol>
+        <symbol id="icon-smartphone" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></symbol>
+        <symbol id="icon-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></symbol>
+        <symbol id="icon-app-window" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect><line x1="10" y1="4" x2="10" y2="20"></line></symbol>
+        <symbol id="icon-server" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></symbol>
+        <symbol id="icon-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></symbol>
+        <symbol id="icon-layout" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></symbol>
+        <symbol id="icon-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></symbol>
+        <symbol id="icon-git-merge" viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M6 21V9a9 9 0 0 0 9 9"></path></symbol>
+        <symbol id="icon-heart" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></symbol>
+        <symbol id="icon-send" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></symbol>
+        <symbol id="icon-google" viewBox="0 0 24 24"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></symbol>
+    </svg>
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="loader-ring"></div>
+        <div class="font-mono text-mrc font-bold tracking-widest text-sm uppercase">Initializing Core...</div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress-container">
+        <div id="scroll-progress"></div>
+    </div>
+
     <!-- Ambient Backgrounds -->
     <div class="tech-grid"></div>
-    <div class="ambient-orb" style="width: 500px; height: 500px; top: -10%; left: -10%;"></div>
-    <div class="ambient-orb"
-        style="width: 400px; height: 400px; bottom: -10%; right: -10%; opacity: 0.15; animation-delay: -5s;"></div>
+    <div class="ambient-orb" style="width: 40vw; height: 40vw; top: -10%; left: -10%;"></div>
+    <div class="ambient-orb" style="width: 30vw; height: 30vw; bottom: 10%; right: -5%; opacity: 0.1; animation-delay: -5s;"></div>
 
     <!-- Navigation -->
-    <header class="header">
+    <header class="header" id="navbar">
         <div class="nav-bar glass-panel">
             <a href="#" class="nav-logo">
                 <img src="https://avatars.githubusercontent.com/u/249983472" alt="MRC Logo">
-                <span class="hidden-mobile">MainRoute <span class="text-mrc">Core</span></span>
+                <span style="color:var(--text-main);">MainRoute <span class="text-mrc">Core</span></span>
             </a>
 
             <nav class="desktop-nav">
                 <a href="#expertise">Expertise</a>
                 <a href="#workflow">Workflow</a>
-                <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.2);"></div>
+                <a href="#open-source">Open Source</a>
+                <div style="width: 1px; height: 16px; background: var(--glass-border);"></div>
                 <div class="system-status">
-                    <div class="status-dot"></div> Systems Active
+                    <div class="status-dot"></div> Active
                 </div>
             </nav>
 
             <button id="mobile-menu-btn" class="mobile-menu-btn">
-                <i data-lucide="menu"></i>
+                <svg class="icon"><use href="#icon-menu"></use></svg>
             </button>
-
-            <div class="founder-tag">Founder: M Ramzan Ch</div>
         </div>
 
-        <div id="mobile-menu" class="mobile-menu">
+        <div id="mobile-menu" class="mobile-menu glass-panel">
             <a href="#expertise">Expertise</a>
             <a href="#workflow">Workflow</a>
             <a href="#open-source">Open Source</a>
-            <hr style="border: none; border-top: 1px solid var(--border-light); margin: 0.5rem 0;">
             <a href="#contact" class="text-mrc">Contact Us</a>
         </div>
     </header>
@@ -1069,85 +363,47 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container grid-2">
-            <div class="hero-content" style="margin: auto;">
-                <div class="section-tag" style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                    <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i> Innovating Tomorrow's, Solution
-                    Today
+            <div class="hero-content">
+                <div class="hero-tag reveal">
+                    <svg class="icon" style="width:14px; height:14px;"><use href="#icon-sparkles"></use></svg> 
+                    Innovating Tomorrow's Solution Today
                 </div>
 
-                <h1 class="hero-title reveal-up">
+                <h1 class="hero-title reveal delay-100">
                     FUTURE <br>
-                    <span class="hero-title-gradient">
-                        ENGINEERED.
-                    </span>
+                    <span class="text-gradient">ENGINEERED.</span>
                 </h1>
 
-                <p class="hero-desc reveal-up">
-                    A specialized technology powerhouse led by <span style="color:#fff; font-weight:700;">M Ramzan
-                        Ch</span>. Originating with roots in Punjab Pakistan, we engineer
-                    high-performance PWAs, enterprise software, and robust open-source infrastructure.
+                <p class="hero-desc reveal delay-200">
+                    A specialized technology powerhouse led by <span class="font-bold text-main">M Ramzan Ch</span>. 
+                    Originating with roots in Punjab, Pakistan, we engineer high-performance PWAs, enterprise software, and robust open-source infrastructure.
                 </p>
 
-                <div class="flex flex-wrap gap-4 reveal-up">
+                <div class="flex flex-wrap gap-4 reveal delay-300">
                     <a href="#contact" class="btn btn-primary">
-                        Initiate Collaboration <i data-lucide="arrow-right" style="width: 18px;"></i>
+                        Initiate Collaboration <svg class="icon"><use href="#icon-arrow-right"></use></svg>
                     </a>
                     <a href="#open-source" class="btn btn-outline">
-                        The FOSS Lab <i data-lucide="github" style="width: 18px;"></i>
+                        The FOSS Lab <svg class="icon"><use href="#icon-github"></use></svg>
                     </a>
                 </div>
             </div>
 
-            <div class="hero-image-wrapper reveal-scale">
-                <div class="circle-spin"></div>
-                <div class="circle-spin-reverse"></div>
+            <div class="hero-graphics scale-in delay-200">
+                <!-- Abstract Graphics replacing heavy GSAP/SVGs -->
+                <div style="position: absolute; width: 100%; height: 100%; border: 1px dashed var(--glass-border); border-radius: 50%; animation: spin 25s linear infinite;"></div>
+                <div style="position: absolute; width: 80%; height: 80%; border: 1px solid rgba(244, 66, 52, 0.2); border-radius: 50%; animation: spin 15s linear infinite reverse;"></div>
+                
+                <div class="glass-panel" style="padding: 1rem; border-radius: 50%; z-index: 10;">
+                    <img src="https://avatars.githubusercontent.com/u/249983472" alt="Core Branding" style="width: 300px; height: 300px; border-radius: 50%; object-fit: cover; filter: grayscale(1); transition: filter 0.5s;" onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(1)'">
+                </div>
 
-                <div style="position: relative; z-index: 10;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" id="MainRoute-Core_Svg"
-                        viewBox="0 0 600 600">
-                        <defs>
-                            <radialGradient id="CoreToOrbit" cx="300" cy="300" r="300" gradientUnits="userSpaceOnUse">
-                                <stop offset="0%" stop-color="#4b1010" />
-                                <stop offset="35%" stop-color="#990000" />
-                                <stop offset="70%" stop-color="#e62e2e" />
-                                <stop offset="85%" stop-color="#d42929" />
-                                <stop offset="100%" stop-color="#f44234" />
-                            </radialGradient>
-                        </defs>
-                        <style>
-                            #MainRoute-Core_Svg{ transform-origin: center;filter: grayscale(1); border-radius: 2.5rem; border:2px solid var(--border-light);} 
-                            #MainRoute-Core_Svg:hover{filter: none;}
-                            #K-Orbit, #L-Orbit, #M-Orbit{ transform-box: fill-box; transform-origin: center;} 
-                            #MainRoute-Core_Svg:hover #K-Orbit{ animation: spinK 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;} 
-                            @keyframes spinK{ from{ transform: rotate(180deg);} to{ transform: rotate(540deg);}} 
-                            #MainRoute-Core_Svg:hover #L-Orbit{ animation: spinL 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;} 
-                            @keyframes spinL{ from{ transform: rotate(720deg);} to{ transform: rotate(180deg);}} 
-                            #MainRoute-Core_Svg:hover #M-Orbit{ animation: spinM 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;} 
-                            @keyframes spinM{ from{ transform: rotate(0deg);} to{ transform: rotate(720deg);}} 
-                            #MainRoute-Core_Svg:hover #Core{ opacity: 0; transform: scale(0.6); transform-origin: center; animation: PopOut 0.8s ease-out forwards; animation-delay: .5s;} 
-                            @keyframes PopOut{ 0%{ opacity: 0; transform: scale(0.6);} 70%{ opacity: 1; transform: scale(1.15);} 100%{ opacity: 1; transform: scale(1);}} </style>
-                        <path id="K-Orbit" fill="url(#CoreToOrbit)"
-                            d="M590.013 281.735c.335 2.41.972 4.355.937 6.288-.24 13.439.223 26.961-1.128 40.296-2.911 28.721-9.56 56.587-20.633 83.424-9.304 22.545-21.182 43.61-35.78 62.943-10.012 13.26-21.286 25.762-33.245 37.31-17.493 16.893-37.242 31.001-58.581 42.886-22.155 12.338-45.577 21.432-70.03 27.677-12.159 3.105-24.72 5.175-37.226 6.253-16.973 1.462-34.105 2.55-51.099 1.924-20.624-.762-41.004-4.527-60.95-10.1-19.106-5.34-37.5-12.596-55.11-21.678-8.848-4.562-17.448-9.703-25.734-15.22-4.78-3.183-9.716-5.246-15.266-5.67-17.269-1.32-27.283-16.27-28.239-28.463-1.75-22.333 12.96-34.396 27.624-36.472 19.216-2.722 36.314 10.34 37.628 29.486.144 2.104 2.253 4.776 4.197 5.946 18.695 11.251 38.034 21.377 59.118 27.258 13.96 3.894 28.244 7.232 42.606 8.912 16.062 1.878 32.445 2.85 48.567 1.975 25.078-1.363 49.478-7.025 72.886-16.545 17.047-6.934 33.274-15.281 48.548-25.614 16.802-11.366 31.825-24.763 45.361-39.703 16.14-17.814 29.31-37.843 39.38-59.676 9.745-21.132 16.574-43.229 20.29-66.325 2.805-17.433 3.785-34.958 2.675-52.432-1.709-26.898-7.474-53.02-17.642-78.167-7.605-18.808-17.65-36.14-29.184-52.703-1.21-1.738-2.122-3.002-.145-4.96 9.588-9.491 19.047-19.112 29.182-29.322 3.768 4.958 7.722 9.295 10.686 14.228 7.92 13.181 16.106 26.276 22.919 40.034 10.47 21.145 18.126 43.444 22.272 66.732 2.297 12.896 3.443 25.998 5.116 39.478M71.139 478.634c-8.264-12.552-16.45-24.75-24.283-37.17-10.108-16.027-16.895-33.67-22.575-51.563-4.523-14.25-7.73-29.042-10.073-43.824-2.34-14.756-3.968-29.799-3.952-44.714.023-21.844 2.56-43.524 7.38-64.999 6.077-27.071 16.083-52.49 29.194-76.776 8.651-16.024 19.305-30.697 30.806-44.818 18.483-22.696 40.32-41.619 64.723-57.512 29.889-19.466 62.179-33.679 97.392-40.142 16.262-2.985 32.848-4.254 49.31-6.088 18.333-2.043 36.441.44 54.573 2.89 26.107 3.53 51.054 10.923 75.153 21.422 16.417 7.152 31.96 15.773 46.599 26.144 2.779 1.97 7.084 2.052 10.746 2.459 14.605 1.623 26.995 14.546 27.945 29.233.743 11.474-2.482 20.888-11.273 28.653-10.484 9.26-32.125 10.073-42.301.245-6.341-6.124-11.24-12.785-11.596-22.004-.234-6.07-5.678-7.54-9.615-9.896-23.722-14.193-49.068-24.604-75.972-30.94-22.683-5.342-45.865-6.546-68.985-5.057-36.582 2.357-71.153 12.49-103.252 30.351-14.608 8.128-28.791 17.095-40.817 28.84-11.94 11.662-24.21 23.162-34.752 36.03-12.76 15.576-22.59 33.193-30.715 51.776-6.45 14.751-11.842 29.776-15.015 45.508-2.1 10.416-3.722 20.985-4.649 31.565-.953 10.882-1.254 21.87-1.035 32.795.377 18.766 3.622 37.151 8.535 55.274 4.996 18.426 12.219 35.948 21.456 52.58 5.068 9.126 11.167 17.679 16.79 26.497.778 1.22 1.494 2.48 2.354 3.913-9.93 9.916-19.694 19.694-29.533 29.397-.425.419-1.537.14-2.563-.069" />
-                        <path id="L-Orbit" fill="url(#CoreToOrbit)"
-                            d="M151.749 152.751c57.428-54.666 125.183-74.563 201.224-54.641 84.938 22.252 134.618 80.433 154.61 165.688h-40.707c-2.932-8.532-5.615-17.06-8.783-25.406-6.68-17.6-16.609-33.239-28.734-47.636-15.526-18.433-34.223-32.659-55.92-42.86-16.337-7.68-33.376-13.333-51.536-14.92-7.21-.629-14.43-2.012-21.62-1.859-36.72.784-70.404 11.438-99.965 33.369-18.928 14.043-35.256 30.948-46.04 52.18-6.55 12.898-11.653 26.55-16.978 40.033-.704 1.782.474 5.12 1.893 6.797 10.08 11.918 9.41 32.102-1.635 43.343-17.51 17.821-47.15 11.347-54.735-11.136-4.62-13.694-.872-29.778 11.003-38.406 2.097-1.523 2.851-5.325 3.58-8.236 6.793-27.185 18.627-51.983 35.484-74.302 5.74-7.601 12.38-14.524 18.859-22.008m289.987 303.014c-12.002 10.504-24.534 19.59-38.075 27.43-20.054 11.61-41.603 18.898-64.135 23.476-17.929 3.643-36.21 4.514-54.345 3.13-28.457-2.171-55.756-9.465-81.128-22.845-14.062-7.415-27.31-16.097-39.373-26.631-14.993-13.093-28.295-27.553-39.175-44.243-15.647-24.002-26.185-50.04-31.399-78.216-.26-1.407-.033-2.904-.033-4.856 12.831 0 25.29-.086 37.743.15 1.089.02 2.793 1.99 3.106 3.314 3.66 15.528 8.95 30.433 16.555 44.474 10.378 19.164 23.915 35.671 40.613 49.784 19.894 16.814 42.366 28.462 67.585 34.381 11.263 2.644 22.948 3.773 34.512 4.789 22.387 1.967 43.966-2.26 64.96-9.867 19.122-6.93 36.137-17.364 51.784-30.347 17.386-14.425 30.766-31.999 40.892-51.903 5.37-10.555 8.785-22.115 12.849-33.305.432-1.189-.272-3.317-1.182-4.384-10.685-12.528-10.932-32.971 1.852-45.76 10.866-10.87 31.219-12.529 44.393-1.436 13.98 11.77 14.31 33.674 5.302 44.995-.816 1.026-1.448 2.406-2.512 2.993-7.992 4.406-9.36 12.53-11.425 20.19-4.732 17.54-12.72 33.62-21.89 49.156-10.043 17.015-22.878 31.778-37.474 45.53" />
-                        <path id="M-Orbit" fill="url(#CoreToOrbit)"
-                            d="M167.006 320.89c-3.548-29.631.333-57.552 14.384-83.676 16.019-29.784 40.042-50.556 71.337-63.12 1.57-.63 3.219-1.735 4.186-3.082 7.214-10.044 17.411-14.637 29.2-13.635 15.21 1.293 25.725 9.67 29.766 24.894 3.539 13.329-1.914 27.72-13.08 35.301-11.417 7.75-27.393 7.293-38.698-.791-1.332-.953-4.157-1.178-5.594-.42-26.818 14.148-44.075 35.913-50.392 65.66-6.065 28.56.695 54.61 18.345 77.491 9.765 12.66 22.063 22.826 37.396 28.485 5.045 1.862 7.729 4.244 7.317 10.329-.65 9.617-.212 19.31-.16 28.972.018 3.58-.74 5.086-5 3.932-20.288-5.495-38.192-15.116-54.23-28.76-13.354-11.363-23.486-25.092-31.579-40.327-6.761-12.731-10.81-26.552-13.198-41.254m228.242 76.376c-12.731 11.483-26.203 21.137-41.79 27.752-3.438 1.459-6.655 4.255-9.06 7.185-9.375 11.43-24.594 15.842-38.515 10.68-12.526-4.644-21.373-17.974-20.83-32.042.496-12.82 6.743-22.472 18.032-28.258 11.123-5.7 22.39-5 32.933 1.941 3.05 2.008 5.466 2.596 8.933.582 14.562-8.46 26.984-19.185 35.907-33.538 7.933-12.76 12.78-26.575 14.266-41.727 2.544-25.948-5.185-48.765-20.927-68.779-10.142-12.895-23.283-22.704-38.966-28.233-5.78-2.037-6.34-5.933-6.203-10.723.278-9.616.636-19.23.988-28.844.047-1.285.253-2.565.453-4.498 45.372 11.794 78.538 38.306 95.061 81.563 20.765 54.36 9.912 103.914-30.282 146.939" />
-                        <path id="Core" fill="url(#CoreToOrbit)"
-                            d="M344.766 341.732c-13.083 13.877-29.153 19.973-47.533 19.155-28.041-1.247-52.055-22.455-56.296-50.404-3.287-21.668 3.248-39.78 18.897-54.79 8.373-8.03 18.683-12.544 29.878-14.539 21.267-3.788 39.668 2.632 54.64 17.89 8.978 9.15 14.023 20.496 15.76 33.44 2.524 18.79-3.127 34.802-15.346 49.248" />
-                    </svg>
-                    <!-- Floating Badge -->
-                    <div class="glass-panel flex items-center gap-4"
-                        style="position: absolute; bottom: -20px; right: -20px; padding: 1rem; border-radius: 1rem; animation: float 4s infinite alternate;">
-                        <div
-                            style="width: 40px; height: 40px; background: var(--mrc); border-radius: 50%; display: flex; justify-content: center; align-items: center;">
-                            <img src="https://avatars.githubusercontent.com/u/195909043?s=64&v=4" alt="Pro Bandey"
-                                srcset="" style="border-radius: 100%;padding: 2px;">
-                        </div>
-                        <div>
-                            <div style="color: #fff; font-weight: 700; line-height: 1.2;">Pro Bandey</div>
-                            <div style="color: var(--mrc); font-size: 0.75rem; font-family: var(--font-mono);">Certified
-                                Dev And Project Manager</div>
-                        </div>
+                <!-- Floating Badge -->
+                <div class="glass-panel flex items-center gap-4" style="position: absolute; bottom: 0; right: 0; padding: 1rem; border-radius: 1rem; z-index: 20; animation: float 4s infinite alternate;">
+                    <img src="https://avatars.githubusercontent.com/u/195909043?s=64&v=4" alt="Pro Bandey" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--mrc);">
+                    <div>
+                        <div style="font-weight: 700; line-height: 1.2;">Pro Bandey</div>
+                        <div class="text-mrc font-mono" style="font-size: 0.7rem;">Certified Project Manager</div>
                     </div>
                 </div>
             </div>
@@ -1155,307 +411,157 @@
     </section>
 
     <!-- Infinite Marquee -->
-    <div class="marquee-wrapper">
+    <div class="marquee">
         <div class="marquee-content">
-            <!-- Set 1 -->
-            <span class="marquee-item marquee-stroke">Progressive</span>
-            <span class="marquee-item text-mrc"><i data-lucide="asterisk"></i>Native</span>
-            <span class="marquee-item marquee-stroke">Solutions</span>
-            <span class="marquee-item text-mrc"><i data-lucide="asterisk"></i>Ecosystem</span>
-            <span class="marquee-item marquee-stroke">Architecture</span>
-            <span class="marquee-item text-mrc"><i data-lucide="asterisk"></i>Engine</span>
-            <!-- Set 2 (Duplicate for loop) -->
-            <span class="marquee-item marquee-stroke">Progressive</span>
-            <span class="marquee-item text-mrc"><i data-lucide="asterisk"></i>Native</span>
-            <span class="marquee-item marquee-stroke">Solutions</span>
-            <span class="marquee-item text-mrc"><i data-lucide="asterisk"></i>Ecosystem</span>
-            <span class="marquee-item marquee-stroke">Architecture</span>
-            <span class="marquee-item text-mrc"><i data-lucide="asterisk"></i>Engine</span>
+            <span class="marquee-item marquee-stroke">Progressive Web Apps</span>
+            <span class="marquee-item text-mrc">Kotlin Native</span>
+            <span class="marquee-item marquee-stroke">MegaMind Solution</span>
+            <span class="marquee-item text-mrc">FOSS Ecosystem</span>
+            <span class="marquee-item marquee-stroke">Agile Architecture</span>
+            <span class="marquee-item text-mrc">Node.js Engine</span>
+            <!-- Duplicate for seamless loop -->
+            <span class="marquee-item marquee-stroke">Progressive Web Apps</span>
+            <span class="marquee-item text-mrc">Kotlin Native</span>
+            <span class="marquee-item marquee-stroke">MegaMind Solution</span>
+            <span class="marquee-item text-mrc">FOSS Ecosystem</span>
+            <span class="marquee-item marquee-stroke">Agile Architecture</span>
+            <span class="marquee-item text-mrc">Node.js Engine</span>
         </div>
     </div>
 
     <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="container grid grid-4">
-            <div class="stat-box reveal-up">
+    <section class="section pb-0">
+        <div class="container grid-4 stats-grid">
+            <div class="stat-item reveal">
                 <div class="stat-num">50<span class="text-mrc">+</span></div>
                 <div class="stat-label">Projects Delivered</div>
             </div>
-            <div class="stat-box reveal-up">
+            <div class="stat-item reveal delay-100">
                 <div class="stat-num">15<span class="text-mrc">K</span></div>
                 <div class="stat-label">Open Source Commits</div>
             </div>
-            <div class="stat-box reveal-up">
+            <div class="stat-item reveal delay-200">
                 <div class="stat-num">99<span class="text-mrc">%</span></div>
                 <div class="stat-label">Client Satisfaction</div>
             </div>
-            <div class="stat-box reveal-up">
+            <div class="stat-item reveal delay-300">
                 <div class="stat-num">24<span class="text-mrc">/7</span></div>
                 <div class="stat-label">System Reliability</div>
             </div>
         </div>
     </section>
 
-    <!-- Leadership / About -->
-    <section class="section" style="background: var(--bg-dark);">
-        <div class="container grid-2 items-center">
-            <div class="reveal-scale" style="position: relative;">
-                <div
-                    style="position: absolute; inset: 0; background: var(--mrc); filter: blur(80px); opacity: 0.2; border-radius: 50%;">
-                </div>
-                <div class="glass-panel"
-                    style="padding: 0.75rem; display: inline-block; transform: rotate(2deg); transition: transform 0.5s;">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" id="MainRoute-Core_Svg" class="alt" viewBox="0 0 600 600">
-                        <defs>
-                            <radialGradient id="CoreToOrbit" cx="300" cy="300" r="300" gradientUnits="userSpaceOnUse">
-                                <stop offset="0%" stop-color="#4b1010" />
-                                <stop offset="35%" stop-color="#990000" />
-                                <stop offset="70%" stop-color="#e62e2e" />
-                                <stop offset="85%" stop-color="#d42929" />
-                                <stop offset="100%" stop-color="#f44234" />
-                            </radialGradient>
-                        </defs>
-                        <style>
-                            #MainRoute-Core_Svg.alt{ transform-origin: center;filter: grayscale(1); border-radius: 0; border:none;} 
-                            #MainRoute-Core_Svg.alt:hover{filter: none;}
-                            #K-Orbit, #L-Orbit, #M-Orbit{ transform-box: fill-box; transform-origin: center;} 
-                            #MainRoute-Core_Svg.alt:hover #K-Orbit{ animation: spinK 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;} 
-                            @keyframes spinK{ from{ transform: rotate(180deg);} to{ transform: rotate(540deg);}} 
-                            #MainRoute-Core_Svg.alt:hover #L-Orbit{ animation: spinL 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;} 
-                            @keyframes spinL{ from{ transform: rotate(720deg);} to{ transform: rotate(180deg);}} 
-                            #MainRoute-Core_Svg.alt:hover #M-Orbit{ animation: spinM 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;} 
-                            @keyframes spinM{ from{ transform: rotate(0deg);} to{ transform: rotate(720deg);}} 
-                            #MainRoute-Core_Svg.alt:hover #Core{ opacity: 0; transform: scale(0.6); transform-origin: center; animation: PopOut 0.8s ease-out forwards; animation-delay: .5s;} 
-                            @keyframes PopOut{ 0%{ opacity: 0; transform: scale(0.6);} 70%{ opacity: 1; transform: scale(1.15);} 100%{ opacity: 1; transform: scale(1);}} </style>
-                        <path id="K-Orbit" fill="url(#CoreToOrbit)"
-                            d="M590.013 281.735c.335 2.41.972 4.355.937 6.288-.24 13.439.223 26.961-1.128 40.296-2.911 28.721-9.56 56.587-20.633 83.424-9.304 22.545-21.182 43.61-35.78 62.943-10.012 13.26-21.286 25.762-33.245 37.31-17.493 16.893-37.242 31.001-58.581 42.886-22.155 12.338-45.577 21.432-70.03 27.677-12.159 3.105-24.72 5.175-37.226 6.253-16.973 1.462-34.105 2.55-51.099 1.924-20.624-.762-41.004-4.527-60.95-10.1-19.106-5.34-37.5-12.596-55.11-21.678-8.848-4.562-17.448-9.703-25.734-15.22-4.78-3.183-9.716-5.246-15.266-5.67-17.269-1.32-27.283-16.27-28.239-28.463-1.75-22.333 12.96-34.396 27.624-36.472 19.216-2.722 36.314 10.34 37.628 29.486.144 2.104 2.253 4.776 4.197 5.946 18.695 11.251 38.034 21.377 59.118 27.258 13.96 3.894 28.244 7.232 42.606 8.912 16.062 1.878 32.445 2.85 48.567 1.975 25.078-1.363 49.478-7.025 72.886-16.545 17.047-6.934 33.274-15.281 48.548-25.614 16.802-11.366 31.825-24.763 45.361-39.703 16.14-17.814 29.31-37.843 39.38-59.676 9.745-21.132 16.574-43.229 20.29-66.325 2.805-17.433 3.785-34.958 2.675-52.432-1.709-26.898-7.474-53.02-17.642-78.167-7.605-18.808-17.65-36.14-29.184-52.703-1.21-1.738-2.122-3.002-.145-4.96 9.588-9.491 19.047-19.112 29.182-29.322 3.768 4.958 7.722 9.295 10.686 14.228 7.92 13.181 16.106 26.276 22.919 40.034 10.47 21.145 18.126 43.444 22.272 66.732 2.297 12.896 3.443 25.998 5.116 39.478M71.139 478.634c-8.264-12.552-16.45-24.75-24.283-37.17-10.108-16.027-16.895-33.67-22.575-51.563-4.523-14.25-7.73-29.042-10.073-43.824-2.34-14.756-3.968-29.799-3.952-44.714.023-21.844 2.56-43.524 7.38-64.999 6.077-27.071 16.083-52.49 29.194-76.776 8.651-16.024 19.305-30.697 30.806-44.818 18.483-22.696 40.32-41.619 64.723-57.512 29.889-19.466 62.179-33.679 97.392-40.142 16.262-2.985 32.848-4.254 49.31-6.088 18.333-2.043 36.441.44 54.573 2.89 26.107 3.53 51.054 10.923 75.153 21.422 16.417 7.152 31.96 15.773 46.599 26.144 2.779 1.97 7.084 2.052 10.746 2.459 14.605 1.623 26.995 14.546 27.945 29.233.743 11.474-2.482 20.888-11.273 28.653-10.484 9.26-32.125 10.073-42.301.245-6.341-6.124-11.24-12.785-11.596-22.004-.234-6.07-5.678-7.54-9.615-9.896-23.722-14.193-49.068-24.604-75.972-30.94-22.683-5.342-45.865-6.546-68.985-5.057-36.582 2.357-71.153 12.49-103.252 30.351-14.608 8.128-28.791 17.095-40.817 28.84-11.94 11.662-24.21 23.162-34.752 36.03-12.76 15.576-22.59 33.193-30.715 51.776-6.45 14.751-11.842 29.776-15.015 45.508-2.1 10.416-3.722 20.985-4.649 31.565-.953 10.882-1.254 21.87-1.035 32.795.377 18.766 3.622 37.151 8.535 55.274 4.996 18.426 12.219 35.948 21.456 52.58 5.068 9.126 11.167 17.679 16.79 26.497.778 1.22 1.494 2.48 2.354 3.913-9.93 9.916-19.694 19.694-29.533 29.397-.425.419-1.537.14-2.563-.069" />
-                        <path id="L-Orbit" fill="url(#CoreToOrbit)"
-                            d="M151.749 152.751c57.428-54.666 125.183-74.563 201.224-54.641 84.938 22.252 134.618 80.433 154.61 165.688h-40.707c-2.932-8.532-5.615-17.06-8.783-25.406-6.68-17.6-16.609-33.239-28.734-47.636-15.526-18.433-34.223-32.659-55.92-42.86-16.337-7.68-33.376-13.333-51.536-14.92-7.21-.629-14.43-2.012-21.62-1.859-36.72.784-70.404 11.438-99.965 33.369-18.928 14.043-35.256 30.948-46.04 52.18-6.55 12.898-11.653 26.55-16.978 40.033-.704 1.782.474 5.12 1.893 6.797 10.08 11.918 9.41 32.102-1.635 43.343-17.51 17.821-47.15 11.347-54.735-11.136-4.62-13.694-.872-29.778 11.003-38.406 2.097-1.523 2.851-5.325 3.58-8.236 6.793-27.185 18.627-51.983 35.484-74.302 5.74-7.601 12.38-14.524 18.859-22.008m289.987 303.014c-12.002 10.504-24.534 19.59-38.075 27.43-20.054 11.61-41.603 18.898-64.135 23.476-17.929 3.643-36.21 4.514-54.345 3.13-28.457-2.171-55.756-9.465-81.128-22.845-14.062-7.415-27.31-16.097-39.373-26.631-14.993-13.093-28.295-27.553-39.175-44.243-15.647-24.002-26.185-50.04-31.399-78.216-.26-1.407-.033-2.904-.033-4.856 12.831 0 25.29-.086 37.743.15 1.089.02 2.793 1.99 3.106 3.314 3.66 15.528 8.95 30.433 16.555 44.474 10.378 19.164 23.915 35.671 40.613 49.784 19.894 16.814 42.366 28.462 67.585 34.381 11.263 2.644 22.948 3.773 34.512 4.789 22.387 1.967 43.966-2.26 64.96-9.867 19.122-6.93 36.137-17.364 51.784-30.347 17.386-14.425 30.766-31.999 40.892-51.903 5.37-10.555 8.785-22.115 12.849-33.305.432-1.189-.272-3.317-1.182-4.384-10.685-12.528-10.932-32.971 1.852-45.76 10.866-10.87 31.219-12.529 44.393-1.436 13.98 11.77 14.31 33.674 5.302 44.995-.816 1.026-1.448 2.406-2.512 2.993-7.992 4.406-9.36 12.53-11.425 20.19-4.732 17.54-12.72 33.62-21.89 49.156-10.043 17.015-22.878 31.778-37.474 45.53" />
-                        <path id="M-Orbit" fill="url(#CoreToOrbit)"
-                            d="M167.006 320.89c-3.548-29.631.333-57.552 14.384-83.676 16.019-29.784 40.042-50.556 71.337-63.12 1.57-.63 3.219-1.735 4.186-3.082 7.214-10.044 17.411-14.637 29.2-13.635 15.21 1.293 25.725 9.67 29.766 24.894 3.539 13.329-1.914 27.72-13.08 35.301-11.417 7.75-27.393 7.293-38.698-.791-1.332-.953-4.157-1.178-5.594-.42-26.818 14.148-44.075 35.913-50.392 65.66-6.065 28.56.695 54.61 18.345 77.491 9.765 12.66 22.063 22.826 37.396 28.485 5.045 1.862 7.729 4.244 7.317 10.329-.65 9.617-.212 19.31-.16 28.972.018 3.58-.74 5.086-5 3.932-20.288-5.495-38.192-15.116-54.23-28.76-13.354-11.363-23.486-25.092-31.579-40.327-6.761-12.731-10.81-26.552-13.198-41.254m228.242 76.376c-12.731 11.483-26.203 21.137-41.79 27.752-3.438 1.459-6.655 4.255-9.06 7.185-9.375 11.43-24.594 15.842-38.515 10.68-12.526-4.644-21.373-17.974-20.83-32.042.496-12.82 6.743-22.472 18.032-28.258 11.123-5.7 22.39-5 32.933 1.941 3.05 2.008 5.466 2.596 8.933.582 14.562-8.46 26.984-19.185 35.907-33.538 7.933-12.76 12.78-26.575 14.266-41.727 2.544-25.948-5.185-48.765-20.927-68.779-10.142-12.895-23.283-22.704-38.966-28.233-5.78-2.037-6.34-5.933-6.203-10.723.278-9.616.636-19.23.988-28.844.047-1.285.253-2.565.453-4.498 45.372 11.794 78.538 38.306 95.061 81.563 20.765 54.36 9.912 103.914-30.282 146.939" />
-                        <path id="Core" fill="url(#CoreToOrbit)"
-                            d="M344.766 341.732c-13.083 13.877-29.153 19.973-47.533 19.155-28.041-1.247-52.055-22.455-56.296-50.404-3.287-21.668 3.248-39.78 18.897-54.79 8.373-8.03 18.683-12.544 29.878-14.539 21.267-3.788 39.668 2.632 54.64 17.89 8.978 9.15 14.023 20.496 15.76 33.44 2.524 18.79-3.127 34.802-15.346 49.248" />
-                    </svg>
-                </div>
-            </div>
-
-            <div class="reveal-up">
-                <div class="section-tag">The Core Mind</div>
-                <h2 class="section-title">
-                    Visionary <br><span style="color: var(--text-muted);">Leadership.</span>
-                </h2>
-                <p class="section-desc">
-                    Spearheaded by <span class="text-mrc font-bold">M Ramzan Ch</span>. Our collective blends artistic
-                    creativity with deep architectural technicalities. From robust modifications to full-scale
-                    enterprise software, we exist to solve hard problems, fostering both corporate growth and
-                    community-driven innovation.
-                </p>
-
-                <div class="grid grid-2" style="margin-top: 2rem;">
-                    <div class="glass-panel" style="padding: 1.5rem; border-left: 4px solid var(--mrc);">
-                        <h4
-                            style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                            <i data-lucide="zap" class="text-mrc"></i> Agile
-                        </h4>
-                        <p
-                            style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.1em; line-height: 1.5;">
-                            Rapid sprints, continuous integration, and fast iterative delivery.</p>
-                    </div>
-                    <div class="glass-panel" style="padding: 1.5rem; border-left: 4px solid #fff;">
-                        <h4
-                            style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                            <i data-lucide="cpu" class="text-mrc"></i> Tailored
-                        </h4>
-                        <p
-                            style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.1em; line-height: 1.5;">
-                            Bespoke systems architected specifically for your unique metrics.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Workflow Section -->
-    <section id="workflow" class="section" style="background: var(--bg-surface);">
+    <section id="workflow" class="section">
         <div class="container">
-            <div class="flex flex-col gap-4 reveal-up" style="margin-bottom: 4rem; max-width: 700px;">
-                <div class="section-tag" style="width: max-content;">PHASE: 01 — 04</div>
+            <div class="section-header reveal">
+                <div class="hero-tag">PHASE: 01 — 04</div>
                 <h2 class="section-title">The <span class="text-mrc">Workflow.</span></h2>
-                <p class="section-desc">Our systematic, battle-tested approach to translating complex requirements into
-                    highly scalable digital infrastructure.</p>
+                <p class="section-desc">Our systematic, battle-tested approach to translating complex requirements into highly scalable digital infrastructure.</p>
             </div>
 
             <div class="grid grid-4">
-                <div class="feature-card reveal-up">
-                    <div class="step-num">01</div>
-                    <h4 style="font-size: 1.25rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem;">
-                        Discovery</h4>
-                    <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">Deep dive analysis of
-                        current technical debt, user behavior, and infrastructure requirements.</p>
-                    <div class="step-line"></div>
+                <div class="glass-panel card reveal">
+                    <div class="font-black" style="font-size: 3rem; color: rgba(255,255,255,0.05); margin-bottom: 1rem;">01</div>
+                    <h4 class="card-title uppercase">Discovery</h4>
+                    <p class="card-text">Deep dive analysis of current technical debt, user behavior, and infrastructure requirements.</p>
                 </div>
-                <div class="feature-card reveal-up">
-                    <div class="step-num">02</div>
-                    <h4 style="font-size: 1.25rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem;">
-                        Architecture</h4>
-                    <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">Designing decoupled,
-                        scalable macro-systems using modern frameworks and FOSS principles.</p>
-                    <div class="step-line"></div>
+                <div class="glass-panel card reveal delay-100">
+                    <div class="font-black" style="font-size: 3rem; color: rgba(255,255,255,0.05); margin-bottom: 1rem;">02</div>
+                    <h4 class="card-title uppercase">Architecture</h4>
+                    <p class="card-text">Designing decoupled, scalable macro-systems using modern frameworks and FOSS principles.</p>
                 </div>
-                <div class="feature-card reveal-up">
-                    <div class="step-num">03</div>
-                    <h4 style="font-size: 1.25rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem;">
-                        Development</h4>
-                    <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">High-velocity
-                        engineering sprints with strict continuous integration and automated testing.</p>
-                    <div class="step-line"></div>
+                <div class="glass-panel card reveal delay-200">
+                    <div class="font-black" style="font-size: 3rem; color: rgba(255,255,255,0.05); margin-bottom: 1rem;">03</div>
+                    <h4 class="card-title uppercase">Development</h4>
+                    <p class="card-text">High-velocity engineering sprints with strict continuous integration and automated testing.</p>
                 </div>
-                <div class="feature-card reveal-up">
-                    <div class="step-num">04</div>
-                    <h4 style="font-size: 1.25rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem;">
-                        Deployment</h4>
-                    <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">Zero-downtime go-live
-                        protocols with 24/7 proactive monitoring and performance optimization.</p>
-                    <div class="step-line"></div>
+                <div class="glass-panel card reveal delay-300">
+                    <div class="font-black" style="font-size: 3rem; color: rgba(255,255,255,0.05); margin-bottom: 1rem;">04</div>
+                    <h4 class="card-title uppercase">Deployment</h4>
+                    <p class="card-text">Zero-downtime go-live protocols with 24/7 proactive monitoring and performance optimization.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- The Arsenal (Expertise) -->
-    <section id="expertise" class="section">
+    <section id="expertise" class="section" style="background: var(--bg-surface-elevated);">
         <div class="container">
-            <div class="text-center reveal-up" style="margin-bottom: 5rem;">
-                <p class="section-tag">Core Competencies</p>
+            <div class="text-center reveal" style="margin-bottom: 4rem;">
                 <h2 class="section-title">The <span class="text-mrc">Arsenal.</span></h2>
-                <div
-                    style="width: 80px; height: 6px; background: var(--mrc); margin: 0 auto; border-radius: 10px; box-shadow: 0 0 15px var(--mrc-glow);">
-                </div>
+                <div style="width: 60px; height: 4px; background: var(--mrc); margin: 0 auto; border-radius: 2px;"></div>
             </div>
 
             <div class="grid grid-3">
-                <div class="feature-card reveal-scale">
-                    <div class="feature-icon"><i data-lucide="smartphone-charging"
-                            style="width: 32px; height: 32px;"></i></div>
-                    <h3 style="font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem;">PWA
-                        Technologies</h3>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Performance-driven
-                        Progressive Web Apps for offline-first experiences, ensuring zero-latency feel even in low
-                        connectivity zones.</p>
-                    <div class="badge-list">
-                        <span class="badge">Service Workers</span>
-                        <span class="badge">Push API</span>
-                    </div>
+                <div class="glass-panel card scale-in">
+                    <div class="card-icon"><svg class="icon"><use href="#icon-smartphone"></use></svg></div>
+                    <h3 class="card-title uppercase">PWA Technologies</h3>
+                    <p class="card-text">Performance-driven Progressive Web Apps for offline-first experiences, ensuring zero-latency feel even in low connectivity zones.</p>
+                    <div class="tags"><span class="tag">Service Workers</span><span class="tag">Push API</span></div>
                 </div>
 
-                <div class="feature-card feature-card-highlight reveal-scale">
-                    <div class="feature-icon"
-                        style="background: var(--mrc); color: #fff; box-shadow: 0 5px 15px var(--mrc-glow);"><i
-                            data-lucide="code-2" style="width: 32px; height: 32px;"></i></div>
-                    <h3 style="font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem;">
-                        Custom Engineering</h3>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Engineered scalability
-                        with complex modifications and API integrations. We construct the core engines that power modern
-                        platforms.</p>
-                    <div class="badge-list">
-                        <span class="badge badge-primary">Microservices</span>
-                        <span class="badge badge-primary">Security</span>
-                    </div>
+                <div class="glass-panel card scale-in delay-100" style="background: linear-gradient(180deg, rgba(244, 66, 52, 0.05), transparent); border-color: rgba(244, 66, 52, 0.3);">
+                    <div class="card-icon" style="background: var(--mrc); color: white;"><svg class="icon"><use href="#icon-code"></use></svg></div>
+                    <h3 class="card-title uppercase">Custom Engineering</h3>
+                    <p class="card-text">Engineered scalability with complex modifications and API integrations. We construct the core engines that power modern platforms.</p>
+                    <div class="tags"><span class="tag primary">Microservices</span><span class="tag primary">Security</span></div>
                 </div>
 
-                <div class="feature-card reveal-scale">
-                    <div class="feature-icon"><i data-lucide="app-window" style="width: 32px; height: 32px;"></i></div>
-                    <h3 style="font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem;">
-                        Android Native</h3>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Fluid Native Android
-                        experiences optimized utilizing modern Kotlin paradigms for peak accessibility and engagement
-                        metrics.</p>
-                    <div class="badge-list">
-                        <span class="badge">Kotlin</span>
-                        <span class="badge">Jetpack Compose</span>
-                    </div>
+                <div class="glass-panel card scale-in delay-200">
+                    <div class="card-icon"><svg class="icon"><use href="#icon-app-window"></use></svg></div>
+                    <h3 class="card-title uppercase">Android Native</h3>
+                    <p class="card-text">Fluid Native Android experiences optimized utilizing modern Kotlin paradigms for peak accessibility and engagement metrics.</p>
+                    <div class="tags"><span class="tag">Kotlin</span><span class="tag">Jetpack Compose</span></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Tech Stack -->
-    <section
-        style="padding: 4rem 0; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); background: rgba(0,0,0,0.3); position: relative; z-index: 10;">
-        <div class="container text-center">
-            <h4
-                style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 3rem;">
-                Technologies We Command</h4>
-            <div class="tech-icons-wrap">
-                <div class="tech-icon"><i data-lucide="server" style="width: 40px; height: 40px;"></i><span
-                        style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Node.js</span></div>
-                <div class="tech-icon"><i data-lucide="database" style="width: 40px; height: 40px;"></i><span
-                        style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">MongoDB</span></div>
-                <div class="tech-icon"><i data-lucide="layout" style="width: 40px; height: 40px;"></i><span
-                        style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">React/Next</span></div>
-                <div class="tech-icon"><i data-lucide="smartphone" style="width: 40px; height: 40px;"></i><span
-                        style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Kotlin</span></div>
-                <div class="tech-icon"><i data-lucide="cloud" style="width: 40px; height: 40px;"></i><span
-                        style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">AWS</span></div>
-                <div class="tech-icon"><i data-lucide="git-merge" style="width: 40px; height: 40px;"></i><span
-                        style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Git Flow</span></div>
+    <section class="section" style="padding: 4rem 0; border-bottom: 1px solid var(--glass-border);">
+        <div class="container text-center reveal">
+            <h4 class="font-mono text-muted uppercase tracking-widest" style="font-size: 0.8rem; margin-bottom: 2.5rem;">Technologies We Command</h4>
+            <div class="tech-icons">
+                <div class="tech-item"><svg class="icon" style="width:2rem; height:2rem;"><use href="#icon-server"></use></svg><span>Node.js</span></div>
+                <div class="tech-item"><svg class="icon" style="width:2rem; height:2rem;"><use href="#icon-database"></use></svg><span>MongoDB</span></div>
+                <div class="tech-item"><svg class="icon" style="width:2rem; height:2rem;"><use href="#icon-layout"></use></svg><span>React/Next</span></div>
+                <div class="tech-item"><svg class="icon" style="width:2rem; height:2rem;"><use href="#icon-smartphone"></use></svg><span>Kotlin</span></div>
+                <div class="tech-item"><svg class="icon" style="width:2rem; height:2rem;"><use href="#icon-cloud"></use></svg><span>AWS</span></div>
+                <div class="tech-item"><svg class="icon" style="width:2rem; height:2rem;"><use href="#icon-git-merge"></use></svg><span>Git Flow</span></div>
             </div>
         </div>
     </section>
 
     <!-- Open Source Section -->
-    <section id="open-source" class="section" style="background: var(--bg-surface);">
+    <section id="open-source" class="section">
         <div class="container grid-2 items-center">
-            <div class="reveal-up">
-                <div class="section-tag"
-                    style="background: transparent; border-color: var(--border-light); color: #fff;">
-                    <i data-lucide="heart"
-                        style="width: 14px; height: 14px; color: var(--mrc); fill: var(--mrc); vertical-align: middle; margin-right: 4px;"></i>
-                    Community First
+            <div class="reveal">
+                <div class="hero-tag" style="border-color: var(--glass-border); color: white; background: transparent;">
+                    <svg class="icon" style="color:var(--mrc); fill:var(--mrc); width:14px; height:14px;"><use href="#icon-heart"></use></svg> Community First
                 </div>
-                <h2 class="section-title">
-                    Empowering the <br><span class="text-mrc">Open Community.</span>
-                </h2>
-                <p class="section-desc">
-                    We believe in giving back to the foundation that built us. MainRoute Core actively constructs and
-                    maintains several open-source repositories that provide building blocks for modern web reliability
-                    and workflow automation.
-                </p>
-
-                <div class="flex-col gap-4">
-                    <a href="#" class="glass-panel feature-card"
-                        style="display: flex; gap: 1rem; padding: 1.5rem; align-items: flex-start;">
-                        <div style="background: rgba(255,255,255,0.05); padding: 0.75rem; border-radius: 0.5rem;"><i
-                                data-lucide="github" class="text-mrc"></i></div>
-                        <div>
-                            <h5 style="font-size: 1.1rem; font-weight: 700;">Core Architecture Libs</h5>
-                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">Reusable,
-                                highly-tested logic for complex software engines.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="flex-col gap-6 reveal-scale">
-
+                <h2 class="section-title">Empowering the <br><span class="text-mrc">Open Community.</span></h2>
+                <p class="section-desc mb-6">We believe in giving back to the foundation that built us. MainRoute Core actively constructs and maintains several open-source repositories that provide building blocks for modern web reliability and workflow automation.</p>
+                
+                <a href="#" class="glass-panel card" style="display: flex; gap: 1rem; padding: 1.5rem; margin-top: 2rem;">
+                    <div class="card-icon" style="margin: 0; width: 48px; height: 48px;"><svg class="icon"><use href="#icon-github"></use></svg></div>
+                    <div>
+                        <h5 class="font-bold text-lg">Core Architecture Libs</h5>
+                        <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem;">Reusable, highly-tested logic for complex software engines.</p>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Contact CTA -->
-    <section id="contact" class="section" style="background: var(--mrc); text-align: center;">
-        <div class="tech-grid" style="filter: invert(1); opacity: 0.1;"></div>
-        <div class="container" style="position: relative; z-index: 10; max-width: 800px;">
-            <h2
-                style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.05em; margin-bottom: 1.5rem;">
-                Ready to Engineer the Future?
-            </h2>
-            <p style="font-size: 1.25rem; opacity: 0.9; margin-bottom: 2.5rem;">
-                Let's discuss your architectural needs and build something extraordinary together.
-            </p>
-            <a href="mailto:tellus@mrc.com" class="btn"
-                style="background: #fff; color: var(--mrc); padding: 1.25rem 2.5rem;">
-                Start the Dialogue <i data-lucide="send" style="width: 18px;"></i>
+    <section id="contact" class="section" style="background: var(--mrc); text-align: center; position: relative; overflow: hidden;">
+        <div style="position: absolute; inset: 0; background-image: radial-gradient(rgba(0,0,0,0.2) 1px, transparent 1px); background-size: 20px 20px;"></div>
+        <div class="container reveal" style="max-width: 800px; position: relative; z-index: 10;">
+            <h2 class="font-black uppercase" style="font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -0.05em; margin-bottom: 1.5rem; color: white;">Ready to Engineer the Future?</h2>
+            <p style="font-size: 1.25rem; color: rgba(255,255,255,0.9); margin-bottom: 2.5rem;">Let's discuss your architectural needs and build something extraordinary together.</p>
+            <a href="mailto:tellus@mrc.com" class="btn" style="background: white; color: var(--mrc); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                Start the Dialogue <svg class="icon"><use href="#icon-send"></use></svg>
             </a>
         </div>
     </section>
@@ -1463,113 +569,99 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-top">
-                <div style="display: flex; align-items: center; gap: 1rem;">
-                    <img src="https://avatars.githubusercontent.com/u/249983472"
-                        style="width: 48px; height: 48px; border-radius: 0.75rem;" alt="Logo">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8" style="border-bottom: 1px solid var(--glass-border); padding-bottom: 3rem; margin-bottom: 2rem;">
+                <div class="flex items-center gap-4">
+                    <img src="https://avatars.githubusercontent.com/u/249983472" style="width: 48px; height: 48px; border-radius: 50%; filter: grayscale(1);" alt="Logo">
                     <div>
-                        <div
-                            style="font-size: 1.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: -0.05em; color:var(--mrc);">
-                            MainRoute <span class="text-mrc">Core</span></div>
-                        <div
-                            style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--text-muted); margin-top: 0.25rem;">
-                            Innovating Tomorrow, Today.</div>
+                        <div class="font-black uppercase" style="font-size: 1.5rem; letter-spacing: -0.05em;">MainRoute <span class="text-mrc">Core</span></div>
+                        <div class="font-mono text-muted" style="font-size: 0.75rem;">Innovating Tomorrow's, Solution Today.</div>
                     </div>
                 </div>
-                <div class="social-links">
-                    <a href="#" class="social-icon"><i data-lucide="github" style="width: 20px;"></i></a>
-                    <a href="#" class="social-icon"><i data-lucide="twitter" style="width: 20px;"></i></a>
-                    <a href="#" class="social-icon"><i data-lucide="linkedin" style="width: 20px;"></i></a>
+                <div class="flex gap-4">
+                    <a target="_blank" href="https://github.com/MainRoute-Core" class="social-btn"><svg class="icon" style="width:1.2rem;"><use href="#icon-github"></use></svg></a>
+                    <a target="_blank" href="https://www.google.com/search?q=MainRoute+Core&utm=50" class="social-btn"><svg class="icon" style="width:1.2rem;"><use href="#icon-google"></use></svg></a>
                 </div>
             </div>
-            <div class="footer-bottom">
+            <div class="flex flex-col md:flex-row justify-between items-center text-center gap-4 text-muted font-mono" style="font-size: 0.8rem;">
                 <p>&copy; <span id="year"></span> MainRoute Core. M Ramzan Ch | Pro Bandey. All rights reserved.</p>
-                <div style="display: flex; gap: 1.5rem; justify-content: center;">
+                <div class="flex gap-6 justify-center">
                     <a href="/Privacy/">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
+                    <a href="/Terms/">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- JS Logic & Animations -->
+    <!-- 100% VANILLA JS LOGIC -->
     <script>
-        // 1. Footer Year
+        // 1. Loader Removal
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            // Adding a tiny delay so the animation is visible briefly
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 500); 
+        });
+
+        // 2. Set Footer Year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // 2. Initialize Lucide Icons
-        lucide.createIcons();
+        // 3. Scroll Progress Bar & Header Shrink
+        const progressBar = document.getElementById('scroll-progress');
+        const header = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            // Progress Bar
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + '%';
 
-        // 3. Mobile Menu Toggle Logic
+            // Header glass effect on scroll
+            if (winScroll > 50) {
+                header.style.transform = "translateY(-0.5rem)";
+            } else {
+                header.style.transform = "translateY(0)";
+            }
+        });
+
+        // 4. Mobile Menu Toggle
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
+        
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('active');
         });
+        
         document.querySelectorAll('#mobile-menu a').forEach(link => {
             link.addEventListener('click', () => mobileMenu.classList.remove('active'));
         });
 
-        // 4. Smooth Scrolling (Lenis)
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            direction: 'vertical',
-            smooth: true,
-        });
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
+        // 5. High-Performance Intersection Observer (Replaces GSAP/ScrollTrigger)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
 
-        // 5. GSAP Scroll Animations
-        gsap.registerPlugin(ScrollTrigger);
-        lenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-        gsap.ticker.lagSmoothing(0, 0);
-
-        // Reveal Up
-        gsap.utils.toArray('.reveal-up').forEach((elem) => {
-            gsap.fromTo(elem,
-                { y: 50, autoAlpha: 0 },
-                {
-                    y: 0,
-                    autoAlpha: 1,
-                    duration: 1,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: elem,
-                        start: "top 85%",
-                        toggleActions: "play none none reverse"
-                    }
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Run once
                 }
-            );
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal, .scale-in').forEach(el => {
+            scrollObserver.observe(el);
         });
 
-        // Reveal Scale
-        gsap.utils.toArray('.reveal-scale').forEach((elem) => {
-            gsap.fromTo(elem,
-                { scale: 0.85, autoAlpha: 0 },
-                {
-                    scale: 1,
-                    autoAlpha: 1,
-                    duration: 1.2,
-                    ease: "back.out(1.2)",
-                    scrollTrigger: {
-                        trigger: elem,
-                        start: "top 85%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-        });
-
-        // 6. PWA Service Worker Stub
+        // 6. PWA Registration Stub
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                // navigator.serviceWorker.register('/service-worker.js').then(...);
-                console.log("PWA Ready: Internal CSS Version.");
+                // navigator.serviceWorker.register('/sw.js');
+                console.log("System initialized with zero external dependencies.");
             });
         }
     </script>
