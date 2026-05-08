@@ -9,252 +9,68 @@
     <meta name="theme-color" content="#f44234">
     <meta name="title" content="About Us | MainRoute Core" />
     <meta name="description" content="Discover the origins, philosophy, and architectural mindset of MainRoute Core and the Pro Bandey standard." />
+    <meta name="keywords" content="MainRoute, MainRoute Core, MR Core, MRC, M Ramzan Ch, MegaMind-Solution, Web Development, Software Development, Modifications, Git Folder Downloader, Government Graduate College Okara, Pro Bandey" />
+    <meta name="author" content="M Ramzan Ch" />
+    <meta name="copyright" content="MainRoute Core" />
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mainroute-core.github.io/" />
+    <meta property="og:title" content="MainRoute Core | Be Passionate For Future" />
+    <meta property="og:description" content="A specialized technology powerhouse delivering PWA, open-source, and custom software solutions." />
+    <meta property="og:image" content="/src/social.png" />
     
     <!-- Icons & Manifest -->
+    <script>navigator.serviceWorker.register("src/sw.js")</script> 
     <link rel="manifest" href="/manifest.webmanifest">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://avatars.githubusercontent.com/u/249983472?s=192&v=4">
-    <link href="https://avatars.githubusercontent.com/u/249983472?s=180&v=4" rel="apple-touch-icon" sizes="180x180" />
+    <link rel="canonical" href="https://mainroute-core.github.io/">
+    <link rel="shortcut icon" type="image/x-icon" sizes="any" href="/src/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/144.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/512.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/src/apple-touch-icon.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="167x167" href="/src/apple-touch-167.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="/src/apple-touch-152.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="/src/apple-touch-120.png">
+
 
     <title>About The Core | MainRoute Core</title>
 
     <!-- Custom Font -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link href="https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf" rel="stylesheet">
+    <link href="/src/CoreSans-Regular_en.otf" rel="stylesheet">
 
-    <!-- 100% INTERNAL CSS (No Frameworks) -->
-    <style>
-        @font-face {
-            font-family: 'Core Sans';
-            src: url(https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf);
-            font-display: swap;
-        }
-
-        :root {
-            /* Core Colors */
-            --mrc: #f44234;
-            --mrc-light: #ff7063;
-            --mrc-glow: rgba(244, 66, 52, 0.4);
-            
-            /* Material Dark Theme */
-            --bg-dark: #09090b;
-            --bg-surface: #18181b;
-            --bg-surface-elevated: #27272a;
-            
-            /* Text */
-            --text-main: #f8fafc;
-            --text-muted: #a1a1aa;
-            
-            /* Glassmorphism */
-            --glass-bg: rgba(24, 24, 27, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-
-            /* Typography */
-            --font-sans: 'Core Sans', system-ui, -apple-system, sans-serif;
-            --font-mono: 'Space Mono', ui-monospace, monospace;
-            
-            /* Layout */
-            --container-width: 1280px;
-            --nav-height: 80px;
-        }
-
-        /* Base Resets */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; font-size: 16px; }
-        body {
-            font-family: var(--font-sans);
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            line-height: 1.5;
-        }
-        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
-        img, svg { max-width: 100%; display: block; }
-        button { cursor: pointer; border: none; background: none; font-family: inherit; }
-
-        /* Icon Styles */
-        .icon { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-        /* Typography Utilities */
-        .text-mrc { color: var(--mrc); }
-        .text-muted { color: var(--text-muted); }
-        .font-mono { font-family: var(--font-mono); }
-        .uppercase { text-transform: uppercase; letter-spacing: 0.05em; }
-        .font-black { font-weight: 900; }
-        .font-bold { font-weight: 700; }
-        .text-center { text-align: center; }
-
-        /* Loading Screen */
-        #loader {
-            position: fixed; inset: 0; z-index: 99999;
-            background: var(--bg-dark);
-            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;
-            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
-        }
-        .loader-ring {
-            width: 60px; height: 60px;
-            border: 4px solid var(--glass-border);
-            border-top-color: var(--mrc);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-
-        /* Scroll Progress Bar */
-        #scroll-progress-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 4px;
-            background: transparent; z-index: 10000;
-        }
-        #scroll-progress {
-            height: 100%; width: 0%; background: var(--mrc);
-            box-shadow: 0 0 10px var(--mrc-glow);
-            transition: width 0.1s ease-out;
-        }
-
-        /* Layout & Utilities */
-        .container { width: 100%; max-width: var(--container-width); margin: 0 auto; padding: 0 1.5rem; }
-        .section { padding: clamp(4rem, 8vw, 8rem) 0; position: relative; z-index: 10; }
-        .flex { display: flex; }
-        .flex-col { display: flex; flex-direction: column; }
-        .items-center { align-items: center; }
-        .justify-between { justify-content: space-between; }
-        .justify-center { justify-content: center; }
-        .gap-2 { gap: 0.5rem; } .gap-4 { gap: 1rem; } .gap-6 { gap: 1.5rem; } .gap-8 { gap: 2rem; }
-        
-        .grid { display: grid; gap: 2rem; }
-        @media (min-width: 768px) {
-            .grid-2 { grid-template-columns: repeat(2, 1fr); }
-            .grid-3 { grid-template-columns: repeat(3, 1fr); }
-        }
-
-        /* Glassmorphism Panels */
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--glass-border);
-            border-radius: 1.5rem;
-            box-shadow: var(--glass-shadow);
-        }
-
-        /* Background Effects */
-        .tech-grid {
-            position: fixed; inset: 0; z-index: 0; pointer-events: none;
-            background-image: linear-gradient(var(--glass-border) 1px, transparent 1px), linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
-            background-size: 40px 40px;
-            mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
-            -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
-        }
-        .ambient-orb {
-            position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15; z-index: -1;
-            background: var(--mrc);
-            animation: float 12s ease-in-out infinite alternate;
-        }
-
-        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, -50px) scale(1.1); } }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        /* Navigation */
-        .header { position: fixed; top: 1rem; left: 1rem; right: 1rem; z-index: 100; transition: transform 0.3s ease; }
-        @media (min-width: 1024px) { .header { top: 1.5rem; left: 2rem; right: 2rem; } }
-        
-        .nav-bar { padding: 0.75rem 1.5rem; border-radius: 9999px; display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 900; letter-spacing: -0.05em; }
-        .nav-logo img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--mrc); }
-        
-        .desktop-nav { display: none; align-items: center; gap: 2rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; }
-        .desktop-nav a { position: relative; color: var(--text-muted); padding: 0.5rem 0; }
-        .desktop-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: var(--mrc); transition: width 0.3s; }
-        .desktop-nav a:hover { color: #fff; }
-        .desktop-nav a:hover::after { width: 100%; }
-
-        .system-status { display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.05); padding: 0.4rem 1rem; border-radius: 99px; font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em; }
-        .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
-
-        .mobile-menu-btn { display: block; color: #fff; padding: 0.5rem; }
-        .mobile-menu {
-            position: absolute; top: 120%; left: 0; width: 100%; padding: 1.5rem;
-            display: flex; flex-direction: column; gap: 1rem;
-            opacity: 0; visibility: hidden; transform: translateY(-10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .mobile-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
-        .mobile-menu a { font-size: 1.2rem; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem; }
-        .mobile-menu a:hover { background: rgba(255,255,255,0.05); color: var(--mrc); }
-
-        @media (min-width: 1024px) {
-            .desktop-nav { display: flex; }
-            .mobile-menu-btn, .mobile-menu { display: none !important; }
-        }
-
-        /* Page Headers */
-        .page-header { padding-top: calc(var(--nav-height) + 6rem); padding-bottom: 4rem; text-align: center; max-width: 900px; margin: 0 auto; position: relative; z-index: 10; }
-        .page-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--mrc); background: rgba(244, 66, 52, 0.1); border: 1px solid rgba(244, 66, 52, 0.2); padding: 0.5rem 1rem; border-radius: 99px; margin-bottom: 2rem; }
-        .page-title { font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
-        .text-gradient { background: linear-gradient(135deg, #fff 0%, var(--mrc) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .page-desc { font-size: clamp(1.1rem, 2vw, 1.35rem); color: var(--text-muted); line-height: 1.7; }
-
-        /* Origin Story Layout */
-        .origin-card { padding: 3rem; position: relative; overflow: hidden; border-left: 4px solid var(--mrc); }
-        .origin-card::before { content: ''; position: absolute; top: 0; right: 0; width: 300px; height: 300px; background: radial-gradient(circle, rgba(244, 66, 52, 0.1) 0%, transparent 70%); border-radius: 50%; transform: translate(50%, -50%); z-index: 0; }
-        .origin-content { position: relative; z-index: 1; }
-
-        /* Pro Bandey Cards */
-        .philosophy-card { padding: 2.5rem; border-radius: 1.5rem; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s; position: relative; overflow: hidden; }
-        .philosophy-card:hover { transform: translateY(-8px); border-color: var(--mrc-glow); }
-        .phil-icon { width: 56px; height: 56px; border-radius: 1rem; background: rgba(244, 66, 52, 0.1); color: var(--mrc); display: flex; justify-content: center; align-items: center; margin-bottom: 1.5rem; transition: all 0.3s; }
-        .philosophy-card:hover .phil-icon { background: var(--mrc); color: #fff; box-shadow: 0 5px 15px var(--mrc-glow); }
-
-        /* Tech Arsenal Accordion / Grid */
-        .tech-box { background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); border-radius: 1rem; padding: 2rem; display: flex; flex-direction: column; gap: 1rem; transition: all 0.3s; }
-        .tech-box:hover { background: rgba(244, 66, 52, 0.05); border-color: rgba(244, 66, 52, 0.3); }
-        .tech-header { display: flex; align-items: center; gap: 1rem; }
-        .tech-icon-wrapper { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: var(--bg-surface-elevated); border-radius: 50%; color: var(--text-main); border: 1px solid var(--glass-border); }
-
-        /* Footer */
-        .footer { background: var(--bg-surface); padding: 4rem 0 2rem; border-top: 1px solid var(--glass-border); position: relative; z-index: 10; }
-        .social-btn { width: 44px; height: 44px; border-radius: 50%; background: var(--bg-surface-elevated); display: flex; justify-content: center; align-items: center; transition: all 0.3s; border: 1px solid var(--glass-border); }
-        .social-btn:hover { background: var(--mrc); color: #fff; transform: translateY(-3px); border-color: var(--mrc); }
-
-        /* Vanilla JS Animations Classes */
-        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .scale-in { opacity: 0; transform: scale(0.95); transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .scale-in.active { opacity: 1; transform: scale(1); }
-        .delay-100 { transition-delay: 100ms; }
-        .delay-200 { transition-delay: 200ms; }
-        .delay-300 { transition-delay: 300ms; }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { background: rgba(244, 66, 52, 0.5); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--mrc); }
-    </style>
-</head>
+    <!--  CSS -->
+      <link rel="stylesheet" href="/css/global.css">
+      <link rel="stylesheet" href="/css/about.css">
+   </head>
 
 <body>
 
-    <!-- Inline SVG Sprite for Icons -->
-    <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
-        <symbol id="icon-menu" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></symbol>
-        <symbol id="icon-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></symbol>
-        <symbol id="icon-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></symbol>
-        <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></symbol>
-        <symbol id="icon-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></symbol>
-        <symbol id="icon-smartphone" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></symbol>
-        <symbol id="icon-server" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></symbol>
-        <symbol id="icon-github" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></symbol>
-        <symbol id="icon-twitter" viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></symbol>
-        <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></symbol>
-    </svg>
-
     <!-- Loading Screen -->
-    <div id="loader">
-        <div class="loader-ring"></div>
-        <div class="font-mono text-mrc font-bold tracking-widest text-sm uppercase">Loading Mindset...</div>
+    <div id="loader" class="loader" style="pointer-events: none;">
+        <img style="height: 120px; pointer-events: none;" src="/src/mrc-nuca-loading.svg" alt="mrc-nuca-loading">
+        <div class="loader-text-wrapper">
+            <span class="loader-text-letter">I</span>
+            <span class="loader-text-letter">n</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">t</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">a</span>
+            <span class="loader-text-letter">l</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">z</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">n</span>
+            <span class="loader-text-letter">g</span>
+            <hr>
+            <span class="loader-text-letter">C</span>
+            <span class="loader-text-letter">o</span>
+            <span class="loader-text-letter">r</span>
+            <span class="loader-text-letter">e</span>
+            <div class="loader-colors"></div>
+        </div>
     </div>
 
     <!-- Scroll Progress Bar -->
@@ -264,51 +80,49 @@
 
     <!-- Ambient Backgrounds -->
     <div class="tech-grid"></div>
-    <div class="ambient-orb" style="width: 40vw; height: 40vw; top: 0%; left: -10%;"></div>
-    <div class="ambient-orb" style="width: 30vw; height: 30vw; bottom: 20%; right: -5%; opacity: 0.1; animation-delay: -5s;"></div>
+    <div class="ambient-orb first-orb"></div>
+    <div class="ambient-orb second-orb"></div>
 
     <!-- Navigation -->
     <header class="header" id="navbar">
         <div class="nav-bar glass-panel">
             <a href="/" class="nav-logo">
-                <img src="https://avatars.githubusercontent.com/u/249983472" alt="MRC Logo">
-                <span style="color:var(--text-main);">MainRoute <span class="text-mrc">Core</span></span>
+                <img src="/src/mrc-nuca.svg" alt="MRC Logo">
+                <span style="color:var(--text-main);">MainRoute <span class="txt-mrc">Core</span></span>
             </a>
-
             <nav class="desktop-nav">
-                <a href="/">Home</a>
-                <a href="/#expertise">Expertise</a>
-                <a href="/#workflow">Workflow</a>
-                <a href="/#open-source">Open Source</a>
+                <a class="active" href="/About/">About Us</a>
+                <a href="/Media/">Media &amp; Press Kit</a>
+                <a href="/CopyRight/">Brand Guidelines</a>
+                <a href="/Contact/">Contact Us</a>
                 <div style="width: 1px; height: 16px; background: var(--glass-border);"></div>
                 <div class="system-status">
                     <div class="status-dot"></div> Active
                 </div>
             </nav>
-
             <button id="mobile-menu-btn" class="mobile-menu-btn">
-                <svg class="icon"><use href="#icon-menu"></use></svg>
+                <svg class="icon"><use href="/src/global.svg#icon-menu"></use></svg>
             </button>
         </div>
 
         <div id="mobile-menu" class="mobile-menu glass-panel">
-            <a href="/">Home</a>
-            <a href="/#expertise">Expertise</a>
-            <a href="/#workflow">Workflow</a>
-            <a href="/#open-source">Open Source</a>
+            <a href="/About/">About Us</a>
+            <a href="/Media/">Media &amp; Press Kit</a>
+            <a href="/CopyRight/">Brand Guidelines</a>
+            <a href="/Contact/">Contact</a>
         </div>
     </header>
 
     <!-- Header Section -->
-    <section class="page-header reveal">
+    <section id="the-core-mind" class="page-header reveal">
         <div class="page-tag">
-            <svg class="icon" style="width:14px; height:14px;"><use href="#icon-cpu"></use></svg> 
+            <svg class="icon" style="width:14px; height:14px;"><use href="/src/global.svg#icon-cpu"></use></svg> 
             About Us
         </div>
         <h1 class="page-title">
             The <span class="text-gradient">Core Mind.</span>
         </h1>
-        <p class="page-desc">
+        <p class="page-desc capitalize">
             We are MainRoute Core. A specialized collective of architects, developers, and visionaries committed to engineering the digital frontier without compromise.
         </p>
     </section>
@@ -317,38 +131,38 @@
     <section class="section pt-0">
         <div class="container grid-2 items-center">
             
-            <div class="glass-panel origin-card scale-in">
-                <div class="origin-content">
-                    <h2 class="font-black uppercase text-mrc" style="font-size: 0.85rem; letter-spacing: 0.15em; margin-bottom: 1rem;">Chapter 01 : Origins</h2>
-                    <h3 class="font-black" style="font-size: 2rem; margin-bottom: 1.5rem; line-height: 1.1;">Forged in Okara. <br>Built for the Web.</h3>
-                    <p class="text-muted" style="margin-bottom: 1.5rem; line-height: 1.7;">
-                        The story of MainRoute Core begins in the halls of <strong>Government Graduate College Okara</strong>, Punjab. What started as an academic pursuit of code rapidly evolved into a relentless passion for scalable architecture.
+            <div class="glass-panel origin-card scale-in" style="margin: 0 0 1rem;">
+                <div class="origin-content capitalize">
+                    <h2 class="font-black uppercase txt-mrc" style="font-size: 0.85rem; letter-spacing: 0.15em; margin-bottom: 1rem;">Chapter 01 : Origins</h2>
+                    <h3 class="font-black" style="font-size: 2rem; margin-bottom: 1.5rem; line-height: 1.1;">Built for the Web.</h3>
+                    <p class="txt-muted" style="margin-bottom: 1.5rem; line-height: 1.7;">
+                        The story of MainRoute Core begins from the redundant thought of <strong>10th Grade Student</strong>, as MRC letter <strong class="txt-mrc">MainRoute Core</strong>. What started as an academic pursuit of code rapidly evolved into a relentless passion for scalable architecture.
                     </p>
-                    <p class="text-muted" style="line-height: 1.7;">
+                    <p class="txt-muted" style="line-height: 1.7;">
                         Led by <strong>M Ramzan Ch</strong>, we realized that modern enterprise solutions were heavily bloated. We assembled a team dedicated to one mission: stripping away the unnecessary and building high-velocity, robust digital systems.
                     </p>
                 </div>
             </div>
 
             <div class="flex-col gap-6 reveal delay-200">
-                <div class="glass-panel" style="padding: 2rem; display: flex; align-items: center; gap: 2rem;">
-                    <img src="https://avatars.githubusercontent.com/u/249983472" alt="M Ramzan Ch" style="width: 120px; height: 120px; border-radius: 1rem; border: 2px solid var(--glass-border); object-fit: cover; filter: grayscale(1);">
+                <div class="glass-panel flex pad-4 items-center gap-4">
+                    <img src="/MRamzanCh/mrc.png" alt="M Ramzan Ch" style="width: 120px; height: 120px; border-radius: 1rem; border: 2px solid var(--glass-border); object-fit: cover; filter: grayscale(1);">
                     <div>
-                        <div class="font-mono text-mrc uppercase tracking-widest" style="font-size: 0.7rem; margin-bottom: 0.5rem;">Founder & Architect</div>
-                        <h4 class="font-black" style="font-size: 1.8rem; margin-bottom: 0.5rem;">M Ramzan Ch</h4>
-                        <p class="text-muted" style="font-size: 0.9rem;">Spearheading architectural decisions and driving the open-source culture at MRC.</p>
+                        <div class="font-mono txt-mrc uppercase txt-sm" style="margin-bottom: 0.5rem;">Founder & Architect</div>
+                        <h4 class="txt-xxlg" style="margin-bottom: 0.5rem;">M Ramzan Ch</h4>
+                        <p class="txt-muted txt-sm" >Spearheading architectural decisions and driving the open-source culture at MRC.</p>
                     </div>
                 </div>
 
-                <div class="glass-panel" style="padding: 2rem; background: linear-gradient(135deg, rgba(244, 66, 52, 0.1), transparent); border-color: rgba(244, 66, 52, 0.2);">
-                    <div class="flex items-center gap-4 mb-4">
-                        <img src="https://avatars.githubusercontent.com/u/195909043?s=64&v=4" alt="Pro Bandey" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--mrc);">
+                <div class="glass-panel pad-4" style="background: linear-gradient(135deg, rgba(244, 66, 52, 0.1), transparent); border-color: rgba(244, 66, 52, 0.2);">
+                    <div class="flex items-center gap-4" style="margin-bottom: 2rem;">
+                        <img src="/ProBandey/pb.png" alt="Pro Bandey" class="border-50" style="width: 50px; height: 50px; border: 2px solid var(--mrc);">
                         <div>
-                            <h4 class="font-bold" style="font-size: 1.2rem;">Pro Bandey</h4>
-                            <div class="font-mono text-muted" style="font-size: 0.75rem;">Certified Project Management</div>
+                            <h4 class="font-bold txt-xlg">Pro Bandey</h4>
+                            <div class="font-mono txt-muted txt-xsm">Certified Project Management And A Brand</div>
                         </div>
                     </div>
-                    <p class="text-muted" style="font-size: 0.9rem; line-height: 1.6;">Ensuring every sprint is delivered with elite precision, zero bottlenecks, and maximum client transparency.</p>
+                    <p class="txt-muted txt-sm" style="line-height: 1.6;">Ensuring every sprint is delivered with elite precision, zero bottlenecks, and maximum client transparency.</p>
                 </div>
             </div>
 
@@ -356,46 +170,47 @@
     </section>
 
     <!-- The Philosophy Section -->
-    <section class="section bg-surface-elevated" style="background: rgba(255,255,255,0.02); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
+    <section id="principles" class="section bg-surf-ela" style="border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
+        <div class="pos-abs inset-0" style="background-image: radial-gradient(rgb(143 143 143 / 30%) 1px, rgb(96 83 83 / 15%) 1px); background-size: 20px 20px;"></div>
         <div class="container">
-            <div class="text-center reveal" style="margin-bottom: 4rem;">
-                <h2 class="font-black uppercase" style="font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -0.02em;">The <span class="text-mrc">Pro Bandey</span> Standard</h2>
-                <p class="text-muted mt-4 max-w-2xl mx-auto" style="max-width: 600px; margin: 1rem auto 0; line-height: 1.6;">It’s not just a title; it is the philosophical core of our work ethic. To be a "Pro Bandey" means adhering to elite engineering principles.</p>
+            <div class="txt-center reveal" style="margin-bottom: 4rem;">
+                <h2 class="font-black uppercase" style="font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -0.02em;">The <span class="txt-mrc">Passionate</span> Standard</h2>
+                <p class="txt-muted" style="max-width: 600px; margin: 1rem auto 0; line-height: 1.6;">It’s not just a title; it is the philosophical core of our work ethic. To be a "Passionate" means adhering to elite engineering principles.</p>
             </div>
 
-            <div class="grid grid-3">
+            <div class="grid gap-4 grid-3">
                 <div class="glass-panel philosophy-card scale-in">
-                    <div class="phil-icon"><svg class="icon"><use href="#icon-target"></use></svg></div>
-                    <h3 class="font-bold uppercase" style="font-size: 1.25rem; margin-bottom: 1rem;">Surgical Precision</h3>
-                    <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6;">We don't guess. Every line of code, every API endpoint, and every UX micro-interaction is deliberately engineered for a specific outcome.</p>
+                    <div class="phil-icon"><svg class="icon"><use href="/src/global.svg#icon-target"></use></svg></div>
+                    <h3 class="font-bold uppercase txt-lgr" style="margin-bottom: 1rem;">Surgical Precision</h3>
+                    <p class="txt-muted" style="font-size: 0.95rem; line-height: 1.6;">We don't guess. Every line of code, every API endpoint, and every UX micro-interaction is deliberately engineered for a specific outcome.</p>
                 </div>
 
                 <div class="glass-panel philosophy-card scale-in delay-100">
-                    <div class="phil-icon"><svg class="icon"><use href="#icon-zap"></use></svg></div>
-                    <h3 class="font-bold uppercase" style="font-size: 1.25rem; margin-bottom: 1rem;">Agile Velocity</h3>
-                    <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6;">Speed matters, but not at the cost of stability. We employ continuous integration to ship fast, iterate rapidly, and adapt to shifting markets.</p>
+                    <div class="phil-icon"><svg class="icon"><use href="/src/global.svg#icon-zap"></use></svg></div>
+                    <h3 class="font-bold uppercase txt-lgr" style="margin-bottom: 1rem;">Agile Velocity</h3>
+                    <p class="txt-muted" style="font-size: 0.95rem; line-height: 1.6;">Speed matters, but not at the cost of stability. We employ continuous integration to ship fast, iterate rapidly, and adapt to shifting markets.</p>
                 </div>
 
                 <div class="glass-panel philosophy-card scale-in delay-200">
-                    <div class="phil-icon"><svg class="icon"><use href="#icon-shield"></use></svg></div>
-                    <h3 class="font-bold uppercase" style="font-size: 1.25rem; margin-bottom: 1rem;">Bulletproof Resilience</h3>
-                    <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6;">We build systems designed to handle failure gracefully. From offline-first PWAs to redundant cloud architectures, we ensure 24/7 uptime.</p>
+                    <div class="phil-icon"><svg class="icon"><use href="/src/global.svg#icon-shield"></use></svg></div>
+                    <h3 class="font-bold uppercase txt-lgr" style="margin-bottom: 1rem;">Bulletproof Resilience</h3>
+                    <p class="txt-muted" style="font-size: 0.95rem; line-height: 1.6;">We build systems designed to handle failure gracefully. From offline-first PWAs to redundant cloud architectures, we ensure 24/7 uptime.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Tech Arsenal Deep Dive -->
-    <section class="section">
+    <section id="why-we-choose" class="section">
         <div class="container">
             <div class="grid-2 items-center" style="display: grid; gap: 4rem;">
                 
                 <div class="reveal">
-                    <div class="page-tag" style="background: transparent; color: white; border-color: var(--glass-border);">
+                    <div class="page-tag txt-main bg-trans" style="border-color: var(--glass-border);">
                         Architectural Mindset
                     </div>
-                    <h2 class="font-black uppercase" style="font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin-bottom: 1.5rem;">Why We Choose <br><span class="text-mrc">Our Arsenal.</span></h2>
-                    <p class="text-muted" style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem;">
+                    <h2 class="font-black uppercase" style="font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin-bottom: 1.5rem;">Why We Choose <br><span class="txt-mrc">Our Arsenal.</span></h2>
+                    <p class="txt-muted txt-lg" style="line-height: 1.7; margin-bottom: 2rem;">
                         Technology is just a tool, but choosing the right tool is the difference between a system that scales and one that collapses under pressure. We don't chase trends; we rely on battle-tested infrastructure.
                     </p>
                 </div>
@@ -404,37 +219,37 @@
                     <!-- Tech Choice 1 -->
                     <div class="tech-box reveal delay-100">
                         <div class="tech-header">
-                            <div class="tech-icon-wrapper"><svg class="icon"><use href="#icon-server"></use></svg></div>
+                            <div class="tech-icon-wrapper"><svg class="icon"><use href="/src/global.svg#icon-server"></use></svg></div>
                             <div>
-                                <h4 class="font-bold uppercase" style="font-size: 1.1rem;">Node.js for the Backend</h4>
-                                <div class="font-mono text-mrc" style="font-size: 0.75rem;">Asynchronous Scalability</div>
+                                <h4 class="font-bold uppercase" style="font-size: 1.1rem;">The Backend</h4>
+                                <div class="font-mono txt-mrc" style="font-size: 0.75rem;">Asynchronous Scalability</div>
                             </div>
                         </div>
-                        <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6;">We leverage Node.js for its non-blocking, event-driven architecture. It allows us to handle thousands of concurrent connections seamlessly, making it the perfect engine for modern APIs and real-time applications.</p>
+                        <p class="txt-muted txt-sm" style="line-height: 1.6;">We leverage enterprise level systems for its non-blocking, event-driven architecture. It allows us to handle thousands of concurrent connections seamlessly, making it the perfect engine for modern APIs and real-time applications.</p>
                     </div>
 
                     <!-- Tech Choice 2 -->
                     <div class="tech-box reveal delay-200">
                         <div class="tech-header">
-                            <div class="tech-icon-wrapper"><svg class="icon"><use href="#icon-smartphone"></use></svg></div>
+                            <div class="tech-icon-wrapper"><svg class="icon"><use href="/src/global.svg#icon-smartphone"></use></svg></div>
                             <div>
-                                <h4 class="font-bold uppercase" style="font-size: 1.1rem;">Kotlin for Native Android</h4>
-                                <div class="font-mono text-mrc" style="font-size: 0.75rem;">Type-Safe Performance</div>
+                                <h4 class="font-bold uppercase" style="font-size: 1.1rem;">Mobile First</h4>
+                                <div class="font-mono txt-mrc" style="font-size: 0.75rem;">Safeer+Boost Performance</div>
                             </div>
                         </div>
-                        <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6;">While cross-platform tools exist, nothing beats the raw performance and hardware integration of Native Android. Kotlin provides us with null-safety and conciseness to build robust mobile experiences.</p>
+                        <p class="txt-muted" style="font-size: 0.95rem; line-height: 1.6;">While cross-platform tools exist, nothing beats the raw performance and hardware integration of native systems. We provides with full-safety and conciseness to build robust mobile experiences.</p>
                     </div>
 
                     <!-- Tech Choice 3 -->
                     <div class="tech-box reveal delay-300">
                         <div class="tech-header">
-                            <div class="tech-icon-wrapper"><svg class="icon"><use href="#icon-zap"></use></svg></div>
+                            <div class="tech-icon-wrapper"><svg class="icon"><use href="/src/global.svg#icon-zap"></use></svg></div>
                             <div>
                                 <h4 class="font-bold uppercase" style="font-size: 1.1rem;">Progressive Web Apps (PWAs)</h4>
-                                <div class="font-mono text-mrc" style="font-size: 0.75rem;">Offline-First Web</div>
+                                <div class="font-mono txt-mrc" style="font-size: 0.75rem;">offline-first Web</div>
                             </div>
                         </div>
-                        <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6;">We build web apps that feel like native apps. By utilizing Service Workers, we ensure your users can access core features even in zero-connectivity environments, drastically reducing bounce rates.</p>
+                        <p class="txt-muted" style="font-size: 0.95rem; line-height: 1.6;">We build web apps that feel like native apps. By utilizing Service Workers, we ensure your users can access core features even in zero-connectivity environments, drastically reducing bounce rates.</p>
                     </div>
                 </div>
 
@@ -443,87 +258,94 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-8" style="border-bottom: 1px solid var(--glass-border); padding-bottom: 3rem; margin-bottom: 2rem;">
-                <div class="flex items-center gap-4">
-                    <img src="https://avatars.githubusercontent.com/u/249983472" style="width: 48px; height: 48px; border-radius: 50%; filter: grayscale(1);" alt="Logo">
-                    <div>
-                        <div class="font-black uppercase" style="font-size: 1.5rem; letter-spacing: -0.05em;">MainRoute <span class="text-mrc">Core</span></div>
-                        <div class="font-mono text-muted" style="font-size: 0.75rem;">Innovating Tomorrow, Today.</div>
+    <footer class="mrc-footer pad-4 pos-rel">
+        <div class="container pad-0">
+            <div class="footer-grid">
+    
+                <!-- Column 1: Brand Info -->
+                <div class="footer-brand">
+                    <div class="brand-logo flex items-start flex-row gap-2">
+                        <img src="/src/mrc-nuca.svg" alt="MainRoute Core Logo">
+                        <h3 class="txt-black capitalize pos-rel">MainRoute <span class="txt-mrc">Core</span></h3>
+                    </div>
+                    <p class="txt-muted">A specialized technology powerhouse delivering PWA, open-source, and custom software solutions.</p>
+                    <div class="flex gap-2">
+                        <a target="_blank" href="https://github.com/MainRoute-Core" class="social-btn"><svg class="icon" style="width:1.2rem;"><use href="/src/global.svg#icon-github"></use></svg></a>
+                        <a target="_blank" href="https://www.google.com/search?q=MainRoute+Core&udm=50&aep=48" class="social-btn"><svg class="icon" style="width:1.2rem;"><use href="/src/global.svg#icon-google"></use></svg></a>
                     </div>
                 </div>
-                <div class="flex gap-4">
-                    <a href="#" class="social-btn"><svg class="icon"><use href="#icon-github"></use></svg></a>
-                    <a href="#" class="social-btn"><svg class="icon"><use href="#icon-twitter"></use></svg></a>
-                    <a href="#" class="social-btn"><svg class="icon"><use href="#icon-linkedin"></use></svg></a>
+    
+                <!-- Column 2: Quick Links -->
+                <div class="footer-col">
+                    <h4 class="uppercase flex txt-main txt-center gap-1 font-md pos-rel">Navigation</h4>
+                    <div class="footer-links">
+                        <a href="/">Home</a>
+                        <a href="/#expertise">Core Expertise</a>
+                        <a href="/#workflow">Our Workflow</a>
+                        <a href="/#open-source">Open Source Lab</a>
+                        <a class="active" href="/About/#the-core-mind">The Core Mind</a>
+                    </div>
                 </div>
+    
+                <!-- Column 3: Legal & Resources -->
+                <div class="footer-col">
+                    <h4 class="uppercase flex txt-main txt-center gap-1 font-md pos-rel" >Resources</h4>
+                    <div class="footer-links">
+                        <a href="/Media/">Media &amp; Press Kit</a>
+                        <a href="/CopyRight/">Brand Guidelines</a>
+                        <a href="/Privacy/">Privacy Policy</a>
+                        <a href="/Terms/">Terms of Service</a>
+                        <a href="/License/">Usage License</a>
+                    </div>
+                </div>
+    
+                <!-- Column 4: Contact -->
+                <div class="footer-col">
+                    <h4 class="uppercase flex txt-main txt-center gap-1 font-md pos-rel">Connect</h4>
+                    <div class="footer-links" style="margin-bottom: 1rem;">
+                        <a href="/Contact/">Contact US</a>
+                    </div>
+                    <div class="footer-contact-box">
+                        <div class="contact-item">
+                            <div class="contact-icon"><svg class="icon">
+                                    <use href="/src/global.svg#icon-mail"></use>
+                                </svg></div>
+                            <div class="contact-text">
+                                <strong style="color: white; display: block; margin-bottom: 2px;">Inquiries</strong>
+                                <a href="mailto:tellus@mrc.com" style="color: var(--text-muted);">tellus@mrc.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item" style="margin-top: 1.25rem;">
+                            <div class="contact-icon">
+                                <svg class="icon">
+                                    <use href="/src/global.svg#icon-map-pin"></use>
+                                </svg></div>
+                            <div class="contact-text">
+                                <strong style="color: white; display: block; margin-bottom: 2px;">Served Area</strong>
+                                Globally
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
             </div>
-            <div class="flex flex-col md:flex-row justify-between items-center text-center gap-4 text-muted font-mono" style="font-size: 0.8rem;">
-                <p>&copy; <span id="year"></span> MainRoute Core. M Ramzan Ch | Pro Bandey. All rights reserved.</p>
-                <div class="flex gap-6 justify-center">
-                    <a href="/Privacy/">Privacy Policy</a>
-                    <a href="/Terms/">Terms of Service</a>
-                    <a href="/Brand/">Brand Policy</a>
+    
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-copy">
+                    &copy; 2024-<span id="year">2024</span> MainRoute Core. <a class="txt-bold" href="https://mramzanch.blogspot.com" target="_blank">M Ramzan Ch</a> | <a class="txt-bold" href="https://github.com/Pro-Bandey" target="_blank"">Pro Bandey</a>. All Rights Reserved.
+                </div>
+                <div class="footer-made-in">
+                    Engineered with <svg class="icon"
+                        style="color: var(--mrc); fill: var(--mrc); width: 14px; height: 14px;">
+                        <use href="/src/global.svg#icon-heart"></use>
+                    </svg> in Tech
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- 100% VANILLA JS LOGIC -->
-    <script>
-        // Loader Removal
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            setTimeout(() => { loader.classList.add('hidden'); }, 400); 
-        });
-
-        // Set Footer Year
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Scroll Progress Bar & Header Shrink
-        const progressBar = document.getElementById('scroll-progress');
-        const header = document.getElementById('navbar');
-        
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            progressBar.style.width = scrolled + '%';
-
-            if (winScroll > 50) {
-                header.style.transform = "translateY(-0.5rem)";
-            } else {
-                header.style.transform = "translateY(0)";
-            }
-        });
-
-        // Mobile Menu Toggle
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-        });
-        
-        // High-Performance Intersection Observer
-        const observerOptions = {
-            root: null, rootMargin: '0px', threshold: 0.15
-        };
-
-        const scrollObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target); 
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal, .scale-in').forEach(el => {
-            scrollObserver.observe(el);
-        });
-    </script>
+<script src="/js/global.js"></script>
 </body>
 
 </html>

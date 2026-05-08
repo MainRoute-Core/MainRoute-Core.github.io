@@ -1,42 +1,42 @@
-====================================================================
-                    MAINROUTE CORE - CUSTOM LICENSE
-====================================================================
-Copyright (c) 2026 MainRoute Core, M Ramzan Ch, Pro Bandey.
-All Rights Reserved.
+     __  __       _       ____             _          ____               
+    |  \/  | __ _(_)_ __ |  _ \ ___  _   _| |_ ___   / ___|___  _ __ ___ 
+    | |\/| |/ _` | | '_ \| |_) / _ \| | | | __/ _ \ | |   / _ \| '__/ _ \
+    | |  | | (_| | | | | |  _ < (_) | |_| | ||  __/ | |__| (_) | | |  __/
+    |_|  |_|\__,_|_|_| |_|_| \_\___/ \__,_|\__\___|  \____\___/|_|  \___|
+
+-------------------------------------------------------------------------------
+                    MianRoute Core - CUSTOM LICENSE
+--------------------------------------------------------------------------------
+Copyright (c) 2026 MainRoute Core, M Ramzan Ch, Pro Bandey. All Rights Reserved.
 
 1. PERMITTED USE
-You are granted a limited, non-exclusive, non-transferable right to 
-view and use the digital content, brand assets, UI designs, and 
-source code ("Materials") provided by MainRoute Core strictly in 
-their ORIGINAL CONDITION. 
+You are granted a limited, non-exclusive, non-transferable right to view and use the digital content, 
+brand assets, UI designs, and source code ("Materials") provided by MainRoute Core strictly in their 
+ORIGINAL CONDITION. 
 
-This permission is granted SOLELY for the purpose of redirecting 
-traffic back to MainRoute Core or officially representing MainRoute 
-Core (e.g., press features, authorized partnerships) with prior 
+This permission is granted SOLELY for the purpose of redirecting traffic back to MainRoute Core or 
+officially representing MainRoute Core (e.g., press features, authorized partnerships) with prior 
 written consent.
 
 2. STRICTLY PROHIBITED ACTIONS
 Under no circumstances are you permitted to:
 - Copy, duplicate, scrape, or reproduce the Materials.
 - Modify, alter, or create derivative works from the Materials.
-- Use the Materials, branding, logos, or UI/UX layouts for your 
-  own personal brand, commercial brand, or agency.
-- Remove or obscure any copyright, trademark, or proprietary 
-  notices contained within the Materials.
+- Use the Materials, branding, logos, or UI/UX layouts for your own personal brand, commercial brand,
+ or agency.
+- Remove or obscure any copyright, trademark, or proprietary notices contained within the Materials.
 
 3. BRAND PROTECTION
-"MainRoute Core", "Pro Bandey", and "M Ramzan Ch" are protected 
-trademarks. Using these assets to pass off your own services, or 
-suggesting affiliation without authorization, is strictly prohibited 
-and will result in immediate legal action under applicable national 
-and international Intellectual Property laws.
+"MainRoute Core", "Pro Bandey", "MindRise Designs" and "MegaMind-Solution" are protected trademarks. 
+Using these assets to pass off your own services, or suggesting affiliation without authorization, 
+is strictly prohibited and will result in immediate legal action under applicable national and 
+international Intellectual Property laws.
 
 4. TERMINATION
-This license is effective until terminated. MainRoute Core may 
-terminate this license at any time, without notice, if you breach 
-any of these terms. Upon termination, you must immediately destroy 
-any downloaded, cloned, or cached Materials in your possession.
+This license is effective until terminated. MainRoute Core may terminate this license at any time, 
+without notice, if you breach any of these terms. Upon termination, you must immediately destroy any 
+downloaded, cloned, or cached Materials in your possession.
 
-====================================================================
+------------------------------------------------------------
 For usage permissions and inquiries, contact: tellus@mrc.com
-====================================================================
+------------------------------------------------------------

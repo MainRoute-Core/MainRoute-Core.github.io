@@ -31,23 +31,15 @@
     <!-- Custom Font -->
     <link href="/src/CoreSans-Regular_en.otf" rel="stylesheet">
 
-    <!-- 100% INTERNAL CSS (No Frameworks) -->
-    <style>
-        @font-face{ font-family: 'Core Sans'; src: url(/src/CoreSans-Regular_en.otf); font-display: swap;} :root{ --mrc: #f44234; --mrc-light: #ff7063; --mrc-glow: rgba(244, 66, 52, 0.4); --bg-dark: #09090b; --bg-surface: #18181b; --bg-surface-elevated: #27272a; --text-main: #f8fafc; --text-muted: #a1a1aa; --glass-bg: rgba(24, 24, 27, 0.65); --glass-border: rgba(255, 255, 255, 0.08); --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); --font-sans: 'Core Sans', system-ui, -apple-system, sans-serif; --font-mono: 'Space Mono', ui-monospace, monospace; --container-width: 1280px; --nav-height: 80px;} *{ margin: 0; padding: 0; box-sizing: border-box;} html{ scroll-behavior: smooth; font-size: 16px;} body{ font-family: var(--font-sans); background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; -webkit-font-smoothing: antialiased; line-height: 1.5;} a{ text-decoration: none; color: inherit; transition: all 0.3s ease;} img, svg{ max-width: 100%; display: block;} button{ cursor: pointer; border: none; background: none; font-family: inherit;} .icon{ width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;} .text-mrc{ color: var(--mrc);} .text-muted{ color: var(--text-muted);} .font-mono{ font-family: var(--font-mono);} .uppercase{ text-transform: uppercase; letter-spacing: 0.05em;} .font-black{ font-weight: 900;} .font-bold{ font-weight: 700;} #loader{position:fixed;inset:0;z-index:99999;background:var(--bg-dark);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1rem;transition:opacity .6s cubic-bezier(.4,0,.2,1),visibility .6s}.loader-text-wrapper{position:relative;display:flex;align-items:center;justify-content:center;height:120px;width:auto;margin:2rem;font-size:1.6em;font-weight:600;user-select:none;color:var(--mrc);scale:2}.loader-colors{position:absolute;top:0;left:0;height:100%;width:100%;z-index:1;background-color:transparent;mask:repeating-linear-gradient(90deg,transparent 0,transparent 6px,black 7px,black 8px)}.loader-colors::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(circle at 50% 50%,#ff0707 0%,#f5181800 50%),radial-gradient(circle at 45% 45%,#cdacac 0%,transparent 45%),radial-gradient(circle at 55% 55%,#f19393 0%,transparent 45%),radial-gradient(circle at 45% 55%,#e50000 0%,transparent 45%),radial-gradient(circle at 55% 45%,#a14e4e 0%,transparent 45%);mask:radial-gradient(circle at 50% 50%,transparent 0%,transparent 10%,black 25%);animation:transform-animation 2.5s infinite alternate,opacity-animation 5s infinite;animation-timing-function:cubic-bezier(.6,.8,.5,1)}@keyframes transform-animation{0%{transform:translate(-55%)}100%{transform:translate(55%)}}@keyframes opacity-animation{0%,100%{opacity:0}15%{opacity:1}65%{opacity:0}}.loader-text-wrapper hr{width:5px;height:0;border:none;outline:none}.loader-text-letter{display:inline-block;opacity:0;animation:loader-text-letter-anim 5s infinite linear;z-index:2}.loader-text-letter:nth-child(1){animation-delay:.1s}.loader-text-letter:nth-child(2){animation-delay:.205s}.loader-text-letter:nth-child(3){animation-delay:.31s}.loader-text-letter:nth-child(4){animation-delay:.415s}.loader-text-letter:nth-child(5){animation-delay:.521s}.loader-text-letter:nth-child(6){animation-delay:.626s}.loader-text-letter:nth-child(7){animation-delay:.731s}.loader-text-letter:nth-child(8){animation-delay:.837s}.loader-text-letter:nth-child(9){animation-delay:.942s}.loader-text-letter:nth-child(10){animation-delay:1.047s}.loader-text-letter:nth-child(11){animation-delay:1.155s}.loader-text-letter:nth-child(12){animation-delay:1.262s}.loader-text-letter:nth-child(13){animation-delay:1.367s}.loader-text-letter:nth-child(14){animation-delay:1.474s}.loader-text-letter:nth-child(15){animation-delay:1.579s}.loader-text-letter:nth-child(16){animation-delay:1.686s}.loader-text-letter:nth-child(17){animation-delay:1.794s}@keyframes loader-text-letter-anim{0%{opacity:0}5%{opacity:1;text-shadow:0 0 4px var(--mrc);transform:scale(1.1) translateY(-2px)}20%{opacity:.2}100%{opacity:0}}#loader.hidden{opacity:0;visibility:hidden;pointer-events:none} #scroll-progress-container{ position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: transparent; z-index: 10000;} #scroll-progress{ height: 100%; width: 0%; background: var(--mrc); box-shadow: 0 0 10px var(--mrc-glow); transition: width 0.1s ease-out;} .container{ width: 100%; max-width: var(--container-width); margin: 0 auto; padding: 0 1.5rem;} .section{ padding: clamp(3rem, 6vw, 6rem) 0; position: relative; z-index: 10;} .flex{ display: flex;} .flex-col{ display: flex; flex-direction: column;} .items-center{ align-items: center;} .justify-between{ justify-content: space-between;} .justify-center{ justify-content: center;} .gap-2{ gap:.5rem;} .gap-4{ gap: 1rem;} .gap-8{ gap: 2rem;} .glass-panel{ background: var(--glass-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid var(--glass-border); border-radius: 1.5rem; box-shadow: var(--glass-shadow);} .tech-grid{ position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(var(--glass-border) 1px, rgb(244 66 52 / 40%) 1px), linear-gradient(90deg, rgb(255 255 255 / 40%) 1px, rgb(0 0 0 / 20%) 1px); background-size: 40px 40px; mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%); -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);} .ambient-orb{ position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15; z-index: -1; background: var(--mrc); animation: float 12s ease-in-out infinite alternate;} @keyframes float{ 0%{ transform: translate(0, 0) scale(1);} 100%{ transform: translate(50px, -50px) scale(1.1);}} @keyframes spin{ 100%{ transform: rotate(360deg);}} .header{ position: fixed; top: 1rem; left: 1rem; right: 1rem; z-index: 100; transition: transform 0.3s ease;} @media (min-width: 1024px){ .header{ top: 1.5rem; left: 2rem; right: 2rem;}} .nav-bar{ padding: 0.75rem 1.5rem; border-radius: 9999px; display: flex; justify-content: space-between; align-items: center;} .nav-logo{ display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 900; letter-spacing: -0.05em;} .nav-logo img{ width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--mrc);} .desktop-nav{ display: none; align-items: center; gap: 2rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase;} .desktop-nav a{ position: relative; color: var(--text-muted); padding: 0.5rem 0;} .desktop-nav a::after{ content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: var(--mrc); transition: width 0.3s;} .desktop-nav a:hover{ color: #fff;} .desktop-nav a:hover::after{ width: 100%;} .system-status{ display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.05); padding: 0.4rem 1rem; border-radius: 99px; font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em;} .status-dot{ width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; animation: pulse 2s infinite;} @keyframes pulse{ 0%, 100%{ opacity: 1; transform: scale(1);} 50%{ opacity: 0.5; transform: scale(0.8);}} .mobile-menu-btn{ display: block; color: #fff; padding: 0.5rem;} .mobile-menu{ position: absolute; top: 120%; left: 0; width: 100%; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);} .mobile-menu.active{ opacity: 1; visibility: visible; transform: translateY(0);} .mobile-menu a{ font-size: 1.2rem; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem;} .mobile-menu a:hover{ background: rgba(255,255,255,0.05); color: var(--mrc);} @media (min-width: 1024px){ .desktop-nav{ display: flex;} .mobile-menu-btn, .mobile-menu{ display: none !important;}} .page-header{ padding-top: calc(var(--nav-height) + 6rem); padding-bottom: 2rem; text-align: center; max-width: 800px; margin: 0 auto;} .page-title{ font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem;} .page-subtitle{ font-family: var(--font-mono); color: var(--mrc); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(244, 66, 52, 0.1); padding: 0.5rem 1rem; border-radius: 99px; display: inline-block; border: 1px solid rgba(244, 66, 52, 0.2);} .prose-container{ max-width: 900px; margin: 0 auto; padding: clamp(2rem, 5vw, 4rem); margin-bottom: 4rem;} .prose{ color: var(--text-muted); font-size: 1.05rem; line-height: 1.8;} .prose h2{ color: #fff; font-size: 1.75rem; font-weight: 800; margin-top: 3rem; margin-bottom: 1rem; letter-spacing: -0.02em;} .prose h2:first-child{ margin-top: 0;} .prose p{ margin-bottom: 1.5rem;} .prose ul{ margin-bottom: 1.5rem; padding-left: 1.5rem; list-style-type: disc;} .prose li{ margin-bottom: 0.5rem;} .prose a{ color: var(--mrc); text-decoration: underline; text-decoration-color: rgba(244, 66, 52, 0.3); text-underline-offset: 4px;} .prose a:hover{ text-decoration-color: var(--mrc);} .footer{ background: var(--bg-surface); padding: 4rem 0 2rem; border-top: 1px solid var(--glass-border);} .social-btn{ width: 44px; height: 44px; border-radius: 50%; background: var(--bg-surface-elevated); display: flex; justify-content: center; align-items: center; transition: all 0.3s; border: 1px solid var(--glass-border);} .social-btn:hover{ background: var(--mrc); color: #fff; transform: translateY(-3px); border-color: var(--mrc);} .reveal{ opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out;} .reveal.active{ opacity: 1; transform: translateY(0);} .delay-100{ transition-delay: 100ms;} .delay-200{ transition-delay: 200ms;} ::-webkit-scrollbar{ width: 6px;} ::-webkit-scrollbar-track{ background: var(--bg-dark);} ::-webkit-scrollbar-thumb{ background: rgba(244, 66, 52, 0.5); border-radius: 10px;} ::-webkit-scrollbar-thumb:hover{ background: var(--mrc);}
-    </style>
+    <!--  CSS -->
+   <link rel="stylesheet" href="/css/global.css">
+   <link rel="stylesheet" href="/css/terms.css">
 </head>
 
 <body>
 
-    <!-- Inline SVG Sprite for Icons -->
-    <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
-        <symbol id="icon-menu" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></symbol>
-        <symbol id="icon-github" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></symbol>
-        <symbol id="icon-google" viewBox="0 0 24 24"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></symbol>
-    </svg>
-
     <!-- Loading Screen -->
-    <div id="loader" style="pointer-events: none;">
+    <div id="loader" class="loader" style="pointer-events: none;">
         <img style="height: 120px; pointer-events: none;" src="/src/mrc-nuca-loading.svg" alt="mrc-nuca-loading">
         <div class="loader-text-wrapper">
             <span class="loader-text-letter">I</span>
@@ -78,36 +70,36 @@
 
     <!-- Ambient Backgrounds -->
     <div class="tech-grid"></div>
-    <div class="ambient-orb" style="width: 40vw; height: 40vw;"></div>
-    <div class="ambient-orb" style="width: 30vw; height: 30vw; opacity: 0.1; animation-delay: -5s;"></div>
+    <div class="ambient-orb first-orb"></div>
+    <div class="ambient-orb second-orb"></div>
 
     <!-- Navigation -->
     <header class="header" id="navbar">
         <div class="nav-bar glass-panel">
             <a href="/" class="nav-logo">
                 <img src="/src/mrc-nuca.svg" alt="MRC Logo">
-                <span style="color:var(--text-main);">MainRoute <span class="text-mrc">Core</span></span>
+                <span style="color:var(--text-main);">MainRoute <span class="txt-mrc">Core</span></span>
             </a>
-
             <nav class="desktop-nav">
-                <a href="/">Home</a>
-                <a href="/Privacy/">Privacy Policy</a>
-                <a href="/CopyRight/">Brand CopyRight</a>
+                <a href="/About/">About Us</a>
+                <a href="/Media/">Media &amp; Press Kit</a>
+                <a href="/CopyRight/">Brand Guidelines</a>
+                <a href="/Contact/">Contact Us</a>
                 <div style="width: 1px; height: 16px; background: var(--glass-border);"></div>
                 <div class="system-status">
                     <div class="status-dot"></div> Active
                 </div>
             </nav>
-
             <button id="mobile-menu-btn" class="mobile-menu-btn">
-                <svg class="icon"><use href="#icon-menu"></use></svg>
+                <svg class="icon"><use href="/src/global.svg#icon-menu"></use></svg>
             </button>
         </div>
 
         <div id="mobile-menu" class="mobile-menu glass-panel">
-            <a href="/">Home</a>
-            <a href="/Privacy/">Privacy Policy</a>
-            <a href="/CopyRight/">Brand CopyRight</a>
+            <a href="/About/">About Us</a>
+            <a href="/Media/">Media &amp; Press Kit</a>
+            <a href="/CopyRight/">Brand Guidelines</a>
+            <a href="/Contact/">Contact</a>
         </div>
     </header>
 
@@ -115,9 +107,9 @@
     <main style="position: relative; z-index: 10;">
         
         <div class="page-header reveal">
-            <div class="page-subtitle mb-4">Legal Framework</div>
+            <div class="page-subtitle">Legal Framework</div>
             <h1 class="page-title">Terms of Service</h1>
-            <p class="text-muted" style="font-size: 1.1rem;">Last updated: May 7, 2026</p>
+            <p class="txt-muted txt-lg">Last updated: May 7, 2026</p>
         </div>
 
         <div class="container">
@@ -166,85 +158,95 @@
 
     </main>
 
+
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-8" style="border-bottom: 1px solid var(--glass-border); padding-bottom: 3rem; margin-bottom: 2rem;">
-                <div class="flex items-center gap-4">
-                    <img src="/src/mrc-nuca.svg" style="width: 48px; height: 48px; border-radius: 50%; filter: grayscale(1);" alt="Logo">
-                    <div>
-                        <div class="font-black uppercase" style="font-size: 1.5rem; letter-spacing: -0.05em;">MainRoute <span class="text-mrc">Core</span></div>
-                        <div class="font-mono text-muted" style="font-size: 0.75rem;">Be Passionate For Future.</div>
+    <footer class="mrc-footer pad-4 pos-rel">
+        <div class="container pad-0">
+            <div class="footer-grid">
+    
+                <!-- Column 1: Brand Info -->
+                <div class="footer-brand">
+                    <div class="brand-logo flex items-start flex-row gap-2">
+                        <img src="/src/mrc-nuca.svg" alt="MainRoute Core Logo">
+                        <h3 class="txt-black capitalize pos-rel">MainRoute <span class="txt-mrc">Core</span></h3>
+                    </div>
+                    <p class="txt-muted">A specialized technology powerhouse delivering PWA, open-source, and custom software solutions.</p>
+                    <div class="flex gap-2">
+                        <a target="_blank" href="https://github.com/MainRoute-Core" class="social-btn"><svg class="icon" style="width:1.2rem;"><use href="/src/global.svg#icon-github"></use></svg></a>
+                        <a target="_blank" href="https://www.google.com/search?q=MainRoute+Core&udm=50&aep=48" class="social-btn"><svg class="icon" style="width:1.2rem;"><use href="/src/global.svg#icon-google"></use></svg></a>
                     </div>
                 </div>
-                <div class="flex gap-4">
-                    <a href="https://github.com/MainRoute-Core/" class="social-btn"><svg class="icon"><use href="#icon-github"></use></svg></a>
-                    <a href="https://www.google.com/search?q=MainRoute+Core&udm=50&aep=48" class="social-btn"><svg class="icon"><use href="#icon-google"></use></svg></a>
+    
+                <!-- Column 2: Quick Links -->
+                <div class="footer-col">
+                    <h4 class="uppercase flex txt-main txt-center gap-1 font-md pos-rel">Navigation</h4>
+                    <div class="footer-links">
+                        <a href="/">Home</a>
+                        <a href="/#expertise">Core Expertise</a>
+                        <a href="/#workflow">Our Workflow</a>
+                        <a href="/#open-source">Open Source Lab</a>
+                        <a href="/About/#the-core-mind">The Core Mind</a>
                     </div>
+                </div>
+    
+                <!-- Column 3: Legal & Resources -->
+                <div class="footer-col">
+                    <h4 class="uppercase flex txt-main txt-center gap-1 font-md pos-rel" >Resources</h4>
+                    <div class="footer-links">
+                        <a href="/Media/">Media &amp; Press Kit</a>
+                        <a href="/CopyRight/">Brand Guidelines</a>
+                        <a href="/Privacy/">Privacy Policy</a>
+                        <a class="active" href="/Terms/">Terms of Service</a>
+                        <a href="/License/">Usage License</a>
+                    </div>
+                </div>
+    
+                <!-- Column 4: Contact -->
+                <div class="footer-col">
+                    <h4 class="uppercase flex txt-main txt-center gap-1 font-md pos-rel">Connect</h4>
+                    <div class="footer-links" style="margin-bottom: 1rem;">
+                        <a href="/Contact/">Contact US</a>
+                    </div>
+                    <div class="footer-contact-box">
+                        <div class="contact-item">
+                            <div class="contact-icon"><svg class="icon">
+                                    <use href="/src/global.svg#icon-mail"></use>
+                                </svg></div>
+                            <div class="contact-text">
+                                <strong style="color: white; display: block; margin-bottom: 2px;">Inquiries</strong>
+                                <a href="mailto:tellus@mrc.com" style="color: var(--text-muted);">tellus@mrc.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item" style="margin-top: 1.25rem;">
+                            <div class="contact-icon">
+                                <svg class="icon">
+                                    <use href="/src/global.svg#icon-map-pin"></use>
+                                </svg></div>
+                            <div class="contact-text">
+                                <strong style="color: white; display: block; margin-bottom: 2px;">Served Area</strong>
+                                Globally
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
             </div>
-            <div class="flex flex-col md:flex-row justify-between items-center text-center gap-4 text-muted font-mono" style="font-size: 0.8rem;">
-                <p>&copy; <span id="year"></span> MainRoute Core. M Ramzan Ch | Pro Bandey. All rights reserved.</p>
-                <div class="flex gap-2 justify-center">
-                    <a href="/Privacy/">Privacy Policy</a> •
-                    <a href="/CopyRight/">Brand CopyRight</a>
+    
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-copy">
+                    &copy; 2024-<span id="year">2024</span> MainRoute Core. <a class="txt-bold" href="https://mramzanch.blogspot.com" target="_blank">M Ramzan Ch</a> | <a class="txt-bold" href="https://github.com/Pro-Bandey" target="_blank"">Pro Bandey</a>. All Rights Reserved.
+                </div>
+                <div class="footer-made-in">
+                    Engineered with <svg class="icon"
+                        style="color: var(--mrc); fill: var(--mrc); width: 14px; height: 14px;">
+                        <use href="/src/global.svg#icon-heart"></use>
+                    </svg> in Tech
                 </div>
             </div>
         </div>
     </footer>
-
     <!-- 100% VANILLA JS LOGIC -->
-    <script>
-        // Loader Removal
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            setTimeout(() => { loader.classList.add('hidden'); }, 2000); 
-        });
-
-        // Set Footer Year
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Scroll Progress Bar & Header Shrink
-        const progressBar = document.getElementById('scroll-progress');
-        const header = document.getElementById('navbar');
-        
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            progressBar.style.width = scrolled + '%';
-
-            if (winScroll > 50) {
-                header.style.transform = "translateY(-0.5rem)";
-            } else {
-                header.style.transform = "translateY(0)";
-            }
-        });
-
-        // Mobile Menu Toggle
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-        });
-        
-        // Intersection Observer for Animations
-        const observerOptions = {
-            root: null, rootMargin: '0px', threshold: 0.1
-        };
-
-        const scrollObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => {
-            scrollObserver.observe(el);
-        });
-    </script>
+    <script src="/js/global.js"></script>
 </body>
 </html>

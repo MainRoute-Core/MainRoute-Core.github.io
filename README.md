@@ -17,7 +17,7 @@
 </div>
 
 <p style="font-size: 1.2em; line-height: 1.6em; color:           
-MainRoute Core is a pioneering tech firm driving innovation through <strong>progressive web apps (PWAs)</strong>, robust software, and open-source solutions. We empower businesses, developers, and organizations to thrive in the digital era with scalable, impactful technology. Based in Pakistan, we blend global standards with local expertise.
+MainRoute Core is a pioneering tech firm driving innovation through <strong>progressive web apps (PWAs)</strong>, robust software, and open-source solutions. We empower businesses, developers, and organizations to thrive in the digital era with scalable, impactful technology.We blend global standards with local expertise.
 </p>
 
                                                           
@@ -60,5 +60,5 @@ We’ve partnered with startups and organizations to:
 Ready to transform your digital journey? <a href="mailto:tellus@mrc.com" style="color: #3498db; text-decoration: none;">Get in touch</a> or explore our projects on <a href="https://github.com/MianRoute-Core" style="color: #3498db; text-decoration: none;">GitHub</a>. Let’s innovate together!
 </p>
 
-*📍 Pakistan | 🌐 [MainRoute Core](https://www.mainroute-core.github.io)*  
+*📍 | 🌐 [MainRoute Core](https://www.mainroute-core.github.io)*  
 

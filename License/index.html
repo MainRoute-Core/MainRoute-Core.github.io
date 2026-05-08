@@ -21,215 +21,75 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link href="https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf" rel="stylesheet">
 
-    <!-- 100% INTERNAL CSS (No Frameworks) -->
-    <style>
-        @font-face {
-            font-family: 'Core Sans';
-            src: url(https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf);
-            font-display: swap;
-        }
-
-        :root {
-            --mrc: #f44234;
-            --mrc-light: #ff7063;
-            --mrc-glow: rgba(244, 66, 52, 0.4);
-            --bg-dark: #09090b;
-            --bg-surface: #18181b;
-            --bg-surface-elevated: #27272a;
-            --text-main: #f8fafc;
-            --text-muted: #a1a1aa;
-            
-            --glass-bg: rgba(24, 24, 27, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-
-            --font-sans: 'Core Sans', system-ui, sans-serif;
-            --font-mono: 'Space Mono', ui-monospace, monospace;
-            
-            --container-width: 1280px;
-            --nav-height: 80px;
-        }
-
-        /* Base Resets */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; font-size: 16px; }
-        body { font-family: var(--font-sans); background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; line-height: 1.5; }
-        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
-        img, svg { max-width: 100%; display: block; }
-        button { cursor: pointer; border: none; background: none; font-family: inherit; }
-        
-        .icon { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-        /* Typography & Utilities */
-        .text-mrc { color: var(--mrc); }
-        .text-muted { color: var(--text-muted); }
-        .font-mono { font-family: var(--font-mono); }
-        .uppercase { text-transform: uppercase; letter-spacing: 0.05em; }
-        .font-black { font-weight: 900; }
-        .font-bold { font-weight: 700; }
-        .container { width: 100%; max-width: var(--container-width); margin: 0 auto; padding: 0 1.5rem; }
-
-        /* Loading Screen & Scroll Bar */
-        #loader { position: fixed; inset: 0; z-index: 99999; background: var(--bg-dark); display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem; transition: opacity 0.6s, visibility 0.6s; }
-        .loader-ring { width: 60px; height: 60px; border: 4px solid var(--glass-border); border-top-color: var(--mrc); border-radius: 50%; animation: spin 1s linear infinite; }
-        #loader.hidden { opacity: 0; visibility: hidden; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        
-        #scroll-progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 4px; z-index: 10000; }
-        #scroll-progress { height: 100%; width: 0%; background: var(--mrc); box-shadow: 0 0 10px var(--mrc-glow); transition: width 0.1s ease-out; }
-
-        /* Glassmorphism & Background Effects */
-        .glass-panel { background: var(--glass-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid var(--glass-border); border-radius: 1.5rem; box-shadow: var(--glass-shadow); }
-        .tech-grid { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(var(--glass-border) 1px, transparent 1px), linear-gradient(90deg, var(--glass-border) 1px, transparent 1px); background-size: 40px 40px; mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%); -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%); }
-        .ambient-orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15; z-index: -1; background: var(--mrc); animation: float 12s ease-in-out infinite alternate; }
-        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, -50px) scale(1.1); } }
-
-        /* Navigation */
-        .header { position: fixed; top: 1rem; left: 1rem; right: 1rem; z-index: 100; transition: transform 0.3s ease; }
-        @media (min-width: 1024px) { .header { top: 1.5rem; left: 2rem; right: 2rem; } }
-        .nav-bar { padding: 0.75rem 1.5rem; border-radius: 9999px; display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 900; letter-spacing: -0.05em; }
-        .nav-logo img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--mrc); }
-        .desktop-nav { display: none; align-items: center; gap: 2rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; }
-        .desktop-nav a { position: relative; color: var(--text-muted); padding: 0.5rem 0; }
-        .desktop-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: var(--mrc); transition: width 0.3s; }
-        .desktop-nav a:hover { color: #fff; }
-        .desktop-nav a:hover::after { width: 100%; }
-        .system-status { display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.05); padding: 0.4rem 1rem; border-radius: 99px; font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em; }
-        .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; animation: pulse 2s infinite; }
-        .mobile-menu-btn { display: block; color: #fff; padding: 0.5rem; }
-        .mobile-menu { position: absolute; top: 120%; left: 0; width: 100%; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s; }
-        .mobile-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
-        .mobile-menu a { font-size: 1.2rem; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem; }
-        @media (min-width: 1024px) { .desktop-nav { display: flex; } .mobile-menu-btn, .mobile-menu { display: none !important; } }
-
-        /* Page Headers */
-        .page-header { padding-top: calc(var(--nav-height) + 6rem); padding-bottom: 2rem; text-align: center; max-width: 800px; margin: 0 auto; position: relative; z-index: 10;}
-        .page-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--mrc); background: rgba(244, 66, 52, 0.1); border: 1px solid rgba(244, 66, 52, 0.2); padding: 0.5rem 1rem; border-radius: 99px; margin-bottom: 1.5rem; }
-        .page-title { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; }
-
-        /* Terminal Window for License */
-        .terminal-container { max-width: 900px; margin: 0 auto 6rem; position: relative; z-index: 10; }
-        .terminal-header { background: var(--bg-surface-elevated); padding: 1rem 1.5rem; border-radius: 1.5rem 1.5rem 0 0; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--glass-border); }
-        .term-dot { width: 12px; height: 12px; border-radius: 50%; }
-        .term-dot.red { background: #ff5f56; } .term-dot.yellow { background: #ffbd2e; } .term-dot.green { background: #27c93f; }
-        .term-title { margin-left: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); }
-        
-        .terminal-body { background: rgba(9, 9, 11, 0.85); padding: 2.5rem; border-radius: 0 0 1.5rem 1.5rem; overflow-x: auto; }
-        #license-content { font-family: var(--font-mono); font-size: 0.95rem; line-height: 1.7; color: #e2e8f0; white-space: pre-wrap; word-wrap: break-word; }
-        
-        /* ------------------------------------------------------------------
-           NEW MASTER FOOTER TEMPLATE (Fully Responsive)
-        ------------------------------------------------------------------- */
-        .mrc-footer {
-            background: linear-gradient(to bottom, var(--bg-surface), var(--bg-dark));
-            border-top: 1px solid var(--glass-border);
-            padding: 5rem 0 2rem;
-            position: relative;
-            z-index: 10;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 3rem;
-            margin-bottom: 4rem;
-        }
-        @media (min-width: 768px) {
-            .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
-        }
-        @media (min-width: 1024px) {
-            .footer-grid { grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 4rem; }
-        }
-        
-        /* Footer Brand Column */
-        .footer-brand .brand-logo { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
-        .footer-brand img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--glass-border); filter: grayscale(1); transition: filter 0.3s; }
-        .footer-brand img:hover { filter: grayscale(0); border-color: var(--mrc); }
-        .footer-brand h3 { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.05em; text-transform: uppercase; }
-        .footer-brand p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; max-width: 350px; margin-bottom: 1.5rem; }
-        
-        /* Social Buttons */
-        .social-flex { display: flex; gap: 1rem; }
-        .social-btn { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); display: flex; justify-content: center; align-items: center; transition: all 0.3s; }
-        .social-btn:hover { background: var(--mrc); border-color: var(--mrc); color: white; transform: translateY(-3px); box-shadow: 0 5px 15px var(--mrc-glow); }
-
-        /* Footer Links Columns */
-        .footer-col h4 { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: white; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
-        .footer-col h4::before { content: ''; width: 8px; height: 8px; background: var(--mrc); border-radius: 50%; }
-        .footer-links { display: flex; flex-direction: column; gap: 1rem; }
-        .footer-links a { color: var(--text-muted); font-size: 0.95rem; transition: color 0.3s, padding-left 0.3s; display: inline-block; }
-        .footer-links a:hover { color: var(--mrc); padding-left: 5px; }
-
-        /* Footer Contact Box */
-        .footer-contact-box { background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); border-radius: 1rem; padding: 1.5rem; }
-        .contact-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
-        .contact-item:last-child { margin-bottom: 0; }
-        .contact-icon { color: var(--mrc); background: rgba(244, 66, 52, 0.1); padding: 0.5rem; border-radius: 0.5rem; }
-        .contact-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
-
-        /* Footer Bottom Bar */
-        .footer-bottom { border-top: 1px solid var(--glass-border); padding-top: 2rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
-        @media (min-width: 768px) {
-            .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
-        }
-        .footer-copy { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); }
-        .footer-made-in { font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.4rem; }
-
-        /* Animations */
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .delay-100 { transition-delay: 100ms; }
-        ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: var(--bg-dark); } ::-webkit-scrollbar-thumb { background: rgba(244, 66, 52, 0.5); border-radius: 10px; }
-    </style>
+    <!--  CSS -->
+      <link rel="stylesheet" href="/css/global.css">
+      <link rel="stylesheet" href="/css/license.css">
 </head>
 
 <body>
 
-    <!-- Inline SVG Sprite -->
-    <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
-        <symbol id="icon-menu" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></symbol>
-        <symbol id="icon-github" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></symbol>
-        <symbol id="icon-twitter" viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></symbol>
-        <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></symbol>
-        <symbol id="icon-mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></symbol>
-        <symbol id="icon-map-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></symbol>
-        <symbol id="icon-heart" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></symbol>
-    </svg>
-
     <!-- Loading Screen -->
-    <div id="loader">
-        <div class="loader-ring"></div>
-        <div class="font-mono text-mrc font-bold tracking-widest uppercase" style="font-size: 0.8rem;">Fetching License...</div>
+    <div id="loader" class="loader" style="pointer-events: none;">
+        <img style="height: 120px; pointer-events: none;" src="/src/mrc-nuca-loading.svg" alt="mrc-nuca-loading">
+        <div class="loader-text-wrapper">
+            <span class="loader-text-letter">I</span>
+            <span class="loader-text-letter">n</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">t</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">a</span>
+            <span class="loader-text-letter">l</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">z</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">n</span>
+            <span class="loader-text-letter">g</span>
+            <hr>
+            <span class="loader-text-letter">C</span>
+            <span class="loader-text-letter">o</span>
+            <span class="loader-text-letter">r</span>
+            <span class="loader-text-letter">e</span>
+            <div class="loader-colors"></div>
+        </div>
     </div>
 
-    <div id="scroll-progress-container"><div id="scroll-progress"></div></div>
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress-container">
+        <div id="scroll-progress"></div>
+    </div>
 
     <!-- Ambient Backgrounds -->
     <div class="tech-grid"></div>
-    <div class="ambient-orb" style="width: 40vw; height: 40vw; top: -10%; left: -10%;"></div>
+    <div class="ambient-orb first-orb"></div>
+    <div class="ambient-orb second-orb"></div>
 
     <!-- Navigation -->
     <header class="header" id="navbar">
         <div class="nav-bar glass-panel">
             <a href="/" class="nav-logo">
-                <img src="https://avatars.githubusercontent.com/u/249983472" alt="MRC Logo">
-                <span style="color:var(--text-main);">MainRoute <span class="text-mrc">Core</span></span>
+                <img src="/src/mrc-nuca.svg" alt="MRC Logo">
+                <span style="color:var(--text-main);">MainRoute <span class="txt-mrc">Core</span></span>
             </a>
             <nav class="desktop-nav">
-                <a href="/">Home</a>
-                <a href="/#expertise">Expertise</a>
-                <a href="/#workflow">Workflow</a>
-                <a href="/#open-source">Open Source</a>
+                <a href="/About/">About Us</a>
+                <a href="/Media/">Media &amp; Press Kit</a>
+                <a href="/CopyRight/">Brand Guidelines</a>
+                <a href="/Contact/">Contact Us</a>
                 <div style="width: 1px; height: 16px; background: var(--glass-border);"></div>
-                <div class="system-status"><div class="status-dot"></div> Active</div>
+                <div class="system-status">
+                    <div class="status-dot"></div> Active
+                </div>
             </nav>
-            <button id="mobile-menu-btn" class="mobile-menu-btn"><svg class="icon"><use href="#icon-menu"></use></svg></button>
+            <button id="mobile-menu-btn" class="mobile-menu-btn">
+                <svg class="icon"><use href="/src/global.svg#icon-menu"></use></svg>
+            </button>
         </div>
+
         <div id="mobile-menu" class="mobile-menu glass-panel">
-            <a href="/">Home</a>
-            <a href="/#expertise">Expertise</a>
-            <a href="/#workflow">Workflow</a>
-            <a href="/#open-source">Open Source</a>
+            <a href="/About/">About Us</a>
+            <a href="/Media/">Media &amp; Press Kit</a>
+            <a href="/CopyRight/">Brand Guidelines</a>
+            <a href="/Contact/">Contact</a>
         </div>
     </header>
 
@@ -238,7 +98,7 @@
         <div class="page-header reveal">
             <div class="page-tag">Strict Compliance</div>
             <h1 class="page-title">Content License</h1>
-            <p class="text-muted" style="font-size: 1.1rem;">Official limitations on code, design, and brand usage.</p>
+            <p class="txt-muted txt-lg">Official limitations on code, design, and brand usage.</p>
         </div>
 
         <div class="container reveal delay-100">
@@ -247,149 +107,104 @@
                     <div class="term-dot red"></div>
                     <div class="term-dot yellow"></div>
                     <div class="term-dot green"></div>
-                    <div class="term-title">licence.txt — bash — 80x24</div>
+                    <div class="term-title"><a href="/license.txt">htt.../license.txt</a> | {col:33} {charactors:2373} {words:232}</div>
                 </div>
                 <div class="terminal-body">
-                    <!-- Javascript will fetch licence.txt and inject it here -->
-                    <pre id="license-content">Fetching license data securely from server...</pre>
+                    <pre id="license-content" >Fetching license data securely from server...</pre>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- ================================================================= -->
-    <!-- NEW RESPONSIVE FOOTER TEMPLATE (FOR ALL PAGES)                    -->
-    <!-- ================================================================= -->
-    <footer class="mrc-footer">
-        <div class="container">
+    <!-- Footer -->
+    <footer class="mrc-footer pad-4 pos-rel">
+        <div class="container pad-0">
             <div class="footer-grid">
-                
+    
                 <!-- Column 1: Brand Info -->
                 <div class="footer-brand">
-                    <div class="brand-logo">
-                        <img src="https://avatars.githubusercontent.com/u/249983472" alt="MainRoute Core Logo">
-                        <h3>MainRoute <span class="text-mrc">Core</span></h3>
+                    <div class="brand-logo flex items-start flex-row gap-2">
+                        <img src="/src/mrc-nuca.svg" alt="MainRoute Core Logo">
+                        <h3 class="txt-black capitalize pos-rel">MainRoute <span class="txt-mrc">Core</span></h3>
                     </div>
-                    <p>A specialized technology powerhouse engineering high-performance Progressive Web Apps, Enterprise Software, and Open-Source infrastructure.</p>
-                    <div class="social-flex">
-                        <a href="https://github.com/MainRoute-Core" target="_blank" class="social-btn"><svg class="icon"><use href="#icon-github"></use></svg></a>
-                        <a href="#" class="social-btn"><svg class="icon"><use href="#icon-twitter"></use></svg></a>
-                        <a href="#" class="social-btn"><svg class="icon"><use href="#icon-linkedin"></use></svg></a>
+                    <p class="txt-muted">A specialized technology powerhouse delivering PWA, open-source, and custom software solutions.</p>
+                    <div class="flex gap-2">
+                        <a target="_blank" href="https://github.com/MainRoute-Core" class="social-btn"><svg class="icon" style="width:1.2rem;"><use href="/src/global.svg#icon-github"></use></svg></a>
+                        <a target="_blank" href="https://www.google.com/search?q=MainRoute+Core&udm=50&aep=48" class="social-btn"><svg class="icon" style="width:1.2rem;"><use href="/src/global.svg#icon-google"></use></svg></a>
                     </div>
                 </div>
-
+    
                 <!-- Column 2: Quick Links -->
                 <div class="footer-col">
-                    <h4>Navigation</h4>
+                    <h4 class="uppercase flex txt-main txt-center gap-1 font-md pos-rel">Navigation</h4>
                     <div class="footer-links">
                         <a href="/">Home</a>
                         <a href="/#expertise">Core Expertise</a>
                         <a href="/#workflow">Our Workflow</a>
                         <a href="/#open-source">Open Source Lab</a>
-                        <a href="/About/">The Core Mind</a>
+                        <a href="/About/#the-core-mind">The Core Mind</a>
                     </div>
                 </div>
-
+    
                 <!-- Column 3: Legal & Resources -->
                 <div class="footer-col">
-                    <h4>Resources</h4>
+                    <h4 class="uppercase flex txt-main txt-center gap-1 font-md pos-rel" >Resources</h4>
                     <div class="footer-links">
-                        <a href="/Media/">Media & Press Kit</a>
+                        <a href="/Media/">Media &amp; Press Kit</a>
+                        <a href="/CopyRight/">Brand Guidelines</a>
                         <a href="/Privacy/">Privacy Policy</a>
                         <a href="/Terms/">Terms of Service</a>
-                        <a href="/Brand/">Brand Guidelines</a>
-                        <a href="/Licence.html" class="text-mrc" style="font-weight: 700;">Usage License</a>
+                        <a class="active" href="/License/">Usage License</a>
                     </div>
                 </div>
-
+    
                 <!-- Column 4: Contact -->
                 <div class="footer-col">
-                    <h4>Connect</h4>
+                    <h4 class="uppercase flex txt-main txt-center gap-1 font-md pos-rel">Connect</h4>
+                    <div class="footer-links" style="margin-bottom: 1rem;">
+                        <a href="/Contact/">Contact US</a>
+                    </div>
                     <div class="footer-contact-box">
                         <div class="contact-item">
-                            <div class="contact-icon"><svg class="icon"><use href="#icon-mail"></use></svg></div>
+                            <div class="contact-icon"><svg class="icon">
+                                    <use href="/src/global.svg#icon-mail"></use>
+                                </svg></div>
                             <div class="contact-text">
                                 <strong style="color: white; display: block; margin-bottom: 2px;">Inquiries</strong>
                                 <a href="mailto:tellus@mrc.com" style="color: var(--text-muted);">tellus@mrc.com</a>
                             </div>
                         </div>
                         <div class="contact-item" style="margin-top: 1.25rem;">
-                            <div class="contact-icon"><svg class="icon"><use href="#icon-map-pin"></use></svg></div>
+                            <div class="contact-icon">
+                                <svg class="icon">
+                                    <use href="/src/global.svg#icon-map-pin"></use>
+                                </svg></div>
                             <div class="contact-text">
-                                <strong style="color: white; display: block; margin-bottom: 2px;">Headquarters</strong>
-                                Punjab, Pakistan
+                                <strong style="color: white; display: block; margin-bottom: 2px;">Served Area</strong>
+                                Globally
                             </div>
                         </div>
                     </div>
                 </div>
-
+    
             </div>
-
+    
             <!-- Footer Bottom -->
             <div class="footer-bottom">
                 <div class="footer-copy">
-                    &copy; <span id="year"></span> MainRoute Core. M Ramzan Ch | Pro Bandey. All Rights Reserved.
+                    &copy; 2024-<span id="year">2024</span> MainRoute Core. <a class="txt-bold" href="https://mramzanch.blogspot.com" target="_blank">M Ramzan Ch</a> | <a class="txt-bold" href="https://github.com/Pro-Bandey" target="_blank"">Pro Bandey</a>. All Rights Reserved.
                 </div>
                 <div class="footer-made-in">
-                    Engineered with <svg class="icon" style="color: var(--mrc); fill: var(--mrc); width: 14px; height: 14px;"><use href="#icon-heart"></use></svg> in Pakistan
+                    Engineered with <svg class="icon"
+                        style="color: var(--mrc); fill: var(--mrc); width: 14px; height: 14px;">
+                        <use href="/src/global.svg#icon-heart"></use>
+                    </svg> in Tech
                 </div>
             </div>
         </div>
     </footer>
-    <!-- ================================================================= -->
-
-    <!-- 100% VANILLA JS LOGIC -->
     <script>
-        // Loader & Dynamic License Fetching
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            
-            // Fetch licence.txt
-            fetch('licence.txt')
-                .then(response => {
-                    if (!response.ok) throw new Error('File not found');
-                    return response.text();
-                })
-                .then(text => {
-                    document.getElementById('license-content').textContent = text;
-                    setTimeout(() => { loader.classList.add('hidden'); }, 300); 
-                })
-                .catch(err => {
-                    document.getElementById('license-content').textContent = "ERROR 404: licence.txt file could not be found. Please ensure the file is uploaded to the root directory.";
-                    document.getElementById('license-content').style.color = "#ff5f56";
-                    setTimeout(() => { loader.classList.add('hidden'); }, 300); 
-                });
-        });
-
-        // Set Footer Year
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Scroll Progress Bar & Header
-        const progressBar = document.getElementById('scroll-progress');
-        const header = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            progressBar.style.width = (winScroll / height) * 100 + '%';
-            header.style.transform = winScroll > 50 ? "translateY(-0.5rem)" : "translateY(0)";
-        });
-
-        // Mobile Menu Toggle
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('active'));
-
-        // Scroll Observer
-        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
-        const scrollObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-        document.querySelectorAll('.reveal').forEach(el => scrollObserver.observe(el));
+        window.addEventListener('load', () => {  const loader = document.getElementById('loader');  fetch('/license.txt')  .then(response => { if (!response.ok) throw new Error('File not found'); return response.text(); })  .then(text => { document.getElementById('license-content').textContent = text; setTimeout(() => { loader.classList.add('hidden'); }, 300);  })  .catch(err => { document.getElementById('license-content').textContent = "ERROR 404: license.txt file could not be found. We able load license file."; document.getElementById('license-content').style.color = "#ff5f56"; setTimeout(() => { loader.classList.add('hidden'); }, 300);  });  });  document.getElementById('year').textContent = new Date().getFullYear();  const progressBar = document.getElementById('scroll-progress');  const header = document.getElementById('navbar');  window.addEventListener('scroll', () => {  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;  progressBar.style.width = (winScroll / height) * 100 + '%';  header.style.transform = winScroll > 50 ? "translateY(-0.5rem)" : "translateY(0)";  });  const menuBtn = document.getElementById('mobile-menu-btn');  const mobileMenu = document.getElementById('mobile-menu');  menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('active'));  const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }; const scrollObserver = new IntersectionObserver((entries, observer) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); observer.unobserve(entry.target); } }); }, observerOptions); document.querySelectorAll('.reveal').forEach(el => scrollObserver.observe(el));
     </script>
 </body>
 </html>

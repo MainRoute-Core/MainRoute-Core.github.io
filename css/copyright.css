@@ -1,0 +1,87 @@
+@import url(/css/global.css);
+        .page-header {
+            padding-top: calc(var(--nav-height) + 6rem);
+            padding-bottom: 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .page-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        .page-subtitle {
+            font-family: var(--font-mono);
+            color: var(--mrc);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: rgba(244, 66, 52, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 99px;
+            display: inline-block;
+            border: 1px solid rgba(244, 66, 52, 0.2);
+        }
+
+        /* Long-form Content Area */
+        .prose-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 4rem;
+        }
+        .prose {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        .prose h2 {
+            color: #fff;
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .prose h2::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 24px;
+            background: var(--mrc);
+            border-radius: 4px;
+        }
+        .prose h2:first-child { margin-top: 0; }
+        .prose p { margin-bottom: 1.5rem; }
+        .prose ul { margin-bottom: 1.5rem; padding-left: 1.5rem; list-style-type: disc; }
+        .prose li { margin-bottom: 0.5rem; }
+        .prose a { color: var(--mrc); text-decoration: underline; text-decoration-color: rgba(244, 66, 52, 0.3); text-underline-offset: 4px; }
+        .prose a:hover { text-decoration-color: var(--mrc); }
+
+        /* Brand Color Showcase */
+        .color-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255,255,255,0.05);
+            padding: 0.5rem 1rem 0.5rem 0.5rem;
+            border-radius: 99px;
+            border: 1px solid var(--glass-border);
+            margin-top: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: #fff;
+        }
+        .color-swatch {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--mrc);
+            box-shadow: 0 0 10px var(--mrc-glow);
+        }

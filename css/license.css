@@ -1,0 +1,99 @@
+@import url(/css/global.css);
+
+.page-header {
+    padding-top: calc(var(--nav-height) + 6rem);
+    padding-bottom: 2rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10
+}
+
+.page-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    color: var(--mrc);
+    background: rgba(244, 66, 52, .1);
+    border: 1px solid rgba(244, 66, 52, .2);
+    padding: .5rem 1rem;
+    border-radius: 99px;
+    margin-bottom: 1.5rem
+}
+
+.page-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1rem
+}
+
+.terminal-container {
+    max-width: 900px;
+    margin: 0 auto 6rem;
+    position: relative;
+    z-index: 10
+}
+
+.terminal-header {
+    background: var(--bg-surface-elevated);
+    padding: 1rem 1.5rem;
+    border-radius: 1.5rem 1.5rem 0 0;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    border-bottom: 1px solid var(--glass-border)
+}
+
+.term-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%
+}
+
+.term-dot.red {
+    background: #ff5f56
+}
+
+.term-dot.yellow {
+    background: #ffbd2e
+}
+
+.term-dot.green {
+    background: #27c93f
+}
+
+.term-title {
+    margin-left: 1rem;
+    font-family: var(--font-mono);
+    font-size: .8rem;
+    color: var(--text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.terminal-body {
+    background: rgba(9, 9, 11, .85);
+    padding: 2.5rem;
+    border-radius: 0 0 1.5rem 1.5rem;
+    overflow-x: auto
+}
+
+#license-content {
+    font-family: var(--font-mono);
+    font-size: .95rem;
+    line-height: 1.7;
+    color: #e2e8f0;
+    white-space: pre-wrap;
+    word-wrap: break-word
+}
+
+@media (max-width: 768px) {
+    #license-content {
+        white-space: pre;
+    }
+}
