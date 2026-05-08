@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+    <!-- SEO Meta Tags -->
+    <meta name="theme-color" content="#f44234">
+    <meta name="title" content="Brand & Copyright Policy | MainRoute Core" />
+    <meta name="description" content="Official brand guidelines, trademark policies, and copyright information for MainRoute Core." />
+    
+    <!-- Icons & Manifest -->
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://avatars.githubusercontent.com/u/249983472?s=192&v=4">
+    <link href="https://avatars.githubusercontent.com/u/249983472?s=180&v=4" rel="apple-touch-icon" sizes="180x180" />
+
+    <title>Brand & Copyright Policy | MainRoute Core</title>
+
+    <!-- Custom Font -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf" rel="stylesheet">
+
+    <!-- 100% INTERNAL CSS (No Frameworks) -->
+    <style>
+        @font-face {
+            font-family: 'Core Sans';
+            src: url(https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf);
+            font-display: swap;
+        }
+
+        :root {
+            /* Core Colors */
+            --mrc: #f44234;
+            --mrc-light: #ff7063;
+            --mrc-glow: rgba(244, 66, 52, 0.4);
+            
+            /* Material Dark Theme */
+            --bg-dark: #09090b;
+            --bg-surface: #18181b;
+            --bg-surface-elevated: #27272a;
+            
+            /* Text */
+            --text-main: #f8fafc;
+            --text-muted: #a1a1aa;
+            
+            /* Glassmorphism */
+            --glass-bg: rgba(24, 24, 27, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+            /* Typography */
+            --font-sans: 'Core Sans', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Space Mono', ui-monospace, monospace;
+            
+            /* Layout */
+            --container-width: 1280px;
+            --nav-height: 80px;
+        }
+
+        /* Base Resets */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.5;
+        }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        img, svg { max-width: 100%; display: block; }
+        button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+        /* Icon Styles */
+        .icon { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* Typography */
+        .text-mrc { color: var(--mrc); }
+        .text-muted { color: var(--text-muted); }
+        .font-mono { font-family: var(--font-mono); }
+        .uppercase { text-transform: uppercase; letter-spacing: 0.05em; }
+        .font-black { font-weight: 900; }
+        .font-bold { font-weight: 700; }
+
+        /* Loading Screen */
+        #loader {
+            position: fixed; inset: 0; z-index: 99999;
+            background: var(--bg-dark);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+        }
+        .loader-ring {
+            width: 60px; height: 60px;
+            border: 4px solid var(--glass-border);
+            border-top-color: var(--mrc);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        /* Scroll Progress Bar */
+        #scroll-progress-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 4px;
+            background: transparent; z-index: 10000;
+        }
+        #scroll-progress {
+            height: 100%; width: 0%; background: var(--mrc);
+            box-shadow: 0 0 10px var(--mrc-glow);
+            transition: width 0.1s ease-out;
+        }
+
+        /* Layout & Utilities */
+        .container { width: 100%; max-width: var(--container-width); margin: 0 auto; padding: 0 1.5rem; }
+        .section { padding: clamp(3rem, 6vw, 6rem) 0; position: relative; z-index: 10; }
+        .flex { display: flex; }
+        .flex-col { display: flex; flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-center { justify-content: center; }
+        .gap-4 { gap: 1rem; } 
+        .gap-8 { gap: 2rem; }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            box-shadow: var(--glass-shadow);
+        }
+
+        /* Background Effects */
+        .tech-grid {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            background-image: linear-gradient(var(--glass-border) 1px, transparent 1px), linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+        }
+        .ambient-orb {
+            position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15; z-index: -1;
+            background: var(--mrc);
+            animation: float 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, -50px) scale(1.1); } }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Navigation */
+        .header { position: fixed; top: 1rem; left: 1rem; right: 1rem; z-index: 100; transition: transform 0.3s ease; }
+        @media (min-width: 1024px) { .header { top: 1.5rem; left: 2rem; right: 2rem; } }
+        
+        .nav-bar { padding: 0.75rem 1.5rem; border-radius: 9999px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 900; letter-spacing: -0.05em; }
+        .nav-logo img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--mrc); }
+        
+        .desktop-nav { display: none; align-items: center; gap: 2rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; }
+        .desktop-nav a { position: relative; color: var(--text-muted); padding: 0.5rem 0; }
+        .desktop-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: var(--mrc); transition: width 0.3s; }
+        .desktop-nav a:hover { color: #fff; }
+        .desktop-nav a:hover::after { width: 100%; }
+
+        .system-status { display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.05); padding: 0.4rem 1rem; border-radius: 99px; font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em; }
+        .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+        .mobile-menu-btn { display: block; color: #fff; padding: 0.5rem; }
+        .mobile-menu {
+            position: absolute; top: 120%; left: 0; width: 100%; padding: 1.5rem;
+            display: flex; flex-direction: column; gap: 1rem;
+            opacity: 0; visibility: hidden; transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mobile-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .mobile-menu a { font-size: 1.2rem; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem; }
+        .mobile-menu a:hover { background: rgba(255,255,255,0.05); color: var(--mrc); }
+
+        @media (min-width: 1024px) {
+            .desktop-nav { display: flex; }
+            .mobile-menu-btn, .mobile-menu { display: none !important; }
+        }
+
+        /* Page specific styling for Brand Policy */
+        .page-header {
+            padding-top: calc(var(--nav-height) + 6rem);
+            padding-bottom: 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .page-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        .page-subtitle {
+            font-family: var(--font-mono);
+            color: var(--mrc);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: rgba(244, 66, 52, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 99px;
+            display: inline-block;
+            border: 1px solid rgba(244, 66, 52, 0.2);
+        }
+
+        /* Long-form Content Area */
+        .prose-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 4rem;
+        }
+        .prose {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        .prose h2 {
+            color: #fff;
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .prose h2::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 24px;
+            background: var(--mrc);
+            border-radius: 4px;
+        }
+        .prose h2:first-child { margin-top: 0; }
+        .prose p { margin-bottom: 1.5rem; }
+        .prose ul { margin-bottom: 1.5rem; padding-left: 1.5rem; list-style-type: disc; }
+        .prose li { margin-bottom: 0.5rem; }
+        .prose a { color: var(--mrc); text-decoration: underline; text-decoration-color: rgba(244, 66, 52, 0.3); text-underline-offset: 4px; }
+        .prose a:hover { text-decoration-color: var(--mrc); }
+
+        /* Brand Color Showcase */
+        .color-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255,255,255,0.05);
+            padding: 0.5rem 1rem 0.5rem 0.5rem;
+            border-radius: 99px;
+            border: 1px solid var(--glass-border);
+            margin-top: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: #fff;
+        }
+        .color-swatch {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--mrc);
+            box-shadow: 0 0 10px var(--mrc-glow);
+        }
+
+        /* Footer */
+        .footer { background: var(--bg-surface); padding: 4rem 0 2rem; border-top: 1px solid var(--glass-border); }
+        .social-btn { width: 44px; height: 44px; border-radius: 50%; background: var(--bg-surface-elevated); display: flex; justify-content: center; align-items: center; transition: all 0.3s; border: 1px solid var(--glass-border); }
+        .social-btn:hover { background: var(--mrc); color: #fff; transform: translateY(-3px); border-color: var(--mrc); }
+
+        /* Animations Classes */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-100 { transition-delay: 100ms; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: rgba(244, 66, 52, 0.5); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--mrc); }
+    </style>
+</head>
+
+<body>
+
+    <!-- Inline SVG Sprite for Icons -->
+    <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="icon-menu" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></symbol>
+        <symbol id="icon-github" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></symbol>
+        <symbol id="icon-twitter" viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></symbol>
+        <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></symbol>
+    </svg>
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="loader-ring"></div>
+        <div class="font-mono text-mrc font-bold tracking-widest uppercase" style="font-size: 0.8rem;">Verifying Identity...</div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress-container">
+        <div id="scroll-progress"></div>
+    </div>
+
+    <!-- Ambient Backgrounds -->
+    <div class="tech-grid"></div>
+    <div class="ambient-orb" style="width: 40vw; height: 40vw; top: -10%; left: -10%;"></div>
+    <div class="ambient-orb" style="width: 30vw; height: 30vw; bottom: 10%; right: -5%; opacity: 0.1; animation-delay: -5s;"></div>
+
+    <!-- Navigation -->
+    <header class="header" id="navbar">
+        <div class="nav-bar glass-panel">
+            <a href="/" class="nav-logo">
+                <img src="https://avatars.githubusercontent.com/u/249983472" alt="MRC Logo">
+                <span style="color:var(--text-main);">MainRoute <span class="text-mrc">Core</span></span>
+            </a>
+
+            <nav class="desktop-nav">
+                <a href="/">Home</a>
+                <a href="/#expertise">Expertise</a>
+                <a href="/#workflow">Workflow</a>
+                <a href="/#open-source">Open Source</a>
+                <div style="width: 1px; height: 16px; background: var(--glass-border);"></div>
+                <div class="system-status">
+                    <div class="status-dot"></div> Active
+                </div>
+            </nav>
+
+            <button id="mobile-menu-btn" class="mobile-menu-btn">
+                <svg class="icon"><use href="#icon-menu"></use></svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="mobile-menu glass-panel">
+            <a href="/">Home</a>
+            <a href="/#expertise">Expertise</a>
+            <a href="/#workflow">Workflow</a>
+            <a href="/#open-source">Open Source</a>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <main style="position: relative; z-index: 10;">
+        
+        <div class="page-header reveal">
+            <div class="page-subtitle mb-4">Intellectual Property</div>
+            <h1 class="page-title">Brand & Copyright Policy</h1>
+            <p class="text-muted" style="font-size: 1.1rem;">Effective Date: May 8, 2026</p>
+        </div>
+
+        <div class="container">
+            <div class="glass-panel prose-container reveal delay-100">
+                <div class="prose">
+                    <h2>1. Ownership and Copyright</h2>
+                    <p>All content, designs, text, graphics, interfaces, and code contained within the MainRoute Core website and its proprietary products are the exclusive property of <strong>M Ramzan Ch</strong> and <strong>Pro Bandey</strong>. These assets are protected by international copyright laws. </p>
+                    <p><strong>Copyright Statement:</strong> © 2026 MainRoute Core. All rights reserved.</p>
+
+                    <h2>2. Trademarks and Brand Names</h2>
+                    <p>The names <strong>"MainRoute Core"</strong>, <strong>"MR Core"</strong>, <strong>"MRC"</strong>, <strong>"Pro Bandey"</strong>, and <strong>"M Ramzan Ch"</strong>, as well as their respective logos, are trademarks and service marks belonging to us.</p>
+                    <p>You may not use these trademarks in any manner that is likely to cause confusion among customers, or in any manner that disparages, discredits, or implies false endorsement by MainRoute Core. Use of our brand names in third-party marketing, domain names, or social media handles is strictly prohibited without prior written consent.</p>
+
+                    <h2>3. Visual Identity and Assets</h2>
+                    <p>When permitted to use our visual assets (such as for press releases or authorized partnerships), you must strictly adhere to our visual identity guidelines. Our brand relies heavily on its designated color scheme and typography.</p>
+                    <ul>
+                        <li><strong>Primary Brand Color:</strong> Our official Core Red must be maintained exactly.
+                            <br>
+                            <span class="color-box">
+                                <span class="color-swatch"></span> HEX: #f44234
+                            </span>
+                        </li>
+                        <li><strong>Modifications Prohibited:</strong> You must not stretch, distort, re-color, or overlay graphics on the MainRoute Core logo or the Pro Bandey insignia.</li>
+                    </ul>
+
+                    <h2>4. Open Source vs. Proprietary Code</h2>
+                    <p>MainRoute Core actively contributes to the FOSS (Free and Open Source Software) community. Code repositories made publicly available by us under licenses such as MIT or GPL may be used according to the terms of those specific licenses.</p>
+                    <p><strong>However:</strong> The open-source nature of the code does <em>not</em> grant you the right to use the MainRoute Core logo, the "MainRoute Core" name, or the "Pro Bandey" branding for commercial distribution of derivative works. You must re-brand any forked or derived software to avoid trademark infringement.</p>
+
+                    <h2>5. Acceptable Use and References</h2>
+                    <p>You may refer to MainRoute Core or our open-source tools in a factual manner (e.g., "This project was built using tools developed by MainRoute Core"). Factual, non-commercial references do not require explicit permission, provided they do not suggest partnership, sponsorship, or endorsement.</p>
+
+                    <h2>6. Copyright Infringement & Takedown</h2>
+                    <p>MainRoute Core respects the intellectual property of others and asks that users of our services do the same. If you believe your copyrighted work has been copied in a way that constitutes copyright infringement and is accessible via our website, please notify us immediately.</p>
+                    <p>Conversely, if we find that our proprietary code, designs, or branding have been stolen, mirrored, or utilized without authorization, we reserve the right to issue formal DMCA takedown notices and pursue legal action.</p>
+
+                    <h2>7. Contact the Legal Team</h2>
+                    <p>For requests pertaining to brand usage permissions, press kits, or to report a trademark/copyright violation, please contact us directly:</p>
+                    <p><strong>Email:</strong> <a href="mailto:tellus@mrc.com">tellus@mrc.com</a><br>
+                    <strong>Location:</strong> Punjab, Pakistan</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8" style="border-bottom: 1px solid var(--glass-border); padding-bottom: 3rem; margin-bottom: 2rem;">
+                <div class="flex items-center gap-4">
+                    <img src="https://avatars.githubusercontent.com/u/249983472" style="width: 48px; height: 48px; border-radius: 50%; filter: grayscale(1);" alt="Logo">
+                    <div>
+                        <div class="font-black uppercase" style="font-size: 1.5rem; letter-spacing: -0.05em;">MainRoute <span class="text-mrc">Core</span></div>
+                        <div class="font-mono text-muted" style="font-size: 0.75rem;">Innovating Tomorrow, Today.</div>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <a href="#" class="social-btn"><svg class="icon"><use href="#icon-github"></use></svg></a>
+                    <a href="#" class="social-btn"><svg class="icon"><use href="#icon-twitter"></use></svg></a>
+                    <a href="#" class="social-btn"><svg class="icon"><use href="#icon-linkedin"></use></svg></a>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between items-center text-center gap-4 text-muted font-mono" style="font-size: 0.8rem;">
+                <p>&copy; <span id="year"></span> MainRoute Core. M Ramzan Ch | Pro Bandey. All rights reserved.</p>
+                <div class="flex gap-6 justify-center">
+                    <a href="/Privacy/">Privacy Policy</a>
+                    <a href="/Terms/">Terms of Service</a>
+                    <a href="/Brand/">Brand Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 100% VANILLA JS LOGIC -->
+    <script>
+        // Loader Removal
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => { loader.classList.add('hidden'); }, 300); 
+        });
+
+        // Set Footer Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Scroll Progress Bar & Header Shrink
+        const progressBar = document.getElementById('scroll-progress');
+        const header = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + '%';
+
+            if (winScroll > 50) {
+                header.style.transform = "translateY(-0.5rem)";
+            } else {
+                header.style.transform = "translateY(0)";
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Intersection Observer for Animations
+        const observerOptions = {
+            root: null, rootMargin: '0px', threshold: 0.1
+        };
+
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            scrollObserver.observe(el);
+        });
+    </script>
+</body>
+</html>
