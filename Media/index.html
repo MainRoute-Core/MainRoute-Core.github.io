@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+    <!-- SEO Meta Tags -->
+    <meta name="theme-color" content="#f44234">
+    <meta name="title" content="Media & Press Kit | MainRoute Core" />
+    <meta name="description" content="Official brand assets, downloadable logos, color palettes, and company boilerplates for MainRoute Core." />
+    
+    <!-- Icons & Manifest -->
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://avatars.githubusercontent.com/u/249983472?s=192&v=4">
+    <link href="https://avatars.githubusercontent.com/u/249983472?s=180&v=4" rel="apple-touch-icon" sizes="180x180" />
+
+    <title>Media & Brand Assets | MainRoute Core</title>
+
+    <!-- Custom Font -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf" rel="stylesheet">
+
+    <!-- 100% INTERNAL CSS (No Frameworks) -->
+    <style>
+        @font-face {
+            font-family: 'Core Sans';
+            src: url(https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf);
+            font-display: swap;
+        }
+
+        :root {
+            /* Core Colors */
+            --mrc: #f44234;
+            --mrc-light: #ff7063;
+            --mrc-glow: rgba(244, 66, 52, 0.4);
+            
+            /* Material Dark Theme */
+            --bg-dark: #09090b;
+            --bg-surface: #18181b;
+            --bg-surface-elevated: #27272a;
+            
+            /* Text */
+            --text-main: #f8fafc;
+            --text-muted: #a1a1aa;
+            
+            /* Glassmorphism */
+            --glass-bg: rgba(24, 24, 27, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+            /* Typography */
+            --font-sans: 'Core Sans', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Space Mono', ui-monospace, monospace;
+            
+            /* Layout */
+            --container-width: 1280px;
+            --nav-height: 80px;
+        }
+
+        /* Base Resets */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.5;
+        }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        img, svg { max-width: 100%; display: block; }
+        button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+        /* Icon Styles */
+        .icon { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* Typography Utilities */
+        .text-mrc { color: var(--mrc); }
+        .text-muted { color: var(--text-muted); }
+        .font-mono { font-family: var(--font-mono); }
+        .uppercase { text-transform: uppercase; letter-spacing: 0.05em; }
+        .font-black { font-weight: 900; }
+        .font-bold { font-weight: 700; }
+        .text-center { text-align: center; }
+
+        /* Loading Screen */
+        #loader {
+            position: fixed; inset: 0; z-index: 99999;
+            background: var(--bg-dark);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+        }
+        .loader-ring {
+            width: 60px; height: 60px;
+            border: 4px solid var(--glass-border);
+            border-top-color: var(--mrc);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        /* Scroll Progress Bar */
+        #scroll-progress-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 4px;
+            background: transparent; z-index: 10000;
+        }
+        #scroll-progress {
+            height: 100%; width: 0%; background: var(--mrc);
+            box-shadow: 0 0 10px var(--mrc-glow);
+            transition: width 0.1s ease-out;
+        }
+
+        /* Layout & Utilities */
+        .container { width: 100%; max-width: var(--container-width); margin: 0 auto; padding: 0 1.5rem; }
+        .section { padding: clamp(3rem, 6vw, 6rem) 0; position: relative; z-index: 10; }
+        .flex { display: flex; }
+        .flex-col { display: flex; flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-center { justify-content: center; }
+        .gap-2 { gap: 0.5rem; } .gap-4 { gap: 1rem; } .gap-6 { gap: 1.5rem; } .gap-8 { gap: 2rem; }
+        
+        .grid { display: grid; gap: 2rem; }
+        @media (min-width: 768px) {
+            .grid-2 { grid-template-columns: repeat(2, 1fr); }
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            .grid-4 { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            box-shadow: var(--glass-shadow);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; border: 1px solid transparent;
+        }
+        .btn-primary { background: var(--mrc); color: #fff; box-shadow: 0 4px 15px var(--mrc-glow); }
+        .btn-primary:hover { background: var(--mrc-light); transform: translateY(-2px); box-shadow: 0 6px 20px var(--mrc-glow); }
+        
+        .btn-outline { background: rgba(255,255,255,0.05); border-color: var(--glass-border); color: var(--text-main); }
+        .btn-outline:hover { border-color: var(--mrc); background: rgba(244, 66, 52, 0.1); color: var(--mrc); transform: translateY(-2px); }
+
+        .btn-sm { padding: 0.5rem 1rem; font-size: 0.75rem; border-radius: 0.5rem; }
+
+        /* Background Effects */
+        .tech-grid {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            background-image: linear-gradient(var(--glass-border) 1px, transparent 1px), linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+        }
+        .ambient-orb {
+            position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15; z-index: -1;
+            background: var(--mrc);
+            animation: float 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, -50px) scale(1.1); } }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Navigation */
+        .header { position: fixed; top: 1rem; left: 1rem; right: 1rem; z-index: 100; transition: transform 0.3s ease; }
+        @media (min-width: 1024px) { .header { top: 1.5rem; left: 2rem; right: 2rem; } }
+        
+        .nav-bar { padding: 0.75rem 1.5rem; border-radius: 9999px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 900; letter-spacing: -0.05em; }
+        .nav-logo img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--mrc); }
+        
+        .desktop-nav { display: none; align-items: center; gap: 2rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; }
+        .desktop-nav a { position: relative; color: var(--text-muted); padding: 0.5rem 0; }
+        .desktop-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: var(--mrc); transition: width 0.3s; }
+        .desktop-nav a:hover { color: #fff; }
+        .desktop-nav a:hover::after { width: 100%; }
+
+        .system-status { display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.05); padding: 0.4rem 1rem; border-radius: 99px; font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em; }
+        .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+        .mobile-menu-btn { display: block; color: #fff; padding: 0.5rem; }
+        .mobile-menu {
+            position: absolute; top: 120%; left: 0; width: 100%; padding: 1.5rem;
+            display: flex; flex-direction: column; gap: 1rem;
+            opacity: 0; visibility: hidden; transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mobile-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .mobile-menu a { font-size: 1.2rem; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem; }
+        .mobile-menu a:hover { background: rgba(255,255,255,0.05); color: var(--mrc); }
+
+        @media (min-width: 1024px) {
+            .desktop-nav { display: flex; }
+            .mobile-menu-btn, .mobile-menu { display: none !important; }
+        }
+
+        /* Page Headers */
+        .page-header { padding-top: calc(var(--nav-height) + 5rem); padding-bottom: 3rem; text-align: center; max-width: 900px; margin: 0 auto; position: relative; z-index: 10; }
+        .page-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--mrc); background: rgba(244, 66, 52, 0.1); border: 1px solid rgba(244, 66, 52, 0.2); padding: 0.5rem 1rem; border-radius: 99px; margin-bottom: 1.5rem; }
+        .page-title { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        .text-gradient { background: linear-gradient(135deg, #fff 0%, var(--mrc) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .page-desc { font-size: clamp(1rem, 2vw, 1.15rem); color: var(--text-muted); line-height: 1.7; }
+
+        /* Media Components */
+        .section-title-sm { font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .section-title-sm::before { content: ''; display: block; width: 6px; height: 20px; background: var(--mrc); border-radius: 4px; }
+        
+        /* Copy Boilerplate */
+        .boilerplate-box { background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); border-radius: 1rem; padding: 2rem; position: relative; transition: border-color 0.3s; }
+        .boilerplate-box:hover { border-color: rgba(255,255,255,0.1); }
+        .boilerplate-text { font-size: 1.05rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 1.5rem; }
+
+        /* Logo Cards */
+        .logo-card { border: 1px solid var(--glass-border); border-radius: 1rem; overflow: hidden; display: flex; flex-direction: column; background: var(--bg-surface-elevated); }
+        .logo-display { height: 200px; display: flex; align-items: center; justify-content: center; position: relative; }
+        .logo-display.dark { background: var(--bg-dark); }
+        .logo-display.light { background: #f8fafc; }
+        .logo-actions { padding: 1.5rem; border-top: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); }
+
+        /* Color Palette Interactive */
+        .color-card { border: 1px solid var(--glass-border); border-radius: 1rem; overflow: hidden; cursor: pointer; transition: transform 0.3s, border-color 0.3s; background: var(--bg-surface-elevated); }
+        .color-card:hover { transform: translateY(-5px); border-color: var(--mrc); }
+        .color-display { height: 120px; width: 100%; transition: opacity 0.3s; }
+        .color-card:hover .color-display { opacity: 0.9; }
+        .color-info { padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+        .color-hex { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); }
+
+        /* Exec Assets */
+        .exec-card { border: 1px solid var(--glass-border); border-radius: 1rem; overflow: hidden; background: var(--bg-surface-elevated); }
+        .exec-img { width: 100%; height: 300px; object-fit: cover; filter: grayscale(0.8); transition: filter 0.4s; }
+        .exec-card:hover .exec-img { filter: grayscale(0); }
+        .exec-info { padding: 1.5rem; }
+
+        /* Toast Notification */
+        #toast {
+            position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: var(--mrc); color: white; padding: 0.75rem 2rem; border-radius: 99px;
+            font-weight: 700; font-size: 0.9rem; letter-spacing: 0.05em; box-shadow: 0 10px 30px var(--mrc-glow);
+            opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10000;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; visibility: visible; }
+
+        /* Footer */
+        .footer { background: var(--bg-surface); padding: 4rem 0 2rem; border-top: 1px solid var(--glass-border); position: relative; z-index: 10; }
+        .social-btn { width: 44px; height: 44px; border-radius: 50%; background: var(--bg-surface-elevated); display: flex; justify-content: center; align-items: center; transition: all 0.3s; border: 1px solid var(--glass-border); }
+        .social-btn:hover { background: var(--mrc); color: #fff; transform: translateY(-3px); border-color: var(--mrc); }
+
+        /* Vanilla JS Animations Classes */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .scale-in { opacity: 0; transform: scale(0.95); transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .scale-in.active { opacity: 1; transform: scale(1); }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: rgba(244, 66, 52, 0.5); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--mrc); }
+    </style>
+</head>
+
+<body>
+
+    <!-- Inline SVG Sprite for Icons -->
+    <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="icon-menu" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></symbol>
+        <symbol id="icon-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></symbol>
+        <symbol id="icon-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></symbol>
+        <symbol id="icon-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></symbol>
+        <symbol id="icon-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></symbol>
+        <symbol id="icon-github" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></symbol>
+        <symbol id="icon-twitter" viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></symbol>
+        <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></symbol>
+    </svg>
+
+    <!-- Global Toast Notification -->
+    <div id="toast">
+        <svg class="icon"><use href="#icon-check"></use></svg> Copied to clipboard!
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="loader-ring"></div>
+        <div class="font-mono text-mrc font-bold tracking-widest text-sm uppercase">Loading Assets...</div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress-container">
+        <div id="scroll-progress"></div>
+    </div>
+
+    <!-- Ambient Backgrounds -->
+    <div class="tech-grid"></div>
+    <div class="ambient-orb" style="width: 40vw; height: 40vw; top: 0%; left: -10%;"></div>
+    <div class="ambient-orb" style="width: 30vw; height: 30vw; bottom: 20%; right: -5%; opacity: 0.1; animation-delay: -5s;"></div>
+
+    <!-- Navigation -->
+    <header class="header" id="navbar">
+        <div class="nav-bar glass-panel">
+            <a href="/" class="nav-logo">
+                <img src="https://avatars.githubusercontent.com/u/249983472" alt="MRC Logo">
+                <span style="color:var(--text-main);">MainRoute <span class="text-mrc">Core</span></span>
+            </a>
+
+            <nav class="desktop-nav">
+                <a href="/">Home</a>
+                <a href="/#expertise">Expertise</a>
+                <a href="/#workflow">Workflow</a>
+                <a href="/#open-source">Open Source</a>
+                <div style="width: 1px; height: 16px; background: var(--glass-border);"></div>
+                <div class="system-status">
+                    <div class="status-dot"></div> Active
+                </div>
+            </nav>
+
+            <button id="mobile-menu-btn" class="mobile-menu-btn">
+                <svg class="icon"><use href="#icon-menu"></use></svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="mobile-menu glass-panel">
+            <a href="/">Home</a>
+            <a href="/#expertise">Expertise</a>
+            <a href="/#workflow">Workflow</a>
+            <a href="/#open-source">Open Source</a>
+        </div>
+    </header>
+
+    <!-- Header Section -->
+    <section class="page-header reveal">
+        <div class="page-tag">
+            <svg class="icon" style="width:14px; height:14px;"><use href="#icon-image"></use></svg> 
+            Press & Media
+        </div>
+        <h1 class="page-title">
+            Brand <span class="text-gradient">Assets.</span>
+        </h1>
+        <p class="page-desc">
+            Everything you need to feature MainRoute Core
