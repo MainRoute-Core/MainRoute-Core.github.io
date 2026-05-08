@@ -4,43 +4,567 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <!--  CSS -->
-    <link rel="stylesheet" href="/css/global.css">
+
+    <!-- SEO Meta Tags -->
+    <meta name="theme-color" content="#f44234">
+    <meta name="title" content="Media & Press Kit | MainRoute Core" />
+    <meta name="description" content="Official brand assets, logos, color palettes, and company boilerplates for MainRoute Core." />
+    
+    <!-- Icons & Manifest -->
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://avatars.githubusercontent.com/u/249983472?s=192&v=4">
+    <link href="https://avatars.githubusercontent.com/u/249983472?s=180&v=4" rel="apple-touch-icon" sizes="180x180" />
+
+    <title>Media & Brand Assets | MainRoute Core</title>
+
+    <!-- Custom Font -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf" rel="stylesheet">
+
+    <!-- 100% INTERNAL CSS (No Frameworks) -->
+    <style>
+        @font-face {
+            font-family: 'Core Sans';
+            src: url(https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf);
+            font-display: swap;
+        }
+
+        :root {
+            /* Core Colors */
+            --mrc: #f44234;
+            --mrc-light: #ff7063;
+            --mrc-glow: rgba(244, 66, 52, 0.4);
+            
+            /* Material Dark Theme */
+            --bg-dark: #09090b;
+            --bg-surface: #18181b;
+            --bg-surface-elevated: #27272a;
+            
+            /* Text */
+            --text-main: #f8fafc;
+            --text-muted: #a1a1aa;
+            
+            /* Glassmorphism */
+            --glass-bg: rgba(24, 24, 27, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+            /* Typography */
+            --font-sans: 'Core Sans', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Space Mono', ui-monospace, monospace;
+            
+            /* Layout */
+            --container-width: 1280px;
+            --nav-height: 80px;
+        }
+
+        /* Base Resets */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.5;
+        }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        img, svg { max-width: 100%; display: block; }
+        button { cursor: pointer; border: none; background: none; font-family: inherit; color: inherit; }
+
+        /* Icon Styles */
+        .icon { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* Typography Utilities */
+        .text-mrc { color: var(--mrc); }
+        .text-muted { color: var(--text-muted); }
+        .font-mono { font-family: var(--font-mono); }
+        .uppercase { text-transform: uppercase; letter-spacing: 0.05em; }
+        .font-black { font-weight: 900; }
+        .font-bold { font-weight: 700; }
+        .text-center { text-align: center; }
+
+        /* Loading Screen */
+        #loader {
+            position: fixed; inset: 0; z-index: 99999;
+            background: var(--bg-dark);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+        }
+        .loader-ring {
+            width: 60px; height: 60px;
+            border: 4px solid var(--glass-border);
+            border-top-color: var(--mrc);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        /* Scroll Progress Bar */
+        #scroll-progress-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 4px;
+            background: transparent; z-index: 10000;
+        }
+        #scroll-progress {
+            height: 100%; width: 0%; background: var(--mrc);
+            box-shadow: 0 0 10px var(--mrc-glow);
+            transition: width 0.1s ease-out;
+        }
+
+        /* Layout & Utilities */
+        .container { width: 100%; max-width: var(--container-width); margin: 0 auto; padding: 0 1.5rem; }
+        .section { padding: clamp(4rem, 8vw, 8rem) 0; position: relative; z-index: 10; }
+        .flex { display: flex; }
+        .flex-col { display: flex; flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-center { justify-content: center; }
+        .gap-2 { gap: 0.5rem; } .gap-4 { gap: 1rem; } .gap-6 { gap: 1.5rem; } .gap-8 { gap: 2rem; }
+        
+        .grid { display: grid; gap: 2rem; }
+        @media (min-width: 768px) {
+            .grid-2 { grid-template-columns: repeat(2, 1fr); }
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            box-shadow: var(--glass-shadow);
+        }
+
+        /* Background Effects */
+        .tech-grid {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            background-image: linear-gradient(var(--glass-border) 1px, transparent 1px), linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+        }
+        .ambient-orb {
+            position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15; z-index: -1;
+            background: var(--mrc);
+            animation: float 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, -50px) scale(1.1); } }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Navigation */
+        .header { position: fixed; top: 1rem; left: 1rem; right: 1rem; z-index: 100; transition: transform 0.3s ease; }
+        @media (min-width: 1024px) { .header { top: 1.5rem; left: 2rem; right: 2rem; } }
+        
+        .nav-bar { padding: 0.75rem 1.5rem; border-radius: 9999px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 900; letter-spacing: -0.05em; }
+        .nav-logo img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--mrc); }
+        
+        .desktop-nav { display: none; align-items: center; gap: 2rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; }
+        .desktop-nav a { position: relative; color: var(--text-muted); padding: 0.5rem 0; }
+        .desktop-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: var(--mrc); transition: width 0.3s; }
+        .desktop-nav a:hover { color: #fff; }
+        .desktop-nav a:hover::after { width: 100%; }
+
+        .system-status { display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.05); padding: 0.4rem 1rem; border-radius: 99px; font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em; }
+        .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+        .mobile-menu-btn { display: block; color: #fff; padding: 0.5rem; }
+        .mobile-menu {
+            position: absolute; top: 120%; left: 0; width: 100%; padding: 1.5rem;
+            display: flex; flex-direction: column; gap: 1rem;
+            opacity: 0; visibility: hidden; transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mobile-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .mobile-menu a { font-size: 1.2rem; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem; }
+        .mobile-menu a:hover { background: rgba(255,255,255,0.05); color: var(--mrc); }
+
+        @media (min-width: 1024px) {
+            .desktop-nav { display: flex; }
+            .mobile-menu-btn, .mobile-menu { display: none !important; }
+        }
+
+        /* Buttons */
+        .btn-action {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.5rem 1rem; background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border); border-radius: 0.5rem;
+            font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+        }
+        .btn-action:hover { background: var(--mrc); border-color: var(--mrc); color: #fff; }
+
+        /* Page Headers */
+        .page-header { padding-top: calc(var(--nav-height) + 6rem); padding-bottom: 2rem; text-align: center; max-width: 900px; margin: 0 auto; position: relative; z-index: 10; }
+        .page-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--mrc); background: rgba(244, 66, 52, 0.1); border: 1px solid rgba(244, 66, 52, 0.2); padding: 0.5rem 1rem; border-radius: 99px; margin-bottom: 2rem; }
+        .page-title { font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .text-gradient { background: linear-gradient(135deg, #fff 0%, var(--mrc) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .page-desc { font-size: clamp(1.1rem, 2vw, 1.35rem); color: var(--text-muted); line-height: 1.7; }
+
+        /* Media Page Specific Components */
+        .media-section-title { font-size: 2rem; font-weight: 900; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+        .media-section-title::before { content: ''; display: block; width: 6px; height: 24px; background: var(--mrc); border-radius: 3px; }
+        
+        .boilerplate-card { padding: 2rem; position: relative; display: flex; flex-direction: column; gap: 1rem; }
+        .boilerplate-text { font-size: 1.05rem; line-height: 1.7; color: var(--text-muted); }
+        .boilerplate-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; border-top: 1px solid var(--glass-border); padding-top: 1rem; }
+
+        .color-card { padding: 1.5rem; border-radius: 1.5rem; cursor: pointer; transition: transform 0.3s, border-color 0.3s; position: relative; overflow: hidden; }
+        .color-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); }
+        .color-preview { height: 100px; border-radius: 1rem; margin-bottom: 1rem; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1); }
+        .color-info { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); }
+        .copy-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; font-weight: bold; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+        .color-card.copied .copy-overlay { opacity: 1; }
+
+        .asset-card { padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; transition: transform 0.3s; }
+        .asset-card:hover { transform: translateY(-5px); border-color: var(--mrc-glow); }
+        .asset-preview { background: var(--bg-surface-elevated); border-radius: 1rem; height: 200px; display: flex; justify-content: center; align-items: center; padding: 2rem; border: 1px solid var(--glass-border); position: relative; }
+        .asset-preview img { max-height: 100%; max-width: 100%; object-fit: contain; }
+
+        /* Footer */
+        .footer { background: var(--bg-surface); padding: 4rem 0 2rem; border-top: 1px solid var(--glass-border); position: relative; z-index: 10; }
+        .social-btn { width: 44px; height: 44px; border-radius: 50%; background: var(--bg-surface-elevated); display: flex; justify-content: center; align-items: center; transition: all 0.3s; border: 1px solid var(--glass-border); }
+        .social-btn:hover { background: var(--mrc); color: #fff; transform: translateY(-3px); border-color: var(--mrc); }
+
+        /* Vanilla JS Animations Classes */
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .scale-in { opacity: 0; transform: scale(0.95); transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .scale-in.active { opacity: 1; transform: scale(1); }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: rgba(244, 66, 52, 0.5); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--mrc); }
+    </style>
 </head>
 
 <body>
 
-    <div id="loader" class="txt-mrc loader" style="pointer-events: none;">
-        <img style="height: 120px; pointer-events: none;" src="/src/mrc-nuca-loading.svg" alt="mrc-nuca-loading">
-        <div class="loader-text-wrapper">
-            <span class="loader-text-letter">I</span>
-            <span class="loader-text-letter">n</span>
-            <span class="loader-text-letter">i</span>
-            <span class="loader-text-letter">t</span>
-            <span class="loader-text-letter">i</span>
-            <span class="loader-text-letter">a</span>
-            <span class="loader-text-letter">l</span>
-            <span class="loader-text-letter">i</span>
-            <span class="loader-text-letter">z</span>
-            <span class="loader-text-letter">i</span>
-            <span class="loader-text-letter">n</span>
-            <span class="loader-text-letter">g</span>
-            <hr>
-            <span class="loader-text-letter">C</span>
-            <span class="loader-text-letter">o</span>
-            <span class="loader-text-letter">r</span>
-            <span class="loader-text-letter">e</span>
-            <div class="loader-colors"></div>
-        </div>
-           ⚠ Unable To Initialize This Page!
+    <!-- Inline SVG Sprite for Icons -->
+    <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="icon-menu" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></symbol>
+        <symbol id="icon-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></symbol>
+        <symbol id="icon-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></symbol>
+        <symbol id="icon-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></symbol>
+        <symbol id="icon-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></symbol>
+        <symbol id="icon-github" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></symbol>
+        <symbol id="icon-twitter" viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></symbol>
+        <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></symbol>
+    </svg>
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="loader-ring"></div>
+        <div class="font-mono text-mrc font-bold tracking-widest text-sm uppercase">Loading Assets...</div>
     </div>
 
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress-container">
+        <div id="scroll-progress"></div>
+    </div>
+
+    <!-- Ambient Backgrounds -->
+    <div class="tech-grid"></div>
+    <div class="ambient-orb" style="width: 40vw; height: 40vw; top: 0%; left: -10%;"></div>
+    <div class="ambient-orb" style="width: 30vw; height: 30vw; bottom: 20%; right: -5%; opacity: 0.1; animation-delay: -5s;"></div>
+
+    <!-- Navigation -->
+    <header class="header" id="navbar">
+        <div class="nav-bar glass-panel">
+            <a href="/" class="nav-logo">
+                <img src="https://avatars.githubusercontent.com/u/249983472" alt="MRC Logo">
+                <span style="color:var(--text-main);">MainRoute <span class="text-mrc">Core</span></span>
+            </a>
+
+            <nav class="desktop-nav">
+                <a href="/">Home</a>
+                <a href="/#expertise">Expertise</a>
+                <a href="/#workflow">Workflow</a>
+                <a href="/#open-source">Open Source</a>
+                <div style="width: 1px; height: 16px; background: var(--glass-border);"></div>
+                <div class="system-status">
+                    <div class="status-dot"></div> Active
+                </div>
+            </nav>
+
+            <button id="mobile-menu-btn" class="mobile-menu-btn">
+                <svg class="icon"><use href="#icon-menu"></use></svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="mobile-menu glass-panel">
+            <a href="/">Home</a>
+            <a href="/#expertise">Expertise</a>
+            <a href="/#workflow">Workflow</a>
+            <a href="/#open-source">Open Source</a>
+        </div>
+    </header>
+
+    <!-- Header Section -->
+    <section class="page-header reveal">
+        <div class="page-tag">
+            <svg class="icon" style="width:14px; height:14px;"><use href="#icon-image"></use></svg> 
+            Press Kit
+        </div>
+        <h1 class="page-title">
+            Brand Assets & <br><span class="text-gradient">Media Toolkit.</span>
+        </h1>
+        <p class="page-desc">
+            Everything you need to write about, feature, or partner with MainRoute Core. Download official logos, copy boilerplates, and view our brand guidelines.
+        </p>
+    </section>
+
+    <!-- Company Boilerplate Section -->
+    <section class="section pt-0">
+        <div class="container">
+            <h2 class="media-section-title reveal">Company Boilerplates</h2>
+            <p class="text-muted mb-8 reveal">Approved copy for press releases, event features, and partner directories.</p>
+            
+            <div class="grid grid-2 mt-8">
+                <!-- 50 Words -->
+                <div class="glass-panel boilerplate-card scale-in">
+                    <div class="font-mono text-mrc uppercase" style="font-size: 0.75rem;">Short Bio (50 Words)</div>
+                    <p class="boilerplate-text" id="bio-short">
+                        MainRoute Core is a specialized technology powerhouse led by M Ramzan Ch. Originating from Punjab, Pakistan, the collective engineers high-performance Progressive Web Apps, native Android experiences, and robust enterprise software. Operating on the "Pro Bandey" standard, MRC delivers surgical precision and agile velocity to the digital frontier.
+                    </p>
+                    <div class="boilerplate-footer">
+                        <span class="font-mono text-muted" style="font-size: 0.7rem;">47 Words</span>
+                        <button class="btn-action" onclick="copyText('bio-short', this)">
+                            <svg class="icon"><use href="#icon-copy"></use></svg> Copy Text
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 100 Words -->
+                <div class="glass-panel boilerplate-card scale-in delay-100">
+                    <div class="font-mono text-mrc uppercase" style="font-size: 0.75rem;">Long Bio (100 Words)</div>
+                    <p class="boilerplate-text" id="bio-long" style="font-size: 0.95rem;">
+                        MainRoute Core is an elite technology collective spearheaded by M Ramzan Ch and managed under the "Pro Bandey" standard of excellence. With roots tracing back to Government Graduate College Okara in Punjab, Pakistan, the team has evolved into a formidable force in modern web and mobile architecture.<br><br>
+                        Specializing in offline-first Progressive Web Apps, scalable Node.js microservices, and type-safe Kotlin applications, MainRoute Core strips away enterprise bloat to build resilient, high-velocity digital solutions. Beyond client services, the collective actively empowers the global developer ecosystem through robust open-source contributions.
+                    </p>
+                    <div class="boilerplate-footer">
+                        <span class="font-mono text-muted" style="font-size: 0.7rem;">95 Words</span>
+                        <button class="btn-action" onclick="copyText('bio-long', this)">
+                            <svg class="icon"><use href="#icon-copy"></use></svg> Copy Text
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Colors Section -->
+    <section class="section" style="background: var(--bg-surface-elevated); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
+        <div class="container">
+            <h2 class="media-section-title reveal">Brand Palette</h2>
+            <p class="text-muted mb-8 reveal">Click any color card to instantly copy its HEX code.</p>
+
+            <div class="grid grid-3 mt-8">
+                <div class="glass-panel color-card scale-in" onclick="copyColor('#f44234', this)">
+                    <div class="color-preview" style="background: #f44234; box-shadow: 0 0 20px rgba(244, 66, 52, 0.4);"></div>
+                    <div class="color-info">
+                        <span class="font-bold">Core Red</span>
+                        <span class="text-muted">#F44234</span>
+                    </div>
+                    <div class="copy-overlay text-mrc"><svg class="icon" style="margin-right:0.5rem;"><use href="#icon-check"></use></svg> Copied!</div>
+                </div>
+
+                <div class="glass-panel color-card scale-in delay-100" onclick="copyColor('#09090b', this)">
+                    <div class="color-preview" style="background: #09090b;"></div>
+                    <div class="color-info">
+                        <span class="font-bold">Abyss Dark</span>
+                        <span class="text-muted">#09090B</span>
+                    </div>
+                    <div class="copy-overlay text-mrc"><svg class="icon" style="margin-right:0.5rem;"><use href="#icon-check"></use></svg> Copied!</div>
+                </div>
+
+                <div class="glass-panel color-card scale-in delay-200" onclick="copyColor('#f8fafc', this)">
+                    <div class="color-preview" style="background: #f8fafc;"></div>
+                    <div class="color-info">
+                        <span class="font-bold" style="color: #000;">Tech White</span>
+                        <span class="text-muted">#F8FAFC</span>
+                    </div>
+                    <div class="copy-overlay text-mrc"><svg class="icon" style="margin-right:0.5rem;"><use href="#icon-check"></use></svg> Copied!</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Official Assets Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="media-section-title reveal">Official Assets</h2>
+            <p class="text-muted mb-8 reveal">High-resolution logos and founder headshots for authorized press and partner use.</p>
+
+            <div class="grid grid-3 mt-8">
+                <!-- Asset 1 -->
+                <div class="glass-panel asset-card scale-in">
+                    <div class="asset-preview">
+                        <img src="https://avatars.githubusercontent.com/u/249983472" style="border-radius: 1rem; box-shadow: 0 0 20px rgba(244, 66, 52, 0.2);" alt="MRC Primary Logo">
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-2">MainRoute Core Logo</h4>
+                        <p class="text-muted font-mono" style="font-size: 0.75rem;">Primary Mark (PNG, 512x512)</p>
+                    </div>
+                    <a href="https://avatars.githubusercontent.com/u/249983472" target="_blank" download class="btn-action" style="justify-content: center; width: 100%; margin-top: auto;">
+                        <svg class="icon"><use href="#icon-download"></use></svg> Download Asset
+                    </a>
+                </div>
+
+                <!-- Asset 2 -->
+                <div class="glass-panel asset-card scale-in delay-100">
+                    <div class="asset-preview" style="background: #fff;">
+                        <img src="https://avatars.githubusercontent.com/u/249983472" style="border-radius: 1rem; filter: grayscale(1) brightness(0.2);" alt="MRC Monochrome Logo">
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-2">MRC Logo (Monochrome)</h4>
+                        <p class="text-muted font-mono" style="font-size: 0.75rem;">Dark Use Mark (PNG, 512x512)</p>
+                    </div>
+                    <a href="https://avatars.githubusercontent.com/u/249983472" target="_blank" download class="btn-action" style="justify-content: center; width: 100%; margin-top: auto;">
+                        <svg class="icon"><use href="#icon-download"></use></svg> Download Asset
+                    </a>
+                </div>
+
+                <!-- Asset 3 -->
+                <div class="glass-panel asset-card scale-in delay-200">
+                    <div class="asset-preview" style="padding: 0; overflow: hidden; border: none;">
+                        <img src="https://avatars.githubusercontent.com/u/249983472" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(1);" alt="M Ramzan Ch Headshot">
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-2">M Ramzan Ch</h4>
+                        <p class="text-muted font-mono" style="font-size: 0.75rem;">Founder Headshot (Press Use)</p>
+                    </div>
+                    <a href="https://avatars.githubusercontent.com/u/249983472" target="_blank" download class="btn-action" style="justify-content: center; width: 100%; margin-top: auto;">
+                        <svg class="icon"><use href="#icon-download"></use></svg> Download Asset
+                    </a>
+                </div>
+            </div>
+
+            <div class="glass-panel text-center reveal delay-300" style="margin-top: 3rem; padding: 2rem;">
+                <p class="text-muted" style="font-size: 0.9rem;">
+                    Before downloading or utilizing any brand assets, please review our <br>
+                    <a href="/Brand/" class="text-mrc font-bold" style="text-decoration: underline; text-underline-offset: 4px;">Brand & Copyright Policy</a> to ensure strict compliance.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8" style="border-bottom: 1px solid var(--glass-border); padding-bottom: 3rem; margin-bottom: 2rem;">
+                <div class="flex items-center gap-4">
+                    <img src="https://avatars.githubusercontent.com/u/249983472" style="width: 48px; height: 48px; border-radius: 50%; filter: grayscale(1);" alt="Logo">
+                    <div>
+                        <div class="font-black uppercase" style="font-size: 1.5rem; letter-spacing: -0.05em;">MainRoute <span class="text-mrc">Core</span></div>
+                        <div class="font-mono text-muted" style="font-size: 0.75rem;">Innovating Tomorrow, Today.</div>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <a href="#" class="social-btn"><svg class="icon"><use href="#icon-github"></use></svg></a>
+                    <a href="#" class="social-btn"><svg class="icon"><use href="#icon-twitter"></use></svg></a>
+                    <a href="#" class="social-btn"><svg class="icon"><use href="#icon-linkedin"></use></svg></a>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between items-center text-center gap-4 text-muted font-mono" style="font-size: 0.8rem;">
+                <p>&copy; <span id="year"></span> MainRoute Core. M Ramzan Ch | Pro Bandey. All rights reserved.</p>
+                <div class="flex gap-6 justify-center">
+                    <a href="/Privacy/">Privacy Policy</a>
+                    <a href="/Terms/">Terms of Service</a>
+                    <a href="/Brand/">Brand Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 100% VANILLA JS LOGIC -->
     <script>
+        // Loader Removal
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
-            setTimeout(() => {
-                loader.classList.add('hiden');
-            }, 2000);
+            setTimeout(() => { loader.classList.add('hidden'); }, 400); 
+        });
+
+        // Set Footer Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Scroll Progress Bar & Header Shrink
+        const progressBar = document.getElementById('scroll-progress');
+        const header = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + '%';
+
+            if (winScroll > 50) {
+                header.style.transform = "translateY(-0.5rem)";
+            } else {
+                header.style.transform = "translateY(0)";
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Copy Text Function (Boilerplates)
+        function copyText(elementId, btnElement) {
+            const textToCopy = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalHTML = btnElement.innerHTML;
+                btnElement.innerHTML = `<svg class="icon"><use href="#icon-check"></use></svg> Copied!`;
+                btnElement.style.borderColor = "var(--mrc)";
+                btnElement.style.color = "var(--mrc)";
+                
+                setTimeout(() => {
+                    btnElement.innerHTML = originalHTML;
+                    btnElement.style.borderColor = "";
+                    btnElement.style.color = "";
+                }, 2000);
+            }).catch(err => console.error('Failed to copy text: ', err));
+        }
+
+        // Copy Color Function (Brand Palette)
+        function copyColor(hex, cardElement) {
+            navigator.clipboard.writeText(hex).then(() => {
+                cardElement.classList.add('copied');
+                setTimeout(() => {
+                    cardElement.classList.remove('copied');
+                }, 1500);
+            }).catch(err => console.error('Failed to copy color: ', err));
+        }
+        
+        // High-Performance Intersection Observer
+        const observerOptions = {
+            root: null, rootMargin: '0px', threshold: 0.15
+        };
+
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal, .scale-in').forEach(el => {
+            scrollObserver.observe(el);
         });
     </script>
 </body>
