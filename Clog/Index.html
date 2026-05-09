@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="refresh" content="0;url=https://mainroute-core.github.io/404">
 
     <!-- SEO Meta Tags -->
     <meta name="theme-color" content="#f44234">
@@ -379,7 +380,7 @@
                 renderFilters();
                 checkUrlRouting();
             } catch (err) {
-                document.getElementById('grid').innerHTML = '<p class="text-mrc text-center">Failed to fetch core logs. System offline.</p>';
+                document.getElementById('grid').innerHTML = '<p class="text-mrc txt-center">Failed to fetch core logs. System offline.</p>';
             } finally {
                 setTimeout(() => {
                     document.getElementById('loader').classList.add('hidden');
@@ -393,7 +394,7 @@
             const grid = document.getElementById('grid');
             
             if(data.length === 0) {
-                grid.innerHTML = '<p class="text-muted text-center" style="grid-column: 1/-1; padding: 3rem;">No logs found matching parameters.</p>';
+                grid.innerHTML = '<p class="txt-muted txt-center" style="grid-column: 1/-1; padding: 3rem;">No logs found matching parameters.</p>';
                 return;
             }
 
@@ -487,7 +488,7 @@
                 view.scrollTop = 0; // Reset scroll
 
             } catch (e) {
-                body.innerHTML = `<h2 class="text-mrc text-center" style="margin-top:20vh;">Data corruption detected. Log unavailable.</h2>`;
+                body.innerHTML = `<h2 class="text-mrc txt-center" style="margin-top:20vh;">Data corruption detected. Log unavailable.</h2>`;
                 view.classList.add('active');
                 document.body.style.overflow = 'hidden';
             } finally {

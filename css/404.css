@@ -1,0 +1,74 @@
+@import url(/css/global.css);
+
+.main-404 {
+    margin: 10rem auto auto;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+/* Div 404  */
+.div-404 {
+    content: "";
+}
+
+.div-404 .error {
+    pointer-events: none;
+}
+.div-404 .error {
+    font-size: 10rem;
+    line-height: .7;
+}
+
+.div-404 .error img {
+    height: 120px;
+    width: 120px;
+}
+
+.div-404 h2 {
+    font-size: 2.5rem;
+    margin: 1rem 0;
+}
+
+.div-404 p {
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.div-404 .btn-home-play {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    margin: 0 .5rem;
+    border-radius: 1rem;
+    background: var(--mrc);
+    color: #fff;
+    font-size: 1rem !important;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px var(--mrc-glow);
+    margin-top: 1rem;
+}
+
+.div-404 .btn-home-play:hover {
+    background: var(--mrc-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--mrc-glow);
+}
+
+/* Div 404 Game */
+
+.div-404-game {
+    content: "";
+}
+
+footer {
+    width: 100%;
+    bottom: 10px;
+}

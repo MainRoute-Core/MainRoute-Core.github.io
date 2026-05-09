@@ -5,22 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
-    <!-- PWA & SEO Meta Tags -->
     <meta name="theme-color" content="#f44234">
     <meta name="title" content="MainRoute Core | Be Passionate For Future" />
     <meta name="description" content="MainRoute Core, led by M Ramzan Ch. We engineer high-performance PWAs, enterprise software, and open-source contributions." />
-    <meta name="keywords" content="MainRoute, MainRoute Core, MR Core, MRC, M Ramzan Ch, MegaMind-Solution, Web Development, Software Development, Modifications, Git Folder Downloader, Government Graduate College Okara, Pro Bandey" />
+    <meta name="keywords" content="MainRoute, MainRoute Core, MR Core, MRC, M Ramzan Ch, MegaMind-Solution, Web Development, Software Development, Modifications, Git Folder Downloader,  Pro Bandey" />
     <meta name="author" content="M Ramzan Ch" />
     <meta name="copyright" content="MainRoute Core" />
 
-    <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mainroute-core.github.io/" />
     <meta property="og:title" content="MainRoute Core | Be Passionate For Future" />
     <meta property="og:description" content="A specialized technology powerhouse delivering PWA, open-source, and custom software solutions." />
     <meta property="og:image" content="/src/social.png" />
     
-    <!-- Icons & Manifest -->
     <script>navigator.serviceWorker.register("src/sw.js")</script> 
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="canonical" href="https://mainroute-core.github.io/">
@@ -37,10 +34,8 @@
     
     <title>MainRoute Core</title>
 
-    <!-- Custom Font -->
     <link href="/src/CoreSans-Regular_en.otf" rel="stylesheet">
 
-    <!--  CSS -->
      <link rel="stylesheet" href="/css/global.css">
      <link rel="stylesheet" href="/css/index.css">
      <style>
@@ -49,7 +44,6 @@
 
 <body>
 
-    <!-- Loading Screen -->
     <div id="loader" class="loader" style="pointer-events: none;">
         <img style="height: 120px; pointer-events: none;" src="/src/mrc-nuca-loading.svg" alt="mrc-nuca-loading">
         <div class="loader-text-wrapper">
@@ -74,17 +68,14 @@
         </div>
     </div>
 
-    <!-- Scroll Progress Bar -->
     <div id="scroll-progress-container">
         <div id="scroll-progress"></div>
     </div>
 
-    <!-- Ambient Backgrounds -->
     <div class="tech-grid"></div>
     <div class="ambient-orb first-orb"></div>
     <div class="ambient-orb second-orb"></div>
 
-    <!-- Navigation -->
     <header class="header" id="navbar">
         <div class="nav-bar glass-panel">
             <a href="/" class="nav-logo">
@@ -93,6 +84,7 @@
             </a>
             <nav class="desktop-nav">
                 <a href="/About/">About Us</a>
+                <a href="/Clog/">Clog</a>
                 <a href="/Media/">Media &amp; Press Kit</a>
                 <a href="/CopyRight/">Brand Guidelines</a>
                 <a href="/Contact/">Contact Us</a>
@@ -108,6 +100,7 @@
 
         <div id="mobile-menu" class="mobile-menu glass-panel">
             <a href="/About/">About Us</a>
+            <a href="/Clog/">Clog</a>
             <a href="/Media/">Media &amp; Press Kit</a>
             <a href="/CopyRight/">Brand Guidelines</a>
             <a href="/Contact/">Contact</a>
@@ -119,7 +112,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container grid-2">
             <div class="hero-content">
@@ -149,7 +141,6 @@
             </div>
 
             <div class="hero-graphics scale-in delay-200">
-                <!-- Abstract Graphics replacing heavy GSAP/SVGs -->
                 <div class="spin1"></div>
                 <div class="spin2" ></div>
                 <div class="spin3" ></div>
@@ -188,8 +179,6 @@
                             d="M344.766 341.732c-13.083 13.877-29.153 19.973-47.533 19.155-28.041-1.247-52.055-22.455-56.296-50.404-3.287-21.668 3.248-39.78 18.897-54.79 8.373-8.03 18.683-12.544 29.878-14.539 21.267-3.788 39.668 2.632 54.64 17.89 8.978 9.15 14.023 20.496 15.76 33.44 2.524 18.79-3.127 34.802-15.346 49.248" />
                     </svg>
                 </div>
-
-                <!-- Floating Badge -->
                 <div class="glass-panel flex items-center gap-4 pos-abs pad-2" style="bottom: 0; right: 0; border-radius: 1rem; z-index: 20; animation: float 4s infinite alternate;">
                     <img src="ProBandey/pb.png" alt="Pro Bandey" class="border-50" style="width: 40px; height: 40px; border: 2px solid var(--mrc);">
                     <div>
@@ -201,7 +190,6 @@
         </div>
     </section>
 
-    <!-- Infinite Marquee -->
     <div class="marquee">
         <div class="marquee-content">
             <span class="marquee-item marquee-stroke">Progress</span>
@@ -210,7 +198,6 @@
             <span class="marquee-item txt-mrc">Ecosystem</span>
             <span class="marquee-item marquee-stroke">Architecture</span>
             <span class="marquee-item txt-mrc">Engine</span>
-            <!-- Duplicate for seamless loop -->
             <span class="marquee-item marquee-stroke">Progress</span>
             <span class="marquee-item txt-mrc">Native</span>
             <span class="marquee-item marquee-stroke">Solution</span>
@@ -220,7 +207,6 @@
         </div>
     </div>
 
-    <!-- Stats Section -->
     <section class="section">
         <div class="container grid grid-4 stats-grid"">
             <div class="stat-item reveal">
@@ -242,7 +228,6 @@
         </div>
     </section>
 
-    <!-- Workflow Section -->
     <section id="workflow" class="section">
         <div class="container">
             <div class="section-header reveal">
@@ -276,7 +261,6 @@
         </div>
     </section>
 
-    <!-- The Arsenal (Expertise) -->
     <section id="expertise" class="section bg-surf-ela">
         <div class="pos-abs inset-0" style="background-image: radial-gradient(rgb(143 143 143 / 30%) 1px, rgb(96 83 83 / 15%) 1px); background-size: 20px 20px;"></div>
         <div class="container">
@@ -310,7 +294,6 @@
         </div>
     </section>
 
-    <!-- Tech Stack -->
     <section class="section" style="padding: 4rem 0; border-bottom: 1px solid var(--glass-border);">
         <div class="container txt-center reveal">
             <h4 class="font-mono txt-muted uppercase tracking-widest" style="font-size: 0.8rem; margin-bottom: 2.5rem;">Main Things We Focus</h4>
@@ -325,7 +308,6 @@
         </div>
     </section>
 
-    <!-- Open Source Section -->
     <section id="open-source" class="section">
         <div class="container grid-2 items-center">
             <div class="reveal">
@@ -346,7 +328,6 @@
         </div>
     </section>
 
-    <!-- Contact CTA -->
     <section id="contact" class="section bg-mrc txt-center ovfl-h">
         <div class="pos-abs inset-0" style="background-image: radial-gradient(rgb(0 0 0 / 40%) 1px, rgb(96 83 83 / 15%) 1px); background-size: 20px 20px;"></div>
         <div class="container reveal pos-rel z-ind-10" style="max-width: 800px;">
@@ -358,12 +339,9 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="mrc-footer pad-4 pos-rel">
         <div class="container pad-0">
             <div class="footer-grid">
-    
-                <!-- Column 1: Brand Info -->
                 <div class="footer-brand">
                     <div class="brand-logo flex items-start flex-row gap-2">
                         <img src="/src/mrc-nuca.svg" alt="MainRoute Core Logo">
@@ -375,20 +353,16 @@
                         <a target="_blank" href="https://www.google.com/search?q=MainRoute+Core&udm=50&aep=48" class="social-btn"><svg class="icon" style="width:1.2rem;"><use href="/src/global.svg#icon-google"></use></svg></a>
                     </div>
                 </div>
-    
-                <!-- Column 2: Quick Links -->
                 <div class="footer-col">
                     <h4 class="uppercase flex txt-main txt-center gap-1 font-md pos-rel">Navigation</h4>
                     <div class="footer-links">
-                        <a href="/">Home</a>
+                        <a class="active" href="/">Home</a>
                         <a href="/#expertise">Core Expertise</a>
                         <a href="/#workflow">Our Workflow</a>
                         <a href="/#open-source">Open Source Lab</a>
                         <a href="/About/#the-core-mind">The Core Mind</a>
                     </div>
                 </div>
-    
-                <!-- Column 3: Legal & Resources -->
                 <div class="footer-col">
                     <h4 class="uppercase flex txt-main txt-center gap-1 font-md pos-rel" >Resources</h4>
                     <div class="footer-links">
@@ -399,8 +373,6 @@
                         <a href="/License/">Usage License</a>
                     </div>
                 </div>
-    
-                <!-- Column 4: Contact -->
                 <div class="footer-col">
                     <h4 class="uppercase flex txt-main txt-center gap-1 font-md pos-rel">Connect</h4>
                     <div class="footer-links" style="margin-bottom: 1rem;">
@@ -413,7 +385,7 @@
                                 </svg></div>
                             <div class="contact-text">
                                 <strong style="color: white; display: block; margin-bottom: 2px;">Inquiries</strong>
-                                <a href="mailto:tellus@mrc.com" style="color: var(--text-muted);">tellus@mrc.com</a>
+                                <a href="mailto:tellus@mrc.com" style="color: var(--txt-muted);">tellus@mrc.com</a>
                             </div>
                         </div>
                         <div class="contact-item" style="margin-top: 1.25rem;">
@@ -428,10 +400,7 @@
                         </div>
                     </div>
                 </div>
-    
             </div>
-    
-            <!-- Footer Bottom -->
             <div class="footer-bottom">
                 <div class="footer-copy">
                     &copy; 2024-<span id="year">2024</span> MainRoute Core. <a class="txt-bold" href="https://mramzanch.blogspot.com" target="_blank">M Ramzan Ch</a> | <a class="txt-bold" href="https://github.com/Pro-Bandey" target="_blank"">Pro Bandey</a>. All Rights Reserved.
@@ -445,8 +414,8 @@
             </div>
         </div>
     </footer>
-    <!-- 100% VANILLA JS LOGIC -->
-<script src="/js/global.js"></script>
+    
+    <script src="/js/global.js"></script>
 </body>
 
 </html>
