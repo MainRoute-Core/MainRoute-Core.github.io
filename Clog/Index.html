@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+    <!-- SEO Meta Tags -->
+    <meta name="theme-color" content="#f44234">
+    <meta name="title" content="The Core Log | MainRoute Core" />
+    <meta name="description" content="Technical deep-dives, architecture updates, and engineering logs from MainRoute Core." />
+    
+    <!-- Icons & Manifest -->
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://avatars.githubusercontent.com/u/249983472?s=192&v=4">
+    <link href="https://avatars.githubusercontent.com/u/249983472?s=180&v=4" rel="apple-touch-icon" sizes="180x180" />
+
+    <title>The Core Log | MainRoute Core</title>
+
+    <!-- Custom Font -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf" rel="stylesheet">
+
+    <!-- 100% INTERNAL CSS -->
+    <style>
+        @font-face {
+            font-family: 'Core Sans';
+            src: url(https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf);
+            font-display: swap;
+        }
+
+        :root {
+            /* Core Colors */
+            --mrc: #f44234;
+            --mrc-light: #ff7063;
+            --mrc-glow: rgba(244, 66, 52, 0.4);
+            
+            --danger: #ef4444;
+            --danger-glow: rgba(239, 68, 68, 0.2);
+            --success: #10b981;
+            --info: #3b82f6;
+            --warn: #f59e0b;
+
+            /* Material Dark Theme */
+            --bg-dark: #09090b;
+            --bg-surface: #18181b;
+            --bg-surface-elevated: #27272a;
+            
+            /* Text */
+            --text-main: #f8fafc;
+            --text-muted: #a1a1aa;
+            
+            /* Glassmorphism */
+            --glass-bg: rgba(24, 24, 27, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+            /* Typography */
+            --font-sans: 'Core Sans', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Space Mono', ui-monospace, monospace;
+            
+            --nav-height: 80px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: var(--font-sans); background-color: var(--bg-dark);
+            color: var(--text-main); overflow-x: hidden;
+            -webkit-font-smoothing: antialiased; line-height: 1.6;
+        }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        img, svg { max-width: 100%; display: block; }
+        button, input { font-family: inherit; }
+
+        .icon { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .text-mrc { color: var(--mrc); }
+        .text-muted { color: var(--text-muted); }
+        .font-mono { font-family: var(--font-mono); }
+
+        /* Loading Screen */
+        #loader {
+            position: fixed; inset: 0; z-index: 99999; background: var(--bg-dark);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;
+            transition: opacity 0.4s ease, visibility 0.4s;
+        }
+        .loader-ring {
+            width: 50px; height: 50px; border: 3px solid var(--glass-border);
+            border-top-color: var(--mrc); border-radius: 50%; animation: spin 1s linear infinite;
+        }
+        #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Background Effects */
+        .tech-grid {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            background-image: linear-gradient(var(--glass-border) 1px, transparent 1px), linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+            background-size: 40px 40px; mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+        }
+        .ambient-orb {
+            position: fixed; border-radius: 50%; filter: blur(120px); opacity: 0.15; z-index: -1; background: var(--mrc);
+        }
+
+        /* Glassmorphism Panel */
+        .glass-panel {
+            background: var(--glass-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border); border-radius: 1.5rem; box-shadow: var(--glass-shadow);
+        }
+
+        /* Navigation */
+        .header { position: fixed; top: 1rem; left: 1rem; right: 1rem; z-index: 100; transition: transform 0.3s ease; }
+        @media (min-width: 1024px) { .header { top: 1.5rem; left: 2rem; right: 2rem; } }
+        .nav-bar { padding: 0.75rem 1.5rem; border-radius: 9999px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 900; letter-spacing: -0.05em; }
+        .nav-logo img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--mrc); }
+
+        /* Main List View */
+        #list-view { padding-top: calc(var(--nav-height) + 5rem); max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; min-height: 100vh; padding-bottom: 4rem;}
+        
+        .blog-controls {
+            display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;
+            margin-bottom: 3rem; padding: 0 1.5rem;
+        }
+
+        .search-box { position: relative; flex-grow: 1; max-width: 400px; }
+        .search-box input {
+            width: 100%; padding: 0.8rem 1rem 0.8rem 2.8rem; border-radius: 99px;
+            background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
+            color: white; outline: none; transition: all 0.3s ease; font-family: inherit;
+        }
+        .search-box input:focus { border-color: var(--mrc); background: rgba(244,66,52,0.03); box-shadow: 0 0 15px var(--mrc-glow); }
+        .search-box svg { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); width: 1.1rem; }
+
+        .cat-btn {
+            background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
+            padding: 0.8rem 1.5rem; border-radius: 99px; color: white; cursor: pointer;
+            display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem;
+        }
+        .cat-btn:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.2); }
+
+        #cat-panel {
+            position: absolute; right: 1.5rem; top: 120px; width: 280px; padding: 1.5rem;
+            opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; z-index: 50;
+        }
+        #cat-panel.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        
+        .tags-wrapper { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tag {
+            font-family: var(--font-mono); font-size: 0.7rem; padding: 0.4rem 0.8rem;
+            border-radius: 99px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
+            color: var(--text-muted); cursor: pointer; transition: all 0.2s;
+        }
+        .tag:hover { background: rgba(255,255,255,0.1); color: white; }
+        .tag.active { background: rgba(244,66,52,0.1); color: var(--mrc); border-color: rgba(244,66,52,0.3); }
+
+        /* Blog Grid */
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; padding: 0 1.5rem; }
+        
+        .card {
+            padding: 1.8rem; display: flex; flex-direction: column; cursor: pointer; transition: transform 0.3s, border-color 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--mrc-glow); }
+        
+        .card.status-not {
+            cursor: not-allowed; opacity: 0.7; border-color: var(--danger-glow);
+        }
+        .card.status-not:hover { transform: none; border-color: var(--danger); box-shadow: 0 0 20px var(--danger-glow); }
+
+        .card-status { font-size: 0.65rem; font-weight: 800; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; padding: 0.3rem 0.6rem; border-radius: 4px; display: inline-block; width: max-content; margin-bottom: 1rem; }
+        .status-pub { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2); }
+        .status-not { background: rgba(239, 68, 68, 0.1); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.2); }
+
+        .card-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem; line-height: 1.3; }
+        .card-date { font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 1.5rem; }
+        .card-bottom { margin-top: auto; border-top: 1px solid var(--glass-border); padding-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+        /* --- Full Blog Reader View --- */
+        #full-view {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-dark); z-index: 1000; overflow-y: auto; overflow-x: hidden;
+            opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #full-view.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        
+        .reader-nav {
+            position: sticky; top: 0; width: 100%; background: rgba(9,9,11,0.9);
+            backdrop-filter: blur(12px); border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 2rem; z-index: 101; display: flex; align-items: center;
+        }
+        .back-btn {
+            background: transparent; color: white; border: 1px solid var(--glass-border);
+            padding: 0.6rem 1.2rem; border-radius: 99px; cursor: pointer; display: flex; align-items: center; gap: 8px;
+            font-size: 0.8rem; font-weight: 700; text-transform: uppercase; transition: 0.3s;
+        }
+        .back-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
+        
+        .reader-progress-container { position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: transparent; }
+        .reader-progress { height: 100%; width: 0%; background: var(--mrc); box-shadow: 0 0 10px var(--mrc-glow); }
+
+        .article-container { max-width: 800px; margin: 0 auto; padding: 4rem 1.5rem 8rem; }
+        .hero-img { width: 100%; height: 400px; object-fit: cover; border-radius: 1.5rem; margin-bottom: 2.5rem; border: 1px solid var(--glass-border); }
+        
+        .article-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -0.02em; }
+        .article-meta { display: flex; align-items: center; gap: 1rem; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.85rem; padding-bottom: 2rem; border-bottom: 1px solid var(--glass-border); margin-bottom: 2rem; }
+
+        /* Custom Syntax Styles */
+        .blog-content { font-size: 1.1rem; line-height: 1.8; color: #d1d5db; }
+        .blog-content h2 { color: #fff; font-size: 2rem; font-weight: 800; margin: 3rem 0 1.5rem; }
+        .blog-content h3 { color: #fff; font-size: 1.5rem; font-weight: 700; margin: 2rem 0 1rem; }
+        .blog-content p { margin-bottom: 1.5rem; }
+        .blog-content a { color: var(--mrc); text-decoration: underline; text-decoration-color: rgba(244,66,52,0.3); text-underline-offset: 4px; }
+        .blog-content a:hover { text-decoration-color: var(--mrc); }
+        
+        .blog-content .note, .blog-content .warn, .blog-content .success {
+            padding: 1.5rem; border-radius: 1rem; margin: 2rem 0; border-left: 4px solid; background: rgba(255,255,255,0.02); backdrop-filter: blur(10px);
+        }
+        .blog-content .note { border-color: var(--info); color: #bfdbfe; }
+        .blog-content .warn { border-color: var(--warn); color: #fde68a; }
+        .blog-content .success { border-color: var(--success); color: #a7f3d0; }
+        
+        .blog-content pre { 
+            background: #000; color: #f8fafc; padding: 1.5rem; border: 1px solid var(--glass-border);
+            border-radius: 1rem; overflow-x: auto; margin: 2rem 0; font-family: var(--font-mono); font-size: 0.9rem;
+        }
+        .blog-content code { font-family: var(--font-mono); background: rgba(255,255,255,0.1); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+        .blog-content pre code { background: transparent; padding: 0; }
+        
+        .blog-content blockquote { border-left: 4px solid var(--mrc); padding-left: 1.5rem; font-style: italic; color: var(--text-muted); margin: 2rem 0; font-size: 1.2rem; }
+        .blog-content img.content-img { width: 100%; border-radius: 1rem; margin: 2rem 0; border: 1px solid var(--glass-border); }
+        .blog-content hr { border: none; height: 1px; background: var(--glass-border); margin: 3rem 0; }
+        
+        .blog-content table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.95rem; }
+        .blog-content td { border: 1px solid var(--glass-border); padding: 1rem; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: rgba(244, 66, 52, 0.5); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--mrc); }
+
+    </style>
+</head>
+<body>
+
+    <!-- Inline SVG Icons -->
+    <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></symbol>
+        <symbol id="icon-filter" viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></symbol>
+        <symbol id="icon-arrow-left" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></symbol>
+        <symbol id="icon-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></symbol>
+        <symbol id="icon-book-open" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></symbol>
+    </svg>
+
+    <!-- Initial Loader -->
+    <div id="loader">
+        <div class="loader-ring"></div>
+        <div class="font-mono text-mrc font-bold tracking-widest text-sm uppercase">Fetching Logs...</div>
+    </div>
+
+    <!-- Ambient Backgrounds -->
+    <div class="tech-grid"></div>
+    <div class="ambient-orb" style="width: 40vw; height: 40vw; top: -10%; left: -10%;"></div>
+
+    <!-- Navigation -->
+    <header class="header" id="navbar">
+        <div class="nav-bar glass-panel">
+            <a href="/" class="nav-logo">
+                <img src="https://avatars.githubusercontent.com/u/249983472" alt="MRC Logo">
+                <span style="color:var(--text-main);">MainRoute <span class="text-mrc">Core</span></span>
+            </a>
+            <div class="system-status" style="display:none;" id="desktop-status">
+                <div class="status-dot"></div> Logs Online
+            </div>
+        </div>
+    </header>
+
+    <!-- Main List View -->
+    <main id="list-view">
+        <div style="text-align: center; margin-bottom: 3rem; padding: 0 1.5rem;">
+            <h1 class="font-black uppercase" style="font-size: clamp(3rem, 6vw, 5rem); letter-spacing: -0.05em; line-height: 1;">The Core <span class="text-mrc">Log.</span></h1>
+            <p class="text-muted mt-2">Technical deep-dives, architecture updates, and engineering logs.</p>
+        </div>
+
+        <div class="blog-controls">
+            <div class="search-box">
+                <svg class="icon"><use href="#icon-search"></use></svg>
+                <input type="text" id="search" placeholder="Search architecture, terms, tags...">
+            </div>
+
+            <button class="cat-btn" id="catBtn">
+                <svg class="icon"><use href="#icon-filter"></use></svg> Filter Logs
+            </button>
+        </div>
+
+        <div id="cat-panel" class="glass-panel">
+            <h4 class="font-mono text-muted uppercase tracking-widest" style="font-size: 0.7rem; margin-bottom: 1rem;">Filter by Category</h4>
+            <div id="cat-list" class="tags-wrapper"></div>
+        </div>
+
+        <div class="blog-grid" id="grid">
+            <!-- JS Injection -->
+        </div>
+    </main>
+
+    <!-- Full Reader View -->
+    <div id="full-view">
+        <div class="reader-nav">
+            <button class="back-btn" id="backBtn">
+                <svg class="icon"><use href="#icon-arrow-left"></use></svg> Return
+            </button>
+            <div class="reader-progress-container">
+                <div class="reader-progress" id="read-progress"></div>
+            </div>
+        </div>
+
+        <div class="article-container" id="articleBody">
+            <!-- JS Injection -->
+        </div>
+    </div>
+
+    <!-- VANILLA JS SPA LOGIC -->
+    <script>
+        // High-Performance Data Routes
+        const INDEX_URL = "https://cdn.jsdelivr.net/gh/MainRoute-Core/blog@output/blogs.json";
+        const CONTENT_BASE_URL = "https://cdn.jsdelivr.net/gh/MainRoute-Core/blog@main/blogs/";
+        
+        let allBlogs =[];
+
+        // 1. Core Syntax Parser (Preserved Logic, Updated CSS Classes)
+        function customSyntaxToHtml(txt) {
+            if(!txt) return "";
+            let s = txt;
+            
+            s = s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+            s = s.replace(/\\h2:([\s\S]*?):h2\\/g, "<h2>$1</h2>");
+            s = s.replace(/\\h3:([\s\S]*?):h3\\/g, "<h3>$1</h3>");
+            s = s.replace(/\\h4:([\s\S]*?):h4\\/g, "<h4>$1</h4>");
+            s = s.replace(/\\p:([\s\S]*?):p\\/g, "<p>$1</p>");
+            s = s.replace(/\\quote:([\s\S]*?):quote\\/g, "<blockquote>$1</blockquote>");
+            
+            s = s.replace(/\\note:([\s\S]*?):note\\/g, '<div class="note">$1</div>');
+            s = s.replace(/\\warn:([\s\S]*?):warn\\/g, '<div class="warn">$1</div>');
+            s = s.replace(/\\success:([\s\S]*?):success\\/g, '<div class="success">$1</div>');
+            
+            s = s.replace(/\\code=([a-z0-9]*):\n([\s\S]*?)\n?:code\\/gi, '<pre><code>$2</code></pre>');
+            s = s.replace(/\\code:\n([\s\S]*?)\n?:code\\/gi, '<pre><code>$1</code></pre>');
+            
+            s = s.replace(/\\tbl:\n([\s\S]*?)\n?:tbl\\/g, (_, t) => {
+                let rows = t.trim().split('\n');
+                let h = '<table><tbody>';
+                rows.forEach(r => h += '<tr>' + r.split('|').map(c => `<td>${c}</td>`).join('') + '</tr>');
+                return h + '</tbody></table>';
+            });
+
+            s = s.replace(/\\b:([\s\S]*?):b\\/g, "<strong>$1</strong>");
+            s = s.replace(/\\i:([\s\S]*?):i\\/g, "<em>$1</em>");
+            s = s.replace(/\\u:([\s\S]*?):u\\/g, "<u>$1</u>");
+            s = s.replace(/\\s:([\s\S]*?):s\\/g, "<s>$1</s>");
+            s = s.replace(/\\ic:([\s\S]*?):ic\\/g, "<code>$1</code>");
+            s = s.replace(/\\a=([^\s:]+):([\s\S]*?):a\\/g, '<a href="$1" target="_blank">$2</a>');
+            s = s.replace(/\\img=([^\s:]+):([\s\S]*?):img\\/g, '<img src="$1" alt="$2" class="content-img">');
+            s = s.replace(/\\hr\\/g, "<hr>");
+
+            return s;
+        }
+
+        // 2. Initialization & Data Fetching
+        async function initApp() {
+            try {
+                const res = await fetch(INDEX_URL);
+                const rawData = await res.json();
+                
+                // Filter out 'Un' (Unpublished) entirely
+                allBlogs = rawData.filter(b => b.Status !== 'Un');
+                
+                renderGrid(allBlogs);
+                renderFilters();
+                checkUrlRouting();
+            } catch (err) {
+                document.getElementById('grid').innerHTML = '<p class="text-mrc text-center">Failed to fetch core logs. System offline.</p>';
+            } finally {
+                setTimeout(() => {
+                    document.getElementById('loader').classList.add('hidden');
+                    document.getElementById('desktop-status').style.display = 'flex';
+                }, 300);
+            }
+        }
+
+        // 3. Render Cards
+        function renderGrid(data) {
+            const grid = document.getElementById('grid');
+            
+            if(data.length === 0) {
+                grid.innerHTML = '<p class="text-muted text-center" style="grid-column: 1/-1; padding: 3rem;">No logs found matching parameters.</p>';
+                return;
+            }
+
+            grid.innerHTML = data.map(b => {
+                const isNot = b.Status === 'Not';
+                const cardClass = isNot ? 'card glass-panel status-not' : 'card glass-panel';
+                const statusHtml = isNot 
+                    ? `<span class="card-status status-not"><svg class="icon" style="width:10px; height:10px; display:inline; margin-right:4px;"><use href="#icon-lock"></use></svg> Classifed</span>` 
+                    : `<span class="card-status status-pub"><svg class="icon" style="width:10px; height:10px; display:inline; margin-right:4px;"><use href="#icon-book-open"></use></svg> Published</span>`;
+                
+                const clickEvent = isNot ? '' : `onclick="openArticle('${b.id}')"`;
+
+                return `
+                <div class="${cardClass}" ${clickEvent}>
+                    ${statusHtml}
+                    <h2 class="card-title">${b.Name}</h2>
+                    <div class="card-date">${b.Date}</div>
+                    <div class="card-bottom">
+                        ${b.Tags.map(t => `<span class="tag" style="pointer-events:none;">${t}</span>`).join('')}
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        // 4. Filters & Search
+        function renderFilters() {
+            const list = document.getElementById('cat-list');
+            const tags = [...new Set(allBlogs.flatMap(b => b.Tags))];
+            
+            list.innerHTML = `<span class="tag active" onclick="applyFilter(null, this)">All Logs</span>` + 
+                tags.map(t => `<span class="tag" onclick="applyFilter('${t}', this)">${t}</span>`).join('');
+        }
+
+        window.applyFilter = function(tag, el) {
+            document.querySelectorAll('#cat-list .tag').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            
+            const filtered = tag ? allBlogs.filter(b => b.Tags.includes(tag)) : allBlogs;
+            renderGrid(filtered);
+            document.getElementById('cat-panel').classList.remove('active'); // auto-close
+        };
+
+        document.getElementById('search').addEventListener('input', (e) => {
+            const q = e.target.value.toLowerCase();
+            const filtered = allBlogs.filter(b => 
+                b.Name.toLowerCase().includes(q) || 
+                b.Tags.some(t => t.toLowerCase().includes(q))
+            );
+            renderGrid(filtered);
+        });
+
+        document.getElementById('catBtn').onclick = () => {
+            document.getElementById('cat-panel').classList.toggle('active');
+        };
+
+        // 5. Article Opening & Rendering
+        async function openArticle(id) {
+            const view = document.getElementById('full-view');
+            const body = document.getElementById('articleBody');
+            const loader = document.getElementById('loader');
+            
+            loader.querySelector('.font-mono').innerText = "Decrypting Log...";
+            loader.classList.remove('hidden');
+            
+            // SPA Routing push
+            window.history.pushState({id}, '', `?log=${id}`);
+
+            try {
+                // Fetch direct from jsdelivr CDN based on ID
+                const res = await fetch(`${CONTENT_BASE_URL}${id}.json`);
+                if(!res.ok) throw new Error("Not Found");
+                
+                const data = await res.json();
+                
+                body.innerHTML = `
+                    ${data.Img ? `<img src="${data.Img}" class="hero-img">` : ''}
+                    <div class="card-status status-pub" style="margin-bottom:1.5rem;">LOG. ${data.Status || 'PUB'}</div>
+                    <h1 class="article-title">${data.Title}</h1>
+                    <div class="article-meta">
+                        <span><svg class="icon" style="width:14px;display:inline;margin-bottom:-2px;"><use href="#icon-book-open"></use></svg> ${data.Date}</span>
+                        <span>BY: SYSTEM CORE</span>
+                    </div>
+                    <div class="blog-content">
+                        ${customSyntaxToHtml(data.Data)}
+                    </div>
+                `;
+
+                // Show View
+                view.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                view.scrollTop = 0; // Reset scroll
+
+            } catch (e) {
+                body.innerHTML = `<h2 class="text-mrc text-center" style="margin-top:20vh;">Data corruption detected. Log unavailable.</h2>`;
+                view.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } finally {
+                setTimeout(() => loader.classList.add('hidden'), 300);
+            }
+        }
+
+        // 6. Navigation Controls
+        function closeArticle() {
+            document.getElementById('full-view').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // Clean URL without reloading
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+            window.history.pushState({path: cleanUrl}, '', cleanUrl);
+        }
+
+        document.getElementById('backBtn').onclick = closeArticle;
+
+        // Handle Browser Back Button smoothly
+        window.addEventListener('popstate', (e) => {
+            if(e.state && e.state.id) {
+                openArticle(e.state.id);
+            } else {
+                document.getElementById('full-view').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        function checkUrlRouting() {
+            const id = new URLSearchParams(window.location.search).get('log');
+            if (id) {
+                const exists = allBlogs.find(x => x.id === id);
+                if (exists && exists.Status !== 'Not') {
+                    openArticle(id);
+                }
+            }
+        }
+
+        // 7. Reader Progress Bar
+        const fullView = document.getElementById('full-view');
+        const progressBar = document.getElementById('read-progress');
+        
+        fullView.addEventListener('scroll', () => {
+            const winScroll = fullView.scrollTop;
+            const height = fullView.scrollHeight - fullView.clientHeight;
+            const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+            progressBar.style.width = scrolled + '%';
+        });
+
+        // Start Engine
+        initApp();
+
+    </script>
+</body>
+</html>
