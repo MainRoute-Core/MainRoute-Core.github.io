@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <!-- Viewport prevents pinch-zooming on mobile for a native app feel -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <meta name="theme-color" content="#f44234">
     <meta name="title" content="404 - Route Not Found | MainRoute Core" />
@@ -21,46 +22,177 @@
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="canonical" href="https://mainroute-core.github.io/">
     <link rel="shortcut icon" type="image/x-icon" sizes="any" href="/src/favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="/src/16.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/src/32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/src/144.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/src/192.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/src/512.png">
-    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/src/apple-touch-icon.png">
-    <link rel="apple-touch-icon" type="image/png" sizes="167x167" href="/src/apple-touch-167.png">
-    <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="/src/apple-touch-152.png">
-    <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="/src/apple-touch-120.png">
 
     <title>404 - Route Not Found | MainRoute Core</title>
 
     <link href="/src/CoreSans-Regular_en.otf" rel="stylesheet">
-
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/404.css">
+
+    <!-- ============================================== -->
+    <!-- 1. PROTECTION & SECURITY CSS                   -->
+    <!-- ============================================== -->
+    <style id="protection-styles">
+        /* Disable text selection, tap highlights, and scrolling behaviors globally */
+        html, body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none; /* Prevents pull-to-refresh on mobile */
+        }
+
+        /* Allow selection ONLY on elements with 'selectable' attribute */
+        [selectable], [selectable] * {
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+            user-select: text !important;
+            cursor: text;
+        }
+
+        /* Prevent image/svg dragging */
+        img, svg {
+            -webkit-user-drag: none;
+            pointer-events: none; 
+        }
+        
+        .pointer-events-auto {
+            pointer-events: auto !important;
+        }
+    </style>
+
+    <!-- ============================================== -->
+    <!-- 2. GAME UI CSS (Optimized for Performance)     -->
+    <!-- ============================================== -->
+    <style id="game-styles">
+        .hidden-ui { display: none !important; }
+
+        .div-404-game {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0 10px;
+        }
+
+        .game-score-board {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #f44234;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+
+        .btn-game-action {
+            background: transparent;
+            border: 2px solid #f44234;
+            color: #f44234;
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .btn-game-action:hover { background: #f44234; color: #fff; }
+
+        /* Game Board using Hardware Acceleration */
+        #game-board {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 2px dashed rgba(244, 66, 52, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            touch-action: none; /* Crucial: stops swiping/scrolling on mobile while playing */
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
+        }
+
+        #game-ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to right, transparent, #f44234 10%, #f44234 90%, transparent);
+            opacity: 0.8;
+            border-top: 2px solid #f44234;
+        }
+
+        /* Using will-change for buttery smooth 60fps translation */
+        #game-player {
+            position: absolute;
+            bottom: 20px; /* Sits exactly on top of the ground */
+            left: 50px;
+            width: 45px;
+            height: 45px;
+            color: #f44234;
+            z-index: 10;
+            will-change: transform; 
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .game-obstacle {
+            position: absolute;
+            bottom: 20px;
+            width: 35px;
+            height: 40px;
+            color: #a1a1aa;
+            z-index: 5;
+            will-change: transform;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        #game-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            color: white;
+            text-align: center;
+            transition: opacity 0.3s;
+        }
+        
+        #game-overlay h3 { font-size: 2rem; color: #f44234; margin-bottom: 10px; font-weight: 900;}
+        #game-overlay p { margin-bottom: 20px; color: #ccc; font-family: monospace;}
+    </style>
 </head>
 
 <body>
 
     <div id="loader" class="loader" style="pointer-events: none;">
-        <img style="height: 120px; pointer-events: none;" src="/src/mrc-nuca-loading.svg" alt="mrc-nuca-loading">
         <div class="loader-text-wrapper">
-            <span class="loader-text-letter">I</span>
-            <span class="loader-text-letter">n</span>
-            <span class="loader-text-letter">i</span>
-            <span class="loader-text-letter">t</span>
-            <span class="loader-text-letter">i</span>
-            <span class="loader-text-letter">a</span>
-            <span class="loader-text-letter">l</span>
-            <span class="loader-text-letter">i</span>
-            <span class="loader-text-letter">z</span>
-            <span class="loader-text-letter">i</span>
-            <span class="loader-text-letter">n</span>
-            <span class="loader-text-letter">g</span>
+            <span class="loader-text-letter">I</span><span class="loader-text-letter">n</span><span class="loader-text-letter">i</span><span class="loader-text-letter">t</span><span class="loader-text-letter">i</span><span class="loader-text-letter">a</span><span class="loader-text-letter">l</span><span class="loader-text-letter">i</span><span class="loader-text-letter">z</span><span class="loader-text-letter">i</span><span class="loader-text-letter">n</span><span class="loader-text-letter">g</span>
             <hr>
-            <span class="loader-text-letter">C</span>
-            <span class="loader-text-letter">o</span>
-            <span class="loader-text-letter">r</span>
-            <span class="loader-text-letter">e</span>
+            <span class="loader-text-letter">C</span><span class="loader-text-letter">o</span><span class="loader-text-letter">r</span><span class="loader-text-letter">e</span>
             <div class="loader-colors"></div>
         </div>
     </div>
@@ -70,45 +202,308 @@
     <div class="ambient-orb second-orb"></div>
 
     <main class="main-404 flex items-center justify-center pad-8">
-        <div id="display-404" class="txt-center flex-col items-center">
-            <div class="div-404">
+        <div id="display-404" class="txt-center flex-col items-center" style="width: 100%;">
+            
+            <!-- Standard 404 Display Pane -->
+            <div class="div-404" id="ui-text-container">
                 <div class="error font-black txt-mrc flex items-center justify-center">
                     <span>4</span>
                     <img src="/src/144.png" alt="Not Found">
                     <span>4</span>
                 </div>
                 <h2 class="font-bold text-main"> Route Lost. </h2>
-                <p class="txt-muted">
+                <!-- Text with 'selectable' attribute allows user to copy it -->
+                <p class="txt-muted" selectable style="max-width: 500px; margin: 0 auto 1.5rem;">
                     The data packet you requested has drifted into the digital void. This route does not exist in the MainRoute Core.
                 </p>
-                <div>
-                    <a href="/" class="btn-home-play">
+                <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                    <a href="/" class="btn-home-play pointer-events-auto">
                         Return to Core 
-                        <svg class="icon">
-                            <use href="/src/global.svg#icon-home"></use>
-                        </svg>
                     </a>
-                    <div href="/" class="btn-home-play">
+                    <div id="btn-trigger-game" class="btn-home-play pointer-events-auto" style="cursor: pointer; background: #f44234; color: white; border:none; box-shadow: 0 4px 15px rgba(244, 66, 52, 0.4);">
                         Play Core Roll 
-                        <svg class="icon">
-                            <use href="/src/global.svg#icon-play"></use>
-                        </svg>
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                     </div>
                 </div>
             </div>
-            <div class="div-404-game">
 
+            <!-- Game Display Pane -->
+            <div class="div-404-game hidden-ui" id="ui-game-container">
+                <div class="game-header">
+                    <div class="game-score-board">HI: <span id="ui-hi-score">00000</span> | <span id="ui-score">00000</span></div>
+                    <button class="btn-game-action pointer-events-auto" id="btn-quit-game">Disconnect</button>
+                </div>
+
+                <div id="game-board">
+                    <div id="game-ground"></div>
+                    
+                    <div id="game-player">
+                        <!-- Temporary Inline SVG: Replace internal path with your external Logo later -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%">
+                            <polygon points="12 2 2 22 22 22 12 2"></polygon>
+                            <circle cx="12" cy="16" r="2" fill="currentColor"></circle>
+                        </svg>
+                    </div>
+
+                    <!-- Overlays -->
+                    <div id="game-overlay">
+                        <h3 id="overlay-title">SYSTEM IDLE</h3>
+                        <p id="overlay-desc">Tap screen or press Space to Boot System</p>
+                    </div>
+                </div>
+                <p class="txt-muted" style="font-size: 0.85rem; font-family: monospace;">Use Touch, Space, or Up Arrow to jump</p>
             </div>
+
         </div>
     </main>
 
-    <footer class="txt-center txt-muted txt-sm pos-fix">
-        <p>&copy; 2024-<span id="year">2026</span> MainRoute Core. M Ramzan Ch | Pro Bandey. All rights reserved.</p>
+    <footer class="txt-center txt-muted txt-sm pos-fix" style="bottom: 20px; width: 100%;">
+        <p selectable>&copy; 2024-<span id="year">2026</span> MainRoute Core. M Ramzan Ch | Pro Bandey. All rights reserved.</p>
     </footer>
 
+    <!-- Init script -->
     <script>
-        window.addEventListener('load', () => { const loader = document.getElementById('loader'); setTimeout(() => { loader.classList.add('hidden'); }, 2000); }); document.getElementById('year').textContent = new Date().getFullYear();
+        window.addEventListener('load', () => { const loader = document.getElementById('loader'); setTimeout(() => { loader.classList.add('hidden'); }, 1500); }); document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <!-- ============================================== -->
+    <!-- 3. PAGE PROTECTION SCRIPT                      -->
+    <!-- ============================================== -->
+    <script id="protection-script">
+        // Prevent right-click unless the element has the 'selectable' attribute
+        document.addEventListener('contextmenu', e => {
+            if (!e.target.closest('[selectable]')) e.preventDefault();
+        });
+
+        // Prevent dragging to stop users from drag-copying text/images
+        document.addEventListener('dragstart', e => {
+            if (!e.target.closest('[selectable]')) e.preventDefault();
+        });
+    </script>
+
+    <!-- ============================================== -->
+    <!-- 4. HIGH-PERFORMANCE GAME ENGINE                -->
+    <!-- ============================================== -->
+    <script id="game-script">
+        // --- DOM Elements ---
+        const uiText = document.getElementById('ui-text-container');
+        const uiGame = document.getElementById('ui-game-container');
+        const btnTrigger = document.getElementById('btn-trigger-game');
+        const btnQuit = document.getElementById('btn-quit-game');
+        
+        const gameBoard = document.getElementById('game-board');
+        const player = document.getElementById('game-player');
+        const overlay = document.getElementById('game-overlay');
+        const overlayTitle = document.getElementById('overlay-title');
+        const overlayDesc = document.getElementById('overlay-desc');
+        
+        const scoreEl = document.getElementById('ui-score');
+        const hiScoreEl = document.getElementById('ui-hi-score');
+
+        // --- SVGs for Obstacles (Tech Theme) ---
+        const obstacleDesigns =[
+            // 404 Bug
+            `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M20.97 5c-2 1.8-3.6 3.5-5.5 3.8"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg>`,
+            // Server Rack
+            `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>`
+        ];
+
+        // --- Engine Variables ---
+        let animationFrameId;
+        let isPlaying = false;
+        let isGameOver = false;
+        
+        let score = 0;
+        let highScore = localStorage.getItem('mrc-hi-score') || 0;
+        hiScoreEl.innerText = String(highScore).padStart(5, '0');
+
+        let speed = 6;
+        let frameCounter = 0;
+        let spawnRate = 90; // Frames between obstacles
+        let obstacles =[];
+
+        // Physics 
+        let playerY = 0;
+        let velocityY = 0;
+        const gravity = 0.8;
+        const jumpPower = 14;
+
+        // --- UI Toggles ---
+        btnTrigger.addEventListener('click', () => {
+            uiText.classList.add('hidden-ui');
+            uiGame.classList.remove('hidden-ui');
+            resetGameEnvironment();
+        });
+
+        btnQuit.addEventListener('click', () => {
+            uiGame.classList.add('hidden-ui');
+            uiText.classList.remove('hidden-ui');
+            haltEngine();
+        });
+
+        // --- Core Engine Functions ---
+        function handleInput(e) {
+            // Prevent scrolling on spacebar down
+            if(e.type === 'keydown') {
+                if(e.code !== 'Space' && e.code !== 'ArrowUp') return;
+                e.preventDefault(); 
+            }
+            if(e.type === 'touchstart') e.preventDefault(); // Stop mobile scroll
+
+            if (!isPlaying) {
+                if (isGameOver) {
+                    resetGameEnvironment();
+                }
+                startGame();
+            } else if (playerY === 0) { // Only jump if on the ground
+                velocityY = jumpPower;
+                player.querySelector('svg').style.transform = "rotate(15deg)";
+            }
+        }
+
+        function startGame() {
+            isPlaying = true;
+            isGameOver = false;
+            overlay.style.display = 'none';
+            gameLoop();
+        }
+
+        function resetGameEnvironment() {
+            haltEngine();
+            obstacles.forEach(obs => obs.element.remove());
+            obstacles =[];
+            score = 0;
+            speed = 6;
+            frameCounter = 0;
+            playerY = 0;
+            velocityY = 0;
+            updateVisuals();
+            scoreEl.innerText = '00000';
+            
+            overlayTitle.innerText = "SYSTEM IDLE";
+            overlayDesc.innerText = "Tap screen or press Space to Boot System";
+            overlay.style.display = 'flex';
+        }
+
+        function haltEngine() {
+            isPlaying = false;
+            cancelAnimationFrame(animationFrameId);
+            player.querySelector('svg').style.transform = "rotate(0deg)";
+        }
+
+        function gameOver() {
+            haltEngine();
+            isGameOver = true;
+            
+            if (Math.floor(score/10) > highScore) {
+                highScore = Math.floor(score/10);
+                localStorage.setItem('mrc-hi-score', highScore);
+                hiScoreEl.innerText = String(highScore).padStart(5, '0');
+            }
+
+            player.querySelector('svg').style.transform = "rotate(90deg) scale(0.8)";
+            overlayTitle.innerText = "PACKET LOST";
+            overlayDesc.innerText = "Connection Dropped. Tap to Reboot.";
+            overlay.style.display = 'flex';
+        }
+
+        // --- Game Loop (60FPS Hardware Accelerated) ---
+        function gameLoop() {
+            if (!isPlaying) return;
+
+            // 1. Player Physics Math
+            if (playerY > 0 || velocityY > 0) {
+                playerY += velocityY;
+                velocityY -= gravity;
+            }
+
+            if (playerY <= 0) {
+                playerY = 0;
+                velocityY = 0;
+                player.querySelector('svg').style.transform = "rotate(0deg)";
+            }
+
+            // 2. Obstacle Management Math
+            frameCounter++;
+            if (frameCounter >= spawnRate) {
+                spawnObstacle();
+                frameCounter = 0;
+                // Randomize spawn time, slightly faster as game progresses
+                spawnRate = Math.max(45, Math.floor(Math.random() * 60) + 50 - (speed * 1.5));
+            }
+
+            // 3. Move Obstacles & Check Collisions
+            // Player static X Hitbox Data (Left = 50px, Width = 45px)
+            const pLeft = 50 + 5; // +5 padding for lenient collision
+            const pRight = 50 + 45 - 5;
+            const pBottom = playerY + 5;
+            const pTop = playerY + 45 - 5;
+
+            for (let i = 0; i < obstacles.length; i++) {
+                let obs = obstacles[i];
+                obs.x -= speed;
+                
+                // AABB Collision Detection
+                let oLeft = obs.x;
+                let oRight = obs.x + 35;
+                let oTop = 40; // Obstacle height
+                
+                if (pRight > oLeft && pLeft < oRight && pBottom < oTop) {
+                    gameOver();
+                    return; // exit loop immediately
+                }
+
+                // Cleanup off-screen
+                if (obs.x < -50) {
+                    obs.element.remove();
+                    obstacles.splice(i, 1);
+                    i--;
+                }
+            }
+
+            // 4. Update Score & Speed
+            score++;
+            if (score % 10 === 0) {
+                scoreEl.innerText = String(Math.floor(score/10)).padStart(5, '0');
+            }
+            if (score % 500 === 0 && speed < 16) {
+                speed += 0.5; // Increase difficulty
+            }
+
+            // 5. Apply Visuals via GPU (No layout thrashing!)
+            updateVisuals();
+
+            // Next Frame
+            animationFrameId = requestAnimationFrame(gameLoop);
+        }
+
+        function spawnObstacle() {
+            const obsEl = document.createElement('div');
+            obsEl.classList.add('game-obstacle');
+            obsEl.innerHTML = obstacleDesigns[Math.floor(Math.random() * obstacleDesigns.length)];
+            
+            gameBoard.appendChild(obsEl);
+            
+            obstacles.push({
+                element: obsEl,
+                x: gameBoard.offsetWidth
+            });
+        }
+
+        function updateVisuals() {
+            // Translate Y must be negative because DOM Y-axis goes downwards
+            player.style.transform = `translate3d(0, ${-playerY}px, 0)`;
+            
+            for (let obs of obstacles) {
+                obs.element.style.transform = `translate3d(${obs.x}px, 0, 0)`;
+            }
+        }
+
+        // --- Event Listeners ---
+        window.addEventListener('keydown', handleInput);
+        gameBoard.addEventListener('mousedown', handleInput);
+        gameBoard.addEventListener('touchstart', handleInput, { passive: false });
+
     </script>
 </body>
-
 </html>
