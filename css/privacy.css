@@ -44,11 +44,23 @@
 
 .prose h2 {
     color: #fff;
-    font-size: 1.75rem;
+    font-size: clamp(1rem,5vw, 1.75rem);
     font-weight: 800;
     margin-top: 3rem;
     margin-bottom: 1rem;
     letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.prose h2::before {
+    content: '';
+    display: block;
+    width: clamp(5px, 1vw, 8px);
+    height: 24px;
+    background: var(--mrc);
+    border-radius: 4px;
 }
 
 .prose h2:first-child {

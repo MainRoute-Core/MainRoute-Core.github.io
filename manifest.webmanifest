@@ -70,10 +70,10 @@
 
   "shortcuts": [
     {
-      "name": "Privacy",
+      "name": "Privacy Policy",
       "short_name": "Privacy",
       "description": "See Privacy Policy",
-      "url": "/Privacy",
+      "url": "/Privacy/",
       "icons": [
         {
           "src": "./src/192.png",
@@ -83,10 +83,10 @@
       ]
     },
     {
-      "name": "Terms",
+      "name": "Terms Of Service",
       "short_name": "Terms",
       "description": "See Terms of Services",
-      "url": "/Terms",
+      "url": "/Terms/",
       "icons": [
         {
           "src": "./src/192.png",
@@ -96,10 +96,10 @@
       ]
     },
     {
-      "name": "CopyRight",
+      "name": "Copy Right",
       "short_name": "CopyRight",
       "description": "See Copy Right",
-      "url": "/CopyRight",
+      "url": "/CopyRight/",
       "icons": [
         {
           "src": "./src/192.png",
@@ -112,10 +112,10 @@
       "name": "M Ramzan Ch",
       "short_name": "MR Ch",
       "description": "Explore M Ramzan Ch's Profile",
-      "url": "/MRamzanCh",
+      "url": "/Redirect/?id=mrc",
       "icons": [
         {
-          "src": "/MRamzanCh/mrc.png",
+          "src": "/src/mrc.png",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -125,10 +125,10 @@
       "name": "Pro Bandey",
       "short_name": "PB",
       "description": "Explore Pro Bandey's Profile",
-      "url": "/ProBandey",
+      "url": "/Redirect/?id=pb",
       "icons": [
         {
-          "src": "/ProBandey/pb.png",
+          "src": "/src/pb.png",
           "sizes": "192x192",
           "type": "image/png"
         }

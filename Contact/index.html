@@ -98,80 +98,82 @@
         </div>
     </header>
 
-    <main>
-        <div class="page-header reveal">
-            <div class="page-tag">Connect with the Core</div>
-            <h1 class="page-title"> Initiate <span style="background: linear-gradient(135deg, #fff 0%, var(--mrc) 100%); background-clip: text; -webkit-text-fill-color: transparent;">Dialogue.</span></h1>
-            <p class="txt-muted txt-lg">
-                Whether you need an enterprise microservice architecture, a highly-optimized PWA, or native Android development, our engineers are ready.
-            </p>
-        </div>
-        <div class="section">
-            <div class="grid grid-2 gap-4 pad-8">
-                <div class="flex flex-col gap-6 items-center">
-                    <a href="mailto:tellus@mrc.com" class="info-card">
-                        <div class="info-icon"><svg class="icon"><use href="/src/global.svg#icon-mail"></use></svg></div>
-                        <div>
-                            <h4 class="font-bold text-main" style="margin-bottom: 0.25rem;">Direct Comms</h4>
-                            <p class="txt-muted font-mono" style="font-size: 0.9rem;">tellus@mrc.com</p>
-                        </div>
-                    </a>                   <div class="info-card">
+    <section class="page-header reveal">
+        <div class="page-tag"> Connect With  the Core</div>
+        <h1 class="page-title">
+            Initiate <span class="text-gradient">Dialogue.</span>
+        </h1>
+        <p class="page-desc capitalize pad-2">
+            Whether you need an enterprise microservice architecture, a highly-optimized PWA, or native Android development, our engineers are ready.
+        </p>
+    </section>
+    <section class="section">
+        <div class="main-wraper flex flex-row gap-4 pad-6 justify-center">
+            <div class="flex flex-col gap-6 items-center" style="padding: 3rem 0rem;">
+                <a href="mailto:tellus@mrc.com" class="info-card">
+                    <div class="info-icon"><svg class="icon"><use href="/src/global.svg#icon-mail"></use></svg></div>
+                    <div>
+                        <h4 class="font-bold txt-main" style="margin-bottom: 0.25rem;">Direct Comms</h4>
+                        <p class="txt-muted font-mono" style="font-size: 0.9rem;">tellus@mrc.com</p>
+                    </div>
+                </a>
+                <div class="info-card">
                     <div class="info-icon"><svg class="icon"><use href="/src/global.svg#icon-map-pin"></use></svg></div>
-                        <div>
-                            <h4 class="font-bold text-main" style="margin-bottom: 0.25rem;">Headquarters</h4>
-                            <p class="txt-muted font-mono" style="font-size: 0.9rem;">Punjab, Pakistan (PK)<br>Operating Globally</p>
-                        </div>
+                    <div>
+                        <h4 class="font-bold txt-main" style="margin-bottom: 0.25rem;">Served <Area></Area></h4>
+                        <p class="txt-muted font-mono" style="font-size: 0.9rem;">Operating Globally</p>
                     </div>
-                    <a href="#" class="info-card" style="background: linear-gradient(135deg, rgba(244, 66, 52, 0.05), transparent); border-color: rgba(244, 66, 52, 0.2);">
-                        <div class="info-icon" style="background: var(--mrc); color: #fff;"><svg class="icon"><use href="/src/global.svg#icon-calendar"></use></svg></div>
-                        <div>
-                            <h4 class="font-bold text-main" style="margin-bottom: 0.25rem;">Book Discovery Call</h4>
-                            <p class="txt-muted font-mono" style="font-size: 0.9rem;">Schedule 15 mins with M Ramzan Ch &rarr;</p>
-                        </div>
-                    </a>
                 </div>
-                <div class="glass-panel" style="padding: 2.5rem;">  
-                    <form id="contact-form">
-                        <h3 class="font-black text-main" style="font-size: 1.75rem; margin-bottom: 2rem;">Transmission <span class="txt-mrc">Terminal</span></h3>                        
-                        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
-                            <div class="form-group">
-                                <label class="form-label" for="name">Your Name</label>
-                                <input type="text" id="name" class="form-control" placeholder="John Doe" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="email">Email Address</label>
-                                <input type="email" id="email" class="form-control" placeholder="john@company.com" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="subject">Project Type</label>
-                            <select id="subject" class="form-control" style="appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%24%2024%22%20fill%3D%22none%22%20stroke%3D%22%23a1a1aa%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1.2em;">
-                                <option value="" disabled selected style="color: black;">Select architectural need...</option>
-                                <option value="pwa" style="color: black;">Progressive Web App (PWA)</option>
-                                <option value="android" style="color: black;">Native Android / Kotlin</option>
-                                <option value="enterprise" style="color: black;">Enterprise Software / Backend</option>                                    <option value="other" style="color: black;">Other Inquiry</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="message">Transmission Details</label>
-                            <textarea id="message" class="form-control" placeholder="Describe your current infrastructure bottlenecks or project goals..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn-submit" id="submit-btn">
-                            Transmit Data <svg class="icon"><use href="/src/global.svg#icon-send"></use></svg>
-                        </button>            
-                        <p class="font-mono txt-muted txt-center" style="font-size: 0.7rem; margin-top: 1rem;">Encrypted End-to-End. No spam, ever.</p>
-                    </form>
-                    <div id="form-success">
-                        <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(197, 34, 34, 0.1); color:var(--mrc); display: flex; justify-content: center; align-items: center; margin: 0 auto 1.5rem;">
-                            <svg viewBox="0 0 24 24" class="icon" stroke="currentColor" style="height:40px; width: 40px;" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /><line x1="8" y1="10" x2="10" y2="12" /><line x1="10" y1="10" x2="8" y2="12" /><line x1="14" y1="10" x2="16" y2="12" /><line x1="16" y1="10" x2="14" y2="12" /><path d="M10 16c1-1 4-1 4 0" /></svg>
-                        </div>
-                        <h3 class="font-black text-main" style="font-size: 2rem; margin-bottom: 0.5rem;">Not Sent. Try Again</h3>                            <p class="txt-muted mb-8" style="font-size: 1.1rem;">Some Reasons your data not sent. Try again a bit latter.</p>
-                            <button class="btn-submit" style="background: rgba(255,255,255,0.1); box-shadow: none; width: auto; padding: 0.8rem 2rem; margin: 0 auto;" onclick="resetForm()">Try Another</button>
+                <a href="#" class="info-card" style="background: linear-gradient(135deg, rgba(244, 66, 52, 0.05), transparent); border-color: rgba(244, 66, 52, 0.2);">
+                    <div class="info-icon" style="background: var(--mrc); color: #fff;"><svg class="icon"><use href="/src/global.svg#icon-calendar"></use></svg></div>
+                    <div>
+                        <h4 class="font-bold txt-main" style="margin-bottom: 0.25rem;">Book Discovery Call</h4>
+                        <p class="txt-muted font-mono" style="font-size: 0.9rem;">Schedule 15 mins with M Ramzan Ch &rarr;</p>
                     </div>
+                </a>
+            </div>
+            <div class="glass-panel" style="padding: 1rem;">  
+                <form id="contact-form">
+                    <h3 class="font-black txt-main" style="font-size: clamp(1rem,4vw, 2rem);margin-bottom: 1rem;">Transmission <span class="txt-mrc">Terminal</span></h3>                        
+                    <div class="form-group-div">
+                        <div class="form-group">
+                            <label class="form-label" for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="john@company.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="subject">Project Type</label>
+                        <select id="subject" class="form-control" style="appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%24%2024%22%20fill%3D%22none%22%20stroke%3D%22%23a1a1aa%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1.2em;">
+                            <option value="" disabled selected style="color: black;">Select One...</option>
+                            <option value="pwa" style="color: black;">Web Development</option>
+                            <option value="android" style="color: black;">Solutions</option>
+                            <option value="enterprise" style="color: black;">Enterprise Software</option>
+                            <option value="other" style="color: black;">Other Inquiry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="message">Transmission Details</label>
+                        <textarea id="message" class="form-control" placeholder="Describe your current infrastructure bottlenecks or project goals..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit" id="submit-btn">
+                        Transmit Data <svg class="icon"><use href="/src/global.svg#icon-send"></use></svg>
+                    </button>            
+                    <p class="font-mono txt-muted txt-center" style="font-size: 0.7rem; margin-top: 1rem;">Encrypted End-to-End. No spam, ever.</p>
+                </form>
+                <div id="form-success">
+                    <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(197, 34, 34, 0.1); color:var(--mrc); display: flex; justify-content: center; align-items: center; margin: 0 auto 1.5rem;">
+                        <svg viewBox="0 0 24 24" class="icon" stroke="currentColor" style="height:40px; width: 40px;" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /><line x1="8" y1="10" x2="10" y2="12" /><line x1="10" y1="10" x2="8" y2="12" /><line x1="14" y1="10" x2="16" y2="12" /><line x1="16" y1="10" x2="14" y2="12" /><path d="M10 16c1-1 4-1 4 0" /></svg>
+                    </div>
+                    <h3 class="font-black txt-main" style="font-size: 2rem; margin-bottom: 0.5rem;">Not Sent. Try Again</h3>                            <p class="txt-muted mb-8" style="font-size: 1.1rem;">Some Reasons your data not sent. Try again a bit latter.</p>
+                    <button class="btn-submit" style="background: rgba(255,255,255,0.1); box-shadow: none; width: auto; padding: 0.8rem 2rem; margin: 0 auto;" onclick="resetForm()">Try Another</button>
                 </div>
             </div>
         </div>
-    </main>
+    </section>
     <footer class="mrc-footer pad-4 pos-rel">
         <div class="container pad-0">
             <div class="footer-grid">

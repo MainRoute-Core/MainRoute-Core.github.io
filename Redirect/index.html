@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+    <meta name="theme-color" content="#f44234">
+    <meta name="title" content="Redirect Gateway | MainRoute Core" />
+    <meta name="description" content="Safe external route gateway with preview, security checks, and share tools." />
+    <meta name="keywords" content="MainRoute, MainRoute Core, MR Core, MRC, M Ramzan Ch, MegaMind-Solution, Web Development, Software Development, Modifications, Git Folder Downloader,  Pro Bandey" />
+    <meta name="author" content="M Ramzan Ch" />
+    <meta name="copyright" content="MainRoute Core" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mainroute-core.github.io/Redirect" />
+    <meta property="og:title" content="MainRoute Core | Be Passionate For Future" />
+    <meta property="og:description" content="A specialized technology powerhouse delivering PWA, open-source, and custom software solutions." />
+    <meta property="og:image" content="/src/social.png" />
+    
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="canonical" href="https://mainroute-core.github.io/">
+    <link rel="shortcut icon" type="image/x-icon" sizes="any" href="/src/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/144.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/512.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/src/apple-touch-icon.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="167x167" href="/src/apple-touch-167.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="/src/apple-touch-152.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="/src/apple-touch-120.png">
+    
+    <title>Redirect Gateway | MainRoute Core</title>
+
+    <link href="/src/CoreSans-Regular_en.otf" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/redirect.css">
+</head>
+
+<body oncontextmenu="return false;" ondragstart="return false;">
+    <div id="loader" class="loader" style="pointer-events: none;">
+        <img style="height: 120px; pointer-events: none;" src="/src/mrc-nuca-loading.svg" alt="mrc-nuca-loading">
+        <div class="loader-text-wrapper">
+            <span class="loader-text-letter">I</span>
+            <span class="loader-text-letter">n</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">t</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">a</span>
+            <span class="loader-text-letter">l</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">z</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">n</span>
+            <span class="loader-text-letter">g</span>
+            <hr>
+            <span class="loader-text-letter">C</span>
+            <span class="loader-text-letter">o</span>
+            <span class="loader-text-letter">r</span>
+            <span class="loader-text-letter">e</span>
+            <div class="loader-colors"></div>
+        </div>
+    </div>
+    <div class="tech-grid"></div>
+    <div class="ambient-orb first-orb"></div>
+    <div class="ambient-orb second-orb"></div>
+    <header class="header" id="navbar">
+        <div class="nav-bar glass-panel">
+            <a href="/" class="nav-logo">
+                <img src="/src/mrc-nuca.svg" alt="MRC Logo">
+                <span style="color:var(--txt-main);">MainRoute <span class="txt-mrc">Core</span></span>
+            </a>
+            <div class="system-status">
+                <div class="status-dot" id="statusDot"></div><div id="statusText">Gateway Actve</div>
+            </div>
+        </div>
+    </header>
+    <main class="section" style="padding: clamp(7rem, 11vw, 9rem) 0;padding-bottom: 3rem;">
+        <div class="container">
+            <div class="glass-panel rdct-card reveal">
+                <div class="rdct-header flex flex-row txt-center">
+                    <div class="favicon-wrap">
+                        <div class="favicon-wrap-inner flex justify-center items-center ovflo-hid border-25 pad-1 bg-surf-ela">
+                            <img id="siteFavicon" src="/src/favicon.ico" alt="Destination Icon">
+                        </div>
+                    </div>
+                    <div class="status-wrap">
+                        <h1 id="routeTitle" class="status-wrap-title txt-xxlg">Route Found <span class="blinking">&bull;</span></h1>
+                        <p id="routeDesc" class="txt-muted">Preparing secure external route preview.</p>
+                    </div>
+                </div>
+                <div class="rdct-grid">
+                    <div class="flex-col gap-4">
+                        <div class="rdct-box flex flex-col pad-2 gap-1">
+                            <span class="rdct-label font-mono txt-muted txt-sm uppercase">Destination Domain</span>
+                            <div id="domainBox" class="rdct-value txt-md font-bold">...</div>
+                        </div>
+                        <div class="rdct-box flex flex-col pad-2 gap-1">
+                            <span class="rdct-label font-mono txt-muted txt-sm uppercase">Full URL Path</span>
+                            <div id="urlBox" class="rdct-value font-mono font-normal" style="font-size: .85rem;">...</div>
+                        </div>
+                        <div class="rdct-box flex flex-col pad-2 gap-1">
+                            <span class="rdct-label font-mono txt-muted txt-sm uppercase">Security Scan</span>
+                            <div id="phishBadge" class="badge items-center txt-sm font-bold gap-1">
+                                <svg class="icon" style="width: 14px; height: 14px;"><use href="/src/global.svg#icon-shield"></use></svg> 
+                                <span>Scanning...</span>
+                            </div>
+                            <div id="phishNotes" class="txt-muted txt-sm"></div>
+                        </div>                
+                        <div class="rdct-box flex flex-col pad-2 gap-1">
+                            <span class="rdct-label font-mono txt-muted txt-sm uppercase">Auto Redirect In</span>
+                            <div class="countdown-wrapper flex justify-between items-center flex-row">
+                                <div class="countdown-number" id="countdownValue">10</div>
+                                <button id="pauseBtn" class="btn btn-outline" style="padding: 0.5rem;border-radius: 50%;width: fit-content;">
+                                    <svg class="icon"><use href="/src/global.svg#icon-pause"></use></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rdct-box flex flex-col pad-2 gap-1" style="height: fit-content; align-items: center; text-align: center;">
+                        <span class="rdct-label font-mono txt-muted txt-xxlg uppercase font-black">QR Code</span>
+                        <div class="qr-box" id="qrBox">
+                            <span class="txt-muted txt-md">No QR code yet</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4" style="border-top: 1px solid var(--glass-border); padding-top: 1.5rem;">
+                    <a href="/" class="btn btn-outline">Cancel</a>
+                    <button id="openSameBtn" class="btn btn-primary">Open Link</button>
+                    <button id="openNewBtn" class="btn btn-primary"><svg class="icon"><use href="/src/global.svg#icon-external"></use></svg> New Tab</button>
+                    <button id="shareBtn" class="btn btn-outline"><svg class="icon"><use href="/src/global.svg#icon-share"></use></svg> Share</button>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <div id="shareOverlay" class="modal-overlay flex items-center justify-center pad-2 z-ind-1000 pos-fix inset-0">
+        <div class="modal-content bg-surf pos-rel pad-4">
+            <div class="modal-content-grid-style pos-abs inset-0" style="z-index: -1;"></div>
+            <div class="flex justify-center items-center pad-1" style="border-bottom: 1px solid var(--glass-border);">
+                <h3 class="font-bold txt-main txt-xlg">Share Route</h3>
+                <button id="closeShareBtn" class="txt-muted transition pos-abs" style="inset: 1rem 1rem auto auto;"><svg class="icon" style="height: 2.25rem; width:2.25rem;"><use href="/src/global.svg#icon-x"></use></svg></button>
+            </div>
+            <div class="rdct-box flex flex-row items-center justify-between pad-2 gap-1 " style="width: 100%; margin: 1rem 0;">
+                <div id="sharePreview" class="txt-muted font-mono txt-lg" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80%;"></div>
+                <button id="copyShareBtn" class="txt-mrc txt-lg cursor: pointer;"><svg class="icon" style="width: 2rem; height:2rem;"><use href="/src/global.svg#icon-copy"></use></svg></button>
+            </div>
+            <div class="share-grid">
+                <a id="fbShare" href="#" target="_blank" rel="noopener" class="share-btn"><svg class="icon"><use href="/src/global.svg#icon-fb"></use></svg></a>
+                <a id="xShare" href="#" target="_blank" rel="noopener" class="share-btn"><svg class="icon"><use href="/src/global.svg#icon-twitter"></use></svg></a>
+                <a id="linkedinShare" href="#" target="_blank" rel="noopener" class="share-btn"><svg class="icon"><use href="/src/global.svg#icon-linkedin"></use></svg></a>
+                <a id="waShare" href="#" target="_blank" rel="noopener" class="share-btn"><svg class="icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></a>
+                <a id="teleShare" href="#" target="_blank" rel="noopener" class="share-btn"><svg class="icon" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
+                <a id="emailShare" href="#" class="share-btn"><svg class="icon"><use href="/src/global.svg#icon-mail"></use></svg></a>
+            </div>
+        </div>
+    </div>
+    <footer class="txt-center txt-muted txt-sm " style="width: 100%;">
+        <p>&copy; 2024-<span id="year">2024</span> MainRoute Core. M Ramzan Ch | Pro Bandey. All rights reserved.</p>
+    </footer>
+    <script src="/js/redirect.js"></script>
+</body>
+</html>

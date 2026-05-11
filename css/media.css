@@ -68,7 +68,7 @@
 
 /* Media Page Specific Components */
 .media-section-title {
-    font-size: 2rem;
+    font-size: clamp(1.75rem, 2.5vw, 2rem);
     font-weight: 900;
     margin-bottom: 1rem;
     display: flex;
@@ -168,7 +168,7 @@
 .asset-preview {
     background: var(--text-main);
     border-radius: 1rem;
-    height: 200px;
+    height: clamp(15rem, 33vw, 18rem);
     display: flex;
     justify-content: center;
     align-items: center;

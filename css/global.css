@@ -303,7 +303,7 @@
      background: var(--bg-dark);
  }
 
- .bg-suface {
+ .bg-surf {
      background: var(--bg-surface);
  }
 
@@ -774,17 +774,6 @@
      opacity: .15;
      z-index: -1;
      background: var(--mrc);
-     animation: float 12s ease-in-out infinite alternate
- }
-
- @keyframes float {
-     0% {
-         transform: translate(0, 0) scale(1)
-     }
-
-     100% {
-         transform: translate(50px, -50px) scale(1.1)
-     }
  }
 
  .first-orb {
@@ -796,7 +785,6 @@
      width: 30vw;
      height: 30vw;
      opacity: 0.1;
-     animation-delay: -5s;
  }
 
 
@@ -903,7 +891,6 @@
      justify-content: space-between;
      align-items: center
  }
-
  .nav-logo {
      display: flex;
      align-items: center;
