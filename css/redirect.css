@@ -259,8 +259,8 @@
 }
 
 .share-btn .icon {
-    height: clamp(1rem, 4vw, 1.5rem);
-    width: clamp(1rem, 4ve, 1.5rem);
+    height: 1.5rem;
+    width: 1.5rem;
 }
 
 /* Footer */
