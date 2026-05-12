@@ -131,7 +131,7 @@
         } catch { els.favicon.src = FALLBACK_FAVICON; }
     }
     function renderNativeQR(url) {
-        els.qrBox.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=512x512&margin=0&data=${encodeURIComponent(url)}&color=f44234&bgcolor=ffffff" oncontextmenu="event.stopImmediatePropagation();" ondragstart="event.stopImmediatePropagation();" onclick="window.open(this.src, '_blank');" alt="QR Code" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\\'text-muted\\'>QR Unavailable</span>'">`;
+        els.qrBox.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=512x512&margin=10&data=${encodeURIComponent(url)}&color=f44234&bgcolor=ffffff" oncontextmenu="event.stopImmediatePropagation();" ondragstart="event.stopImmediatePropagation();" onclick="window.open(this.src, '_blank');" alt="QR Code" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\\'text-muted\\'>QR Unavailable</span>'">`;
     }
     function updateShareLinks(url) {
         const encoded = encodeURIComponent(url);

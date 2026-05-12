@@ -168,6 +168,7 @@
     background: #fff;
     padding: 0.5rem;
     border-radius: 0.75rem;
+    outline: 2.5px dotted var(--mrc);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -236,9 +237,10 @@
 
 .share-grid {
     display: flex;
-    justify-content: center;
-    gap: 0.75rem;
+    justify-content: space-around;
+    gap: 1rem;
     margin-top: 1.5rem;
+    flex-wrap: wrap;
 }
 
 .share-btn {
