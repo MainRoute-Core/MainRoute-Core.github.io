@@ -5,7 +5,7 @@
     |_|  |_|\__,_|_|_| |_|_| \_\___/ \__,_|\__\___|  \____\___/|_|  \___|
 
 -------------------------------------------------------------------------------
-                    MianRoute Core - CUSTOM LICENSE
+                    MianRoute Core LICENSE - MRCL v1.0
 --------------------------------------------------------------------------------
 Copyright (c) 2026 MainRoute Core, M Ramzan Ch, Pro Bandey. All Rights Reserved.
 
