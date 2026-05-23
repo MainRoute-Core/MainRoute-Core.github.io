@@ -5,7 +5,7 @@
     });
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    const FALLBACK_FAVICON = "/src/favicon.ico";
+    const FALLBACK_FAVICON = "/favicon.ico";
     const DEFAULT_COUNTDOWN = 15;
     const ROUTES = {
         mrc: "https://mramzanch.blogspot.com",
