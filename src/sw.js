@@ -6,42 +6,42 @@ import { precacheAndRoute } from 'workbox-precaching/precacheAndRoute';
 
 precacheAndRoute([
   {
-    "revision":"d41d8cd98f00b204e9800998ecf8427e",
-    "url":"CopyRight/index.html"
+    "revision": "d41d8cd98f00b204e9800998ecf8427e",
+    "url": "CopyRight/index.html"
   },
   {
-    "revision":"48b778db6743ef01b9e28a1baf9381a9",
-    "url":"googlea6b289d9dfe16c91.html"
+    "revision": "48b778db6743ef01b9e28a1baf9381a9",
+    "url": "googlea6b289d9dfe16c91.html"
   },
   {
-    "revision":"6ac964f915a46cae0802c7c687bdb806",
-    "url":"index.html"
+    "revision": "6ac964f915a46cae0802c7c687bdb806",
+    "url": "index.html"
   },
   {
-    "revision":"423ff60d09e606412e3329ab21826b3e",
-    "url":"MRamzanCh/index.html"
+    "revision": "423ff60d09e606412e3329ab21826b3e",
+    "url": "MRamzanCh/index.html"
   },
   {
-    "revision":"a808a80d29b1ae7dcc5db17f6a4e9eeb",
-    "url":"MRD/index.html"
+    "revision": "a808a80d29b1ae7dcc5db17f6a4e9eeb",
+    "url": "MRD/index.html"
   },
   {
-    "revision":"3163bc5cbde4ab5487ac7b21774d3996",
-    "url":"Privacy/index.html"
+    "revision": "3163bc5cbde4ab5487ac7b21774d3996",
+    "url": "Privacy/index.html"
   },
   {
-    "revision":"02b9cbf9629b43c3a900fe80eb3d78eb",
-    "url":"ProBandey/index.html"
+    "revision": "02b9cbf9629b43c3a900fe80eb3d78eb",
+    "url": "ProBandey/index.html"
   },
   {
-    "revision":"de172cdca1c6eb810797ab3c9e60847b",
-    "url":"Terms/index.html"
+    "revision": "de172cdca1c6eb810797ab3c9e60847b",
+    "url": "Terms/index.html"
   },
 
   /* OFFLINE PAGE */
   {
-    "revision":"1",
-    "url":"offline.html"
+    "revision": "5451dfb545a5e25c1652f5e564d6a6b656c65",
+    "url": "offline.html"
   }
 ]);
 

@@ -9,18 +9,10 @@
     const DEFAULT_COUNTDOWN = 15;
     const ROUTES = {
         mrc: "https://mramzanch.blogspot.com",
-        pb: "https://github.com/Pro-Bandey",
+        pb: "https://Pro-Bandey.github.io",
         mrd: "https://mainroute-core.github.io/mrd/",
-        chatgpt: "https://chatgpt.com/",
-        google: "https://www.google.com/",
-        yt: "https://www.youtube.com/",
-        insta: "https://www.instagram.com/",
-        fb: "https://www.facebook.com/",
-        wa: "https://wa.me/",
-        tele: "https://t.me/",
-        linkedin: "https://www.linkedin.com/",
-        x: "https://x.com/",
-        git: "https://github.com/MainRoute-Core"
+        google: "https://www.google.com/search?q=MainRoute+Core&udm=50&aep=48",
+        core: "https://github.com/MainRoute-Core"
     };
 
     const state = {
@@ -33,7 +25,6 @@
     const els = {
         routeTitle: document.getElementById("routeTitle"),
         routeDesc: document.getElementById("routeDesc"),
-        domainBox: document.getElementById("domainBox"),
         urlBox: document.getElementById("urlBox"),
         favicon: document.getElementById("siteFavicon"),
         countdownValue: document.getElementById("countdownValue"),
@@ -50,7 +41,6 @@
         copyShareBtn: document.getElementById("copyShareBtn"),
         statusDot: document.getElementById("statusDot"),
         statusText: document.getElementById("statusText"),
-        // Share Links
         fbShare: document.getElementById("fbShare"),
         xShare: document.getElementById("xShare"),
         linkedinShare: document.getElementById("linkedinShare"),
@@ -158,7 +148,6 @@
             els.routeTitle.innerHTML = `Route Not Found <span class="blinking f">&bull;</span>`;
             els.routeTitle.style.color = "var(--mrc) !important"
             els.routeDesc.textContent = "No valid destination. Missing ?id= or ?url= parameters.";
-            els.domainBox.textContent = "N/A";
             els.urlBox.textContent = "Invalid or missing route";
             els.statusDot.style.background = "#f87171";
             els.statusDot.style.boxShadow = "0 0 10px #f87171";
@@ -169,7 +158,6 @@
             return;
         }
         const parsed = new URL(url);
-        els.domainBox.innerHTML = renderHighlightedDomain(url);
         els.urlBox.textContent = url;
         document.title = `Redirecting to ${parsed.hostname} | MRC Gateway`;
         setFavicon(url);
