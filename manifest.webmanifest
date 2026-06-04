@@ -3,6 +3,7 @@
   "short_name": "MRC",
   "description": "A specialized technology powerhouse delivering PWA, open-source, and custom software solutions.",
   "start_url": "./",
+  "id": "./",
   "display": "standalone",
   "background_color": "#050505",
   "theme_color": "#f44234",
@@ -17,7 +18,7 @@
   "icons": [
     {
       "src": "./favicon.ico",
-      "sizes": "16x16 32x32 48x48 64x64",
+      "sizes": "any",
       "type": "image/x-icon"
     },
     {
@@ -139,7 +140,14 @@
   "screenshots": [
     {
       "src": "./src/social.png",
+      "form_factor": "wide",
       "sizes": "2560x1440",
+      "type": "image/png",
+      "description": "ScreenShot Of Site's Upper Part."
+    },
+    {
+      "src": "./src/social_2.png",
+      "sizes": "1440x2960",
       "type": "image/png",
       "description": "ScreenShot Of Site's Upper Part."
     }

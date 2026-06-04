@@ -18,7 +18,7 @@
 
 .page-subtitle {
     font-family: var(--font-mono);
-    color: var(--mrc);
+    color: var(--text-main);
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;

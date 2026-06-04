@@ -12,6 +12,7 @@
     <meta name="author" content="M Ramzan Ch" />
     <meta name="copyright" content="MainRoute Core" />
     
+    <script>navigator.serviceWorker.register("/js/sw.js")</script>     
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="canonical" href="https://mainroute-core.github.io/License">
     <link rel="shortcut icon" type="image/x-icon" sizes="any" href="/favicon.ico">
@@ -36,7 +37,7 @@
 <body>
 
     <div id="loader" class="loader" style="pointer-events: none;">
-        <img style="height: 120px; pointer-events: none;" src="/src/mrc-nuca-loading.svg" alt="mrc-nuca-loading">
+        <img style="height: 120px; width: 120px; pointer-events: none;" src="/src/mrc-nuca-loading.svg" alt="mrc-nuca-loading">
         <div class="loader-text-wrapper">
             <span class="loader-text-letter">I</span>
             <span class="loader-text-letter">n</span>
@@ -64,8 +65,7 @@
     </div>
 
     <div class="tech-grid"></div>
-    <div class="ambient-orb first-orb"></div>
-    <div class="ambient-orb second-orb"></div>
+
 
     <header class="header" id="navbar">
         <div class="nav-bar glass-panel">
@@ -84,7 +84,7 @@
                     <div class="status-dot"></div> Active
                 </div>
             </nav>
-            <button id="mobile-menu-btn" class="mobile-menu-btn">
+            <button id="mobile-menu-btn" class="mobile-menu-btn" title="Menu Button">
                 <svg class="icon"><use href="/src/global.svg#icon-menu"></use></svg>
             </button>
         </div>
@@ -128,8 +128,8 @@
                     </div>
                     <p class="txt-muted">A specialized technology powerhouse delivering PWA, open-source, and custom software solutions.</p>
                     <div class="flex gap-2">
-                        <a target="_blank" href="/Redirect/?id=core" class="social-btn"><svg class="icon" style="width:1.2rem;"><use href="/src/global.svg#icon-github"></use></svg></a>
-                        <a target="_blank" href="/Redirect/?id=google" class="social-btn"><svg class="icon" style="width:1.2rem;"><use href="/src/global.svg#icon-google"></use></svg></a>
+                        <a target="_blank" href="/Redirect/?id=core" class="social-btn" title="Social Link" aria-label="Social Link"><svg class="icon" style="width:1.2rem;"><use href="/src/global.svg#icon-github"></use></svg></a>
+                        <a target="_blank" href="/Redirect/?id=google" class="social-btn" title="Social Link" aria-label="Social Link"><svg class="icon" style="width:1.2rem;"><use href="/src/global.svg#icon-google"></use></svg></a>
                     </div>
                 </div>
                 <div class="footer-col">

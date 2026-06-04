@@ -767,27 +767,6 @@
      -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%)
  }
 
- .ambient-orb {
-     position: absolute;
-     border-radius: 50%;
-     filter: blur(120px);
-     opacity: .15;
-     z-index: -1;
-     background: var(--mrc);
- }
-
- .first-orb {
-     width: 40vw;
-     height: 40vw;
- }
-
- .second-orb {
-     width: 30vw;
-     height: 30vw;
-     opacity: 0.1;
- }
-
-
  /* Btns mean Buttons */
 
  .btn {
@@ -810,7 +789,8 @@
  .btn-prim {
      background: var(--mrc);
      color: #fff;
-     box-shadow: 0 4px 15px var(--mrc-glow)
+     box-shadow: 0 4px 15px var(--mrc-glow);
+     text-shadow: 0 0 10px black;
  }
 
  .btn-prim:hover {
@@ -891,6 +871,7 @@
      justify-content: space-between;
      align-items: center
  }
+
  .nav-logo {
      display: flex;
      align-items: center;
@@ -904,6 +885,10 @@
      width: 40px;
      height: 40px;
      border-radius: 50%;
+ }
+
+ .nav-logo:hover img {
+     scale: 1.2;
  }
 
  .desktop-nav {
@@ -935,6 +920,7 @@
  .desktop-nav a:hover,
  .desktop-nav a.active {
      color: var(--text-main);
+     scale: 1.05;
  }
 
  .desktop-nav a:hover::after,

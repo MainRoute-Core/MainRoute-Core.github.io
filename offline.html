@@ -20,7 +20,7 @@
         content="A specialized technology powerhouse delivering PWA, open-source, and custom software solutions." />
     <meta property="og:image" content="/src/social.png" />
 
-    <script>navigator.serviceWorker.register("src/sw.js")</script>
+    <script>navigator.serviceWorker.register("/js/sw.js")</script>
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="canonical" href="https://mainroute-core.github.io/">
     <link rel="shortcut icon" type="image/x-icon" sizes="any" href="/favicon.ico">
@@ -44,7 +44,7 @@
 <body>
 
     <div id="loader" class="loader" style="pointer-events: none;">
-        <img style="height: 120px; pointer-events: none;" src="/src/mrc-nuca-loading.svg" alt="mrc-nuca-loading">
+        <img style="height: 120px; width: 120px; pointer-events: none;" src="/src/mrc-nuca-loading.svg" alt="mrc-nuca-loading">
         <div class="loader-text-wrapper">
             <span class="loader-text-letter">I</span>
             <span class="loader-text-letter">n</span>
@@ -68,8 +68,7 @@
     </div>
 
     <div class="tech-grid"></div>
-    <div class="ambient-orb first-orb"></div>
-    <div class="ambient-orb second-orb"></div>
+
 
     <main class="main flex items-center justify-center pad-8">
         <div class="div" id="div-container">
