@@ -4,14 +4,38 @@
   "description": "A specialized technology powerhouse delivering PWA, open-source, and custom software solutions.",
   "start_url": "./",
   "id": "./",
+  "dir": "auto",
   "display": "standalone",
+  "display_override": ["minimal-ui", "browser", "standalone"],
   "background_color": "#050505",
   "theme_color": "#f44234",
-  "orientation": "portrait-primary",
+  "orientation": "portrait",
   "scope": "/",
   "lang": "en",
 
-  "categories": ["technology", "business", "development"],
+  "categories": [
+    "business",
+    "developer",
+    "developer tools",
+    "development",
+    "education",
+    "graphics &amp; design",
+    "multimedia",
+    "multimedia design",
+    "productivity"
+  ],
+
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "mailto",
+      "url": "./&tar=%s"
+    }
+  ],
+
+  "edge_side_panel": {},
 
   "prefer_related_applications": false,
 
@@ -71,65 +95,13 @@
 
   "shortcuts": [
     {
-      "name": "Privacy Policy",
-      "short_name": "Privacy",
-      "description": "See Privacy Policy",
-      "url": "/Privacy/",
+      "name": "System Map",
+      "short_name": "System",
+      "description": "See System Map",
+      "url": "/SystemMap/",
       "icons": [
         {
           "src": "./src/192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
-    },
-    {
-      "name": "Terms Of Service",
-      "short_name": "Terms",
-      "description": "See Terms of Services",
-      "url": "/Terms/",
-      "icons": [
-        {
-          "src": "./src/192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
-    },
-    {
-      "name": "Copy Right",
-      "short_name": "CopyRight",
-      "description": "See Copy Right",
-      "url": "/CopyRight/",
-      "icons": [
-        {
-          "src": "./src/192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
-    },
-    {
-      "name": "M Ramzan Ch",
-      "short_name": "MR Ch",
-      "description": "Explore M Ramzan Ch's Profile",
-      "url": "/Redirect/?id=mrc",
-      "icons": [
-        {
-          "src": "/src/mrc.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
-    },
-    {
-      "name": "Pro Bandey",
-      "short_name": "PB",
-      "description": "Explore Pro Bandey's Profile",
-      "url": "/Redirect/?id=pb",
-      "icons": [
-        {
-          "src": "/src/pb.png",
           "sizes": "192x192",
           "type": "image/png"
         }

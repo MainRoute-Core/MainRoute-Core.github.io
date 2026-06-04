@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+    <meta name="theme-color" content="#f44234">
+    <meta name="title" content="MainRoute Core | Be Passionate For Future" />
+    <meta name="description" content="MainRoute Core, led by M Ramzan Ch. We engineer high-performance PWAs, enterprise software, and open-source contributions." />
+    <meta name="keywords" content="MainRoute, MainRoute Core, MR Core, MRC, M Ramzan Ch, MegaMind-Solution, Web Development, Software Development, Modifications, Git Folder Downloader,  Pro Bandey" />
+    <meta name="author" content="M Ramzan Ch" />
+    <meta name="copyright" content="MainRoute Core" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mainroute-core.github.io/SystemMap" />
+    <meta property="og:title" content="MainRoute Core | Be Passionate For Future" />
+    <meta property="og:description" content="A specialized technology powerhouse delivering PWA, open-source, and custom software solutions." />
+    <meta property="og:image" content="/src/social.png" />
+    
+
+    <!-- <script>navigator.serviceWorker.register("/js/sw.js")<script>  -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            // Wait for the page to fully load before registering.
+            // This ensures the SW doesn't compete for network bandwidth while the UI is rendering!
+            window.addEventListener('load', () => {
+                // NOTE: Path MUST be /sw.js (Root directory) to control the whole site!
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => {
+                        console.log('✅ Core Service Worker Active. Scope:', reg.scope);
+                    })
+                    .catch(err => {
+                        console.error('❌ Service Worker Registration Failed:', err);
+                    });
+            });
+        }
+    </script>
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="canonical" href="https://mainroute-core.github.io/">
+    <link rel="shortcut icon" type="image/x-icon" sizes="any" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/144.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/512.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/src/apple-touch-icon.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="167x167" href="/src/apple-touch-167.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="/src/apple-touch-152.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="/src/apple-touch-120.png">
+    
+    <title>System Map | MainRoute Core</title>
+
+    <link href="/src/CoreSans-Regular_en.otf" rel="stylesheet">
+
+     <link rel="stylesheet" href="/css/global.css">
+     <link rel="stylesheet" href="/css/systemmap.css">
+     <style>
+       </style>
+</head>
+
+
+<body>
+
+    <div id="loader" class="loader" style="pointer-events: none;">
+        <img style="height: 120px; width: 120px; pointer-events: none;" src="/src/mrc-nuca-loading.svg" alt="mrc-nuca-loading">
+        <div class="loader-text-wrapper">
+            <span class="loader-text-letter">I</span>
+            <span class="loader-text-letter">n</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">t</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">a</span>
+            <span class="loader-text-letter">l</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">z</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">n</span>
+            <span class="loader-text-letter">g</span>
+            <hr>
+            <span class="loader-text-letter">C</span>
+            <span class="loader-text-letter">o</span>
+            <span class="loader-text-letter">r</span>
+            <span class="loader-text-letter">e</span>
+            <div class="loader-colors"></div>
+        </div>
+    </div>
+
+    <div id="scroll-progress-container">
+        <div id="scroll-progress"></div>
+    </div>
+
+    <div class="tech-grid"></div>
+
+
+    <!-- Header Section -->
+    <section class="page-header reveal">
+        <div class="page-tag">
+            <svg class="icon" style="width:14px; height:14px;"><use href="/src/global.svg#icon-map-pin"></use></svg> 
+            Site Directory
+        </div>
+        <h1 class="page-title">
+            Sys<span class="text-gradient">tem Map.</span>
+        </h1>
+        <p class="page-desc">
+            A index of all routes, directives, and tools engineered the MainRoute Core Site.
+        </p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="section pt-0">
+        <div class="container grid grid-2 gap-2">
+            
+            <!-- Core Navigation -->
+            <div class="glass-panel directory-card reveal delay-100">
+                <div class="dir-header">
+                    <div class="dir-icon"><svg class="icon"><use href="/src/global.svg#icon-compass"></use></svg></div>
+                    <h2 class="dir-title">Core Navigation</h2>
+                </div>
+                <div class="dir-list">
+                    <a href="/" class="dir-item">
+                        <div class="dir-item-content">
+                            <span class="dir-item-title"><svg class="icon" style="width:16px; height:16px; color:var(--mrc);"><use href="/src/global.svg#icon-home"></use></svg> The Core</span>
+                            <span class="dir-item-desc"><span class="url"></span>/</span>
+                        </div>
+                        <svg class="icon dir-arrow"><use href="/src/global.svg#icon-chevron-right"></use></svg>
+                    </a>
+                    <a href="/about/" class="dir-item">
+                        <div class="dir-item-content">
+                            <span class="dir-item-title"><svg class="icon" style="width:16px; height:16px; color:var(--mrc);"><use href="/src/global.svg#icon-info"></use></svg> The Core Mind</span>
+                            <span class="dir-item-desc"><span class="url"></span>/About/</span>
+                        </div>
+                        <svg class="icon dir-arrow"><use href="/src/global.svg#icon-chevron-right"></use></svg>
+                    </a>
+                    <a href="/contact/" class="dir-item">
+                        <div class="dir-item-content">
+                            <span class="dir-item-title"><svg class="icon" style="width:16px; height:16px; color:var(--mrc);"><use href="/src/global.svg#icon-mail"></use></svg> Initiate Dialogue</span>
+                            <span class="dir-item-desc"><span class="url"></span>/Contact/</span>
+                        </div>
+                        <svg class="icon dir-arrow"><use href="/src/global.svg#icon-chevron-right"></use></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Legal Directives -->
+            <div class="glass-panel directory-card reveal delay-200">
+                <div class="dir-header">
+                    <div class="dir-icon"><svg class="icon"><use href="/src/global.svg#icon-shield"></use></svg></div>
+                    <h2 class="dir-title">Legal Directives & Media</h2>
+                </div>
+                <div class="dir-list">
+                    <a href="/Privacy/" class="dir-item">
+                        <div class="dir-item-content">
+                            <span class="dir-item-title"><svg class="icon" style="width:16px; height:16px; color:var(--mrc);"><use href="/src/global.svg#icon-file-text"></use></svg> Privacy Policy</span>
+                            <span class="dir-item-desc"><span class="url"></span>/Privacy/</span>
+                        </div>
+                        <svg class="icon dir-arrow"><use href="/src/global.svg#icon-chevron-right"></use></svg>
+                    </a>
+                    <a href="/Terms/" class="dir-item">
+                        <div class="dir-item-content">
+                            <span class="dir-item-title"><svg class="icon" style="width:16px; height:16px; color:var(--mrc);"><use href="/src/global.svg#icon-file-text"></use></svg> Terms of Service</span>
+                            <span class="dir-item-desc"><span class="url"></span>/Terms/</span>
+                        </div>
+                        <svg class="icon dir-arrow"><use href="/src/global.svg#icon-chevron-right"></use></svg>
+                    </a>
+                    <a href="/Brand/" class="dir-item">
+                        <div class="dir-item-content">
+                            <span class="dir-item-title"><svg class="icon" style="width:16px; height:16px; color:var(--mrc);"><use href="/src/global.svg#icon-file-text"></use></svg> Brand & Copyright Policy</span>
+                            <span class="dir-item-desc"><span class="url"></span>/CopyRight/</span>
+                        </div>
+                        <svg class="icon dir-arrow"><use href="/src/global.svg#icon-chevron-right"></use></svg>
+                    </a>
+                </div>
+                <div class="dir-list">
+                    <a href="/Media/" class="dir-item">
+                        <div class="dir-item-content">
+                            <span class="dir-item-title"><svg class="icon" style="width:16px; height:16px; color:var(--mrc);"><use href="/src/global.svg#icon-image"></use></svg> Press Kit & Assets</span>
+                            <span class="dir-item-desc"><span class="url"></span>/Media/</span>
+                        </div>
+                        <svg class="icon dir-arrow"><use href="/src/global.svg#icon-chevron-right"></use></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- System Utilities -->
+            <div class="glass-panel directory-card reveal delay-200">
+                <div class="dir-header">
+                    <div class="dir-icon"><svg class="icon"><use href="/src/global.svg#icon-cpu"></use></svg></div>
+                    <h2 class="dir-title">System Utilities</h2>
+                </div>
+                <div class="dir-list">
+                    <a href="/Clog/" class="dir-item">
+                        <div class="dir-item-content">
+                            <span class="dir-item-title"><svg class="icon" style="width:16px; height:16px; color:var(--mrc);"><use href="/src/global.svg#icon-link"></use></svg>Clog</span>
+                            <span class="dir-item-desc"><span class="url"></span>/Clog/</span>
+                        </div>
+                        <svg class="icon dir-arrow"><use href="/src/global.svg#icon-chevron-right"></use></svg>
+                    </a>
+                    <a href="/Redirect/" class="dir-item">
+                        <div class="dir-item-content">
+                            <span class="dir-item-title"><svg class="icon" style="width:16px; height:16px; color:var(--mrc);"><use href="/src/global.svg#icon-link"></use></svg> Redirect Gateway</span>
+                            <span class="dir-item-desc"><span class="url"></span>/Redirect/</span>
+                        </div>
+                        <svg class="icon dir-arrow"><use href="/src/global.svg#icon-chevron-right"></use></svg>
+                    </a>
+                    <a href="/404.html" class="dir-item">
+                        <div class="dir-item-content">
+                            <span class="dir-item-title"><svg class="icon" style="width:16px; height:16px; color:var(--mrc);"><use href="/src/global.svg#icon-alert-triangle"></use></svg> 404 Error Simulator</span>
+                            <span class="dir-item-desc"><span class="url"></span>/404.html</span>
+                        </div>
+                        <svg class="icon dir-arrow"><use href="/src/global.svg#icon-chevron-right"></use></svg>
+                    </a>
+                    <a href="/offline.html" class="dir-item">
+                        <div class="dir-item-content">
+                            <span class="dir-item-title"><svg class="icon" style="width:16px; height:16px; color:var(--mrc);"><use href="/src/global.svg#icon-wifi-off"></use></svg> Offline State</span>
+                            <span class="dir-item-desc"><span class="url"></span>/offline.html</span>
+                        </div>
+                        <svg class="icon dir-arrow"><use href="/src/global.svg#icon-chevron-right"></use></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- External Route -->
+            <div class="glass-panel directory-card reveal delay-200">
+                <div class="dir-header">
+                    <div class="dir-icon"><svg class="icon"><use href="/src/global.svg#icon-cpu"></use></svg></div>
+                    <h2 class="dir-title">External Routes</h2>
+                </div>
+                <div class="dir-list">
+                    <a href="/Redirect/?id=git" class="dir-item">
+                        <div class="dir-item-content">
+                            <span class="dir-item-title"><svg class="icon" style="width:16px; height:16px; color:var(--mrc);"><use href="/src/global.svg#icon-github"></use></svg>GitHub WorkSpace</span>
+                            <span class="dir-item-desc"><span class="url"></span>/Redirect/?id=git</span>
+                        </div>
+                        <svg class="icon dir-arrow"><use href="/src/global.svg#icon-chevron-right"></use></svg>
+                    </a>
+                    <a href="/Redirect/?id=google" class="dir-item">
+                        <div class="dir-item-content">
+                            <span class="dir-item-title"><svg class="icon" style="width:16px; height:16px; color:var(--mrc);"><use href="/src/global.svg#icon-google"></use></svg>Google Overview</span>
+                            <span class="dir-item-desc"><span class="url"></span>/Redirect/?id=goohle</span>
+                        </div>
+                        <svg class="icon dir-arrow"><use href="/src/global.svg#icon-chevron-right"></use></svg>
+                    </a>
+                    <a href="/Redirect/?id=mrc" class="dir-item">
+                        <div class="dir-item-content">
+                            <span class="dir-item-title"><img class="icon" src="/src/mrc.png" alt="M Ramzan Ch">M Ramzan Ch</span>
+                            <span class="dir-item-desc"><span class="url"></span>/Redirect/?id=mrc</span>
+                        </div>
+                        <svg class="icon dir-arrow"><use href="/src/global.svg#icon-chevron-right"></use></svg>
+                    </a>
+                    <a href="/Redirect/?id=pb" class="dir-item">
+                        <div class="dir-item-content">
+                            <span class="dir-item-title"><img class="icon" src="/src/pb.png" alt="Pro Bandey">Pro Bandey</span>
+                            <span class="dir-item-desc"><span class="url"></span>/Redirect/?id=pb</span>
+                        </div>
+                        <svg class="icon dir-arrow"><use href="/src/global.svg#icon-chevron-right"></use></svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mrc-footer pad-4 pos-rel">
+        <div class="container pad-0">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="brand-logo flex items-start flex-row gap-2">
+                        <img src="/src/mrc-nuca.svg" alt="MainRoute Core Logo">
+                        <h3 class="txt-black capitalize pos-rel">MainRoute <span class="txt-mrc">Core</span></h3>
+                    </div>
+                    <p class="txt-muted">A specialized technology powerhouse delivering PWA, open-source, and custom software solutions.</p>
+                    <div class="flex gap-2">
+                        <a target="_blank" href="/Redirect/?id=core" class="social-btn" title="Social Link" aria-label="Social Link"><svg class="icon" style="width:1.2rem;"><use href="/src/global.svg#icon-github"></use></svg></a>
+                        <a target="_blank" href="/Redirect/?id=google" class="social-btn" title="Social Link" aria-label="Social Link"><svg class="icon" style="width:1.2rem;"><use href="/src/global.svg#icon-google"></use></svg></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copy">
+                    &copy; 2024-<span id="year">2024</span> MainRoute Core. <a class="txt-bold" href="/Redirect/?id=mrc target="_blank">M Ramzan Ch</a> | <a class="txt-bold" href="/Redirect/?id=pb" target="_blank"">Pro Bandey</a>. All Rights Reserved.
+                </div>
+                <div class="footer-made-in">
+                    Engineered with <svg class="icon"
+                        style="color: var(--mrc); fill: var(--mrc); width: 14px; height: 14px;">
+                        <use href="/src/global.svg#icon-heart"></use>
+                    </svg> in Tech
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS LOGIC -->
+     <script src="/js/global.js"></script>
+    <script>
+     const domain = window.location.hostname;
+
+document.querySelectorAll('.url').forEach(el => {
+    el.textContent = domain;
+});
+    </script>
+</body>
+</html>

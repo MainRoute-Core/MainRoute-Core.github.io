@@ -18,33 +18,24 @@
     <meta property="og:description" content="A specialized technology powerhouse delivering PWA, open-source, and custom software solutions." />
     <meta property="og:image" content="/src/social.png" />
     
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-    <script>navigator.serviceWorker.register("/js/sw.js")</script> 
-=======
->>>>>>> Stashed changes
-<!-- Register PWA Service Worker -->
-<script>
-    if ('serviceWorker' in navigator) {
-        // Wait for the page to fully load before registering.
-        // This ensures the SW doesn't compete for network bandwidth while the UI is rendering!
-        window.addEventListener('load', () => {
-            // NOTE: Path MUST be /sw.js (Root directory) to control the whole site!
-            navigator.serviceWorker.register('/sw.js')
-                .then(reg => {
-                    console.log('✅ Core Service Worker Active. Scope:', reg.scope);
-                })
-                .catch(err => {
-                    console.error('❌ Service Worker Registration Failed:', err);
-                });
-        });
-    }
-</script>
-<<<<<<< Updated upstream
-=======
->>>>>>> dd492889702cd05441ba92edeb1a3c2eab05f474
->>>>>>> Stashed changes
+
+    <!-- <script>navigator.serviceWorker.register("/js/sw.js")<script>  -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            // Wait for the page to fully load before registering.
+            // This ensures the SW doesn't compete for network bandwidth while the UI is rendering!
+            window.addEventListener('load', () => {
+                // NOTE: Path MUST be /sw.js (Root directory) to control the whole site!
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => {
+                        console.log('✅ Core Service Worker Active. Scope:', reg.scope);
+                    })
+                    .catch(err => {
+                        console.error('❌ Service Worker Registration Failed:', err);
+                    });
+            });
+        }
+    </script>
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="canonical" href="https://mainroute-core.github.io/">
     <link rel="shortcut icon" type="image/x-icon" sizes="any" href="/favicon.ico">

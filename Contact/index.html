@@ -12,7 +12,23 @@
     <meta name="author" content="M Ramzan Ch" />
     <meta name="copyright" content="MainRoute Core" />
     
-    <script>navigator.serviceWorker.register("/js/sw.js")</script> 
+    <!-- <script>navigator.serviceWorker.register("/js/sw.js")</script>  -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            // Wait for the page to fully load before registering.
+            // This ensures the SW doesn't compete for network bandwidth while the UI is rendering!
+            window.addEventListener('load', () => {
+                // NOTE: Path MUST be /sw.js (Root directory) to control the whole site!
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => {
+                        console.log('✅ Core Service Worker Active. Scope:', reg.scope);
+                    })
+                    .catch(err => {
+                        console.error('❌ Service Worker Registration Failed:', err);
+                    });
+            });
+        }
+    </script> 
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="canonical" href="https://mainroute-core.github.io/Contact">
     <link rel="shortcut icon" type="image/x-icon" sizes="any" href="/favicon.ico">
