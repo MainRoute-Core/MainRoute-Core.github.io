@@ -5,589 +5,277 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
-    <!-- SEO & Theme -->
     <meta name="theme-color" content="#f44234">
-    <meta name="title" content="Clog | MainRoute Core Publications" />
-    <meta name="description" content="Read the latest architectural insights, tech tutorials, and development updates from MainRoute Core." />
+    <meta name="title" content="MainRoute Core | Be Passionate For Future" />
+    <meta name="description" content="MainRoute Core, led by M Ramzan Ch. We engineer high-performance PWAs, enterprise software, and open-source contributions." />
+    <meta name="keywords" content="MainRoute, MainRoute Core, MR Core, MRC, M Ramzan Ch, MegaMind-Solution, Web Development, Software Development, Modifications, Git Folder Downloader,  Pro Bandey" />
+    <meta name="author" content="M Ramzan Ch" />
+    <meta name="copyright" content="MainRoute Core" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mainroute-core.github.io/" />
+    <meta property="og:title" content="MainRoute Core | Be Passionate For Future" />
+    <meta property="og:description" content="A specialized technology powerhouse delivering PWA, open-source, and custom software solutions." />
+    <meta property="og:image" content="/src/social.png" />
     
-    <!-- Icons & Manifest -->
+
+
+    <script>
+        if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js') .then(reg => { console.log('✅ Core Service Worker Active. Scope:', reg.scope); }) .catch(err => { console.error('❌ Service Worker Registration Failed:', err); }); }); }
+    </script>
     <link rel="manifest" href="/manifest.webmanifest">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://avatars.githubusercontent.com/u/249983472?s=192&v=4">
-    <link href="https://avatars.githubusercontent.com/u/249983472?s=180&v=4" rel="apple-touch-icon" sizes="180x180" />
+    <link rel="canonical" href="https://mainroute-core.github.io/">
+    <link rel="shortcut icon" type="image/x-icon" sizes="any" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/144.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/512.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/src/apple-touch-icon.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="167x167" href="/src/apple-touch-167.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="/src/apple-touch-152.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="/src/apple-touch-120.png">
+    
+    <title>Clog | MainRoute Core</title>
 
-    <title>Publications | MainRoute Core</title>
+    <link href="/src/CoreSans-Regular_en.otf" rel="stylesheet">
 
-    <!-- Custom Font -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link href="https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf" rel="stylesheet">
+    <script src="/js/marked.min.js"></script>
+    <link rel="stylesheet" href="/css/github-markdown.min.css">
 
-    <!-- Marked.js Markdown Parser -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-    <!-- 100% INTERNAL CSS (Glassmorphism & Markdown Overrides) -->
-    <style>
-        @font-face {
-            font-family: 'Core Sans';
-            src: url(https://cdn.jsdelivr.net/gh/MainRoute-Core/CoreSans@main/CoreSans-Regular_en.otf);
-            font-display: swap;
-        }
-
-        :root {
-            --mrc: #f44234;
-            --mrc-light: #ff7063;
-            --mrc-glow: rgba(244, 66, 52, 0.4);
-            --bg-dark: #09090b;
-            --bg-surface: #18181b;
-            --bg-surface-elevated: #27272a;
-            --text-main: #f8fafc;
-            --text-muted: #a1a1aa;
-            --glass-bg: rgba(24, 24, 27, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            --font-sans: 'Core Sans', system-ui, sans-serif;
-            --font-mono: 'Space Mono', ui-monospace, monospace;
-            --nav-height: 80px;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; font-size: 16px; }
-        body { font-family: var(--font-sans); background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; line-height: 1.5; min-height: 100vh; display: flex; flex-direction: column; }
-        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
-        img, svg { max-width: 100%; display: block; }
-        button { cursor: pointer; border: none; background: none; font-family: inherit; color: inherit; transition: all 0.2s; }
-        .icon { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-        /* Background Effects */
-        .tech-grid { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(var(--glass-border) 1px, transparent 1px), linear-gradient(90deg, var(--glass-border) 1px, transparent 1px); background-size: 40px 40px; mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%); -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%); }
-        .ambient-orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15; z-index: -1; background: var(--mrc); animation: float 12s ease-in-out infinite alternate; }
-        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, -50px) scale(1.1); } }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        /* Loader */
-        #loader { position: fixed; inset: 0; z-index: 99999; background: var(--bg-dark); display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem; transition: opacity 0.6s, visibility 0.6s; }
-        .loader-ring { width: 60px; height: 60px; border: 4px solid var(--glass-border); border-top-color: var(--mrc); border-radius: 50%; animation: spin 1s linear infinite; }
-        #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-
-        /* Nav */
-        .header { position: fixed; top: 1rem; left: 1rem; right: 1rem; z-index: 100; transition: transform 0.3s ease; }
-        @media (min-width: 1024px) { .header { top: 1.5rem; left: 2rem; right: 2rem; } }
-        .nav-bar { padding: 0.75rem 1.5rem; border-radius: 9999px; display: flex; justify-content: space-between; align-items: center; background: var(--glass-bg); backdrop-filter: blur(24px); border: 1px solid var(--glass-border); }
-        .nav-logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 900; }
-        .nav-logo img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--mrc); }
-        .system-status { display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.05); padding: 0.4rem 1rem; border-radius: 99px; font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em; }
-        .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; }
-        .status-dot.remote { background: var(--mrc); box-shadow: 0 0 10px var(--mrc); }
-
-        /* Main Container */
-        .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: calc(var(--nav-height) + 3rem) 1.5rem 4rem; position: relative; z-index: 10; flex-grow: 1; }
-
-        /* Reader State Toggles */
-        .view-list { display: grid; grid-template-columns: 280px 1fr; gap: 2rem; }
-        .view-reader { display: none; }
-        .app-state-reader .view-list { display: none; }
-        .app-state-reader .view-reader { display: block; }
-        @media (max-width: 900px) { .view-list { grid-template-columns: 1fr; } }
-
-        /* Search & Filters */
-        .search-bar { width: 100%; padding: 1rem 1rem 1rem 3rem; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); border-radius: 1rem; color: #fff; font-family: inherit; font-size: 1rem; margin-bottom: 1.5rem; transition: border-color 0.3s; }
-        .search-bar:focus { outline: none; border-color: var(--mrc); background: rgba(244, 66, 52, 0.03); }
-        .search-wrapper { position: relative; }
-        .search-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
-
-        .glass-card { background: var(--glass-bg); backdrop-filter: blur(24px); border: 1px solid var(--glass-border); border-radius: 1.5rem; padding: 1.5rem; }
-        .filter-title { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-        
-        .filter-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-        .filter-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0.75rem; border-radius: 0.5rem; cursor: pointer; color: var(--text-muted); transition: all 0.2s; font-size: 0.9rem; }
-        .filter-item:hover { background: rgba(255,255,255,0.05); color: #fff; }
-        .filter-item.active { background: rgba(244, 66, 52, 0.1); color: var(--mrc); font-weight: 700; border: 1px solid rgba(244, 66, 52, 0.2); }
-        .filter-count { background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 99px; font-size: 0.7rem; font-family: var(--font-mono); }
-        .filter-item.active .filter-count { background: var(--mrc); color: #fff; }
-
-        .btn-clear { background: rgba(244, 66, 52, 0.15); color: var(--mrc); border: 1px solid rgba(244, 66, 52, 0.3); padding: 0.5rem 1rem; border-radius: 99px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.5rem; }
-        .btn-clear:hover { background: var(--mrc); color: #fff; }
-
-        /* Post Grid */
-        .posts-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
-        .posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
-        
-        .post-card { background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); border-radius: 1.25rem; overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column; }
-        .post-card:hover { transform: translateY(-5px); border-color: rgba(244, 66, 52, 0.4); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        
-        .card-img-wrap { width: 100%; height: 200px; position: relative; overflow: hidden; cursor: pointer; }
-        .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-        .post-card:hover .card-img { transform: scale(1.05); }
-        
-        .card-badges { position: absolute; top: 1rem; left: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; pointer-events: none; }
-        .card-badge { background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); color: #fff; padding: 0.3rem 0.8rem; border-radius: 99px; font-size: 0.7rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.1); }
-        
-        .card-content { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
-        .card-meta { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; display: flex; justify-content: space-between; }
-        .card-title { font-size: 1.35rem; font-weight: 900; line-height: 1.2; margin-bottom: 0.75rem; cursor: pointer; transition: color 0.2s; }
-        .post-card:hover .card-title { color: var(--mrc); }
-        .card-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-        
-        .card-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-        .card-tag { font-size: 0.75rem; font-family: var(--font-mono); color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 0.3rem 0.6rem; border-radius: 0.5rem; border: 1px solid transparent; cursor: pointer; transition: all 0.2s; }
-        .card-tag:hover { background: rgba(244, 66, 52, 0.1); color: var(--mrc); border-color: rgba(244, 66, 52, 0.3); }
-
-        /* Reader Pane */
-        .reader-container { max-width: 900px; margin: 0 auto; }
-        .btn-back { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.85rem; margin-bottom: 2rem; padding: 0.5rem 1rem; border-radius: 99px; background: rgba(255,255,255,0.05); }
-        .btn-back:hover { color: #fff; background: rgba(255,255,255,0.1); }
-        
-        .reader-banner { width: 100%; height: 400px; border-radius: 1.5rem; object-fit: cover; margin-bottom: 2.5rem; border: 1px solid var(--glass-border); }
-        @media (max-width: 768px) { .reader-banner { height: 250px; } }
-        
-        .reader-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
-        .reader-meta { display: flex; flex-wrap: wrap; gap: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); }
-        .reader-meta-item { display: flex; align-items: center; gap: 0.5rem; }
-        
-        /* Markdown Styling Engine for MainRoute Core */
-        .markdown-body { font-family: var(--font-sans); font-size: 1.1rem; line-height: 1.8; color: #d1d5db; }
-        .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 { color: #fff; font-weight: 800; margin-top: 2.5rem; margin-bottom: 1rem; line-height: 1.25; }
-        .markdown-body h2 { font-size: 2rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem; }
-        .markdown-body p { margin-bottom: 1.5rem; }
-        .markdown-body a { color: var(--mrc); text-decoration: underline; text-decoration-color: rgba(244, 66, 52, 0.4); text-underline-offset: 4px; }
-        .markdown-body a:hover { text-decoration-color: var(--mrc); }
-        .markdown-body strong { color: #fff; font-weight: 700; }
-        .markdown-body blockquote { border-left: 4px solid var(--mrc); padding-left: 1rem; color: #9ca3af; font-style: italic; background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 0 0.5rem 0.5rem 0; }
-        .markdown-body ul, .markdown-body ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
-        .markdown-body li { margin-bottom: 0.5rem; }
-        .markdown-body img { border-radius: 1rem; border: 1px solid var(--glass-border); margin: 2rem 0; }
-        .markdown-body pre { background: var(--bg-dark); border: 1px solid var(--glass-border); padding: 1.5rem; border-radius: 1rem; overflow-x: auto; margin-bottom: 1.5rem; }
-        .markdown-body code { font-family: var(--font-mono); font-size: 0.9em; background: rgba(255,255,255,0.1); padding: 0.2rem 0.4rem; border-radius: 0.3rem; color: #f87171; }
-        .markdown-body pre code { background: none; padding: 0; color: #e5e7eb; }
-        .markdown-body table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
-        .markdown-body th, .markdown-body td { padding: 0.75rem; border: 1px solid var(--glass-border); text-align: left; }
-        .markdown-body th { background: rgba(255,255,255,0.05); font-weight: 700; color: #fff; }
-
-        /* 404 Inline State */
-        .error-state { text-align: center; padding: 4rem 1rem; }
-        .error-icon { width: 120px; height: 120px; margin: 0 auto 1.5rem; color: var(--text-muted); opacity: 0.5; }
-        .error-code { font-size: 6rem; font-weight: 900; line-height: 1; color: var(--mrc); text-shadow: 0 0 30px var(--mrc-glow); margin-bottom: 1rem; }
-
-        /* Footer */
-        .footer { background: var(--bg-surface); padding: 2rem 0; border-top: 1px solid var(--glass-border); margin-top: auto; }
-
-        /* Animations */
-        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
+     <link rel="stylesheet" href="/css/global.css">
+     <link rel="stylesheet" href="/css/clog.css">
+  
 </head>
 
 <body>
 
-    <!-- Inline SVG Icons -->
-    <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
-        <symbol id="icon-menu" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></symbol>
-        <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></symbol>
-        <symbol id="icon-category" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></symbol>
-        <symbol id="icon-tag" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></symbol>
-        <symbol id="icon-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></symbol>
-        <symbol id="icon-arrow-left" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></symbol>
-        <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></symbol>
-        <symbol id="icon-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></symbol>
-    </svg>
 
-    <div id="loader">
-        <div class="loader-ring"></div>
-        <div class="font-mono text-mrc font-bold tracking-widest text-sm uppercase">Loading Logs...</div>
+
+    <div id="loader" class="loader" style="pointer-events: none;">
+        <img style="height: 120px; width: 120px; pointer-events: none;" src="/src/mrc-nuca-loading.svg" alt="mrc-nuca-loading">
+        <div class="loader-text-wrapper">
+            <span class="loader-text-letter">I</span>
+            <span class="loader-text-letter">n</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">t</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">a</span>
+            <span class="loader-text-letter">l</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">z</span>
+            <span class="loader-text-letter">i</span>
+            <span class="loader-text-letter">n</span>
+            <span class="loader-text-letter">g</span>
+            <hr>
+            <span class="loader-text-letter">C</span>
+            <span class="loader-text-letter">o</span>
+            <span class="loader-text-letter">r</span>
+            <span class="loader-text-letter">e</span>
+            <div class="loader-colors"></div>
+        </div>
+    </div>
+
+    <div id="scroll-progress-container">
+        <div id="scroll-progress"></div>
     </div>
 
     <div class="tech-grid"></div>
-    <div class="ambient-orb" style="width: 40vw; height: 40vw; top: -10%; left: -10%;"></div>
 
-    <!-- Navigation -->
+
     <header class="header" id="navbar">
-        <div class="nav-bar">
+        <div class="nav-bar glass-panel">
             <a href="/" class="nav-logo">
-                <img src="https://avatars.githubusercontent.com/u/249983472" alt="MRC Logo">
-                <span style="color:var(--text-main);">MainRoute <span class="text-mrc">Core</span></span>
+                <img src="/src/mrc-nuca.svg" alt="MRC Logo">
+                <span style="color:var(--text-main);">MainRoute <span class="txt-mrc">Core</span></span>
             </a>
+            <nav class="desktop-nav">
+                <a href="/About/">About Us</a>
+                <a class="active" href="/Clog/">Clog</a>
+                <a href="/Media/">Media &amp; Press Kit</a>
+                <a href="/CopyRight/">Brand Guidelines</a>
+                <a href="/Contact/">Contact Us</a>
+                <div style="width: 1px; height: 16px; background: var(--glass-border);"></div>
+                <div class="system-status">
+                    <div class="status-dot"></div> Active
+                </div>
+            </nav>
+            <button id="mobile-menu-btn" class="mobile-menu-btn" title="Menu Button">
+                <svg class="icon"><use href="/src/global.svg#icon-menu"></use></svg>
+            </button>
+        </div>
 
-            <div class="system-status">
-                <div class="status-dot" id="db-status-dot"></div> <span id="db-status-text">Local Sync</span>
+        <div id="mobile-menu" class="mobile-menu glass-panel">
+            <a href="/About/">About Us</a>
+            <a href="/Clog/">Clog</a>
+            <a href="/Media/">Media &amp; Press Kit</a>
+            <a href="/CopyRight/">Brand Guidelines</a>
+            <a href="/Contact/">Contact</a>
+            <div class="mobile-menu-goto-id">
+            <a href="#expertise">Expertise</a>
+            <a href="#workflow">Workflow</a>
+            <a href="#open-source">Open Source</a>
             </div>
         </div>
     </header>
 
-    <!-- App Container -->
-    <main class="container" id="app-root">
-        
-        <!-- ================= LIST VIEW ================= -->
-        <div class="view-list">
-            <!-- Sidebar -->
-            <aside class="flex-col gap-6">
-                <!-- Search -->
-                <div class="search-wrapper">
-                    <svg class="icon search-icon"><use href="#icon-search"></use></svg>
-                    <input type="text" id="search-input" class="search-bar" placeholder="Search logs...">
+    <!-- Main Application -->
+    <main class="section">
+        <div class="container">
+            
+            <div id="main-layout-wrapper">
+                
+                <div class="search-container">
+                    <div class="search-wrapper glass-panel" id="search-wrapper">
+                        <button class="search-icon-btn" onclick="toggleSearch()" aria-label="Search">
+                            <svg class="icon"><use href="/src/global.svg#icon-search"></use></svg>
+                        </button>
+                        <input type="search" class="search-input" id="search-bar" placeholder="Type To Search..." oninput="handleSearchInput()" onblur="closeSearchIfEmpty()">
+                    </div>
                 </div>
 
-                <div class="glass-card">
-                    <h3 class="filter-title"><svg class="icon"><use href="#icon-category"></use></svg> Categories</h3>
-                    <ul class="filter-list" id="cat-list">
-                        <!-- Rendered by JS -->
-                    </ul>
-                </div>
+                <div class="layout-grid">
+                    <aside>
+                        <div class="glass-panel sidebar-card pad-2">
+                            <div class="sidebar-header" id="sidebar-header" onclick="toggleMobileCategories()">
+                                <div class="flex items-center gap-2">
+                                    <svg class="icon txt-mrc"><use href="/src/global.svg#icon-category"></use></svg> Categories
+                                </div>
+                                <svg class="icon cat-toggle-btn"><use href="/src/global.svg#icon-chevron-down"></use></svg>
+                            </div>
+                            <ul class="cat-list" id="category-filter-list">
+                            </ul>
+                        </div>
+                    </aside>
+                    <div>
+                        <div class="grid-header">
+                            <span class="results-count" id="results-count">Retrieving signals...</span>
+                            <button class="btn btn-out" id="clear-filters-btn" onclick="clearFiltersAndHome()" style="display: none; padding: 0.4rem 0.8rem; font-size: 0.75rem; color: #f87171; border-color: rgba(248, 113, 113, 0.3);">
+                                <svg class="icon" style="width: 14px; height: 14px;"><use href="/src/global.svg#icon-x"></use></svg> Clear Filters
+                            </button>
+                        </div>
+                        <div class="post-grid" id="publication-grid">
+                        </div>
+                    </div>
 
-                <div class="glass-card">
-                    <h3 class="filter-title"><svg class="icon"><use href="#icon-tag"></use></svg> Tags</h3>
-                    <ul class="filter-list" id="tag-list">
-                        <!-- Rendered by JS -->
-                    </ul>
-                </div>
-            </aside>
-
-            <!-- Main Grid -->
-            <div>
-                <div class="posts-header">
-                    <div class="font-mono text-muted" id="results-meta">Analyzing database...</div>
-                    <button class="btn-clear" id="btn-clear-filters" style="display: none;" onclick="clearFilters()">
-                        <svg class="icon"><use href="#icon-x"></use></svg> Clear Filters
-                    </button>
-                </div>
-
-                <div class="posts-grid" id="posts-grid">
-                    <!-- Cards Rendered by JS -->
                 </div>
             </div>
-        </div>
 
-        <!-- ================= READER VIEW ================= -->
-        <div class="view-reader reader-container">
-            <button class="btn-back" onclick="closeReader()">
-                <svg class="icon"><use href="#icon-arrow-left"></use></svg> Back to Logs
-            </button>
+            <div class="reader-pane" id="main-reader-pane">
+                <button class="btn btn-out mb-6" onclick="exitReaderView()" style="margin-bottom: 2rem;">
+                    <svg class="icon"><use href="/src/global.svg#icon-back"></use></svg> Back to Logs
+                </button>
 
-            <div id="reader-content" class="fade-in">
-                <!-- Content Injected via JS -->
+                <article class="glass-panel reader-container">
+                    <img src="" alt="Banner" id="full-img" class="reader-banner" onerror="this.style.display='none'">
+                    
+                    <div class="reader-content">
+                        <div id="full-meta-block">
+                            <h1 class="reader-title" id="full-title">Loading...</h1>
+                            
+                            <div class="reader-meta">
+                                <div class="meta-item">
+                                    <span class="meta-label">Author</span>
+                                    <span class="meta-value txt-mrc" id="full-author">System</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">Published</span>
+                                    <span class="meta-value" id="full-date">--/--/----</span>
+                                </div>
+                                <div class="meta-item" style="flex-grow: 1;">
+                                    <span class="meta-label">Tags & Categories</span>
+                                    <div class="reader-tags" id="full-tags"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="markdown-body" id="full-body">
+                        </div>
+                    </div>
+                </article>
             </div>
-        </div>
 
+        </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container text-center">
-            <p class="text-muted font-mono" style="font-size: 0.75rem;">&copy; <span id="year"></span> MainRoute Core. M Ramzan Ch | Pro Bandey.</p>
+    <footer class="mrc-footer pad-4 pos-rel">
+        <div class="container pad-0">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="brand-logo flex items-start flex-row gap-2">
+                        <img src="/src/mrc-nuca.svg" alt="MainRoute Core Logo">
+                        <h3 class="txt-black capitalize pos-rel">MainRoute <span class="txt-mrc">Core</span></h3>
+                    </div>
+                    <p class="txt-muted">A specialized technology powerhouse delivering PWA, open-source, and custom software solutions.</p>
+                    <div class="flex gap-2">
+                        <a target="_blank" href="/Redirect/?id=core" class="social-btn" title="Social Link" aria-label="Social Link"><svg class="icon" style="width:1.2rem;"><use href="/src/global.svg#icon-github"></use></svg></a>
+                        <a target="_blank" href="/Redirect/?id=google" class="social-btn" title="Social Link" aria-label="Social Link"><svg class="icon" style="width:1.2rem;"><use href="/src/global.svg#icon-google"></use></svg></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4 class="uppercase flex txt-main txt-center gap-1 font-md pos-rel">Navigation</h4>
+                    <div class="footer-links">
+                        <a href="/">Home</a>
+                        <a href="/#expertise">Core Expertise</a>
+                        <a href="/#workflow">Our Workflow</a>
+                        <a class="active" href="/Clog/">Clog</a>
+                        <a href="/About/#the-core-mind">The Core Mind</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4 class="uppercase flex txt-main txt-center gap-1 font-md pos-rel" >Resources</h4>
+                    <div class="footer-links">
+                        <a href="/Media/">Media &amp; Press Kit</a>
+                        <a href="/CopyRight/">Brand Guidelines</a>
+                        <a href="/Privacy/">Privacy Policy</a>
+                        <a href="/Terms/">Terms of Service</a>
+                        <a href="/License/">Usage License</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4 class="uppercase flex txt-main txt-center gap-1 font-md pos-rel">Connect</h4>
+                    <div class="footer-links" style="margin-bottom: 1rem;">
+                        <a href="/Contact/">Contact US</a>
+                    </div>
+                    <div class="footer-contact-box">
+                        <div class="contact-item">
+                            <div class="contact-icon"><svg class="icon">
+                                    <use href="/src/global.svg#icon-mail"></use>
+                                </svg></div>
+                            <div class="contact-text">
+                                <strong style="color: white; display: block; margin-bottom: 2px;">Inquiries</strong>
+                                <a href="mailto:tellus@mrc.com" style="color: var(--txt-muted);">tellus@mrc.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item" style="margin-top: 1.25rem;">
+                            <div class="contact-icon">
+                                <svg class="icon">
+                                    <use href="/src/global.svg#icon-map-pin"></use>
+                                </svg></div>
+                            <div class="contact-text">
+                                <strong style="color: white; display: block; margin-bottom: 2px;">Served Area</strong>
+                                Globally
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copy">
+                    &copy; 2024-<span id="year">2024</span> MainRoute Core. <a class="txt-bold" href="/Redirect/?id=mrc target="_blank">M Ramzan Ch</a> | <a class="txt-bold" href="/Redirect/?id=pb" target="_blank"">Pro Bandey</a>. All Rights Reserved.
+                </div>
+                <div class="footer-made-in">
+                    Engineered with <svg class="icon"
+                        style="color: var(--mrc); fill: var(--mrc); width: 14px; height: 14px;">
+                        <use href="/src/global.svg#icon-heart"></use>
+                    </svg> in Tech
+                </div>
+            </div>
         </div>
     </footer>
-
-    <!-- LOGIC -->
-    <script>
-        // CONFIGURATION (Define Paths Here)
-        // 1. Database Path (Local or raw GitHub URL)
-        const DB_Path = "https://raw.githubusercontent.com/MainRoute-Core/Clogs/output/blogs.json"; 
-        
-        // 2. Logs Data Folder Path (Local or raw GitHub base URL ending with /)
-        const Logs_Path = "https://raw.githubusercontent.com/MainRoute-Core/Clogs/main/Logs/"; 
-
-        // Core State
-        let indexData = [];
-        let state = {
-            q: "",
-            tg: "",
-            ct: [], // Array for multi-category selection
-            log: ""
-        };
-
-        // DOM Elements
-        const els = {
-            appRoot: document.getElementById('app-root'),
-            loader: document.getElementById('loader'),
-            searchInput: document.getElementById('search-input'),
-            catList: document.getElementById('cat-list'),
-            tagList: document.getElementById('tag-list'),
-            postsGrid: document.getElementById('posts-grid'),
-            resultsMeta: document.getElementById('results-meta'),
-            btnClearFilters: document.getElementById('btn-clear-filters'),
-            readerContent: document.getElementById('reader-content'),
-            statusDot: document.getElementById('db-status-dot'),
-            statusText: document.getElementById('db-status-text')
-        };
-
-        // Initialize App
-        async function initApp() {
-            document.getElementById('year').textContent = new Date().getFullYear();
-            
-            // Check Data Source UI
-            if (DB_Path.startsWith('http')) {
-                els.statusDot.classList.add('remote');
-                els.statusText.textContent = "Cloud Sync";
-            }
-
-            try {
-                const response = await fetch(DB_Path);
-                if (!response.ok) throw new Error("DB Fetch Failed");
-                
-                const data = await response.json();
-                // Extract array depending on how db.json is structured
-                indexData = Array.isArray(data) ? data : (data.blogs || Object.values(data));
-                
-                // Only keep published posts
-                indexData = indexData.filter(p => p.Status === "Pub");
-                
-                syncStateFromURL();
-                
-            } catch (err) {
-                console.error("Initialization Error:", err);
-                els.postsGrid.innerHTML = `<div class="error-state"><h2 class="error-code">ERR</h2><p class="text-muted">Failed to connect to the database (${DB_Path}).</p></div>`;
-            } finally {
-                setTimeout(() => { els.loader.classList.add('hidden'); }, 300);
-            }
-        }
-
-        // URL & State Management
-        function syncStateFromURL() {
-            const params = new URLSearchParams(window.location.search);
-            state.q = (params.get('q') || "").toLowerCase();
-            state.tg = params.get('tg') || "";
-            state.log = params.get('log') || "";
-            
-            const ctParam = params.get('ct');
-            state.ct = ctParam ? ctParam.split(',').filter(Boolean) : [];
-
-            els.searchInput.value = state.q;
-
-            renderApp();
-        }
-
-        function updateURL() {
-            const url = new URL(window.location);
-            
-            if (state.q) url.searchParams.set('q', state.q); else url.searchParams.delete('q');
-            if (state.tg) url.searchParams.set('tg', state.tg); else url.searchParams.delete('tg');
-            if (state.ct.length > 0) url.searchParams.set('ct', state.ct.join(',')); else url.searchParams.delete('ct');
-            if (state.log) url.searchParams.set('log', state.log); else url.searchParams.delete('log');
-
-            window.history.pushState({}, '', url);
-            renderApp();
-        }
-
-        window.addEventListener('popstate', syncStateFromURL);
-
-        // Rendering Engine
-        function renderApp() {
-            // View Routing
-            if (state.log) {
-                els.appRoot.classList.add('app-state-reader');
-                loadReaderPost(state.log);
-            } else {
-                els.appRoot.classList.remove('app-state-reader');
-                renderSidebar();
-                renderPosts();
-            }
-        }
-
-        function renderSidebar() {
-            const catMap = {};
-            const tagMap = {};
-
-            indexData.forEach(p => {
-                (p.Cat || []).forEach(c => { catMap[c] = (catMap[c] || 0) + 1; });
-                (p.Tags || []).forEach(t => { tagMap[t] = (tagMap[t] || 0) + 1; });
-            });
-
-            // Render Categories (Multi-select)
-            els.catList.innerHTML = Object.keys(catMap).sort().map(c => {
-                const isActive = state.ct.includes(c);
-                return `
-                <li class="filter-item ${isActive ? 'active' : ''}" onclick="toggleCategory('${c}')">
-                    <span>${c}</span>
-                    <span class="filter-count">${catMap[c]}</span>
-                </li>`;
-            }).join('');
-
-            // Render Tags (Single-select for simplicity)
-            els.tagList.innerHTML = Object.keys(tagMap).sort().map(t => {
-                const isActive = state.tg === t;
-                return `
-                <li class="filter-item ${isActive ? 'active' : ''}" onclick="toggleTag('${t}')">
-                    <span>#${t}</span>
-                    <span class="filter-count">${tagMap[t]}</span>
-                </li>`;
-            }).join('');
-        }
-
-        function renderPosts() {
-            let filtered = indexData;
-
-            // Apply Filters
-            if (state.q) {
-                filtered = filtered.filter(p => 
-                    (p.Name && p.Name.toLowerCase().includes(state.q)) || 
-                    (p.Desc && p.Desc.toLowerCase().includes(state.q))
-                );
-            }
-            if (state.tg) {
-                filtered = filtered.filter(p => p.Tags && p.Tags.includes(state.tg));
-            }
-            if (state.ct.length > 0) {
-                // Shows posts that match ANY of the selected categories
-                filtered = filtered.filter(p => p.Cat && state.ct.some(c => p.Cat.includes(c)));
-            }
-
-            // Update Meta & Clear Button
-            const isFiltered = state.q || state.tg || state.ct.length > 0;
-            els.btnClearFilters.style.display = isFiltered ? 'inline-flex' : 'none';
-            els.resultsMeta.innerHTML = `<span class="text-mrc font-bold">${filtered.length}</span> Logs Found`;
-
-            // Render Cards
-            if (filtered.length === 0) {
-                els.postsGrid.innerHTML = `<div class="error-state" style="grid-column: 1/-1;"><svg class="icon error-icon"><use href="#icon-search"></use></svg><h3 class="text-main font-bold" style="font-size: 1.5rem;">No logs matched your criteria.</h3></div>`;
-                return;
-            }
-
-            els.postsGrid.innerHTML = filtered.map((p, index) => {
-                const img = p.Img || 'https://via.placeholder.com/600x300/18181b/f8fafc?text=MainRoute+Core';
-                const badges = (p.Cat || []).map(c => `<span class="card-badge">${c}</span>`).join('');
-                const tags = (p.Tags || []).map(t => `<span class="card-tag" onclick="clickTag(event, '${t}')">#${t}</span>`).join('');
-                const delay = (index * 50) + 'ms'; // Staggered animation
-
-                return `
-                <article class="post-card fade-in" style="animation-delay: ${delay};">
-                    <div class="card-img-wrap" onclick="openPost('${p.Article}')">
-                        <img src="${img}" alt="${p.Name}" class="card-img" loading="lazy">
-                        <div class="card-badges">${badges}</div>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-meta">
-                            <span><svg class="icon" style="width:12px; margin-right:4px; vertical-align:middle;"><use href="#icon-calendar"></use></svg>${p.Date || 'N/A'}</span>
-                            <span>${p.Author || 'MRC'}</span>
-                        </div>
-                        <h2 class="card-title" onclick="openPost('${p.Article}')">${p.Name}</h2>
-                        <p class="card-desc">${p.Desc || ''}</p>
-                        <div class="card-tags">${tags}</div>
-                    </div>
-                </article>`;
-            }).join('');
-        }
-
-        // Reader Engine
-        async function loadReaderPost(articleId) {
-            window.scrollTo(0, 0);
-
-            if (articleId === '404') {
-                show404Reader();
-                return;
-            }
-
-            const dbEntry = indexData.find(p => p.Article === articleId);
-            if (!dbEntry) {
-                state.log = '404';
-                updateURL();
-                return;
-            }
-
-            els.loader.classList.remove('hidden');
-
-            try {
-                // Ensure Logs_Path ends with slash
-                const basePath = Logs_Path.endsWith('/') ? Logs_Path : Logs_Path + '/';
-                const fileUrl = basePath + dbEntry.Url;
-
-                const response = await fetch(fileUrl);
-                if (!response.ok) throw new Error("File not found");
-                
-                const postData = await response.json();
-                
-                // Construct UI
-                const img = postData.Img || dbEntry.Img || 'https://via.placeholder.com/900x400/18181b/f8fafc?text=MainRoute+Core';
-                const htmlContent = window.marked ? marked.parse(postData.Data || "") : "<p class='text-mrc'>Error: Marked.js parser failed to load.</p>";
-
-                els.readerContent.innerHTML = `
-                    <img src="${img}" class="reader-banner" alt="Banner">
-                    <h1 class="reader-title">${postData.Title || dbEntry.Name}</h1>
-                    
-                    <div class="reader-meta">
-                        <div class="reader-meta-item"><svg class="icon"><use href="#icon-calendar"></use></svg> ${postData.Date || dbEntry.Date}</div>
-                        <div class="reader-meta-item"><svg class="icon"><use href="#icon-user"></use></svg> ${postData.Author || dbEntry.Author}</div>
-                        <div style="flex-grow: 1;"></div>
-                        <div class="card-tags">
-                            ${(postData.Tags || dbEntry.Tags || []).map(t => `<span class="card-tag" style="border-color:var(--glass-border); cursor:default;">#${t}</span>`).join('')}
-                        </div>
-                    </div>
-
-                    <div class="markdown-body">
-                        ${htmlContent}
-                    </div>
-                `;
-
-            } catch (err) {
-                console.error("Reader Error:", err);
-                state.log = '404';
-                updateURL();
-            } finally {
-                setTimeout(() => { els.loader.classList.add('hidden'); }, 300);
-            }
-        }
-
-        function show404Reader() {
-            els.readerContent.innerHTML = `
-                <div class="error-state fade-in">
-                    <svg class="icon error-icon" viewBox="0 0 24 24">
-                        <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" stroke-width="1.5" />
-                        <line x1="8" y1="10" x2="10" y2="12" stroke-width="1.5" />
-                        <line x1="10" y1="10" x2="8" y2="12" stroke-width="1.5" />
-                        <line x1="14" y1="10" x2="16" y2="12" stroke-width="1.5" />
-                        <line x1="16" y1="10" x2="14" y2="12" stroke-width="1.5" />
-                        <path d="M10 16c1-1 4-1 4 0" stroke-width="1.5" />
-                    </svg>
-                    <h2 class="error-code">404</h2>
-                    <h3 class="text-main font-bold" style="font-size: 2rem; margin-bottom: 0.5rem;">Log Not Found.</h3>
-                    <p class="text-muted" style="margin-bottom: 2rem;">The publication you requested has drifted into the digital void.</p>
-                    <button class="btn-clear" onclick="closeReader()" style="background: var(--mrc); color: #fff; padding: 1rem 2rem; font-size: 1rem;">Return to Logs</button>
-                </div>
-            `;
-        }
-
-        // Interaction Handlers
-        els.searchInput.addEventListener('input', (e) => {
-            state.q = e.target.value.toLowerCase();
-            updateURL();
-        });
-
-        function toggleCategory(cat) {
-            const index = state.ct.indexOf(cat);
-            if (index > -1) state.ct.splice(index, 1);
-            else state.ct.push(cat);
-            updateURL();
-        }
-
-        function toggleTag(tag) {
-            state.tg = state.tg === tag ? "" : tag;
-            updateURL();
-        }
-
-        function clickTag(event, tag) {
-            event.stopPropagation(); // Prevents card opening
-            state.tg = tag;
-            updateURL();
-            window.scrollTo(0, 0);
-        }
-
-        function openPost(articleId) {
-            state.log = articleId;
-            updateURL();
-        }
-
-        function closeReader() {
-            state.log = "";
-            updateURL();
-        }
-
-        function clearFilters() {
-            state.q = "";
-            state.tg = "";
-            state.ct = [];
-            els.searchInput.value = "";
-            updateURL();
-        }
-
-        // Boot
-        initApp();
-    </script>
+    
+    <script src="/js/global.js"></script>
+    <script src="/js/clog.js"></script>
+   
 </body>
 </html>
