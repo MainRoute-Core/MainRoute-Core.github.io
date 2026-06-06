@@ -241,7 +241,7 @@ async function loadAndRenderFullPost(logId) {
         document.getElementById('full-meta-block').style.display = 'block';
         const catBadges = (postData.Categories || dbEntry.Cat || []).map(c => `<span class="badge-cat" style="position:static;">${c}</span>`).join('');
         const tagBadges = (postData.Tags || dbEntry.Tags || []).map(t => `<button class="tag-btn" onclick="clickFilter('tg', '${t}'); exitReaderView();">#${t}</button>`).join('');
-        document.getElementById('full-tags').innerHTML = catBadges + tagBadges;
+        document.getElementById('full-tags').innerHTML = `<div class="flex flex-wrap gap-1">${catBadges}</div><div class="flex flex-wrap gap-1">${tagBadges}</div>`;
         const bodyContainer = document.getElementById('full-body');
         if (window.marked) bodyContainer.innerHTML = marked.parse(postData.Data || "");
         else bodyContainer.innerHTML = `<p class="txt-mrc">Parsing Engine Offline.</p><pre>${postData.Data}</pre>`;
