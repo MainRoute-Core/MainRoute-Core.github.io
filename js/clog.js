@@ -1,9 +1,8 @@
-
 const DB_Path = "https://raw.githubusercontent.com/MainRoute-Core/Clogs/output/blogs.json";
 const Logs_Path = "https://raw.githubusercontent.com/MainRoute-Core/Clogs/main/Logs/";
 
 let indexData = [];
-let activeFilters = { ct: [], tg: null, q: "", author: null };
+let activeFilters = { ct: [], tg: null, q: "", author: null, srt: null };
 
 window.addEventListener('popstate', processUrlParamsAndRoute);
 
@@ -14,13 +13,25 @@ async function initializeClogReader() {
         let data = await response.json();
         indexData = Array.isArray(data) ? data : (data.blogs || []);
         indexData = indexData.filter(item => item.Status === "Pub");
+        setupEventListeners();
         processUrlParamsAndRoute();
     } catch (err) {
         document.getElementById('publication-grid').innerHTML = `
-        <div style="grid-column: 1/-1; txt-align: center; padding: 4rem 1rem;">
+        <div style="grid-column: 1/-1; text-align: center; padding: 4rem 1rem;">
             <h2 class="txt-mrc txt-center font-bold" style="font-size: 3rem;">Database Connection Failed</h2>
             <p class="txt-muted txt-center txt-xlg">Could not load logs from <strong>Database</strong>.</p>
         </div>`;
+    }
+}
+
+function setupEventListeners() {
+    const sortSelect = document.getElementById('sort-select');
+    if (sortSelect) {
+        sortSelect.addEventListener('change', (e) => {
+            activeFilters.srt = e.target.value;
+            document.getElementById('sort-wrapper').classList.remove('expanded'); // Close wrapper on select
+            updateUrlState();
+        });
     }
 }
 
@@ -30,10 +41,21 @@ function processUrlParamsAndRoute() {
     activeFilters.q = params.get('q') || "";
     activeFilters.tg = params.get('tg') || null;
     activeFilters.author = params.get('author') || null;
+    activeFilters.srt = params.get('srt') || null;
     const ctParam = params.get('ct');
     activeFilters.ct = ctParam ? ctParam.split(',').filter(Boolean) : [];
-    document.getElementById('search-bar').value = activeFilters.q;
-    if (activeFilters.q) document.getElementById('search-wrapper').classList.add('expanded');
+    const searchBar = document.getElementById('search-bar');
+    if (searchBar) searchBar.value = activeFilters.q;
+    const searchWrapper = document.getElementById('search-wrapper');
+    if (activeFilters.q && searchWrapper) searchWrapper.classList.add('expanded');
+    const sortSelect = document.getElementById('sort-select');
+    if (sortSelect) {
+        if (activeFilters.srt) {
+            sortSelect.value = activeFilters.srt;
+        } else {
+            sortSelect.selectedIndex = 0;
+        }
+    }
     if (logId) {
         loadAndRenderFullPost(logId);
     } else {
@@ -52,11 +74,11 @@ function updateUrlState() {
     else url.searchParams.delete('author');
     if (activeFilters.q) url.searchParams.set('q', activeFilters.q);
     else url.searchParams.delete('q');
-
+    if (activeFilters.srt) url.searchParams.set('srt', activeFilters.srt); // Add sort to URL
+    else url.searchParams.delete('srt');
     window.history.pushState({}, '', url);
     processUrlParamsAndRoute();
 }
-
 
 function showListView() {
     document.getElementById('main-reader-pane').classList.remove('active');
@@ -72,7 +94,7 @@ function buildCategorySidebar() {
     });
     const catList = document.getElementById('category-filter-list');
     catList.innerHTML = '';
-
+    const fragment = document.createDocumentFragment();
     Object.keys(categoriesMap).sort().forEach(cat => {
         const isActive = activeFilters.ct.includes(cat);
         const li = document.createElement('li');
@@ -84,15 +106,16 @@ function buildCategorySidebar() {
             <span>${cat}</span>
         </div>
         <span class="cat-count">${categoriesMap[cat]}</span>
-                `;
-        catList.appendChild(li);
+        `;
+        fragment.appendChild(li);
     });
+    catList.appendChild(fragment);
 }
 
 function renderPostList() {
     const grid = document.getElementById('publication-grid');
     grid.innerHTML = "";
-    const filtered = indexData.filter(item => {
+    let filtered = indexData.filter(item => {
         if (activeFilters.ct.length > 0 && (!item.Cat || !activeFilters.ct.some(selected => item.Cat.includes(selected)))) return false;
         if (activeFilters.tg && (!item.Tags || !item.Tags.includes(activeFilters.tg))) return false;
         if (activeFilters.author && item.Author !== activeFilters.author) return false;
@@ -104,24 +127,40 @@ function renderPostList() {
         }
         return true;
     });
-
+    if (activeFilters.srt) {
+        filtered.sort((a, b) => {
+            if (activeFilters.srt.startsWith('Name')) {
+                const nameA = (a.Name || "").toLowerCase();
+                const nameB = (b.Name || "").toLowerCase();
+                if (nameA < nameB) return activeFilters.srt === 'NameA' ? -1 : 1;
+                if (nameA > nameB) return activeFilters.srt === 'NameA' ? 1 : -1;
+                return 0;
+            } else if (activeFilters.srt.startsWith('Date')) {
+                const dateA = new Date(a.Date).getTime() || 0;
+                const dateB = new Date(b.Date).getTime() || 0;
+                return activeFilters.srt === 'DateA' ? dateA - dateB : dateB - dateA;
+            }
+            return 0;
+        });
+    }
     const clearBtn = document.getElementById('clear-filters-btn');
     if (activeFilters.ct.length > 0 || activeFilters.tg || activeFilters.q || activeFilters.author) {
         let filterText = [];
-        if (activeFilters.q) filterText.push(`"${activeFilters.q}"`);
-        if (activeFilters.ct) filterText.push(`"${activeFilters.ct}"`);
+        if (activeFilters.q) filterText.push(`Query:"${activeFilters.q}"`);
+        if (activeFilters.ct.length > 0) filterText.push(`Category:"${activeFilters.ct.join(', ')}"`);
         if (activeFilters.tg) filterText.push(`#${activeFilters.tg}`);
-        if (activeFilters.author) filterText.push(`by ${activeFilters.author}`);
-        document.getElementById('results-count').innerHTML = `<span class="txt-main font-bold">${filtered.length}</span> Logs Found For <span class="txt-main">${filterText.join(', ')}</span>`;
-        clearBtn.style.display = 'inline-flex';
+        if (activeFilters.author) filterText.push(`Author:"@${activeFilters.author}"`);
+        document.getElementById('results-count').innerHTML = `<span class="txt-main font-bold">[${filtered.length}]</span> Logs Found For <span class="txt-main">${filterText.join(', ')}</span>`;
+        if (clearBtn) clearBtn.style.display = 'inline-flex';
     } else {
-        document.getElementById('results-count').innerHTML = `Initilized Logs <span class="txt-main">[${filtered.length}]</span>`;
-        clearBtn.style.display = 'none';
+        document.getElementById('results-count').innerHTML = `Initialized Logs <span class="txt-main">[${filtered.length}]</span>`;
+        if (clearBtn) clearBtn.style.display = 'none';
     }
     if (filtered.length === 0) {
         grid.innerHTML = `<div style="grid-column: 1/-1;text-align: center;padding: 4rem 1rem;border: 1px dashed var(--text-main);border-radius: 1rem;background: var(--glass-bg);"><p class="txt-main txt-lg">No logs match the current clearance level.</p></div>`;
         return;
     }
+    const fragment = document.createDocumentFragment();
     filtered.forEach(item => {
         const card = document.createElement('article');
         card.className = "glass-panel post-card";
@@ -136,50 +175,49 @@ function renderPostList() {
         <div class="card-body">
             <div class="card-meta">
                 <span>${item.Date || 'Classified Date'}</span>
-                <span class="card-author" onclick="clickFilter('author', '${item.Author}', event)">${item.Author || 'System'}</span>
+                <span class="card-author" onclick="clickFilter('author', '${item.Author}', event)">@${item.Author || 'Unknown'}</span>
             </div>
             <h2 class="card-title" onclick="openPost('${item.Article}')">${item.Name}</h2>
             <p class="card-desc">${item.Desc || ''}</p>
             <div class="card-tags">${tagHtml}</div>
         </div>`;
-        grid.appendChild(card);
+        fragment.appendChild(card);
     });
+    grid.appendChild(fragment);
 }
 
-// --- Action Handlers ---
 function toggleCategoryFilter(cat) {
     const idx = activeFilters.ct.indexOf(cat);
     if (idx > -1) activeFilters.ct.splice(idx, 1);
     else activeFilters.ct.push(cat);
     updateUrlState();
 }
-
 function clickFilter(type, value, event) {
     if (event) event.stopPropagation();
     activeFilters[type] = value;
     updateUrlState();
 }
-
 function clearFiltersAndHome() {
-    activeFilters = { ct: [], tg: null, q: "", author: null };
-    document.getElementById('search-wrapper').classList.remove('expanded');
+    activeFilters = { ct: [], tg: null, q: "", author: null, srt: null };
+    const searchWrapper = document.getElementById('search-wrapper');
+    if (searchWrapper) searchWrapper.classList.remove('expanded');
+    const sortWrapper = document.getElementById('sort-wrapper');
+    if (sortWrapper) sortWrapper.classList.remove('expanded');
     window.history.pushState({}, '', new URL(window.location.pathname, window.location.origin));
     processUrlParamsAndRoute();
 }
 
-function openPost(articleId) {
-    const url = new URL(window.location);
-    url.searchParams.set('log', articleId);
-    window.history.pushState({}, '', url);
-    processUrlParamsAndRoute();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+function toggleSort() {
+    const wrapper = document.getElementById('sort-wrapper');
+    if (wrapper) wrapper.classList.toggle('expanded');
 }
-
-function exitReaderView() {
-    const url = new URL(window.location);
-    url.searchParams.delete('log');
-    window.history.pushState({}, '', url);
-    processUrlParamsAndRoute();
+function clearSort() {
+    activeFilters.srt = null; // Reset sort state
+    const sortSelect = document.getElementById('sort-selct');
+    if (sortSelect) sortSelect.selectedIndex = 0; // Reset Dropdown to default value
+    const wrapper = document.getElementById('sort-wrapper');
+    if (wrapper) wrapper.classList.remove('expanded'); // Close the wrapper
+    updateUrlState();
 }
 
 function toggleSearch() {
@@ -204,6 +242,15 @@ function handleSearchInput() {
     updateUrlState();
 }
 
+function clearSearch() {
+    const searchInput = document.getElementById('search-bar');
+    if (searchInput) searchInput.value = ''; 
+    activeFilters.q = ""; 
+    const searchWrapper = document.getElementById('search-wrapper');
+    if (searchWrapper) searchWrapper.classList.remove('expanded');
+    updateUrlState(); 
+}
+
 function toggleMobileCategories() {
     if (window.innerWidth < 900) {
         document.getElementById('category-filter-list').classList.toggle('show');
@@ -211,10 +258,24 @@ function toggleMobileCategories() {
     }
 }
 
+function openPost(articleId) {
+    const url = new URL(window.location);
+    url.searchParams.set('log', articleId);
+    window.history.pushState({}, '', url);
+    processUrlParamsAndRoute();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function exitReaderView() {
+    const url = new URL(window.location);
+    url.searchParams.delete('log');
+    window.history.pushState({}, '', url);
+    processUrlParamsAndRoute();
+}
+
 async function loadAndRenderFullPost(logId) {
     document.getElementById('main-layout-wrapper').style.display = 'none';
     document.getElementById('main-reader-pane').classList.add('active');
-
     if (logId === '404') {
         render404Page();
         return;
@@ -236,7 +297,7 @@ async function loadAndRenderFullPost(logId) {
         else { banner.style.display = 'none'; }
         document.getElementById('full-title').innerText = postData.Title || dbEntry.Name;
         document.getElementById('full-date').innerText = postData.Date || dbEntry.Date || 'Classified';
-        document.getElementById('full-author').innerText = postData.Author || dbEntry.Author || "System";
+        document.getElementById('full-author').innerText = `@${postData.Author}` || `@${dbEntry.Author}` || "Unknown";
         document.getElementById('full-author').onclick = () => { clickFilter('author', postData.Author || dbEntry.Author); exitReaderView(); };
         document.getElementById('full-meta-block').style.display = 'block';
         const catBadges = (postData.Categories || dbEntry.Cat || []).map(c => `<span class="badge-cat" style="position:static;">${c}</span>`).join('');
@@ -261,7 +322,7 @@ async function render404Page() {
     document.getElementById('full-img').style.display = 'none';
     document.getElementById('full-meta-block').style.display = 'none';
     const bodyContainer = document.getElementById('full-body');
-        bodyContainer.innerHTML = `
+    bodyContainer.innerHTML = `
         <div class="reader-404">
             <div class="error font-black txt-mrc flex items-center justify-center">
                 <span>5</span>
@@ -274,6 +335,5 @@ async function render404Page() {
         </div>`;
 
 }
-
 
 initializeClogReader();

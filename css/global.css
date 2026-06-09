@@ -844,7 +844,7 @@
      inset: 0;
  }
 
- /* page header */
+
 
  .header {
      position: fixed;
@@ -1027,10 +1027,6 @@
      }
  }
 
-
- /* ------------------------------------------------------------------
-         MASTER FOOTER TEMPLATE (Fully Responsive)
-------------------------------------------------------------------- */
  .mrc-footer {
      background: linear-gradient(to bottom, var(--bg-surface), var(--bg-dark));
      border-top: 1px solid var(--glass-border);
@@ -1056,7 +1052,6 @@
      }
  }
 
- /* Footer Brand Column */
  .footer-brand .brand-logo {
      margin-bottom: 1.5rem;
  }
@@ -1096,7 +1091,6 @@
      margin-bottom: 1.5rem;
  }
 
- /* Social Buttons */
  .social-btn {
      width: 40px;
      height: 40px;
@@ -1117,7 +1111,6 @@
      box-shadow: 0 5px 15px var(--mrc-glow);
  }
 
- /* Footer Links Columns */
  .footer-col h4 {
      margin-bottom: 1rem;
  }
@@ -1155,7 +1148,6 @@
      color: var(--mrc);
  }
 
- /* Footer Contact Box */
  .footer-contact-box {
      background: rgba(255, 255, 255, 0.02);
      border: 1px solid var(--glass-border);
@@ -1187,7 +1179,6 @@
      line-height: 1.5;
  }
 
- /* Footer Bottom Bar */
  .footer-bottom {
      border-top: 1px solid var(--glass-border);
      padding-top: 2rem;
@@ -1220,7 +1211,6 @@
      gap: 0.4rem;
  }
 
- /* Animations */
  .reveal {
      opacity: 0;
      transform: translateY(30px);
@@ -1236,8 +1226,6 @@
      transition-delay: 100ms;
  }
 
-
- /* scrollbar */
 
  ::-webkit-scrollbar {
      width: 6px

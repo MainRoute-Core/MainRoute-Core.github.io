@@ -1,10 +1,10 @@
 @import url(/css/global.css);
 
-/* Search Bar */
 .search-container {
     display: flex;
-    justify-content: flex-end;
-    margin-bottom: 1.5rem;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 2rem 0 1rem;
     position: relative;
 }
 
@@ -19,16 +19,19 @@
     transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s;
 }
 
-/* Mobile Search Expands 100%, Desktop stops at 400px */
 .search-wrapper.expanded {
     width: 100%;
-    max-width: 90%;
+    max-width: 75%;
     margin: auto;
     background: rgba(0, 0, 0, 0.5);
     border-color: var(--mrc);
 }
 
 @media (min-width: 480px) {
+    .search-container {
+        margin: 0 0 1rem;
+    }
+
     .search-wrapper.expanded {
         max-width: 70%;
     }
@@ -52,16 +55,17 @@
 .search-input {
     flex-grow: 1;
     background: transparent;
-    border: none;
-    color: #fff;
+    color:var(--text-main);
     padding: 0.5rem 1rem 0.5rem 0;
     outline: none;
+    border: none;
     font-size: 0.95rem;
     font-family: var(--font-sans);
     opacity: 0;
     transition: opacity 0.3s;
     width: 100%;
 }
+
 
 .search-wrapper.expanded .search-input {
     opacity: 1;
@@ -71,7 +75,107 @@
     color: rgba(255, 255, 255, 0.3);
 }
 
-/* Layout Grid */
+.clearSearch {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--mrc);
+    font-size: 14px;
+    display: none;
+}
+
+.clearSearch:hover,
+.clearSearch:active {
+    scale: 1.1;
+}
+
+.search-input:not(:placeholder-shown)+.clearSearch {
+    display: block;
+}
+
+.sort-wrapper {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 99px;
+    overflow: hidden;
+    width: 44px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s;
+}
+
+.sort-wrapper.expanded {
+    width: 100%;
+    max-width: 75%;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.5);
+    border-color: var(--mrc);
+}
+
+@media (min-width: 480px) {
+    .sort-wrapper.expanded {
+        max-width: 400px;
+    }
+}
+
+.sort-icon-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: color 0.3s;
+}
+
+.sort-wrapper.expanded .sort-icon-btn {
+    color: var(--mrc);
+}
+
+.sort-select {
+    background: transparent;
+    color:var(--text-main);
+    padding: 0.5rem 1rem 0.5rem 0;
+    outline: none;
+    border: none;
+    font-size: 0.95rem;
+    font-family: var(--font-sans);
+    transition: opacity 0.3s;
+    width: 100%; 
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.sort-wrapper.expanded .sort-input {
+    opacity: 1;
+}
+.sort-select option {
+    color: var(--text-main);
+    background: var(--bg-dark);
+}
+.clearSort {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--mrc);
+    font-size: 14px;
+    display: none;
+}
+
+.sort-wrapper.expanded .clearSort {
+  display: block;
+}
+
+.clearSort:hover,
+.clearSort:active {
+    scale: 1.1;
+}
+
 .layout-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -167,7 +271,6 @@
     border-radius: 99px;
 }
 
-/* Mobile specific panel toggles */
 @media (max-width: 899px) {
     .sidebar-card {
         padding: 1rem;
@@ -212,7 +315,6 @@
     }
 }
 
-/* Post Grid */
 .grid-header {
     display: flex;
     justify-content: space-between;
@@ -228,14 +330,12 @@
     color: var(--text-muted);
 }
 
-/* Adjusted auto-fill grid min-width from 280px to 250px for smaller mobiles */
 .post-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5rem;
 }
 
-/* Post Cards */
 .post-card {
     display: flex;
     flex-direction: column;
@@ -388,7 +488,6 @@
     color: #fff;
 }
 
-/* Reader Pane */
 .reader-pane {
     display: none;
 }
@@ -410,7 +509,6 @@
     border-bottom: 1px solid var(--glass-border);
 }
 
-/* Adjusted Reader Padding for Mobile */
 .reader-content {
     padding: clamp(1.2rem, 5vw, 4rem);
     min-height: 400px;
@@ -467,6 +565,12 @@
     font-weight: 700;
 }
 
+.meta-value[id="full-author"]:hover {
+    cursor: pointer;
+    color: #fff;
+    text-decoration: underline;
+}
+
 .reader-tags {
     display: flex;
     flex-wrap: wrap;
@@ -474,7 +578,6 @@
     margin-top: 0.5rem;
 }
 
-/* GitHub Markdown Overrides for Dark Glassmorphism */
 .markdown-body {
     color: var(--text-main);
     background: transparent !important;
@@ -525,7 +628,6 @@
 }
 
 .markdown-body table {
-    display: block;
     overflow-x: auto;
     white-space: nowrap;
 }
@@ -551,7 +653,6 @@
     height: auto;
 }
 
-/* 404 Integration inside reader */
 .reader-404 {
     pointer-events: none;
     text-align: center;
@@ -570,4 +671,8 @@
     width: 120px;
     background: transparent;
     border: none;
+}
+
+.section {
+    padding: clamp(4rem, 12vw, 8rem) 0;
 }

@@ -21,7 +21,6 @@
     color: #fff;
 }
 
-/* Page Headers */
 .page-header {
     padding-top: calc(var(--nav-height) + 6rem);
     padding-bottom: 2rem;
@@ -66,7 +65,6 @@
     line-height: 1.7;
 }
 
-/* Media Page Specific Components */
 .media-section-title {
     font-size: clamp(1.75rem, 2.5vw, 2rem);
     font-weight: 900;

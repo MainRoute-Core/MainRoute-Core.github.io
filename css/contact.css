@@ -48,18 +48,20 @@
     color: var(--text-muted);
     line-height: 1.7;
 }
+
 .form-group-div {
     display: flex;
     flex-direction: column;
     gap: 0;
 }
- @media (min-width: 480px) {
+
+@media (min-width: 480px) {
     .form-group-div {
-    flex-direction: row;
-    gap: 2rem;
+        flex-direction: row;
+        gap: 2rem;
+    }
 }
- }
-/* Forms & Inputs */
+
 .form-group {
     display: flex;
     flex-direction: column;
@@ -154,7 +156,6 @@ textarea.form-control {
     flex-shrink: 0;
 }
 
-/* Success Message */
 #form-success {
     display: none;
     text-align: center;

@@ -27,10 +27,10 @@
     <link rel="canonical" href="https://mainroute-core.github.io/">
     <link rel="shortcut icon" type="image/x-icon" sizes="any" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="/src/16.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/src/32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/src/144.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/src/192.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/src/512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/src/32.png">
+    <link rel="icon" type="image/png" sizes="144x144" href="/src/144.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/src/192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/src/512.png">
     <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/src/apple-touch-icon.png">
     <link rel="apple-touch-icon" type="image/png" sizes="167x167" href="/src/apple-touch-167.png">
     <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="/src/apple-touch-152.png">
@@ -119,18 +119,32 @@
         </div>
     </header>
 
-    <!-- Main Application -->
     <main class="section">
         <div class="container">
             
             <div id="main-layout-wrapper">
                 
                 <div class="search-container">
+                    <div class="sort-wrapper glass-panel" id="sort-wrapper">
+                        <button class="sort-icon-btn" onclick="toggleSort()" aria-label="sort">
+                            <svg class="icon">
+                                <use href="/src/global.svg#icon-sort"></use>
+                            </svg>
+                        </button>
+                        <select class="sort-select" id="sort-select">
+                            <option value="NameA">By Name Ascending</option>
+                            <option value="NameD">By Name Descending</option>
+                            <option value="DateA">By Date Ascending</option>
+                            <option value="DateD">By Date Descending</option>
+                        </select>
+                        <svg class="clearSort icon" onclick="clearSort()"><use href="/src/global.svg#icon-close"></use></svg>
+                    </div>
                     <div class="search-wrapper glass-panel" id="search-wrapper">
                         <button class="search-icon-btn" onclick="toggleSearch()" aria-label="Search">
                             <svg class="icon"><use href="/src/global.svg#icon-search"></use></svg>
                         </button>
-                        <input type="search" class="search-input" id="search-bar" placeholder="Type To Search..." oninput="handleSearchInput()" onblur="closeSearchIfEmpty()">
+                        <input type="text" class="search-input" id="search-bar" placeholder="Type To Search..." oninput="handleSearchInput()" onblur="closeSearchIfEmpty()">
+                        <svg class="clearSearch icon" onclick="clearSearch()"><use href="/src/global.svg#icon-close"></use></svg>
                     </div>
                 </div>
 

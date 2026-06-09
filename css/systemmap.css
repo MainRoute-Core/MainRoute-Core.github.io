@@ -4,7 +4,6 @@
     font-display: swap;
 }
 
-/* Page Headers */
 .page-header {
     padding-top: calc(var(--nav-height) + 6rem);
     padding-bottom: 2rem;
@@ -50,7 +49,6 @@
     line-height: 1.7;
 }
 
-/* Directory Specific UI */
 .directory-card {
     padding: 2rem;
     display: flex;
@@ -137,7 +135,6 @@
     color: var(--mrc);
 }
 
-/* Animations Classes */
 .reveal {
     opacity: 0;
     transform: translateY(30px);

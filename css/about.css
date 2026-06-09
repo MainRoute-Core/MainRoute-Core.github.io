@@ -1,6 +1,5 @@
 @import url(/css/global.css);
 
-/* Page Headers */
 .page-header {
     padding-top: calc(var(--nav-height) + 6rem);
     padding-bottom: 4rem;
@@ -44,7 +43,6 @@
     line-height: 1.7;
 }
 
-/* Origin Story Layout */
 .origin-card {
     padding: 3rem;
     position: relative;
@@ -70,7 +68,6 @@
     z-index: 1;
 }
 
-/* Pro Bandey Cards */
 .philosophy-card {
     padding: 2.5rem;
     border-radius: 1.5rem;
@@ -103,7 +100,6 @@
     box-shadow: 0 5px 15px var(--mrc-glow);
 }
 
-/* Tech Arsenal Accordion / Grid */
 .tech-box {
     background:var(--glass-bg);
     border-radius: 1rem;

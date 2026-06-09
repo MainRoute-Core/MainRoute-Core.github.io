@@ -29,7 +29,6 @@
     border: 1px solid rgba(244, 66, 52, 0.2);
 }
 
-/* Long-form Content Area */
 .prose-container {
     max-width: 900px;
     margin: 0 auto;
@@ -93,7 +92,6 @@
     text-decoration-color: var(--mrc);
 }
 
-/* Brand Color Showcase */
 .color-box {
     display: inline-flex;
     align-items: center;
