@@ -55,7 +55,7 @@
 .search-input {
     flex-grow: 1;
     background: transparent;
-    color:var(--text-main);
+    color: var(--text-main);
     padding: 0.5rem 1rem 0.5rem 0;
     outline: none;
     border: none;
@@ -137,14 +137,14 @@
 
 .sort-select {
     background: transparent;
-    color:var(--text-main);
+    color: var(--text-main);
     padding: 0.5rem 1rem 0.5rem 0;
     outline: none;
     border: none;
     font-size: 0.95rem;
     font-family: var(--font-sans);
     transition: opacity 0.3s;
-    width: 100%; 
+    width: 100%;
     -webkit-appearance: none;
     appearance: none;
 }
@@ -152,10 +152,12 @@
 .sort-wrapper.expanded .sort-input {
     opacity: 1;
 }
+
 .sort-select option {
     color: var(--text-main);
     background: var(--bg-dark);
 }
+
 .clearSort {
     position: absolute;
     right: 10px;
@@ -168,7 +170,7 @@
 }
 
 .sort-wrapper.expanded .clearSort {
-  display: block;
+    display: block;
 }
 
 .clearSort:hover,
@@ -218,6 +220,12 @@
     overflow: hidden auto;
     list-style: none;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cat-list hr {
+    border: none;
+    border-top: 1px solid var(--glass-border);
+    height: 0;
 }
 
 .cat-item {
@@ -525,6 +533,7 @@
 .reader-meta {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-end;
     gap: 1rem;
     border-bottom: 1px solid var(--glass-border);
     padding-bottom: 1.5rem;
@@ -576,6 +585,71 @@
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 0.5rem;
+}
+
+#reader-bookmark-btn.bookmarked {
+    background: rgba(244, 66, 52, 0.15);
+    border-color: rgba(244, 66, 52, 0.5);
+    color: var(--mrc);
+}
+
+#reader-bookmark-btn.bookmarked svg {
+    fill: var(--mrc);
+    stroke: var(--mrc);
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.toc-link {
+    display: block;
+    padding: 0.35rem 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.toc-link:hover {
+    color: var(--mrc);
+    background: rgba(255, 255, 255, 0.02);
+    border-left-color: var(--mrc);
+}
+
+.toc-depth-3 {
+    padding-left: 1.5rem;
+    font-size: 0.825rem;
+}
+
+#reader-toc-container {
+    transition: border-color 0.3s;
+}
+
+#reader-toc-container:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.toggleToc {
+    display: flex;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 1rem;
+    cursor: pointer;
+    border-bottom: 1px solid var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+    user-select: none;
+    transition: color 0.3s;
+    justify-content: flex-start;
 }
 
 .markdown-body {
