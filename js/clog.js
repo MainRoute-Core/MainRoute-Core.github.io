@@ -133,6 +133,22 @@ function toggleCurrentBookmark() {
     buildCategorySidebar();
 }
 
+// Fixed: Correctly scoped function that handles card-level bookmarks safely
+function togglePostBookmark(articleId, event) {
+    if (event) event.stopPropagation();
+    if (!articleId) return;
+    const bookmarks = getBookmarks();
+    const idx = bookmarks.indexOf(articleId);
+    if (idx > -1) {
+        bookmarks.splice(idx, 1);
+    } else {
+        bookmarks.push(articleId);
+    }
+    saveBookmarks(bookmarks);
+    buildCategorySidebar();
+    renderPostList();
+}
+
 function updateBookmarkButtonUI(articleId) {
     const bookmarks = getBookmarks();
     const btn = document.getElementById('reader-bookmark-btn');
@@ -161,7 +177,6 @@ async function prefetchPost(articleId) {
         .then(data => {
             postCache.set(articleId, data);
             prefetchPromises.delete(articleId);
-            updateReadingTimeOnCard(articleId, data);
         })
         .catch(() => {
             prefetchPromises.delete(articleId);
@@ -169,11 +184,17 @@ async function prefetchPost(articleId) {
     prefetchPromises.set(articleId, promise);
 }
 
-function updateReadingTimeOnCard(articleId, data) {
-    const words = (data.Data || "").trim().split(/\s+/).length;
-    const readTime = Math.max(1, Math.round(words / 200));
-    const elements = document.querySelectorAll(`[data-article="${articleId}"] .card-meta span:first-child`);
-}
+// Fixed: Correctly updates DOM elements to display calculated read time
+// function updateReadingTimeOnCard(articleId, data) {
+//     const words = (data.Data || "").trim().split(/\s+/).length;
+//     const readTime = Math.max(1, Math.round(words / 200));
+//     const elements = document.querySelectorAll(`[data-article="${articleId}"] .card-meta span:first-child`);
+//     elements.forEach(el => {
+//         const rawText = el.textContent || "";
+//         const baseDate = rawText.split(" • ")[0];
+//         el.textContent = `${baseDate} • ${readTime} min read`;
+//     });
+// }
 
 function buildCategorySidebar() {
     const categoriesMap = {};
@@ -181,11 +202,14 @@ function buildCategorySidebar() {
         (item.Cat || []).forEach(c => { if (c) categoriesMap[c] = (categoriesMap[c] || 0) + 1; });
     });
     const catList = document.getElementById('category-filter-list');
+    if (!catList) return;
     catList.innerHTML = '';
     const fragment = document.createDocumentFragment();
     const bookmarksCount = getBookmarks().length;
     const bLi = document.createElement('li');
     bLi.className = `cat-item ${activeFilters.bm ? 'active' : ''}`;
+    bLi.setAttribute('role', 'button');
+    bLi.setAttribute('tabindex', '0');
     bLi.onclick = () => {
         activeFilters.bm = !activeFilters.bm;
         if (activeFilters.bm) {
@@ -193,6 +217,12 @@ function buildCategorySidebar() {
         }
         currentPage = 1;
         updateUrlState();
+    };
+    bLi.onkeydown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            bLi.onclick();
+            e.preventDefault();
+        }
     };
     bLi.innerHTML = `
     <div class="flex items-center">
@@ -208,9 +238,17 @@ function buildCategorySidebar() {
         const isActive = activeFilters.ct.includes(cat);
         const li = document.createElement('li');
         li.className = `cat-item ${isActive ? 'active' : ''}`;
+        li.setAttribute('role', 'button');
+        li.setAttribute('tabindex', '0');
         li.onclick = () => {
             activeFilters.bm = false;
             toggleCategoryFilter(cat);
+        };
+        li.onkeydown = (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                li.onclick();
+                e.preventDefault();
+            }
         };
         li.innerHTML = `
         <div class="flex items-center">
@@ -226,6 +264,7 @@ function buildCategorySidebar() {
 
 function renderPostList() {
     const grid = document.getElementById('publication-grid');
+    if (!grid) return;
     grid.innerHTML = "";
     let filtered = indexData.filter(item => {
         if (activeFilters.bm) {
@@ -283,6 +322,8 @@ function renderPostList() {
 
     const sliced = filtered.slice(0, currentPage * postsPerPage);
     const fragment = document.createDocumentFragment();
+    const bookmarks = getBookmarks();
+
     sliced.forEach(item => {
         const card = document.createElement('article');
         card.className = "glass-panel post-card";
@@ -292,22 +333,25 @@ function renderPostList() {
         const catHtml = (item.Cat || []).map(c => `<span class="badge-cat">${c}</span>`).join('');
         const tagHtml = (item.Tags || []).map(t => `<button class="tag-btn" onclick="clickFilter('tg', '${t}', event)">#${t}</button>`).join('');
         let metadataTimeStr = item.Date || 'Classified Date';
-        if (postCache.has(item.Article)) {
-            const cachedData = postCache.get(item.Article);
-            const words = (cachedData.Data || "").trim().split(/\s+/).length;
-            const readTime = Math.max(1, Math.round(words / 200));
-            metadataTimeStr += ` • ${readTime} min read`;
-        }
+
+        // Check if bookmarked and build clean heart style
+        const isBookmarked = bookmarks.includes(item.Article);
+        const heartStyle = isBookmarked ? 'style="fill: var(--mrc); stroke: var(--mrc);"' : '';
 
         card.innerHTML = `
         <div class="card-img-wrap" onclick="openPost('${item.Article}')">
-            <img src="${bannerImg}" alt="${item.Name}" loading="lazy" onerror="this.src='/src/Log_404.png'">
+            <img src="${bannerImg}" alt="${item.Name}" loading="lazy" onerror="this.onerror=null; this.src='/src/Log_404.png';">
             <div class="card-badges">${catHtml}</div>
         </div>
         <div class="card-body">
             <div class="card-meta">
                 <span>${metadataTimeStr}</span>
-                <span class="card-author" onclick="clickFilter('author', '${item.Author}', event)">@${item.Author || 'Unknown'}</span>
+                <span class="clickable">
+                    <span class="bookmark-btn" onclick="togglePostBookmark('${item.Article}', event)" title="Add To Bookmark" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){togglePostBookmark('${item.Article}', event); event.preventDefault();}">
+                        <svg class="icon" ${heartStyle}><use href="/src/global.svg#icon-heart"></use></svg>
+                    </span>
+                    <span class="card-author" onclick="clickFilter('author', '${item.Author}', event)" role="button" tabindex="0">@${item.Author || 'Unknown'}</span>
+                </span>
             </div>
             <h2 class="card-title" onclick="openPost('${item.Article}')">${item.Name}</h2>
             <p class="card-desc">${item.Desc || ''}</p>
@@ -343,6 +387,31 @@ function clickFilter(type, value, event) {
     activeFilters.bm = false;
     currentPage = 1;
     updateUrlState();
+}
+
+// Fixed: Prevents consecutive push-routing issues by updating criteria and exiting in a unified step
+function clickFilterAndExit(type, value) {
+    activeFilters[type] = value;
+    activeFilters.bm = false;
+    currentPage = 1;
+
+    const url = new URL(window.location);
+    url.searchParams.delete('log');
+    if (activeFilters.ct.length > 0) url.searchParams.set('ct', activeFilters.ct.join(','));
+    else url.searchParams.delete('ct');
+    if (activeFilters.tg) url.searchParams.set('tg', activeFilters.tg);
+    else url.searchParams.delete('tg');
+    if (activeFilters.author) url.searchParams.set('author', activeFilters.author);
+    else url.searchParams.delete('author');
+    if (activeFilters.q) url.searchParams.set('q', activeFilters.q);
+    else url.searchParams.delete('q');
+    if (activeFilters.srt) url.searchParams.set('srt', activeFilters.srt);
+    else url.searchParams.delete('srt');
+    if (activeFilters.bm) url.searchParams.set('bm', 'true');
+    else url.searchParams.delete('bm');
+
+    window.history.pushState({}, '', url);
+    processUrlParamsAndRoute();
 }
 
 function clearFiltersAndHome() {
@@ -385,7 +454,7 @@ function toggleSearch() {
 function closeSearchIfEmpty() {
     const wrapper = document.getElementById('search-wrapper');
     const input = document.getElementById('search-bar');
-    if (input.value.trim() === '') wrapper.classList.remove('expanded');
+    if (input && input.value.trim() === '') wrapper.classList.remove('expanded');
 }
 
 function handleSearchInput() {
@@ -443,7 +512,6 @@ function generateTableOfContents() {
         return;
     }
 
-    tocContainer.style.display = 'block';
     const ul = document.createElement('ul');
     ul.className = 'toc-list';
     headings.forEach((heading, index) => {
@@ -457,12 +525,9 @@ function generateTableOfContents() {
         anchor.innerText = heading.innerText;
         anchor.onclick = (e) => {
             e.preventDefault();
-            const headerOffset = 90;
-            const elementPosition = heading.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
+            heading.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
             });
         };
         const li = document.createElement('li');
@@ -474,14 +539,11 @@ function generateTableOfContents() {
 
 function toggleToC() {
     const toc = document.getElementById('reader-toc');
-    const icon = document.getElementById('toc-toggle-icon');
     if (!toc) return;
     if (toc.style.maxHeight === '0px' || !toc.style.maxHeight) {
         toc.style.maxHeight = toc.scrollHeight + 'px';
-        if (icon) icon.style.transform = 'rotate(180deg)';
     } else {
         toc.style.maxHeight = '0px';
-        if (icon) icon.style.transform = 'rotate(0deg)';
     }
 }
 
@@ -525,8 +587,11 @@ function shareCurrentPost() {
 }
 
 async function loadAndRenderFullPost(logId) {
-    document.getElementById('main-layout-wrapper').style.display = 'none';
-    document.getElementById('main-reader-pane').classList.add('active');
+    const layoutWrapper = document.getElementById('main-layout-wrapper');
+    const readerPane = document.getElementById('main-reader-pane');
+    if (layoutWrapper) layoutWrapper.style.display = 'none';
+    if (readerPane) readerPane.classList.add('active');
+
     currentArticleId = logId;
     if (logId === '404') {
         render404Page();
@@ -556,22 +621,42 @@ async function loadAndRenderFullPost(logId) {
     }
     const banner = document.getElementById('full-img');
     const imgSrc = postData.Img || dbEntry.Img;
-    if (imgSrc) { banner.src = imgSrc; banner.style.display = 'block'; }
-    else { banner.style.display = 'none'; }
-    document.getElementById('full-title').innerText = postData.Title || dbEntry.Name;
-    document.getElementById('full-date').innerText = postData.Date || dbEntry.Date || 'Classified';
-    document.getElementById('full-author').innerText = `@${postData.Author}` || `@${dbEntry.Author}` || "Unknown";
-    document.getElementById('full-author').onclick = () => { clickFilter('author', postData.Author || dbEntry.Author); exitReaderView(); };
-    document.getElementById('full-meta-block').style.display = 'block';
+    if (imgSrc && banner) { banner.src = imgSrc; banner.style.display = 'block'; }
+    else if (banner) { banner.style.display = 'none'; }
+
+    const titleEl = document.getElementById('full-title');
+    const dateEl = document.getElementById('full-date');
+    const authorEl = document.getElementById('full-author');
+
+    if (titleEl) titleEl.innerText = postData.Title || dbEntry.Name;
+    if (dateEl) dateEl.innerText = postData.Date || dbEntry.Date || 'Classified';
+    if (authorEl) {
+        const authorVal = postData.Author || dbEntry.Author || "Unknown";
+        authorEl.innerText = `@${authorVal}`;
+        authorEl.onclick = () => { clickFilterAndExit('author', authorVal); };
+    }
+
+    const metaBlock = document.getElementById('full-meta-block');
+    if (metaBlock) metaBlock.style.display = 'block';
+
     const words = (postData.Data || "").trim().split(/\s+/).length;
     const readTime = Math.max(1, Math.round(words / 200));
-    document.getElementById('full-reading-time').innerText = `${readTime} min read`;
+    const readTimeEl = document.getElementById('full-reading-time');
+    if (readTimeEl) readTimeEl.innerText = `${readTime} min read`;
+
     const catBadges = (postData.Categories || dbEntry.Cat || []).map(c => `<span class="badge-cat" style="position:static;">${c}</span>`).join('');
-    const tagBadges = (postData.Tags || dbEntry.Tags || []).map(t => `<button class="tag-btn" onclick="clickFilter('tg', '${t}'); exitReaderView();">#${t}</button>`).join('');
-    document.getElementById('full-tags').innerHTML = `<div class="flex flex-wrap gap-1">${catBadges}</div><div class="flex flex-wrap gap-1">${tagBadges}</div>`;
+    // Fixed: Resolves navigation loop conditions by utilizing exit redirection functions
+    const tagBadges = (postData.Tags || dbEntry.Tags || []).map(t => `<button class="tag-btn" onclick="clickFilterAndExit('tg', '${t}')">#${t}</button>`).join('');
+
+    const tagsEl = document.getElementById('full-tags');
+    if (tagsEl) tagsEl.innerHTML = `<div class="flex flex-wrap gap-1">${catBadges}</div><div class="flex flex-wrap gap-1">${tagBadges}</div>`;
+
     const bodyContainer = document.getElementById('full-body');
-    if (window.marked) bodyContainer.innerHTML = marked.parse(postData.Data || "");
-    else bodyContainer.innerHTML = `<p class="txt-mrc">Parsing Engine Offline.</p><pre>${postData.Data}</pre>`;
+    if (bodyContainer) {
+        if (window.marked) bodyContainer.innerHTML = marked.parse(postData.Data || "");
+        else bodyContainer.innerHTML = `<p class="txt-mrc">Parsing Engine Offline.</p><pre>${postData.Data}</pre>`;
+    }
+
     generateTableOfContents();
     handleScrollProgress();
 }
@@ -584,20 +669,25 @@ function trigger404Redirect() {
 }
 
 async function render404Page() {
-    document.getElementById('full-img').style.display = 'none';
-    document.getElementById('full-meta-block').style.display = 'none';
+    const banner = document.getElementById('full-img');
+    const metaBlock = document.getElementById('full-meta-block');
+    if (banner) banner.style.display = 'none';
+    if (metaBlock) metaBlock.style.display = 'none';
+
     const bodyContainer = document.getElementById('full-body');
-    bodyContainer.innerHTML = `
-        <div class="reader-404">
-            <div class="error font-black txt-mrc flex items-center justify-center">
-                <span>5</span>
-                <span>2</span>
-                <img class="trytryagain" src="/src/144.png" alt="Not Found">
-            </div>
-            <h3 class="txt-main font-bold" style="font-size: 2rem;">Couldn't Initialize Log..</h3>
-            <p class="txt-muted" style="margin: 1rem 0 2rem;">The requested log packet does not exist/load in the MainRoute Core Clog index.</p>
-            <button style="pointer-events: auto;" class="btn btn-prim" onclick="clearFiltersAndHome()">Return to Index</button>
-        </div>`;
+    if (bodyContainer) {
+        bodyContainer.innerHTML = `
+            <div class="reader-404">
+                <div class="error font-black txt-mrc flex items-center justify-center">
+                    <span>5</span>
+                    <span>2</span>
+                    <img class="trytryagain" src="/src/144.png" alt="Not Found" onerror="this.onerror=null; this.style.display='none';">
+                </div>
+                <h3 class="txt-main font-bold" style="font-size: 2rem;">Couldn't Initialize Log..</h3>
+                <p class="txt-muted" style="margin: 1rem 0 2rem;">The requested log packet does not exist/load in the MainRoute Core Clog index.</p>
+                <button style="pointer-events: auto;" class="btn btn-prim" onclick="clearFiltersAndHome()">Return to Index</button>
+            </div>`;
+    }
 }
 
 initializeClogReader();

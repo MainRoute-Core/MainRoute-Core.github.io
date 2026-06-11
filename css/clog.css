@@ -5,35 +5,36 @@
     justify-content: space-between;
     gap: 1rem;
     margin: 2rem 0 1rem;
-    position: relative;
+    position: relative
 }
 
 .search-wrapper {
+    position: relative;
     display: flex;
     align-items: center;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, .05);
     border: 1px solid var(--glass-border);
     border-radius: 99px;
     overflow: hidden;
     width: 44px;
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s;
+    transition: width .4s cubic-bezier(.4, 0, .2, 1), border-color .4s
 }
 
 .search-wrapper.expanded {
     width: 100%;
     max-width: 75%;
     margin: auto;
-    background: rgba(0, 0, 0, 0.5);
-    border-color: var(--mrc);
+    background: rgba(0, 0, 0, .5);
+    border-color: var(--mrc)
 }
 
-@media (min-width: 480px) {
+@media (min-width:480px) {
     .search-container {
-        margin: 0 0 1rem;
+        margin: 0 0 1rem
     }
 
     .search-wrapper.expanded {
-        max-width: 70%;
+        max-width: 70%
     }
 }
 
@@ -45,78 +46,87 @@
     justify-content: center;
     color: var(--text-muted);
     flex-shrink: 0;
-    transition: color 0.3s;
+    transition: color .3s;
+    background: transparent;
+    border: none;
+    cursor: pointer
+}
+
+.search-icon-btn:focus-visible {
+    outline: 2px solid var(--mrc);
+    border-radius: 50%
 }
 
 .search-wrapper.expanded .search-icon-btn {
-    color: var(--mrc);
+    color: var(--mrc)
 }
 
 .search-input {
     flex-grow: 1;
     background: transparent;
     color: var(--text-main);
-    padding: 0.5rem 1rem 0.5rem 0;
+    padding: .5rem 2rem .5rem 0;
     outline: none;
     border: none;
-    font-size: 0.95rem;
+    font-size: .95rem;
     font-family: var(--font-sans);
     opacity: 0;
-    transition: opacity 0.3s;
-    width: 100%;
+    transition: opacity .3s;
+    width: 100%
 }
 
-
 .search-wrapper.expanded .search-input {
-    opacity: 1;
+    opacity: 1
 }
 
 .search-input::placeholder {
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, .3)
 }
 
 .clearSearch {
     position: absolute;
-    right: 10px;
+    right: 12px;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
     color: var(--mrc);
     font-size: 14px;
     display: none;
+    z-index: 2
 }
 
 .clearSearch:hover,
 .clearSearch:active {
-    scale: 1.1;
+    transform: translateY(-50%) scale(1.1)
 }
 
 .search-input:not(:placeholder-shown)+.clearSearch {
-    display: block;
+    display: block
 }
 
 .sort-wrapper {
+    position: relative;
     display: flex;
     align-items: center;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, .05);
     border: 1px solid var(--glass-border);
     border-radius: 99px;
     overflow: hidden;
     width: 44px;
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s;
+    transition: width .4s cubic-bezier(.4, 0, .2, 1), border-color .4s
 }
 
 .sort-wrapper.expanded {
     width: 100%;
     max-width: 75%;
     margin: auto;
-    background: rgba(0, 0, 0, 0.5);
-    border-color: var(--mrc);
+    background: rgba(0, 0, 0, .5);
+    border-color: var(--mrc)
 }
 
-@media (min-width: 480px) {
+@media (min-width:480px) {
     .sort-wrapper.expanded {
-        max-width: 400px;
+        max-width: 400px
     }
 }
 
@@ -128,128 +138,148 @@
     justify-content: center;
     color: var(--text-muted);
     flex-shrink: 0;
-    transition: color 0.3s;
+    transition: color .3s;
+    background: transparent;
+    border: none;
+    cursor: pointer
+}
+
+.sort-icon-btn:focus-visible {
+    outline: 2px solid var(--mrc);
+    border-radius: 50%
 }
 
 .sort-wrapper.expanded .sort-icon-btn {
-    color: var(--mrc);
+    color: var(--mrc)
 }
 
 .sort-select {
     background: transparent;
     color: var(--text-main);
-    padding: 0.5rem 1rem 0.5rem 0;
+    padding: .5rem 2rem .5rem 0;
     outline: none;
     border: none;
-    font-size: 0.95rem;
+    font-size: .95rem;
     font-family: var(--font-sans);
-    transition: opacity 0.3s;
+    transition: opacity .3s;
     width: 100%;
     -webkit-appearance: none;
     appearance: none;
+    cursor: pointer
 }
 
 .sort-wrapper.expanded .sort-input {
-    opacity: 1;
+    opacity: 1
 }
 
 .sort-select option {
     color: var(--text-main);
-    background: var(--bg-dark);
+    background: var(--bg-dark)
 }
 
 .clearSort {
     position: absolute;
-    right: 10px;
+    right: 12px;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
     color: var(--mrc);
     font-size: 14px;
     display: none;
+    z-index: 2
 }
 
 .sort-wrapper.expanded .clearSort {
-    display: block;
+    display: block
 }
 
 .clearSort:hover,
 .clearSort:active {
-    scale: 1.1;
+    transform: translateY(-50%) scale(1.1)
 }
 
 .layout-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
-    align-items: start;
+    align-items: start
 }
 
-@media (min-width: 900px) {
+@media (min-width:900px) {
     .layout-grid {
         grid-template-columns: 280px 1fr;
-        gap: 2rem;
+        gap: 2rem
     }
+}
+
+.filter-panel {
+    position: sticky;
+    top: clamp(5rem, 11vw, 6rem);
+    z-index: 100;
 }
 
 .sidebar-header {
     display: flex;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: .1em;
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--text-muted);
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
+    font-size: .9rem;
     color: var(--text-muted);
     user-select: none;
-    transition: color 0.3s;
-    justify-content: center;
+    transition: color .3s;
+    justify-content: center
 }
 
 .cat-toggle-btn {
     display: none;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform .4s cubic-bezier(.4, 0, .2, 1)
 }
 
 .cat-list {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: .5rem;
     max-height: 400px;
     overflow: hidden auto;
     list-style: none;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all .4s cubic-bezier(.4, 0, .2, 1)
 }
 
 .cat-list hr {
     border: none;
     border-top: 1px solid var(--glass-border);
-    height: 0;
+    height: 0
 }
 
 .cat-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.25rem;
+    padding: .25rem;
     border-radius: 10px;
-    font-size: 0.9rem;
+    font-size: .9rem;
     cursor: pointer;
-    transition: all 0.2s;
-    border: 1px solid transparent;
+    transition: all .2s;
+    border: 1px solid transparent
 }
 
 .cat-item:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: var(--glass-border);
+    background: rgba(255, 255, 255, .05);
+    border-color: var(--glass-border)
+}
+
+.cat-item:focus-visible {
+    outline: 2px solid var(--mrc);
+    background: rgba(255, 255, 255, .05)
 }
 
 .cat-item.active {
-    background: rgba(244, 66, 52, 0.1);
-    border-color: rgba(244, 66, 52, 0.3);
+    background: rgba(244, 66, 52, .1);
+    border-color: rgba(244, 66, 52, .3);
     color: var(--mrc);
-    font-weight: 700;
+    font-weight: 700
 }
 
 .cat-checkbox {
@@ -260,66 +290,58 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-right: 0.5rem;
-    transition: all 0.2s;
-    flex-shrink: 0;
+    margin-right: .5rem;
+    transition: all .2s;
+    flex-shrink: 0
 }
 
 .cat-item.active .cat-checkbox {
     background: var(--mrc);
     border-color: var(--mrc);
-    color: #fff;
+    color: var(--text-main)
 }
 
 .cat-count {
-    font-size: 0.75rem;
+    font-size: .75rem;
     font-family: var(--font-mono);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, .05);
     padding: 2px 6px;
-    border-radius: 99px;
+    border-radius: 99px
 }
 
-@media (max-width: 899px) {
+@media (max-width:899px) {
     .sidebar-card {
-        padding: 1rem;
-    }
-
-    .sidebar-header {
-        cursor: pointer;
-        margin-bottom: 0;
-        background: rgba(255, 255, 255, 0.03);
-        padding: 0.4rem .5rem;
-        border-radius: 0.5rem;
+        padding: 1rem
     }
 
     .sidebar-header:active {
-        background: rgba(255, 255, 255, 0.06);
+        background: rgba(255, 255, 255, .06)
     }
 
     .cat-toggle-btn {
         display: block;
-        color: var(--text-main);
+        color: var(--text-main)
     }
 
     .sidebar-header.open {
-        color: var(--text-main);
+        color: var(--text-main)
     }
 
     .sidebar-header.open .cat-toggle-btn {
         transform: rotate(180deg);
-        color: var(--mrc);
+        color: var(--mrc)
     }
 
     .cat-list {
         max-height: 0;
         opacity: 0;
-        margin-top: 0;
+        margin-top: 0
     }
 
     .cat-list.show {
         max-height: 400px;
         opacity: 1;
-        margin-top: 1rem;
+        margin-top: 1rem
     }
 }
 
@@ -329,32 +351,32 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem
 }
 
 .results-count {
-    font-size: 0.9rem;
+    font-size: .9rem;
     font-weight: 700;
-    color: var(--text-muted);
+    color: var(--text-muted)
 }
 
 .post-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
+    gap: 1.5rem
 }
 
 .post-card {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transition: transform 0.3s, border-color 0.3s;
-    cursor: default;
+    transition: transform .3s, border-color .3s;
+    cursor: default
 }
 
 .post-card:hover {
     transform: translateY(-5px);
-    border-color: rgba(244, 66, 52, 0.3);
+    border-color: rgba(244, 66, 52, .3)
 }
 
 .card-img-wrap {
@@ -363,52 +385,53 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border)
 }
 
 .card-img-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s;
+    transition: transform .5s;
+    will-change: transform
 }
 
 .post-card:hover .card-img-wrap img {
-    transform: scale(1.05);
+    transform: scale(1.05)
 }
 
 .card-badges {
     position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
+    top: .5rem;
+    left: .5rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    pointer-events: none;
+    gap: .5rem;
+    pointer-events: none
 }
 
 .badge-cat {
-    background: rgba(9, 9, 11, 0.8);
+    background: rgba(9, 9, 11, .8);
     backdrop-filter: blur(4px);
     border: 1px solid var(--glass-border);
-    color: #fff;
-    font-size: 0.65rem;
+    color: var(--text-main);
+    font-size: .65rem;
     font-weight: 700;
-    padding: 0.25rem 0.5rem;
+    padding: .25rem .5rem;
     border-radius: 99px;
-    text-transform: uppercase;
+    text-transform: uppercase
 }
 
 .card-body {
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    flex-grow: 1
 }
 
-@media (min-width: 768px) {
+@media (min-width:768px) {
     .card-body {
-        padding: 1.5rem;
+        padding: 1.5rem
     }
 }
 
@@ -418,19 +441,41 @@
     font-family: var(--font-mono);
     font-size: small;
     color: var(--text-muted);
-    margin-bottom: 0.75rem;
+    margin-bottom: .75rem
+}
+
+.card-meta .clickable {
+    display: inline-flex;
+    gap: .75rem;
+    align-items: center
+}
+
+.clickable .bookmark .icon,
+.clickable .bookmark-btn .icon {
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+    color: var(--text-main);
+    fill: none;
+    stroke: currentColor;
+    transition: stroke .2s, fill .2s
+}
+
+.clickable .bookmark .icon:hover,
+.clickable .bookmark-btn .icon:hover {
+    stroke: var(--mrc-light)
 }
 
 .card-author {
     cursor: pointer;
     font-weight: 700;
     color: var(--mrc);
-    transition: color 0.2s;
+    transition: color .2s
 }
 
 .card-author:hover {
-    color: #fff;
-    text-decoration: underline;
+    color: var(--text-main);
+    text-decoration: underline
 }
 
 .card-title {
@@ -442,21 +487,21 @@
     line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border)
 }
 
-@media (min-width: 768px) {
+@media (min-width:768px) {
     .card-title {
-        font-size: 1.25rem;
+        font-size: 1.25rem
     }
 }
 
 .card-title:hover {
-    color: var(--mrc);
+    color: var(--mrc)
 }
 
 .card-desc {
-    font-size: 0.9rem;
+    font-size: .9rem;
     color: var(--text-muted);
     margin-bottom: 1.5rem;
     line-height: 1.6;
@@ -464,62 +509,165 @@
     -webkit-line-clamp: 4;
     line-clamp: 4;
     -webkit-box-orient: vertical;
-    overflow: hidden;
+    overflow: hidden
 }
 
 .card-tags {
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    gap: 0.5rem;
+    gap: .5rem;
     margin-top: auto;
     border-top: 1px solid var(--glass-border);
     padding-top: 1rem;
     min-height: 200px;
     max-height: 200px;
-    overflow: hidden;
+    overflow: hidden
 }
 
 .tag-btn {
-    font-size: 0.7rem;
+    font-size: .7rem;
     font-family: var(--font-mono);
     color: var(--text-muted);
-    background: rgba(255, 255, 255, 0.05);
-    padding: 0.3rem 0.6rem;
+    background: rgba(255, 255, 255, .05);
+    padding: .3rem .6rem;
     border-radius: 10px;
-    transition: all 0.2s;
+    transition: all .2s;
     height: fit-content;
+    border: 1px solid transparent;
+    cursor: pointer
 }
 
 .tag-btn:hover {
     background: var(--mrc);
-    color: #fff;
+    color: var(--text-main)
+}
+
+.tag-btn:focus-visible {
+    outline: 2px solid var(--mrc);
+    background: rgba(255, 255, 255, .1)
 }
 
 .reader-pane {
-    display: none;
+    display: none
 }
 
 .reader-pane.active {
+    display: block
+}
+
+.reader-toc-container {
+    margin-bottom: 2rem;
+    padding: 1rem 1.25rem;
+    border-radius: 20px;
+    position: fixed;
+    top: clamp(6rem, 12vw, 7rem);
+    right: 2.5rem;
+    z-index: 100;
+    width: 340px;
+}
+
+@media (max-width: 480px) {
+    .reader-toc-container {
+        position: sticky;
+        top: clamp(6rem, 12vw, 7rem);
+        z-index: 100;
+        width: 280px;
+        transition: border-color .3s
+    }
+}
+
+#reader-toc-container:hover {
+    border-color: rgba(255, 255, 255, .15)
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    max-height: 400px;
+    overflow: hidden auto;
+    flex-direction: column;
+    gap: .35rem;
+}
+
+.toc-link {
     display: block;
+    padding: .35rem .5rem;
+    font-size: .9rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-left: 2px solid var(--glass-border);
+    transition: all .2s ease-in-out
+}
+
+.toc-link:hover {
+    color: var(--mrc);
+    background: rgba(255, 255, 255, .02);
+    border-left-color: var(--mrc)
+}
+
+.toc-depth-3 {
+    padding-left: 1.5rem;
+    font-size: .825rem
+}
+
+
+.toggleToc {
+    display: flex;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid var(--text-muted);
+    font-size: .9rem;
+    color: var(--text-muted);
+    user-select: none;
+    transition: color .3s;
+    justify-content: center;
+}
+
+#full-body h2,
+#full-body h3 {
+    scroll-margin-top: 120px;
 }
 
 .reader-container {
     max-width: 900px;
     margin: 0 auto;
-    overflow: hidden;
+    overflow: hidden
 }
 
 .reader-banner {
     width: 100%;
     height: clamp(180px, 40vw, 400px);
     object-fit: cover;
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border)
 }
 
 .reader-content {
     padding: clamp(1.2rem, 5vw, 4rem);
-    min-height: 400px;
+    min-height: 400px
+}
+
+@media (min-width:1024px) {
+    .reader-container {
+        max-width: 1100px
+    }
+
+    #full-meta-block {
+        grid-column: 1 / -1
+    }
+
+    .markdown-body {
+        grid-column: 1;
+        grid-row: 2
+    }
+
+    .reader-meta-bottom {
+        grid-column: 1 / -1
+    }
 }
 
 .reader-title {
@@ -527,7 +675,7 @@
     font-weight: 900;
     line-height: 1.2;
     margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
+    letter-spacing: -.02em
 }
 
 .reader-meta {
@@ -537,7 +685,7 @@
     gap: 1rem;
     border-bottom: 1px solid var(--glass-border);
     padding-bottom: 1.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2rem
 }
 
 .reader-meta-bottom {
@@ -546,116 +694,62 @@
     gap: 1rem;
     border-top: 1px solid var(--glass-border);
     padding-top: 1.5rem;
-    margin-top: 2rem;
+    margin-top: 2rem
 }
 
-@media (min-width: 600px) {
+@media (min-width:600px) {
     .reader-meta {
         gap: 1.5rem;
-        margin-bottom: 2.5rem;
+        margin-bottom: 2.5rem
     }
 }
 
 .meta-item {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: .25rem
 }
 
 .meta-label {
-    font-size: 0.7rem;
+    font-size: .7rem;
     font-family: var(--font-mono);
     color: var(--text-muted);
-    text-transform: uppercase;
+    text-transform: uppercase
 }
 
 .meta-value {
-    font-size: 0.9rem;
-    font-weight: 700;
+    font-size: .9rem;
+    font-weight: 700
 }
 
 .meta-value[id="full-author"]:hover {
     cursor: pointer;
-    color: #fff;
-    text-decoration: underline;
+    color: var(--text-main);
+    text-decoration: underline
 }
 
 .reader-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+    gap: .5rem;
+    margin-top: .5rem
 }
 
 #reader-bookmark-btn.bookmarked {
-    background: rgba(244, 66, 52, 0.15);
-    border-color: rgba(244, 66, 52, 0.5);
-    color: var(--mrc);
+    background: rgba(244, 66, 52, .15);
+    border-color: rgba(244, 66, 52, .5);
+    color: var(--mrc)
 }
 
 #reader-bookmark-btn.bookmarked svg {
     fill: var(--mrc);
-    stroke: var(--mrc);
-}
-
-.toc-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-}
-
-.toc-link {
-    display: block;
-    padding: 0.35rem 0.5rem;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    text-decoration: none;
-    border-left: 2px solid transparent;
-    transition: all 0.2s ease-in-out;
-}
-
-.toc-link:hover {
-    color: var(--mrc);
-    background: rgba(255, 255, 255, 0.02);
-    border-left-color: var(--mrc);
-}
-
-.toc-depth-3 {
-    padding-left: 1.5rem;
-    font-size: 0.825rem;
-}
-
-#reader-toc-container {
-    transition: border-color 0.3s;
-}
-
-#reader-toc-container:hover {
-    border-color: rgba(255, 255, 255, 0.15);
-}
-
-.toggleToc {
-    display: flex;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding-bottom: 1rem;
-    cursor: pointer;
-    border-bottom: 1px solid var(--text-muted);
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-    color: var(--text-muted);
-    user-select: none;
-    transition: color 0.3s;
-    justify-content: flex-start;
+    stroke: var(--mrc)
 }
 
 .markdown-body {
     color: var(--text-main);
     background: transparent !important;
-    font-family: var(--font-sans);
+    font-family: var(--font-sans)
 }
 
 .markdown-body h1,
@@ -664,79 +758,79 @@
 .markdown-body h4,
 .markdown-body h5,
 .markdown-body h6 {
-    color: #fff;
+    color: var(--text-main);
     border-bottom-color: var(--glass-border) !important;
-    margin-top: 2rem;
+    margin-top: 2rem
 }
 
 .markdown-body p,
 .markdown-body li {
     color: var(--text-muted);
     line-height: 1.7;
-    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    font-size: clamp(.95rem, 2vw, 1.05rem)
 }
 
 .markdown-body a {
     color: var(--mrc);
-    text-decoration: none;
+    text-decoration: none
 }
 
 .markdown-body a:hover {
-    text-decoration: underline;
+    text-decoration: underline
 }
 
 .markdown-body pre,
 .markdown-body code {
-    background-color: rgba(0, 0, 0, 0.4) !important;
+    background-color: rgba(0, 0, 0, .4) !important;
     border: 1px solid var(--glass-border);
-    border-radius: 0.5rem;
-    font-family: var(--font-mono);
+    border-radius: .5rem;
+    font-family: var(--font-mono)
 }
 
 .markdown-body blockquote {
     color: var(--text-muted);
     border-left-color: var(--mrc) !important;
-    background: rgba(244, 66, 52, 0.05);
+    background: rgba(244, 66, 52, .05);
     padding: 1rem;
-    border-radius: 0 0.5rem 0.5rem 0;
+    border-radius: 0 .5rem .5rem 0
 }
 
 .markdown-body table {
     overflow-x: auto;
-    white-space: nowrap;
+    white-space: nowrap
 }
 
 .markdown-body table tr {
     background-color: transparent !important;
-    border-top-color: var(--glass-border) !important;
+    border-top-color: var(--glass-border) !important
 }
 
 .markdown-body table tr:nth-child(2n) {
-    background-color: rgba(255, 255, 255, 0.02) !important;
+    background-color: rgba(255, 255, 255, .02) !important
 }
 
 .markdown-body table th,
 .markdown-body table td {
-    border-color: var(--glass-border) !important;
+    border-color: var(--glass-border) !important
 }
 
 .markdown-body img {
     border-radius: 1rem;
     border: 1px solid var(--glass-border);
     max-width: 100%;
-    height: auto;
+    height: auto
 }
 
 .reader-404 {
     pointer-events: none;
     text-align: center;
-    padding: 4rem 1rem;
+    padding: 4rem 1rem
 }
 
 .error {
     pointer-events: none;
     font-size: 10rem;
-    line-height: .7;
+    line-height: .7
 }
 
 .reader-404 .error img {
@@ -744,9 +838,9 @@
     height: 120px;
     width: 120px;
     background: transparent;
-    border: none;
+    border: none
 }
 
 .section {
-    padding: clamp(4rem, 12vw, 8rem) 0;
+    padding: clamp(4rem, 12vw, 8rem) 0
 }
