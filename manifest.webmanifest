@@ -4,13 +4,13 @@
   "description": "A specialized technology powerhouse delivering PWA, open-source, and custom software solutions.",
   "start_url": "./",
   "id": "./",
+  "scope": "/",
   "dir": "auto",
   "display": "standalone",
   "display_override": ["minimal-ui", "browser", "standalone"],
   "background_color": "#050505",
   "theme_color": "#f44234",
   "orientation": "portrait",
-  "scope": "/",
   "lang": "en",
 
   "categories": [
