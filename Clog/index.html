@@ -129,10 +129,10 @@
                             </svg>
                         </button>
                         <select class="sort-select" id="sort-select" aria-label="Sort logs option">
-                            <option value="NameA">By Name Ascending</option>
-                            <option value="NameD">By Name Descending</option>
-                            <option value="DateA">By Date Ascending</option>
-                            <option value="DateD">By Date Descending</option>
+                            <option value="NameA">By Name A-Z</option>
+                            <option value="NameD">By Name Z-A</option>
+                            <option value="DateA">By Old First</option>
+                            <option value="DateD">By New First</option>
                         </select>
                         <svg class="clearSort icon" onclick="clearSort()" tabindex="0" role="button" aria-label="Clear sort options" onkeydown="if(event.key === 'Enter' || event.key === ' ') { clearSort(); event.preventDefault(); }">
                             <use href="/src/global.svg#icon-close"></use>
