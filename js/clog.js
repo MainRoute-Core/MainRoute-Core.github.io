@@ -564,16 +564,21 @@ function handleScrollProgress() {
 
 function shareCurrentPost() {
     if (!currentArticleId) return;
+
     const dbEntry = indexData.find(item => item.Article === currentArticleId);
     const shareTitle = dbEntry ? dbEntry.Name : "MainRoute Core Clog";
     const shareUrl = window.location.href;
+
+    const shareText = `Read ${shareTitle}\n==>\n${shareUrl}`;
+
     if (navigator.share) {
         navigator.share({
             title: shareTitle,
+            text: shareText,
             url: shareUrl
         }).catch(() => { });
     } else {
-        navigator.clipboard.writeText(shareUrl).then(() => {
+        navigator.clipboard.writeText(shareText).then(() => {
             const btn = document.querySelector('#full-meta-block button[onclick="shareCurrentPost()"]');
             if (btn) {
                 const originalText = btn.innerHTML;
