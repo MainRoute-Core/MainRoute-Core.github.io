@@ -285,16 +285,26 @@ function renderPostList() {
 
     if (activeFilters.srt) {
         filtered.sort((a, b) => {
-            if (activeFilters.srt.startsWith('Name')) {
-                const nameA = (a.Name || "").toLowerCase();
-                const nameB = (b.Name || "").toLowerCase();
-                if (nameA < nameB) return activeFilters.srt === 'NameA' ? -1 : 1;
-                if (nameA > nameB) return activeFilters.srt === 'NameA' ? 1 : -1;
-                return 0;
-            } else if (activeFilters.srt.startsWith('Date')) {
-                const dateA = new Date(a.Date).getTime() || 0;
-                const dateB = new Date(b.Date).getTime() || 0;
-                return activeFilters.srt === 'DateA' ? dateA - dateB : dateB - dateA;
+            const mode = activeFilters.srt;
+            if (!mode) return 0;
+            if (mode.startsWith('Name')) {
+                const nameA = (a.Name || "").toString();
+                const nameB = (b.Name || "").toString();
+                return mode === 'NameA' ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+            }
+            if (mode.startsWith('Date')) {
+                const parseDMY = (str) => {
+                    if (!str) return 0;
+                    const parts = str.split('-');
+                    if (parts.length !== 3) return 0;
+                    const [day, month, year] = parts.map(Number);
+                    return new Date(year, month - 1, day).getTime();
+                };
+                const dateA = parseDMY(a.Date);
+                const dateB = parseDMY(b.Date);
+                const safeA = isNaN(dateA) ? 0 : dateA;
+                const safeB = isNaN(dateB) ? 0 : dateB;
+                return mode === 'DateA' ? safeB - safeA : safeA - safeB;
             }
             return 0;
         });
@@ -586,7 +596,7 @@ async function shareCurrentPost() {
                     const blob = await res.blob();
                     const file = new File([blob], "image.jpg", { type: blob.type || "image/jpeg" });
                     if (navigator.canShare({ files: [file] })) {
-                        await navigator.share({ 
+                        await navigator.share({
                             title, text: `${title} by ${author}`, url, files: [file]
                         });
                         return;
@@ -597,7 +607,7 @@ async function shareCurrentPost() {
             await navigator.share({ title, text: `${shareText}`, url });
             return;
         }
-    } catch (e) {}
+    } catch (e) { }
     const finalText = shareText;
     navigator.clipboard.writeText(finalText).then(() => {
         const btn = document.querySelector('#full-meta-block button[onclick="shareCurrentPost()"]');
