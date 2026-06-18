@@ -562,33 +562,51 @@ function handleScrollProgress() {
     progress.style.width = scrolled + '%';
 }
 
-function shareCurrentPost() {
+async function shareCurrentPost() {
     if (!currentArticleId) return;
 
     const dbEntry = indexData.find(item => item.Article === currentArticleId);
-    const shareTitle = dbEntry ? dbEntry.Name : "MainRoute Core Clog";
-    const shareUrl = window.location.href;
 
-    const shareText = `Read ${shareTitle}\n==>\n${shareUrl}`;
+    const title = dbEntry ? dbEntry.Name : "MainRoute Core Clog";
+    const author = dbEntry?.Author ? `@${dbEntry.Author}` : "@Unknown";
+    const url = window.location.href;
+    const imageUrl = dbEntry?.Img || null;
 
-    if (navigator.share) {
-        navigator.share({
-            title: shareTitle,
-            text: shareText,
-            url: shareUrl
-        }).catch(() => { });
-    } else {
-        navigator.clipboard.writeText(shareText).then(() => {
-            const btn = document.querySelector('#full-meta-block button[onclick="shareCurrentPost()"]');
-            if (btn) {
-                const originalText = btn.innerHTML;
-                btn.innerHTML = `<svg class="icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> <span>Copied!</span>`;
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                }, 2000);
+    const shareText =`Read ${title}\nBy: ${author}\n==>\n${url}${imageUrl ? `\nImage: ${imageUrl}` : ""}`;
+    try {
+        if (navigator.share) {
+            if (imageUrl && navigator.canShare) {
+                try {
+                    const res = await fetch(imageUrl);
+                    const blob = await res.blob();
+                    const file = new File([blob], "image.jpg", { type: blob.type || "image/jpeg" });
+                    if (navigator.canShare({ files: [file] })) {
+                        await navigator.share({ 
+                            title, text: `${title} by ${author}`, url, files: [file]
+                        });
+                        return;
+                    }
+                } catch (e) {
+                }
             }
-        });
-    }
+            await navigator.share({ title, text: `${shareText}`, url });
+            return;
+        }
+    } catch (e) {}
+    const finalText = shareText;
+    navigator.clipboard.writeText(finalText).then(() => {
+        const btn = document.querySelector('#full-meta-block button[onclick="shareCurrentPost()"]');
+        if (btn) {
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `
+                <svg class="icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Copied!</span>
+            `;
+            setTimeout(() => { btn.innerHTML = originalText; }, 2000);
+        }
+    });
 }
 
 async function loadAndRenderFullPost(logId) {
