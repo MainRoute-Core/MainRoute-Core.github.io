@@ -572,7 +572,7 @@
         position: sticky;
         top: clamp(6rem, 12vw, 7rem);
         z-index: 100;
-        width: 280px;
+        width: 100%;
         transition: border-color .3s
     }
 }
