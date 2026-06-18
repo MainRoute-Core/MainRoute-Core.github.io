@@ -572,7 +572,12 @@ async function shareCurrentPost() {
     const url = window.location.href;
     const imageUrl = dbEntry?.Img || null;
 
-    const shareText =`Read ${title}\nBy: ${author}\n==>\n${url}${imageUrl ? `\nImage: ${imageUrl}` : ""}`;
+    const shareText =
+        `Read ${title}\n
+        By: ${author}\n
+        ==>${url}\n
+        ${imageUrl ? `\nImage: ${imageUrl}` : ""}
+        `;
     try {
         if (navigator.share) {
             if (imageUrl && navigator.canShare) {
