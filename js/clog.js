@@ -575,7 +575,7 @@ async function shareCurrentPost() {
     const shareText =
         `Read ${title}\n
         By: ${author}\n
-        ==>${url}\n
+        at: ${url}\n
         ${imageUrl ? `\nImage: ${imageUrl}` : ""}
         `;
     try {
