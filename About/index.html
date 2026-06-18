@@ -18,7 +18,6 @@
     <meta property="og:description" content="A specialized technology powerhouse delivering PWA, open-source, and custom software solutions." />
     <meta property="og:image" content="/src/social.png" />
     
-    <!-- <script>navigator.serviceWorker.register("/js/sw.js")</script>  -->
     <script>
         if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js') .then(reg => { console.log('Core Service Worker Active. Scope:', reg.scope); }) .catch(err => { console.error('× Service Worker Registration Failed:', err); }); }); }
     </script> 
