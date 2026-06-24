@@ -1,81 +1,111 @@
-const CACHE_NAME = "mr-core-cache-v3";
+const CACHE_VERSION = "v1";
+const CACHE_NAME = `mainroute-caches-${CACHE_VERSION}`;
 const OFFLINE_URL = "/offline.html";
 
 const CORE_ASSETS = [
     OFFLINE_URL,
+    "/src/social-.png",
+    "/src/social_.png",
+    "/css/index.css",
+    "/js/index.js",
+    "/favicon.ico",
+    "/index.html",
     "/manifest.webmanifest",
-    "/src/CoreSans-Regular_en.otf",
-    "/src/mrc-nuca.svg",
 ];
 
 self.addEventListener("install", (event) => {
     self.skipWaiting();
+
     event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            console.log("[SW] Precaching Core Assets");
-            return cache.addAll(CORE_ASSETS);
-        }),
+        (async () => {
+            const cache = await caches.open(CACHE_NAME);
+
+            await Promise.allSettled(
+                CORE_ASSETS.map((asset) => cache.add(asset))
+            );
+        })()
     );
 });
 
 self.addEventListener("activate", (event) => {
     event.waitUntil(
-        caches
-            .keys()
-            .then((cacheNames) => {
-                return Promise.all(
-                    cacheNames.map((cache) => {
-                        if (cache !== CACHE_NAME) {
-                            console.log("[SW] Clearing old cache:", cache);
-                            return caches.delete(cache);
-                        }
-                    }),
-                );
-            })
-            .then(() => self.clients.claim()),
+        (async () => {
+            const cacheNames = await caches.keys();
+
+            await Promise.all(
+                cacheNames
+                    .filter((name) => name !== CACHE_NAME)
+                    .map((name) => caches.delete(name))
+            );
+
+            if ("navigationPreload" in self.registration) {
+                await self.registration.navigationPreload.enable();
+            }
+
+            await self.clients.claim();
+        })()
     );
 });
 
 self.addEventListener("fetch", (event) => {
-    const request = event.request;
+    const { request } = event;
 
     if (request.method !== "GET") return;
 
+    // HTML pages: Network First
     if (
         request.mode === "navigate" ||
-        request.headers.get("accept").includes("text/html")
+        request.headers.get("accept")?.includes("text/html")
     ) {
-        event.respondWith(
-            fetch(request)
-                .then((response) => {
-                    const clone = response.clone();
-                    caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
-                    return response;
-                })
-                .catch(async () => {
-                    const cachedResponse = await caches.match(request);
-                    if (cachedResponse) return cachedResponse;
-                    return caches.match(OFFLINE_URL);
-                }),
-        );
+        event.respondWith(networkFirst(request));
         return;
     }
 
-    if (["font", "image", "style", "script"].includes(request.destination)) {
-        event.respondWith(
-            caches.match(request).then((cachedResponse) => {
-                const fetchPromise = fetch(request)
-                    .then((networkResponse) => {
-                        caches.open(CACHE_NAME).then((cache) => {
-                            cache.put(request, networkResponse.clone());
-                        });
-                        return networkResponse;
-                    })
-                    .catch(() => null);
-
-                return cachedResponse || fetchPromise;
-            }),
-        );
+    // CSS, JS, Images, Fonts: Stale While Revalidate
+    if (
+        ["style", "script", "image", "font"].includes(
+            request.destination
+        )
+    ) {
+        event.respondWith(staleWhileRevalidate(request));
         return;
     }
 });
+
+async function networkFirst(request) {
+    try {
+        const preload = await event?.preloadResponse;
+        if (preload) return preload;
+
+        const response = await fetch(request);
+
+        if (response.ok) {
+            const cache = await caches.open(CACHE_NAME);
+            cache.put(request, response.clone());
+        }
+
+        return response;
+    } catch {
+        const cached = await caches.match(request);
+
+        if (cached) return cached;
+
+        return caches.match(OFFLINE_URL);
+    }
+}
+
+async function staleWhileRevalidate(request) {
+    const cache = await caches.open(CACHE_NAME);
+    const cached = await cache.match(request);
+
+    const networkFetch = fetch(request)
+        .then((response) => {
+            if (response.ok) {
+                cache.put(request, response.clone());
+            }
+            return response;
+        })
+        .catch(() => null);
+
+    return cached || networkFetch;
+}
