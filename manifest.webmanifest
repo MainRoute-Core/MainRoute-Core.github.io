@@ -6,8 +6,8 @@
   "id": "./",
   "scope": "/",
   "dir": "auto",
+  "display_override": ["standalone", "minimal-ui"],
   "display": "standalone",
-  "display_override": ["minimal-ui", "browser", "standalone"],
   "background_color": "#050505",
   "theme_color": "#f44234",
   "orientation": "portrait",
@@ -111,17 +111,43 @@
 
   "screenshots": [
     {
-      "src": "./src/social.png",
+      "src": "./src/social-.png",
       "form_factor": "wide",
       "sizes": "2560x1440",
       "type": "image/png",
-      "description": "ScreenShot Of Site's Upper Part."
+      "label": "ScreenShot Of Site."
+    },
+    {
+      "src": "./src/social-1.png",
+      "form_factor": "wide",
+      "sizes": "2560x1440",
+      "type": "image/png",
+      "label": "ScreenShot Of Site's Clog's Logs."
+    },
+    {
+      "src": "./src/social-2.png",
+      "form_factor": "wide",
+      "sizes": "2560x1440",
+      "type": "image/png",
+      "label": "ScreenShot Of Site's Clog Reading A Log."
+    },
+    {
+      "src": "./src/social_.png",
+      "sizes": "720x1600",
+      "type": "image/png",
+      "label": "ScreenShot Of Site."
+    },
+    {
+      "src": "./src/social_1.png",
+      "sizes": "720x1600",
+      "type": "image/png",
+      "label": "ScreenShot Of Site's Clog's Logs."
     },
     {
       "src": "./src/social_2.png",
-      "sizes": "1440x2960",
+      "sizes": "720x1600",
       "type": "image/png",
-      "description": "ScreenShot Of Site's Upper Part."
+      "label": "ScreenShot Of Site's Clog Reading A Log."
     }
   ]
 }
